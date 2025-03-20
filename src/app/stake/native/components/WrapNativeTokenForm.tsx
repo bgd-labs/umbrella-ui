@@ -1,0 +1,236 @@
+import { TransactionCard } from "@/components/Transaction/TransactionCard";
+import { Button } from "@/components/ui/Button";
+import { SummarySection } from "@/components/Transaction/SummarySection";
+import { TokenBreakdown } from "@/components/Transaction/TokenBreakdown";
+import { TransactionBreakdown } from "@/components/Transaction/TransactionBreakdown";
+import React, { useMemo } from "react";
+import { formatUnits } from "viem";
+import { useWrapNativeToken } from "@/hooks/useWrapNativeToken";
+import { NativeToken } from "@/types/token";
+import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
+import { LayersIcon } from "lucide-react";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { Controller, FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ControlledAmountField } from "@/components/ControlledAmountField/ControlledAmountField";
+import { useStake } from "@/hooks/useStake";
+import { useQueryClient } from "@tanstack/react-query";
+import {
+  createStakeNativeTokenFormSchema,
+  StakeNativeTokenFormValues,
+} from "@/app/stake/native/stakeNativeTokenFormSchema";
+import { useSafeWrapAndStake } from "@/hooks/useWrapAndStake";
+import { useIsSafeWallet } from "@/hooks/useSafeWallet";
+import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
+
+export type WrapNativeTokenFormProps = {
+  nativeToken: NativeToken;
+};
+
+export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) => {
+  const client = useQueryClient();
+  const { batchHelper: spender } = useCurrentMarket();
+  const isSafeWallet = useIsSafeWallet();
+
+  const { signingStatus } = useTxFormSignature();
+
+  const {
+    wrap,
+    data: wrapHash,
+    isPending: isWrapping,
+    error: wrapNativeTokenError,
+  } = useWrapNativeToken();
+  const { stake, data: depositHash, isPending: isStaking, error: depositError } = useStake();
+  const {
+    safeWrapAndStake,
+    data: safeHash,
+    isPending: isSafeStaking,
+    error: safeDepositError,
+  } = useSafeWrapAndStake();
+
+  const { name, decimals, symbol, balance, stkToken } = nativeToken;
+  const maxAmount = balance || 0n;
+
+  const schema = useMemo(
+    () => createStakeNativeTokenFormSchema({ maxAmount, isSafeWallet }),
+    [maxAmount, isSafeWallet],
+  );
+  const formMethods = useForm<StakeNativeTokenFormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      wrappedAmount: 0n,
+    },
+    mode: "onChange",
+  });
+  const { getFieldState, formState, watch } = formMethods;
+  const amountFieldState = getFieldState("amount", formState);
+  const approval = watch("approval");
+
+  const handleWrapClick = async () => {
+    const amount = formMethods.getValues("amount");
+    if (!amount) {
+      return;
+    }
+    await wrap({
+      amount,
+      description: `Wrap ${formatUnits(amount, decimals)} ${nativeToken.symbol}`,
+    });
+    formMethods.setValue("wrappedAmount", amount, {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
+  };
+
+  const onSubmit = async (formValues: StakeNativeTokenFormValues) => {
+    if (!formValues.amount) {
+      return;
+    }
+
+    if (isSafeWallet) {
+      safeWrapAndStake({
+        umbrellaAddress: stkToken.address,
+        assetAddress: nativeToken.stkToken.underlying.address,
+        amount: formValues.amount,
+      });
+    } else {
+      const { status } = await stake({
+        amount: formValues.amount,
+        umbrellaAddress: stkToken.address,
+        assetAddress: nativeToken.stkToken.underlying.address,
+        permit: formValues.permit,
+        description: `Stake ${formatUnits(formValues.amount, decimals)} ${symbol}`,
+      });
+
+      if (status === "success") {
+        client.invalidateQueries({
+          queryKey: ["allUnderlyings"],
+        });
+      }
+    }
+  };
+
+  return (
+    <FormProvider {...formMethods}>
+      <TransactionCard
+        title="Stake native token"
+        hash={wrapHash}
+        safeHash={safeHash}
+        loading={isStaking || isSafeStaking}
+        error={wrapNativeTokenError || depositError || safeDepositError}
+      >
+        <div className="flex flex-col justify-start gap-5 self-stretch">
+          <h2 className="font-bold">Select amount</h2>
+
+          <Controller
+            name="amount"
+            control={formMethods.control}
+            disabled={signingStatus === "pending" || isWrapping || !!wrapHash}
+            render={({ field }) => (
+              <ControlledAmountField
+                {...field}
+                maxValue={maxAmount}
+                decimals={decimals}
+                usdPrice={nativeToken.stkToken.underlying.latestAnswer}
+              />
+            )}
+          />
+        </div>
+
+        {isSafeWallet ? (
+          <div className="flex flex-col gap-4 self-center">
+            <Button
+              primary
+              elevation={1}
+              onClick={formMethods.handleSubmit(onSubmit)}
+              loading={isSafeStaking}
+              disabled={isSafeStaking || !formState.isValid}
+              outerClassName="w-[248px]"
+              className="flex items-center gap-2"
+            >
+              <LayersIcon size={14} />
+              Approve & Stake
+            </Button>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-4 self-center">
+            <Button
+              primary
+              elevation={1}
+              onClick={handleWrapClick}
+              loading={isWrapping}
+              disabled={
+                isWrapping || amountFieldState.invalid || !amountFieldState.isDirty || !!wrapHash
+              }
+              outerClassName="w-[248px]"
+              className="flex items-center gap-2"
+            >
+              Wrap
+            </Button>
+
+            <SignTransaction
+              asset={nativeToken.stkToken.underlying.address}
+              spender={spender}
+              disabled={!wrapHash}
+            />
+
+            <Button
+              primary
+              elevation={1}
+              onClick={formMethods.handleSubmit(onSubmit)}
+              loading={isStaking}
+              disabled={isStaking || !formState.isValid}
+              outerClassName="w-[248px]"
+              className="flex items-center gap-2"
+            >
+              <LayersIcon size={14} />
+              Stake
+            </Button>
+          </div>
+        )}
+      </TransactionCard>
+
+      <TransactionCard title="Details">
+        <SummarySection title="You are staking">
+          <TokenBreakdown
+            name={name}
+            type="underlying"
+            decimals={decimals}
+            symbol={symbol}
+            amount={formMethods.getValues("amount") ?? 0n}
+            usdPrice={stkToken.underlying.latestAnswer}
+          />
+        </SummarySection>
+
+        <SummarySection title="You will receive">
+          <TokenBreakdown
+            name={nativeToken.stkToken.underlying.name}
+            type="stk"
+            decimals={nativeToken.stkToken.underlying.decimals}
+            symbol={nativeToken.stkToken.underlying.symbol}
+            amount={formMethods.getValues("amount") ?? 0n}
+            usdPrice={nativeToken.stkToken.latestAnswer}
+          />
+        </SummarySection>
+
+        {approval?.txHash && (
+          <SummarySection title="Approval hash">
+            <TransactionBreakdown hash={approval?.txHash} />
+          </SummarySection>
+        )}
+
+        {wrapHash && (
+          <SummarySection title="Wrapping native token hash">
+            <TransactionBreakdown hash={wrapHash} />
+          </SummarySection>
+        )}
+
+        {depositHash && (
+          <SummarySection title="Transaction hash">
+            <TransactionBreakdown hash={depositHash} />
+          </SummarySection>
+        )}
+      </TransactionCard>
+    </FormProvider>
+  );
+};

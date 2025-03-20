@@ -1,0 +1,17 @@
+{
+  "short_name": "Aave Umbrella",
+  "name": "Aave Umbrella",
+  "description": "Stake your Aave positions and earn extra yield",
+  "iconPath": "icon.svg",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1c1c21",
+  "background_color": "#ffffff"
+}
