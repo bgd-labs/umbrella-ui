@@ -1,7 +1,12 @@
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/Tooltip/Tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/Tooltip/Tooltip";
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
 import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
 import { Reward } from "@/types/token";
+import { RewardAssetIcon } from "@/components/RewardAssetIcon/RewardAssetIcon";
 
 export type APYBreakdownProps = {
   symbol: string;
@@ -10,7 +15,12 @@ export type APYBreakdownProps = {
   rewards: Reward[];
 };
 
-export const APYBreakdown = ({ symbol, totalApy, supplyApy, rewards }: APYBreakdownProps) => {
+export const APYBreakdown = ({
+  symbol,
+  totalApy,
+  supplyApy,
+  rewards,
+}: APYBreakdownProps) => {
   return (
     <Tooltip>
       <TooltipTrigger className="group flex items-center justify-center">
@@ -30,9 +40,9 @@ export const APYBreakdown = ({ symbol, totalApy, supplyApy, rewards }: APYBreakd
               />
             )}
             {rewards?.map((reward) => (
-              <AssetIcon
+              <RewardAssetIcon
                 key={reward.address}
-                symbol={reward.symbol}
+                reward={reward}
                 className="-ml-[6px] size-4 first:ml-0"
               />
             ))}
@@ -49,9 +59,12 @@ export const APYBreakdown = ({ symbol, totalApy, supplyApy, rewards }: APYBreakd
             <NumberDisplay value={supplyApy} type="percent" />
           </div>
           {rewards.map((reward) => (
-            <div key={reward.address} className="flex items-center justify-between gap-3">
+            <div
+              key={reward.address}
+              className="flex items-center justify-between gap-3"
+            >
               <div className="flex items-center gap-2">
-                <AssetIcon symbol={reward.symbol} className="size-[18px]" />
+                <RewardAssetIcon reward={reward} className="size-[18px]" />
                 <div>{reward.name}</div>
               </div>
               <NumberDisplay value={reward.apy} type="percent" />
