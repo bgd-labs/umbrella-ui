@@ -79,7 +79,7 @@ npm run start
 Deploy your own instance of the application effortlessly through Vercel by simply clicking the button below and following the guided setup process:
 
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbgd-labs%2Faave-umbrella-ui)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Faave-dao%2Faave-umbrella-ui)
 
 ## Project Structure
 
