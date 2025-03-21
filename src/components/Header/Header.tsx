@@ -12,6 +12,8 @@ import { useMarketStore } from "@/providers/MarketProvider/MarketContext";
 import { ThemeToggleButton } from "@/components/ThemeToggleButton/ThemeToggleButton";
 import UmbrellaLogoIcon from "../../../public/images/umbrella-logo.svg";
 import { InfoModal } from "@/components/InfoModal/InfoModal";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { Desktop } from "@/components/MediaQueries/MediaQueries";
 
 const items = MARKETS.map((market) => ({
   label: (
@@ -24,7 +26,7 @@ const items = MARKETS.map((market) => ({
 }));
 
 export const Header = () => {
-  const market = useMarketStore((store) => store.market);
+  const market = useCurrentMarket();
   const setMarket = useMarketStore((store) => store.setMarket);
 
   const handleMarketChange = (marketId: string) => {
@@ -35,12 +37,12 @@ export const Header = () => {
     }
 
     setMarket(marketId);
-    switchChain(config, { chainId: newMarket?.chainId });
+    switchChain(config, { chainId: newMarket.chainId });
   };
 
   return (
-    <header className="mx-auto mb-5 flex w-full max-w-(--mobile-container) items-center justify-between gap-5 py-6 md:max-w-(--breakpoint-lg)">
-      <Link href="/" className="flex items-center gap-3">
+    <header className="mx-auto mb-5 flex flex-wrap w-full max-w-(--mobile-container) items-center justify-between gap-y-9 md:gap-5 py-6 md:max-w-(--breakpoint-lg)">
+      <Link href="/" className="flex items-center gap-3 order-1">
         <UmbrellaLogoIcon className="text-main-950 w-[130px] md:w-[211px] dark:text-white" />
       </Link>
 
@@ -49,11 +51,14 @@ export const Header = () => {
         items={items}
         value={market.id}
         onValueChange={handleMarketChange}
+        className="not-md:w-full order-3 md:order-2"
       />
 
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-3 md:gap-5 order-2 md:order-3">
         <Wallet />
-        <InfoModal />
+        <Desktop>
+          <InfoModal />
+        </Desktop>
         <ThemeToggleButton />
       </div>
     </header>

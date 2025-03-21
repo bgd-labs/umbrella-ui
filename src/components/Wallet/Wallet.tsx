@@ -17,10 +17,10 @@ export const Wallet = () => {
           return (
             <Block
               elevation={1}
-              className="flex animate-pulse items-center gap-2 px-2 py-2.5 leading-5"
+              className="flex animate-pulse items-center gap-1 md:gap-2 px-2 py-2 md:py-2.5 leading-5"
             >
-              <div className="bg-main-100 size-4 animate-pulse rounded-full" />
-              <div className="bg-main-100 h-2 w-[89px] animate-pulse rounded-lg" />
+              <div className="bg-main-100 size-3 md:size-4 animate-pulse rounded-full" />
+              <div className="bg-main-100 h-2 w-[66px] md:w-[82px] animate-pulse rounded-lg" />
             </Block>
           );
         }
@@ -32,7 +32,7 @@ export const Wallet = () => {
                 elevation={1}
                 size="lg"
                 onClick={openConnectModal}
-                className="flex items-center"
+                className="leading-none text-xs md:text-sm font-semibold"
               >
                 Connect Wallet
               </Button>
@@ -45,7 +45,7 @@ export const Wallet = () => {
                 elevation={1}
                 size="lg"
                 onClick={openChainModal}
-                className="flex items-center"
+                className="leading-none text-xs md:text-sm font-semibold"
               >
                 Wrong Network
               </Button>
@@ -54,8 +54,12 @@ export const Wallet = () => {
 
           return (
             <WalletModal open={open} onOpenChange={setOpen}>
-              <Button elevation={1} size="lg" className="flex items-center gap-2">
-                <AssetIcon chainId={chain.id} className="size-4 dark:text-white" />
+              <Button
+                elevation={1}
+                size="lg"
+                className="leading-none text-xs md:text-sm font-semibold gap-1 md:gap-2"
+              >
+                <AssetIcon chainId={chain.id} className="size-3 md:size-4" />
                 <span>{account.displayName}</span>
               </Button>
             </WalletModal>
