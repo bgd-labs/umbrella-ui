@@ -10,18 +10,24 @@ import { withPositiveBalance } from "@/utils/filters";
 import { useAllAssets } from "@/hooks/useAllAssets";
 
 export default function Home() {
-  const { data: stkTokens, isLoading: isAllStkTokensLoading } = useAllStkTokens();
+  const { data: stkTokens, isLoading: isAllStkTokensLoading } =
+    useAllStkTokens();
   const { data: assets, isLoading: isAllAssetsLoading } = useAllAssets();
 
   const filteredAssets = useMemo(() => {
     return assets.filter((asset) => {
       const hasRewardsToClaim =
         asset.rewards.length > 0 &&
-        asset.rewards.every((reward) => !!reward.currentEmissionPerSecondScaled);
+        asset.rewards.every(
+          (reward) => !!reward.currentEmissionPerSecondScaled,
+        );
       return hasRewardsToClaim;
     });
   }, [assets]);
-  const filteredUmbrellaTokens = useMemo(() => stkTokens?.filter(withPositiveBalance), [stkTokens]);
+  const filteredUmbrellaTokens = useMemo(
+    () => stkTokens?.filter(withPositiveBalance),
+    [stkTokens],
+  );
 
   if (isAllStkTokensLoading || isAllAssetsLoading) {
     return <PageLoader />;
@@ -32,7 +38,7 @@ export default function Home() {
   }
 
   return (
-    <main className="mx-auto mb-auto flex w-full max-w-(--breakpoint-lg) flex-col gap-12">
+    <main className="mx-auto mb-auto flex w-full max-w-(--mobile-container) md:max-w-(--breakpoint-lg) flex-col gap-12">
       {filteredUmbrellaTokens && filteredUmbrellaTokens.length > 0 && (
         <UmbrellaTable data={filteredUmbrellaTokens} assets={filteredAssets} />
       )}

@@ -50,7 +50,7 @@ export const BlockSelect = <T extends Item>({
       <Select.Portal>
         <Select.Content
           position="popper"
-          className="animate-in fade-in w-[220px] duration-200"
+          className="animate-in fade-in w-[336px] md:w-[220px] duration-200"
         >
           <Block elevation={1} className="px-0">
             <Select.Viewport className="p-1">

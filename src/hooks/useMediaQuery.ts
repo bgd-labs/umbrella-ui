@@ -5,3 +5,5 @@ export const useDesktopMediaQuery = () =>
 
 export const useTabletAndBelowMediaQuery = () =>
   useMediaQuery({ query: "(max-width: 1279px)" });
+
+export const useMobile = () => useMediaQuery({ query: "(max-width: 768px)" });
