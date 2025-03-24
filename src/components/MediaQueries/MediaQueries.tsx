@@ -1,7 +1,9 @@
 import { PropsWithChildren } from "react";
 import {
   useDesktopMediaQuery,
-  useTabletAndBelowMediaQuery,
+  useMobileMediaQuery,
+  useMobileAndTabletMediaQuery,
+  useTabletAndDesktopMediaQuery,
 } from "@/hooks/useMediaQuery";
 
 export const Desktop = ({ children }: PropsWithChildren) => {
@@ -10,8 +12,20 @@ export const Desktop = ({ children }: PropsWithChildren) => {
   return isDesktop ? children : null;
 };
 
-export const TabletAndBelow = ({ children }: PropsWithChildren) => {
-  const isTabletAndBelow = useTabletAndBelowMediaQuery();
+export const Mobile = ({ children }: PropsWithChildren) => {
+  const isMobile = useMobileMediaQuery();
 
-  return isTabletAndBelow ? children : null;
+  return isMobile ? children : null;
+};
+
+export const MobileAndTablet = ({ children }: PropsWithChildren) => {
+  const isMobileAndTablet = useMobileAndTabletMediaQuery();
+
+  return isMobileAndTablet ? children : null;
+};
+
+export const TabletAndDesktop = ({ children }: PropsWithChildren) => {
+  const isTabletAndDesktop = useTabletAndDesktopMediaQuery();
+
+  return isTabletAndDesktop ? children : null;
 };

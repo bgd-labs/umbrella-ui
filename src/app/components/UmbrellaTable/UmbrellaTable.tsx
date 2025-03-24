@@ -5,7 +5,12 @@ import React from "react";
 
 import { Asset, StkToken } from "@/types/token";
 import { Summary } from "@/app/components/Summary/Summary";
-import { useMobile } from "@/hooks/useMediaQuery";
+import { useMobileMediaQuery } from "@/hooks/useMediaQuery";
+import { UmbrellaCard } from "@/app/components/UmbrellaTable/UmbrellaCard";
+import {
+  Mobile,
+  TabletAndDesktop,
+} from "@/components/MediaQueries/MediaQueries";
 
 export type UmbrellaTableProps = {
   data: StkToken[];
@@ -13,7 +18,7 @@ export type UmbrellaTableProps = {
 };
 
 export const UmbrellaTable = ({ data, assets }: UmbrellaTableProps) => {
-  const isMobile = useMobile();
+  const isMobile = useMobileMediaQuery();
   const elevation = isMobile ? 1 : 2;
 
   const SummaryBlock = <Summary umbrellaTokens={data} assets={assets} />;
@@ -28,35 +33,27 @@ export const UmbrellaTable = ({ data, assets }: UmbrellaTableProps) => {
       <TableHeaderCell />
     </div>
   );
-  const Rows = data.map((item) => (
-    <Block key={item.address} elevation={elevation} className="px-0 py-0">
-      <UmbrellaTableRow data={item} />
-    </Block>
-  ));
-
-  if (isMobile) {
-    return (
-      <BlocksColumn className="gap-6 md:gap-0">
-        <Block elevation={elevation} className="px-0 py-0">
-          {SummaryBlock}
-        </Block>
-        <BlocksColumn>
-          <Block elevation={elevation} className="px-0 py-0">
-            {TableHead}
-          </Block>
-          {Rows}
-        </BlocksColumn>
-      </BlocksColumn>
-    );
-  }
 
   return (
-    <BlocksColumn>
-      <Block elevation={2} className="px-0 py-0">
+    <BlocksColumn className="gap-6 md:gap-0">
+      <Block elevation={elevation} className="px-0 py-0">
         {SummaryBlock}
-        {TableHead}
+        <TabletAndDesktop>{TableHead}</TabletAndDesktop>
       </Block>
-      {Rows}
+
+      <Mobile>
+        {data.map((item) => (
+          <UmbrellaCard key={item.address} data={item} />
+        ))}
+      </Mobile>
+
+      <TabletAndDesktop>
+        {data.map((item) => (
+          <Block key={item.address} elevation={elevation} className="px-0 py-0">
+            <UmbrellaTableRow data={item} />
+          </Block>
+        ))}
+      </TabletAndDesktop>
     </BlocksColumn>
   );
 };

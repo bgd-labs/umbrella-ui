@@ -13,10 +13,15 @@ export type UmbrellaTableRowProps = {
 };
 
 export const UmbrellaTableRow = ({ data }: UmbrellaTableRowProps) => {
-  const { address, balance, underlying, rewards, isUnderlyingStataToken } = data;
+  const { address, balance, underlying, rewards, isUnderlyingStataToken } =
+    data;
 
   return (
-    <div className={"grid grid-cols-[1fr_80px_120px_160px_160px] gap-4 px-[30px] py-3.5"}>
+    <div
+      className={
+        "grid grid-cols-[1fr_80px_120px_160px_160px] gap-4 px-[30px] py-3.5"
+      }
+    >
       <TableCell>
         <Token
           token={{

@@ -1,5 +1,5 @@
 import { DonutChart } from "@/components/DonutChart/DonutChart";
-import { useMobile } from "@/hooks/useMediaQuery";
+import { useMobileMediaQuery } from "@/hooks/useMediaQuery";
 import { HalfPieChart } from "@/components/HalfPieChart/HalfPieChart";
 
 export type SummaryChartProps = {
@@ -11,7 +11,7 @@ export const SummaryChart = ({
   totalStaked,
   availableToStake,
 }: SummaryChartProps) => {
-  const isMobile = useMobile();
+  const isMobile = useMobileMediaQuery();
   const chartData = [
     { value: totalStaked, colour: "#ffd400" },
     { value: availableToStake, colour: "#6D6C53" },

@@ -8,6 +8,8 @@ import { AssetsTable } from "@/app/components/AssetsTable/AssetsTable";
 import { useAllStkTokens } from "@/hooks/useAllStkTokens";
 import { withPositiveBalance } from "@/utils/filters";
 import { useAllAssets } from "@/hooks/useAllAssets";
+import { Mobile } from "@/components/MediaQueries/MediaQueries";
+import { AboutUmbrella } from "@/app/components/AboutUmbrella/AboutUmbrella";
 
 export default function Home() {
   const { data: stkTokens, isLoading: isAllStkTokensLoading } =
@@ -43,9 +45,11 @@ export default function Home() {
         <UmbrellaTable data={filteredUmbrellaTokens} assets={filteredAssets} />
       )}
 
-      <div className="flex flex-col">
-        <AssetsTable data={filteredAssets} />
-      </div>
+      <AssetsTable data={filteredAssets} />
+
+      <Mobile>
+        <AboutUmbrella />
+      </Mobile>
     </main>
   );
 }

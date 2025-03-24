@@ -5,13 +5,28 @@ import React from "react";
 import { useAccount } from "wagmi";
 import { Asset } from "@/types/token";
 import { cn } from "@/utils/cn";
+import { useMobileMediaQuery } from "@/hooks/useMediaQuery";
+import { AssetCard } from "@/app/components/AssetsTable/AssetCard";
 
 export type AssetsTableProps = {
   data: Asset[];
 };
 
 export const AssetsTable = ({ data }: AssetsTableProps) => {
+  const isMobile = useMobileMediaQuery();
   const { isConnected } = useAccount();
+
+  if (isMobile) {
+    return (
+      <div className="flex flex-col gap-6">
+        <h2 className="text-lg font-bold pb-2.5">Available</h2>
+
+        {data.map((asset) => (
+          <AssetCard key={asset.address} data={asset} />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <BlocksColumn>
@@ -20,17 +35,23 @@ export const AssetsTable = ({ data }: AssetsTableProps) => {
           <span className="text-xl font-bold">Available</span>
         </div>
         <div
-          className={cn("bg-main-600 dark:bg-main-900 grid gap-4 px-[30px] py-3 text-white", {
-            "grid-cols-[1fr_128px_128px_128px]": isConnected,
-            "grid-cols-[1fr_128px_128px]": !isConnected,
-          })}
+          className={cn(
+            "bg-main-600 dark:bg-main-900 grid gap-4 px-[30px] py-3 text-white",
+            {
+              "grid-cols-[1fr_128px_128px_128px]": isConnected,
+              "grid-cols-[1fr_128px_128px]": !isConnected,
+            },
+          )}
         >
-          <TableHeaderCell className="grow justify-start gap-1">Asset</TableHeaderCell>
+          <TableHeaderCell className="grow justify-start gap-1">
+            Asset
+          </TableHeaderCell>
           {isConnected && <TableHeaderCell>Balance</TableHeaderCell>}
           <TableHeaderCell>Stake APY</TableHeaderCell>
           <TableHeaderCell />
         </div>
       </Block>
+
       {data.map((asset) => (
         <Block key={asset.address} elevation={2} className="px-0 py-0">
           <AssetsTableRow data={asset} />

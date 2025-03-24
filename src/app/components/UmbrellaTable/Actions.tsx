@@ -18,6 +18,7 @@ import { useIsSafeWallet } from "@/hooks/useSafeWallet";
 import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { Button } from "@/components/ui/Button";
+import { Desktop, Mobile } from "@/components/MediaQueries/MediaQueries";
 
 export type ActionsProps = {
   token: StkToken;
@@ -34,12 +35,15 @@ export const Actions = ({ token }: ActionsProps) => {
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
 
   const [safeStartCooldown] = useSafeStartCooldown();
-  const [startCooldown] = useStartCooldown();
+  const [startCooldown, { isPending: isStartCooldownPending }] =
+    useStartCooldown();
   const { status } = useUmbrellaCooldownStatus(address);
 
   const handleCooldownClick = async () => {
     if (isSafeWallet) {
-      const hash = (await safeStartCooldown({ assetAddress: address })) as `0x${string}`;
+      const hash = (await safeStartCooldown({
+        assetAddress: address,
+      })) as `0x${string}`;
 
       if (hash) {
         trackTransaction({ chainId, hash, description: `Start cooldown` });
@@ -61,7 +65,7 @@ export const Actions = ({ token }: ActionsProps) => {
   };
 
   return (
-    <div className="flex items-center justify-center gap-4">
+    <div className="flex flex-col gap-3 md:items-center md:justify-center md:gap-4">
       {status === "withdraw" && (
         <Button
           href={`/withdraw/${address}`}
@@ -75,23 +79,40 @@ export const Actions = ({ token }: ActionsProps) => {
         </Button>
       )}
 
-      <DropdownRoot onOpenChange={setIsDropdownOpened}>
-        <DropdownTrigger className="outline-none">
-          <Block
-            elevation={1}
-            isHovered={isDropdownOpened}
-            className="flex items-center justify-center gap-1.5 px-1.5 py-4"
-          >
-            <span className="bg-main-950 size-[3.5px] rounded-full dark:bg-white" />
-            <span className="bg-main-950 size-[3.5px] rounded-full dark:bg-white" />
-            <span className="bg-main-950 size-[3.5px] rounded-full dark:bg-white" />
-          </Block>
-        </DropdownTrigger>
+      <Mobile>
+        <Button
+          elevation={1}
+          size="lg"
+          loading={isStartCooldownPending}
+          disabled={isStartCooldownPending}
+          onClick={handleCooldownClick}
+          className="font-semibold"
+        >
+          Initiate cooldown
+        </Button>
+      </Mobile>
 
-        <DropdownContent>
-          <DropdownItem onClick={handleCooldownClick}>Initiate cooldown</DropdownItem>
-        </DropdownContent>
-      </DropdownRoot>
+      <Desktop>
+        <DropdownRoot onOpenChange={setIsDropdownOpened}>
+          <DropdownTrigger className="outline-none">
+            <Block
+              elevation={1}
+              isHovered={isDropdownOpened}
+              className="flex items-center justify-center gap-1.5 px-1.5 py-4"
+            >
+              <span className="bg-main-950 size-[3.5px] rounded-full dark:bg-white" />
+              <span className="bg-main-950 size-[3.5px] rounded-full dark:bg-white" />
+              <span className="bg-main-950 size-[3.5px] rounded-full dark:bg-white" />
+            </Block>
+          </DropdownTrigger>
+
+          <DropdownContent>
+            <DropdownItem onClick={handleCooldownClick}>
+              Initiate cooldown
+            </DropdownItem>
+          </DropdownContent>
+        </DropdownRoot>
+      </Desktop>
     </div>
   );
 };

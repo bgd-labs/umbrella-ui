@@ -22,7 +22,9 @@ const getDisplayName = (symbol: string, type: TokenType["type"] | "native") => {
 
 export type TokenProps = {
   // TODO Fix types
-  token: Pick<TokenType, "address" | "symbol"> & { type: TokenType["type"] | "native" };
+  token: Pick<TokenType, "address" | "symbol"> & {
+    type: TokenType["type"] | "native";
+  };
   className?: string;
 };
 
@@ -30,17 +32,30 @@ export const Token = ({ token, className }: TokenProps) => {
   const { chainId } = useMarketStore((state) => state.market);
   const { address, type, symbol } = token;
 
-  const assetTag = type !== "underlying" && type !== "native" ? type : undefined;
+  const assetTag =
+    type !== "underlying" && type !== "native" ? type : undefined;
 
   return (
-    <div className={cn("flex min-w-[100px] grow items-center justify-start gap-3", className)}>
-      <AssetIcon symbol={symbol} assetTag={assetTag} className="size-11 shrink-0" />
+    <div
+      className={cn(
+        "flex min-w-[100px] grow items-center justify-start gap-3",
+        className,
+      )}
+    >
+      <AssetIcon
+        symbol={symbol}
+        assetTag={assetTag}
+        className="size-[34px] md:size-11 shrink-0"
+      />
 
       <div className="flex w-[calc(100%_-_--spacing(14))] flex-col items-start">
-        <div className="text-main-900 flex w-full items-center gap-[3px] text-xl leading-6 font-bold dark:text-white">
+        <div className="text-main-900 flex w-full items-center gap-[3px] text-xl md:text-base leading-6 font-bold dark:text-white">
           <div className="truncate">{getDisplayName(symbol, type)}</div>
           <Link href={getScannerUrl(chainId, address)} target="_blank">
-            <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer" />
+            <ExternalLinkIcon
+              size={14}
+              className="text-main-500 cursor-pointer"
+            />
           </Link>
         </div>
         <TokenLabel type={type} />
