@@ -13,7 +13,7 @@ import { ThemeToggleButton } from "@/components/ThemeToggleButton/ThemeToggleBut
 import UmbrellaLogoIcon from "../../../public/images/umbrella-logo.svg";
 import { InfoModal } from "@/components/InfoModal/InfoModal";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { Desktop } from "@/components/MediaQueries/MediaQueries";
+import { TabletAndDesktop } from "@/components/MediaQueries/MediaQueries";
 
 const items = MARKETS.map((market) => ({
   label: (
@@ -56,9 +56,9 @@ export const Header = () => {
 
       <div className="flex items-center gap-3 md:gap-5 order-2 md:order-3">
         <Wallet />
-        <Desktop>
+        <TabletAndDesktop>
           <InfoModal />
-        </Desktop>
+        </TabletAndDesktop>
         <ThemeToggleButton />
       </div>
     </header>

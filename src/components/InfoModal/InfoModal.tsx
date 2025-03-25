@@ -10,10 +10,13 @@ import { Block } from "@/components/ui/Block";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import GhostWithUmbrellaImage from "../../../public/images/ghost-with-umbrella.svg";
 import { PropsWithChildren } from "react";
+import { useMobileMediaQuery } from "@/hooks/useMediaQuery";
 
 export type InfoModalProps = PropsWithChildren;
 
 export const InfoModal = ({ children }: InfoModalProps) => {
+  const isMobile = useMobileMediaQuery();
+
   return (
     <ModalRoot>
       <ModalTrigger asChild>
@@ -29,16 +32,19 @@ export const InfoModal = ({ children }: InfoModalProps) => {
         )}
       </ModalTrigger>
 
-      <ModalBody className="w-full max-w-[1000px]">
+      <ModalBody className="w-full max-w-(--mobile-container) md:max-w-[1000px]">
         <VisuallyHidden>
           <ModalTitle>Umbrella Info</ModalTitle>
         </VisuallyHidden>
-        <Block elevation={2} className="relative">
+        <Block
+          elevation={isMobile ? 1 : 2}
+          className="relative not-md:px-6 not-md:py-5"
+        >
           <ModalClose className="absolute top-4 right-4" />
 
-          <div className="mx-auto flex w-full max-w-[728px] flex-col gap-9 pt-14 pb-[80px]">
-            <div className="flex justify-between">
-              <h1 className="text-[78px] leading-[6rem] font-bold dark:text-white">
+          <div className="not-md:text-base mx-auto flex w-full md:max-w-[728px] flex-col gap-7 md:gap-9 md:pt-14 md:pb-[80px]">
+            <div className="flex not-md:items-center justify-between">
+              <h1 className="text-4xl md:text-[78px] leading-14 md:leading-[6rem] font-bold dark:text-white">
                 <span className="block">What is</span>
                 <span className="block">Umbrella?</span>
               </h1>
@@ -51,7 +57,7 @@ export const InfoModal = ({ children }: InfoModalProps) => {
               accrued on the Aave pools.
             </p>
 
-            <h2 className="text-3xl font-semibold dark:text-white">
+            <h2 className="text-2xl md:text-3xl font-semibold dark:text-white">
               How does Umbrella work?
             </h2>
 
@@ -101,7 +107,7 @@ export const InfoModal = ({ children }: InfoModalProps) => {
               </p>
             </div>
 
-            <h2 className="text-3xl font-semibold dark:text-white">
+            <h2 className="text-2xl md:text-3xl font-semibold dark:text-white">
               User Risks
             </h2>
 
@@ -135,9 +141,11 @@ export const InfoModal = ({ children }: InfoModalProps) => {
                 earning rewards as compensation for assuming the risk.
               </li>
             </ul>
-            <h2 className="text-3xl font-semibold dark:text-white">
+
+            <h2 className="text-2xl md:text-3xl font-semibold dark:text-white">
               More information and links
             </h2>
+
             <ul className="pl-6">
               <li className="relative mb-4">
                 <span className="absolute -left-5 font-bold">&bull;</span>

@@ -32,13 +32,14 @@ export const Transaction = ({
   const { data: receipt, isLoading: isTxLoading } = useTransactionReceipt({
     hash: isSafeWallet ? undefined : hash,
   });
-  const { data: safeTxDetails, isLoading: isSafeTxLoading } = useWaitForSafeTransaction({
-    hash: isSafeWallet && isSafeWalletConnected ? hash : undefined,
-  });
+  const { data: safeTxDetails, isLoading: isSafeTxLoading } =
+    useWaitForSafeTransaction({
+      hash: isSafeWallet && isSafeWalletConnected ? hash : undefined,
+    });
   const status = receipt?.status || safeTxDetails?.status;
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between gap-4">
       <div className="flex flex-col">
         <div className="flex items-center justify-center gap-2.5">
           <div className="text-lg font-bold">{description}</div>
@@ -52,7 +53,9 @@ export const Transaction = ({
             </Link>
           )}
         </div>
-        {(isTxLoading || isSafeTxLoading) && <div className="text-sm">Pending</div>}
+        {(isTxLoading || isSafeTxLoading) && (
+          <div className="text-sm">Pending</div>
+        )}
         {status && (
           <div
             className={cn("text-sm", {
@@ -66,8 +69,12 @@ export const Transaction = ({
       </div>
 
       <div className="flex flex-col items-end">
-        <div className="font-semibold">{dayjs(timestamp).format(TIME_FORMAT)}</div>
-        <div className="text-main-500 text-sm">{dayjs(timestamp).format(DATE_FORMAT)}</div>
+        <div className="font-semibold">
+          {dayjs(timestamp).format(TIME_FORMAT)}
+        </div>
+        <div className="text-main-500 text-sm">
+          {dayjs(timestamp).format(DATE_FORMAT)}
+        </div>
       </div>
     </div>
   );

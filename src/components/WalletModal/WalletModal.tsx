@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Block, BlocksColumn } from "@/components/ui/Block";
 import { useAccount, useDisconnect } from "wagmi";
 import { getScannerUrl } from "@/utils/getScannerUrl";
-import { ExternalLinkIcon, CopyIcon } from "lucide-react";
+import { ExternalLinkIcon } from "lucide-react";
 import { useNativeToken } from "@/hooks/useNativeToken";
 import React, { ComponentProps, PropsWithChildren, useMemo } from "react";
 import { textCenterEllipsis } from "@/utils/textCenterEllipsis";
@@ -18,12 +18,18 @@ import { Transaction } from "@/components/WalletModal/Transaction";
 import { useTransactionsTrackerStore } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
 import { byTimestampDesc } from "@/constants/sorts";
 import { CopyToClipboard } from "@/components/CopyToClipboard/CopyToClipboard";
+import { useMobileMediaQuery } from "@/hooks/useMediaQuery";
 
 export type WalletModalProps = PropsWithChildren<
   Pick<ComponentProps<typeof ModalRoot>, "open" | "onOpenChange">
 >;
 
-export const WalletModal = ({ open, onOpenChange, children }: WalletModalProps) => {
+export const WalletModal = ({
+  open,
+  onOpenChange,
+  children,
+}: WalletModalProps) => {
+  const isMobile = useMobileMediaQuery();
   const { address, chainId } = useAccount();
   const { data } = useNativeToken();
   const { disconnect } = useDisconnect();
@@ -57,28 +63,39 @@ export const WalletModal = ({ open, onOpenChange, children }: WalletModalProps) 
     <ModalRoot open={open} onOpenChange={onOpenChange}>
       <ModalTrigger asChild>{children}</ModalTrigger>
 
-      <ModalBody className="w-full max-w-[478px]">
+      <ModalBody className="w-full max-w-(--mobile-container) md:max-w-[478px]">
         <BlocksColumn>
-          <Block className="bg-main-50 flex items-center justify-between px-[30] py-6">
+          <Block
+            elevation={isMobile ? 1 : 2}
+            className="bg-main-50 flex items-center justify-between px-[30px] py-6"
+          >
             <ModalTitle className="text-lg font-bold">Wallet</ModalTitle>
             <ModalClose />
           </Block>
 
-          <Block elevation={2} className="relative px-10 py-10">
+          <Block
+            elevation={isMobile ? 1 : 2}
+            className="relative px-[30px] py-6 md:px-10 md:py-10"
+          >
             <div className="flex flex-col items-center gap-9">
-              <div className="flex flex-col items-center gap-6">
-                <AssetIcon chainId={chainId} className="size-[90px]" />
+              <div className="flex flex-col items-center md:gap-6">
+                <AssetIcon
+                  chainId={chainId}
+                  className="size-[72px] md:size-[90px]"
+                />
 
                 <div className="flex items-center justify-center gap-1.5">
-                  <div className="text-xl font-bold">{textCenterEllipsis(address, 4, 4)}</div>
+                  <div className="text-xl font-bold">
+                    {textCenterEllipsis(address, 4, 4)}
+                  </div>
                   <CopyToClipboard value={address} />
                 </div>
 
                 <div className="text-lg">{`${data?.balanceFormatted} ${data?.symbol}`}</div>
               </div>
 
-              <div className="flex w-full flex-col gap-8">
-                <div className="flex items-center justify-between border-b pb-6">
+              <div className="flex w-full flex-col gap-5 md:gap-8">
+                <div className="flex items-center justify-between border-b pb-4 md:pb-6">
                   <div className="text-lg font-bold">Transactions</div>
                   <button
                     className="cursor-pointer text-base underline underline-offset-2"
@@ -88,14 +105,14 @@ export const WalletModal = ({ open, onOpenChange, children }: WalletModalProps) 
                   </button>
                 </div>
 
-                <div className="flex max-h-[240px] flex-col gap-8 overflow-y-auto">
+                <div className="flex max-h-[240px] flex-col gap-4 md:gap-8 overflow-y-auto">
                   {sortedTransactions.map((transaction) => (
                     <Transaction key={transaction.hash} {...transaction} />
                   ))}
                 </div>
               </div>
 
-              <div className="flex w-full items-center gap-9">
+              <div className="flex flex-col md:flex-row w-full md:items-center gap-5 md:gap-9">
                 <Button
                   href={getScannerUrl(chainId, address)}
                   target="_blank"
@@ -103,7 +120,8 @@ export const WalletModal = ({ open, onOpenChange, children }: WalletModalProps) 
                   size="lg"
                   className="flex items-center gap-1"
                 >
-                  All Transactions <ExternalLinkIcon size={14} className="cursor-pointer" />
+                  All Transactions{" "}
+                  <ExternalLinkIcon size={14} className="cursor-pointer" />
                 </Button>
                 <Button elevation={1} size="lg" onClick={handleDisconnectClick}>
                   Disconnect

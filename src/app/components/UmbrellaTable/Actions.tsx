@@ -18,7 +18,10 @@ import { useIsSafeWallet } from "@/hooks/useSafeWallet";
 import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { Button } from "@/components/ui/Button";
-import { Desktop, Mobile } from "@/components/MediaQueries/MediaQueries";
+import {
+  Mobile,
+  TabletAndDesktop,
+} from "@/components/MediaQueries/MediaQueries";
 
 export type ActionsProps = {
   token: StkToken;
@@ -92,7 +95,7 @@ export const Actions = ({ token }: ActionsProps) => {
         </Button>
       </Mobile>
 
-      <Desktop>
+      <TabletAndDesktop>
         <DropdownRoot onOpenChange={setIsDropdownOpened}>
           <DropdownTrigger className="outline-none">
             <Block
@@ -112,7 +115,7 @@ export const Actions = ({ token }: ActionsProps) => {
             </DropdownItem>
           </DropdownContent>
         </DropdownRoot>
-      </Desktop>
+      </TabletAndDesktop>
     </div>
   );
 };
