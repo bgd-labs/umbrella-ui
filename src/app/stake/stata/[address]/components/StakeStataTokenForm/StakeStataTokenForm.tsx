@@ -117,6 +117,7 @@ export const StakeStataTokenForm = ({
             render={({ field }) => (
               <ControlledAmountField
                 {...field}
+                autoFocus
                 maxValue={maxAmount}
                 decimals={decimals}
                 usdPrice={latestAnswer}

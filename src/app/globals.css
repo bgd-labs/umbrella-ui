@@ -31,6 +31,7 @@
     }
   }
 }
+
 @keyframes section-highlight {
   0% { fill: var(--color-secondary-500); }
   12.5% { fill: var(--color-main-100); }

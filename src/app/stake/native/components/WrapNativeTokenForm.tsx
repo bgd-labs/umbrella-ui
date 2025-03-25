@@ -136,6 +136,7 @@ export const WrapNativeTokenForm = ({
             render={({ field }) => (
               <ControlledAmountField
                 {...field}
+                autoFocus
                 maxValue={maxAmount}
                 decimals={decimals}
                 usdPrice={nativeToken.stkToken.underlying.latestAnswer}
