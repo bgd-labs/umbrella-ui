@@ -7,6 +7,7 @@ import React from "react";
 import { Reserve, StkToken } from "@/types/token";
 import { useFormContext, useWatch } from "react-hook-form";
 import { StakeATokenFormValues } from "@/app/stake/a/[address]/stakeATokenFormSchema";
+import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
 
 export type StakeATokenSummaryProps = {
   reserve: Reserve;
@@ -53,8 +54,18 @@ export const StakeATokenSummary = ({
       </SummarySection>
 
       <SummarySection title="Health factor">
-        <HealthFactorBreakdown reserveId={reserveId} newBalance={newBalance} positions={reserves} />
+        <HealthFactorBreakdown
+          reserveId={reserveId}
+          newBalance={newBalance}
+          positions={reserves}
+        />
       </SummarySection>
+
+      <APYAndEarningsForecast
+        amount={amount}
+        initialTokenType="a"
+        stkToken={stkToken}
+      />
 
       {approval?.txHash && (
         <SummarySection title="Transaction hash">

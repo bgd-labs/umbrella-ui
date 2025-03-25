@@ -1,7 +1,7 @@
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
 import { useAccount } from "wagmi";
 import { calculateMetrics } from "@/utils/calculateMetrics";
-import { calculateLinearInterest } from "@/utils/calculateCompoundedInterestPerSecond";
+import { calculateSimpleInterest } from "@/utils/calculateCompoundedInterestPerSecond";
 import { calculateAvailableToStakeUsd } from "@/utils/calculateAvailableToStakeUsd";
 import { Button } from "@/components/ui/Button";
 import { Asset, StkToken } from "@/types/token";
@@ -24,9 +24,9 @@ export const Summary = ({ umbrellaTokens, assets }: SummaryProps) => {
     calculateMetrics(umbrellaTokens);
   const availableToStakeUsd = calculateAvailableToStakeUsd(assets);
   const monthlyYield =
-    calculateLinearInterest(totalStakedUsd, totalApy, 1) - totalStakedUsd;
+    calculateSimpleInterest(totalStakedUsd, totalApy, 1) - totalStakedUsd;
   const yearlyYield =
-    calculateLinearInterest(totalStakedUsd, totalApy, 12) - totalStakedUsd;
+    calculateSimpleInterest(totalStakedUsd, totalApy, 12) - totalStakedUsd;
 
   return (
     <div className="flex flex-col md:flex-row md:h-[168px]">

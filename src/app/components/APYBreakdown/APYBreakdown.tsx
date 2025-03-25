@@ -13,6 +13,7 @@ export type APYBreakdownProps = {
   totalApy: number;
   supplyApy: number;
   rewards: Reward[];
+  displayRewards?: boolean;
 };
 
 export const APYBreakdown = ({
@@ -20,6 +21,7 @@ export const APYBreakdown = ({
   totalApy,
   supplyApy,
   rewards,
+  displayRewards = true,
 }: APYBreakdownProps) => {
   return (
     <Tooltip>
@@ -30,23 +32,25 @@ export const APYBreakdown = ({
             type="percent"
             className="group-hover:bg-secondary-500 rounded-2xl px-1.5 font-semibold transition"
           />
-          <div className="flex items-center">
-            {!!supplyApy && (
-              <AssetIcon
-                key="supply-apy"
-                symbol={symbol}
-                assetTag="a"
-                className="-ml-[6px] size-4 first:ml-0"
-              />
-            )}
-            {rewards?.map((reward) => (
-              <RewardAssetIcon
-                key={reward.address}
-                reward={reward}
-                className="-ml-[6px] size-4 first:ml-0"
-              />
-            ))}
-          </div>
+          {displayRewards && (
+            <div className="flex items-center">
+              {!!supplyApy && (
+                <AssetIcon
+                  key="supply-apy"
+                  symbol={symbol}
+                  assetTag="a"
+                  className="-ml-[6px] size-4 first:ml-0"
+                />
+              )}
+              {rewards?.map((reward) => (
+                <RewardAssetIcon
+                  key={reward.address}
+                  reward={reward}
+                  className="-ml-[6px] size-4 first:ml-0"
+                />
+              ))}
+            </div>
+          )}
         </div>
       </TooltipTrigger>
       <TooltipContent side="right" align="start">

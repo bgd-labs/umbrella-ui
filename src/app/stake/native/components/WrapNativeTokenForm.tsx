@@ -22,6 +22,7 @@ import {
 import { useSafeWrapAndStake } from "@/hooks/useWrapAndStake";
 import { useIsSafeWallet } from "@/hooks/useSafeWallet";
 import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
+import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
 
 export type WrapNativeTokenFormProps = {
   nativeToken: NativeToken;
@@ -223,6 +224,12 @@ export const WrapNativeTokenForm = ({
             usdPrice={nativeToken.stkToken.latestAnswer}
           />
         </SummarySection>
+
+        <APYAndEarningsForecast
+          amount={formMethods.getValues("amount") ?? 0n}
+          initialTokenType="native"
+          stkToken={stkToken}
+        />
 
         {approval?.txHash && (
           <SummarySection title="Approval hash">
