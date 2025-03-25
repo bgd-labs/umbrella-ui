@@ -21,7 +21,14 @@ export type PermitProps = SignTransactionProps & {
   disabled?: boolean;
 };
 
-export const Permit = ({ asset, amount, spender, value, onChange, disabled }: PermitProps) => {
+export const Permit = ({
+  asset,
+  amount,
+  spender,
+  value,
+  onChange,
+  disabled,
+}: PermitProps) => {
   const owner = useWalletAddress();
   const { chainId } = useCurrentMarket();
   const { setSigningStatus } = useTxFormSignature();
@@ -116,7 +123,7 @@ export const Permit = ({ asset, amount, spender, value, onChange, disabled }: Pe
       onClick={permit}
       loading={isSigning}
       disabled={isSigning || amount === 0n || disabled}
-      outerClassName="w-[248px]"
+      outerClassName="w-full md:w-[248px]"
     >
       Authorize
     </Button>

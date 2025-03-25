@@ -26,13 +26,22 @@ export type StakeStataTokenFormProps = {
   stataToken: StataToken;
 };
 
-export const StakeStataTokenForm = ({ asset, stkToken, stataToken }: StakeStataTokenFormProps) => {
+export const StakeStataTokenForm = ({
+  asset,
+  stkToken,
+  stataToken,
+}: StakeStataTokenFormProps) => {
   const client = useQueryClient();
   const { batchHelper: spender } = useCurrentMarket();
   const isSafeWallet = useIsSafeWallet();
   const { signingStatus } = useTxFormSignature();
 
-  const { stake, data: hash, isPending: isTxPending, error: depositError } = useStake();
+  const {
+    stake,
+    data: hash,
+    isPending: isTxPending,
+    error: depositError,
+  } = useStake();
   const {
     approveAndStake,
     data: safeHash,
@@ -52,7 +61,11 @@ export const StakeStataTokenForm = ({ asset, stkToken, stataToken }: StakeStataT
     mode: "onChange",
   });
 
-  const onSubmit = async ({ amount, permit, approval }: StakeStataFormValues) => {
+  const onSubmit = async ({
+    amount,
+    permit,
+    approval,
+  }: StakeStataFormValues) => {
     const umbrellaAddress = stkToken.address;
 
     if (!amount) {
@@ -98,7 +111,9 @@ export const StakeStataTokenForm = ({ asset, stkToken, stataToken }: StakeStataT
           <Controller
             name="amount"
             control={formMethods.control}
-            disabled={signingStatus === "pending" || isTxPending || isSafeTxPending}
+            disabled={
+              signingStatus === "pending" || isTxPending || isSafeTxPending
+            }
             render={({ field }) => (
               <ControlledAmountField
                 {...field}
@@ -110,15 +125,19 @@ export const StakeStataTokenForm = ({ asset, stkToken, stataToken }: StakeStataT
           />
         </div>
 
-        <div className="flex flex-col gap-4 self-center">
-          {!isSafeWallet ? <SignTransaction asset={asset} spender={spender} /> : null}
+        <div className="flex flex-col gap-4 md:self-center">
+          {!isSafeWallet ? (
+            <SignTransaction asset={asset} spender={spender} />
+          ) : null}
           <Button
             primary
             elevation={1}
             onClick={formMethods.handleSubmit(onSubmit)}
             loading={isTxPending || isSafeTxPending}
-            disabled={isTxPending || isSafeTxPending || !formMethods.formState.isValid}
-            outerClassName="w-[248px]"
+            disabled={
+              isTxPending || isSafeTxPending || !formMethods.formState.isValid
+            }
+            outerClassName="w-full md:w-[248px]"
             className="flex items-center gap-2"
           >
             <LayersIcon size={14} />
@@ -127,7 +146,11 @@ export const StakeStataTokenForm = ({ asset, stkToken, stataToken }: StakeStataT
         </div>
       </TransactionCard>
 
-      <StakeStataTokenSummary token={stataToken} stkToken={stkToken} hash={hash} />
+      <StakeStataTokenSummary
+        token={stataToken}
+        stkToken={stkToken}
+        hash={hash}
+      />
     </FormProvider>
   );
 };

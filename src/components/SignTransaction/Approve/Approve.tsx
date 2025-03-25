@@ -20,7 +20,13 @@ export type ApproveProps = SignTransactionProps & {
   disabled?: boolean;
 };
 
-export const Approve = ({ asset, spender, amount, onChange, disabled }: ApproveProps) => {
+export const Approve = ({
+  asset,
+  spender,
+  amount,
+  onChange,
+  disabled,
+}: ApproveProps) => {
   const client = useQueryClient();
   const { chainId } = useCurrentMarket();
   const trackTransaction = useTrackTransaction();
@@ -35,8 +41,14 @@ export const Approve = ({ asset, spender, amount, onChange, disabled }: ApproveP
     asset,
     spender,
   });
-  const { writeContractAsync, data: hash, isPending: isApprovalPending } = useWriteContract();
-  const { isFetching: isReceiptFetching } = useWaitForTransactionReceipt({ hash });
+  const {
+    writeContractAsync,
+    data: hash,
+    isPending: isApprovalPending,
+  } = useWriteContract();
+  const { isFetching: isReceiptFetching } = useWaitForTransactionReceipt({
+    hash,
+  });
 
   const isApproved = allowance ? allowance >= amount : false;
 
@@ -80,10 +92,14 @@ export const Approve = ({ asset, spender, amount, onChange, disabled }: ApproveP
       elevation={1}
       loading={isApprovalPending || isReceiptFetching || isAllowanceFetching}
       disabled={
-        isApprovalPending || isReceiptFetching || isAllowanceFetching || amount === 0n || disabled
+        isApprovalPending ||
+        isReceiptFetching ||
+        isAllowanceFetching ||
+        amount === 0n ||
+        disabled
       }
       onClick={handleApproveClick}
-      outerClassName="w-[248px]"
+      outerClassName="w-full md:w-[248px]"
     >
       Approve
     </Button>

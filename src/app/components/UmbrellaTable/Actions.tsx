@@ -68,7 +68,7 @@ export const Actions = ({ token }: ActionsProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-3 md:items-center md:justify-center md:gap-4">
+    <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-center md:gap-4">
       {status === "withdraw" && (
         <Button
           href={`/withdraw/${address}`}

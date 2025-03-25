@@ -23,11 +23,11 @@ export const UmbrellaRewardsBreakdown = ({
           <AssetIcon
             symbol={umbrella.underlying.symbol}
             assetTag="stk"
-            className="size-11"
+            className="size-9 md:size-11"
           />
 
           <div className="flex flex-col">
-            <h2 className="font-bold dark:text-white">
+            <h2 className="font-bold dark:text-white truncate">
               {umbrella.underlying.name}
             </h2>
             <div className="text-main-500 text-sm capitalize">
@@ -44,12 +44,14 @@ export const UmbrellaRewardsBreakdown = ({
             key={reward.address}
             className="flex items-center justify-between"
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 max-w-[60%]">
               <RewardAssetIcon reward={reward} className="size-6" />
-              <h2 className="font-bold dark:text-white">{reward.name}</h2>
+              <h2 className="font-bold dark:text-white truncate">
+                {reward.name}
+              </h2>
             </div>
 
-            <div className="flex flex-col items-end">
+            <div className="flex flex-col items-end shrink-0">
               <NumberDisplay
                 value={reward.usdAmount ?? 0}
                 type="currency"

@@ -27,7 +27,9 @@ export type WrapNativeTokenFormProps = {
   nativeToken: NativeToken;
 };
 
-export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) => {
+export const WrapNativeTokenForm = ({
+  nativeToken,
+}: WrapNativeTokenFormProps) => {
   const client = useQueryClient();
   const { batchHelper: spender } = useCurrentMarket();
   const isSafeWallet = useIsSafeWallet();
@@ -40,7 +42,12 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
     isPending: isWrapping,
     error: wrapNativeTokenError,
   } = useWrapNativeToken();
-  const { stake, data: depositHash, isPending: isStaking, error: depositError } = useStake();
+  const {
+    stake,
+    data: depositHash,
+    isPending: isStaking,
+    error: depositError,
+  } = useStake();
   const {
     safeWrapAndStake,
     data: safeHash,
@@ -153,16 +160,19 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
             </Button>
           </div>
         ) : (
-          <div className="flex flex-col gap-4 self-center">
+          <div className="flex flex-col gap-4 md:self-center">
             <Button
               primary
               elevation={1}
               onClick={handleWrapClick}
               loading={isWrapping}
               disabled={
-                isWrapping || amountFieldState.invalid || !amountFieldState.isDirty || !!wrapHash
+                isWrapping ||
+                amountFieldState.invalid ||
+                !amountFieldState.isDirty ||
+                !!wrapHash
               }
-              outerClassName="w-[248px]"
+              outerClassName="w-full md:w-[248px]"
               className="flex items-center gap-2"
             >
               Wrap
@@ -180,7 +190,7 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
               onClick={formMethods.handleSubmit(onSubmit)}
               loading={isStaking}
               disabled={isStaking || !formState.isValid}
-              outerClassName="w-[248px]"
+              outerClassName="w-full md:w-[248px]"
               className="flex items-center gap-2"
             >
               <LayersIcon size={14} />

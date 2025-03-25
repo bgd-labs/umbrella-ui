@@ -44,7 +44,12 @@ export const StakeUnderlyingTokenForm = ({
     isPending: isSafeTxPending,
     error: approveAndStakeError,
   } = useSafeApproveAndStake();
-  const { stake, data: hash, isPending: isTxPending, error: depositError } = useStake();
+  const {
+    stake,
+    data: hash,
+    isPending: isTxPending,
+    error: depositError,
+  } = useStake();
 
   const { decimals, latestAnswer, symbol } = stkToken.underlying;
   const maxAmount = calculateMaxSupply(stkToken, totalSupplied);
@@ -102,7 +107,9 @@ export const StakeUnderlyingTokenForm = ({
           <Controller
             name="amount"
             control={control}
-            disabled={signingStatus === "pending" || isTxPending || isSafeTxPending}
+            disabled={
+              signingStatus === "pending" || isTxPending || isSafeTxPending
+            }
             render={({ field }) => (
               <ControlledAmountField
                 {...field}
@@ -114,15 +121,17 @@ export const StakeUnderlyingTokenForm = ({
           />
         </div>
 
-        <div className="flex flex-col gap-4 self-center">
-          {!isSafeWallet ? <SignTransaction asset={asset} spender={spender} /> : null}
+        <div className="flex flex-col gap-4 md:self-center">
+          {!isSafeWallet ? (
+            <SignTransaction asset={asset} spender={spender} />
+          ) : null}
           <Button
             primary
             elevation={1}
             onClick={handleSubmit(onSubmit)}
             loading={isTxPending || isSafeTxPending}
             disabled={isTxPending || isSafeTxPending || !formState.isValid}
-            outerClassName="w-[248px]"
+            outerClassName="w-full md:w-[248px]"
             className="flex items-center gap-2"
           >
             <LayersIcon size={14} />

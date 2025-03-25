@@ -20,11 +20,15 @@ export default function ClaimRewardsPage() {
   const isSafeWallet = useIsSafeWallet();
 
   const { data: stkTokens, isLoading: isStkTokensLoading } = useAllStkTokens();
-  const stkTokenWithRewards = stkTokens?.filter((umbrella) => umbrella.rewards.length);
+  const stkTokenWithRewards = stkTokens?.filter(
+    (umbrella) => umbrella.rewards.length,
+  );
   const total = sumUpAllRewards(stkTokenWithRewards);
 
-  const [safeClaim, { data: safeHash, isPending: isSafeClaiming, error: safeClaimError }] =
-    useSafeClaimSelectedRewards();
+  const [
+    safeClaim,
+    { data: safeHash, isPending: isSafeClaiming, error: safeClaimError },
+  ] = useSafeClaimSelectedRewards();
   const [claim, { data: hash, isPending: isClaiming, error: claimError }] =
     useClaimSelectedRewards();
 
@@ -68,22 +72,31 @@ export default function ClaimRewardsPage() {
         loading={isClaiming || isSafeClaiming}
         error={claimError || safeClaimError}
       >
-        <div className="flex flex-col gap-8 overflow-y-auto">
+        <div className="w-full flex flex-col gap-8 overflow-y-auto overflow-x-clip max-h-[480px]">
           {stkTokenWithRewards
-            ?.filter((umbrella) => umbrella.rewards.some((reward) => reward?.usdAmount))
+            ?.filter((umbrella) =>
+              umbrella.rewards.some((reward) => reward?.usdAmount),
+            )
             .map((umbrella) => (
-              <UmbrellaRewardsBreakdown key={umbrella.address} umbrella={umbrella} />
+              <UmbrellaRewardsBreakdown
+                key={umbrella.address}
+                umbrella={umbrella}
+              />
             ))}
         </div>
 
         <div className="flex items-center justify-end">
           <div className="flex items-center gap-2.5">
             <div className="text-lg font-bold">Total:</div>
-            <NumberDisplay value={total} type="currency" className="text-2xl font-semibold" />
+            <NumberDisplay
+              value={total}
+              type="currency"
+              className="text-2xl font-semibold"
+            />
           </div>
         </div>
 
-        <div className="flex w-[248px] self-center">
+        <div className="flex w-full md:w-[248px] self-center">
           <Button
             primary
             elevation={1}

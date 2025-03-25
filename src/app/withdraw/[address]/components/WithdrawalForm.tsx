@@ -35,7 +35,11 @@ export type WithdrawalFormProps = {
   cooldown: CooldownData;
 };
 
-export const WithdrawalForm = ({ stkToken, relatedAssets, cooldown }: WithdrawalFormProps) => {
+export const WithdrawalForm = ({
+  stkToken,
+  relatedAssets,
+  cooldown,
+}: WithdrawalFormProps) => {
   const { batchHelper: spender } = useCurrentMarket();
   const isSafeWallet = useIsSafeWallet();
   const { signingStatus } = useTxFormSignature();
@@ -46,7 +50,12 @@ export const WithdrawalForm = ({ stkToken, relatedAssets, cooldown }: Withdrawal
     isPending: isSafeWithdrawing,
     error: safeWithdrawalError,
   } = useSafeWithdraw();
-  const { withdraw, data: hash, isPending: isWithdrawing, error: withdrawalError } = useWithdraw();
+  const {
+    withdraw,
+    data: hash,
+    isPending: isWithdrawing,
+    error: withdrawalError,
+  } = useWithdraw();
   const maxAmount = cooldown.amount;
 
   const schema = useMemo(
@@ -63,14 +72,18 @@ export const WithdrawalForm = ({ stkToken, relatedAssets, cooldown }: Withdrawal
   const { control } = formMethods;
 
   const { decimals, underlying, latestAnswer } = stkToken;
-  const supportedWithdrawingMethods = calculateSupportedWithdrawingMethods(relatedAssets);
+  const supportedWithdrawingMethods =
+    calculateSupportedWithdrawingMethods(relatedAssets);
 
   const onSubmit = async (formValues: WithdrawalFormValues) => {
     if (!formValues.amount) {
       return;
     }
     const { amount, withdrawalMethod, permit } = formValues;
-    const assetAddress = getRelatedAssetByWithdrawMethod(relatedAssets, withdrawalMethod);
+    const assetAddress = getRelatedAssetByWithdrawMethod(
+      relatedAssets,
+      withdrawalMethod,
+    );
 
     if (!assetAddress) {
       throw new Error("Unknown asset address");
@@ -105,11 +118,17 @@ export const WithdrawalForm = ({ stkToken, relatedAssets, cooldown }: Withdrawal
       >
         <div className="border-y-main-950 flex items-center justify-between border-b pb-4">
           <div className="flex items-center gap-2">
-            <AssetIcon symbol={underlying.symbol} type="stk" className="size-9" />
+            <AssetIcon
+              symbol={underlying.symbol}
+              type="stk"
+              className="size-9"
+            />
 
             <div className="flex flex-col">
               <h2 className="font-bold dark:text-white">{underlying.name}</h2>
-              <div className="text-main-500 text-sm capitalize">{mapTokenTypeToLabel("stk")}</div>
+              <div className="text-main-500 text-sm capitalize">
+                {mapTokenTypeToLabel("stk")}
+              </div>
             </div>
           </div>
 
@@ -124,7 +143,9 @@ export const WithdrawalForm = ({ stkToken, relatedAssets, cooldown }: Withdrawal
           <Controller
             name="amount"
             control={formMethods.control}
-            disabled={signingStatus === "pending" || isWithdrawing || isSafeWithdrawing}
+            disabled={
+              signingStatus === "pending" || isWithdrawing || isSafeWithdrawing
+            }
             render={({ field }) => (
               <ControlledAmountField
                 {...field}
@@ -154,16 +175,22 @@ export const WithdrawalForm = ({ stkToken, relatedAssets, cooldown }: Withdrawal
           />
         </div>
 
-        <div className="flex flex-col gap-4 self-center">
-          {isSafeWallet ? null : <SignTransaction asset={stkToken.address} spender={spender} />}
+        <div className="flex flex-col gap-4 md:self-center">
+          {isSafeWallet ? null : (
+            <SignTransaction asset={stkToken.address} spender={spender} />
+          )}
 
           <Button
             primary
             elevation={1}
             loading={isWithdrawing || isSafeWithdrawing}
-            disabled={isWithdrawing || isSafeWithdrawing || !formMethods.formState.isValid}
+            disabled={
+              isWithdrawing ||
+              isSafeWithdrawing ||
+              !formMethods.formState.isValid
+            }
             onClick={formMethods.handleSubmit(onSubmit)}
-            outerClassName="w-[248px]"
+            outerClassName="w-full md:w-[248px]"
             className="flex items-center gap-2"
           >
             <LayersIcon size={14} />
