@@ -1,5 +1,7 @@
 import { PropsWithChildren } from "react";
 import { cn } from "@/utils/cn";
+import { Button } from "@/components/ui/Button";
+import ArrowLeftIcon from "../../../public/images/arrow-left.svg";
 
 export type PageContainerProps = PropsWithChildren<{
   className?: string;
@@ -10,11 +12,25 @@ export const PageContainer = ({ children, className }: PageContainerProps) => {
     <div className="grow">
       <div
         className={cn(
-          "mx-auto flex w-full max-w-(--mobile-container) flex-col items-start gap-6 self-start md:max-w-(--breakpoint-lg) md:flex-row md:gap-8 md:pt-10",
+          "mx-auto flex w-full md:px-5 max-w-(--mobile-container) self-start flex-col gap-10 md:max-w-(--breakpoint-lg) md:pt-5",
           className,
         )}
       >
-        {children}
+        <div className="md:pl-[3px] flex items-center justify-start">
+          <Button
+            href="/"
+            elevation={1}
+            outerClassName="grow-0"
+            className=" flex items-center gap-1.5 font-semibold"
+          >
+            <ArrowLeftIcon className="h-2" />
+            Back
+          </Button>
+        </div>
+
+        <div className="flex flex-col items-start gap-6 md:flex-row md:gap-8">
+          {children}
+        </div>
       </div>
     </div>
   );

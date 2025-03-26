@@ -44,8 +44,8 @@ export const UmbrellaRewardsBreakdown = ({
             key={reward.address}
             className="flex items-center justify-between"
           >
-            <div className="flex items-center gap-2 max-w-[60%]">
-              <RewardAssetIcon reward={reward} className="size-6" />
+            <div className="flex items-center gap-2 max-w-[200px] md:max-w-[320px]">
+              <RewardAssetIcon reward={reward} className="size-6 shrink-0" />
               <h2 className="font-bold dark:text-white truncate">
                 {reward.name}
               </h2>
