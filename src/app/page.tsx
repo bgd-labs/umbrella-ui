@@ -6,7 +6,10 @@ import React, { useMemo } from "react";
 import { UmbrellaTable } from "@/app/components/UmbrellaTable/UmbrellaTable";
 import { AssetsTable } from "@/app/components/AssetsTable/AssetsTable";
 import { useAllStkTokens } from "@/hooks/useAllStkTokens";
-import { withPositiveBalance } from "@/utils/filters";
+import {
+  withAtLeastOneActiveReward,
+  withPositiveBalance,
+} from "@/utils/filters";
 import { useAllAssets } from "@/hooks/useAllAssets";
 import { Mobile } from "@/components/MediaQueries/MediaQueries";
 import { AboutUmbrella } from "@/app/components/AboutUmbrella/AboutUmbrella";
@@ -16,16 +19,10 @@ export default function Home() {
     useAllStkTokens();
   const { data: assets, isLoading: isAllAssetsLoading } = useAllAssets();
 
-  const filteredAssets = useMemo(() => {
-    return assets.filter((asset) => {
-      const hasRewardsToClaim =
-        asset.rewards.length > 0 &&
-        asset.rewards.every(
-          (reward) => !!reward.currentEmissionPerSecondScaled,
-        );
-      return hasRewardsToClaim;
-    });
-  }, [assets]);
+  const filteredAssets = useMemo(
+    () => assets.filter(withAtLeastOneActiveReward),
+    [assets],
+  );
   const filteredUmbrellaTokens = useMemo(
     () => stkTokens?.filter(withPositiveBalance),
     [stkTokens],

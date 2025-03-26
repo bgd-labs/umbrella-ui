@@ -7,7 +7,11 @@ export type NumberDisplayProps = {
   className?: string;
 };
 
-export const NumberDisplay = ({ value, type = "token", className }: NumberDisplayProps) => {
+export const NumberDisplay = ({
+  value,
+  type = "token",
+  className,
+}: NumberDisplayProps) => {
   let displayValue = value;
   let prefix: string | undefined = undefined;
 
@@ -36,8 +40,8 @@ export const NumberDisplay = ({ value, type = "token", className }: NumberDispla
   }
 
   if (type === "percent") {
-    if (value > 0 && value < 0.0001) {
-      displayValue = 0.0001;
+    if (value > 0 && value < 0.01) {
+      displayValue = 0.01;
       prefix = "<";
     }
 

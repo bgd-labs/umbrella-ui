@@ -74,7 +74,7 @@ export const Approve = ({
     }
   };
 
-  if (isApproved) {
+  if (isApproved && amount !== 0n) {
     return (
       <div className="mx-auto flex h-[34px] items-center gap-2 text-green-600">
         <Check />

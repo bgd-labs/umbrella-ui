@@ -91,7 +91,7 @@ export const AmountField = ({
           allowNegative={false}
           isAllowed={isAmountValid}
           disabled={disabled}
-          autoComplete="false"
+          autoComplete="off"
           {...numericFieldProps}
         />
       </div>
