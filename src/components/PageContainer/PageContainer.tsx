@@ -28,7 +28,7 @@ export const PageContainer = ({ children, className }: PageContainerProps) => {
           </Button>
         </div>
 
-        <div className="flex flex-col items-start gap-6 md:flex-row md:gap-8">
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:gap-8">
           {children}
         </div>
       </div>
