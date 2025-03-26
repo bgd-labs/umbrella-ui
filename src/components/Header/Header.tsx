@@ -40,27 +40,33 @@ export const Header = () => {
   };
 
   return (
-    <header className="mx-auto mb-5 flex flex-wrap w-full max-w-(--mobile-container) items-center justify-between gap-y-9 md:gap-5 py-6 md:max-w-(--breakpoint-lg)">
-      <Link href="/" className="flex items-center gap-3 order-1">
-        <UmbrellaLogoIcon className="text-main-950 w-[130px] md:w-[211px] dark:text-white" />
-      </Link>
+    <header className="mx-auto mb-5 flex flex-wrap w-full max-w-(--mobile-container) items-center justify-between gap-y-9 py-6 md:max-w-(--breakpoint-lg)">
+      <div className="flex basis-[30%] md:basis-1/3 order-1">
+        <Link href="/" className="flex items-center gap-3">
+          <UmbrellaLogoIcon className="text-main-950 w-[130px] md:w-[211px] dark:text-white" />
+        </Link>
+      </div>
 
-      <BlockSelect
-        placeholder="Select Market"
-        items={items}
-        value={market.id}
-        onValueChange={handleMarketChange}
-        className="not-md:w-full order-3 md:order-2"
-      />
+      <div className="flex basis-[100%] md:basis-1/3 justify-center order-3 md:order-2">
+        <BlockSelect
+          placeholder="Select Market"
+          items={items}
+          value={market.id}
+          onValueChange={handleMarketChange}
+          className="not-md:w-full h-[38px]"
+        />
+      </div>
 
-      <div className="flex items-center gap-3 md:gap-5 order-2 md:order-3">
-        <Wallet />
+      <div className="flex basis-[60%] md:basis-1/3 justify-end order-2 md:order-3">
+        <div className="flex items-center gap-3 md:gap-5">
+          <Wallet />
 
-        <div className="flex not-md:hidden">
-          <InfoModal />
+          <div className="flex not-md:hidden">
+            <InfoModal />
+          </div>
+
+          <ThemeToggleButton />
         </div>
-
-        <ThemeToggleButton />
       </div>
     </header>
   );

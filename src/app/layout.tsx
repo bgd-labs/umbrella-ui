@@ -18,7 +18,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
         className={`font-sans ${inter.variable} ${spaceGrotesk.variable} border-main-950 dark:border-main-500 text-main-950 dark:bg-main-950 antialiased dark:text-white`}
       >
         <Providers>
-          <div className="Root flex min-h-screen flex-col justify-between">
+          <div className="Root flex min-h-screen flex-col justify-between sm:px-7">
             <Header />
             {children}
             <Footer />

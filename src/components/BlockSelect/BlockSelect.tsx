@@ -38,7 +38,7 @@ export const BlockSelect = <T extends Item>({
       <Select.Trigger className={cn("w-[220px] outline-hidden", className)}>
         <Block
           elevation={1}
-          className="text-main-950 dark:!bg-main-900 flex items-center justify-center md:justify-between gap-2 px-5 leading-5 font-bold dark:text-white"
+          className="h-[38px] text-main-950 dark:!bg-main-900 flex items-center justify-center md:justify-between gap-2 px-5 leading-5 font-bold dark:text-white"
         >
           <Select.Value placeholder={placeholder} className="font-semibold" />
           <Select.Icon>
