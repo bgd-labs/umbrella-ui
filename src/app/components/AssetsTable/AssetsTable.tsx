@@ -31,12 +31,12 @@ export const AssetsTable = ({ data }: AssetsTableProps) => {
   return (
     <BlocksColumn>
       <Block elevation={2} className="bg-main-50 px-0 py-0">
-        <div className="border-b-main-950 dark:border-b-main-500 flex items-center border-b px-7 py-6">
+        <div className="border-b-main-950 dark:border-b-main-500 flex items-center border-b sm:max-lg:px-4 px-7 py-6">
           <span className="text-xl font-bold">Available</span>
         </div>
         <div
           className={cn(
-            "bg-main-600 dark:bg-main-900 grid gap-4 px-[30px] py-3 text-white",
+            "bg-main-600 dark:bg-main-900 grid gap-4 md:px-4 lg:px-[30px] py-3 text-white",
             {
               "grid-cols-[1fr_128px_128px_128px]": isConnected,
               "grid-cols-[1fr_128px_128px]": !isConnected,

@@ -21,7 +21,7 @@ export const AssetsTableRow = ({ data }: AssetsTableRowProps) => {
 
   return (
     <div
-      className={cn("grid gap-4 px-[30px] py-3.5", {
+      className={cn("grid gap-4 md:px-4 lg:px-[30px] py-3.5", {
         "grid-cols-[1fr_128px_128px_128px]": isConnected,
         "grid-cols-[1fr_128px_128px]": !isConnected,
       })}

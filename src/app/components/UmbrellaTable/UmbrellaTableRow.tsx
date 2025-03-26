@@ -19,7 +19,7 @@ export const UmbrellaTableRow = ({ data }: UmbrellaTableRowProps) => {
   return (
     <div
       className={
-        "grid grid-cols-[1fr_80px_120px_160px_160px] gap-4 px-[30px] py-3.5"
+        "grid md:grid-cols-[1fr_80px_100px_160px_60px] lg:grid-cols-[1fr_80px_120px_160px_160px] gap-4 md:px-4 lg:px-[30px] py-3.5"
       }
     >
       <TableCell>

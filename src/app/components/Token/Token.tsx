@@ -45,7 +45,7 @@ export const Token = ({ token, className }: TokenProps) => {
       <AssetIcon
         symbol={symbol}
         assetTag={assetTag}
-        className="size-[34px] md:size-11 shrink-0"
+        className="size-[34px] md:size-9 lg:size-11 shrink-0"
       />
 
       <div className="flex w-[calc(100%_-_--spacing(14))] flex-col items-start">

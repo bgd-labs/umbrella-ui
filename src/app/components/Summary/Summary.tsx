@@ -30,7 +30,7 @@ export const Summary = ({ umbrellaTokens, assets }: SummaryProps) => {
 
   return (
     <div className="flex flex-col md:flex-row md:h-[168px]">
-      <div className="bg-main-950 flex grow items-center justify-between md:justify-start md:gap-4 px-6 py-6 md:px-10 dark:bg-[#17171a]">
+      <div className="bg-main-950 flex grow items-center justify-between md:justify-start md:gap-4 px-6 md:px-4 lg:px-10 py-6 dark:bg-[#17171a]">
         <SummaryChart
           totalStaked={totalStakedUsd}
           availableToStake={availableToStakeUsd}
@@ -103,7 +103,7 @@ export const Summary = ({ umbrellaTokens, assets }: SummaryProps) => {
         </div>
       </div>
 
-      <div className="text-main-950 relative flex not-md:items-center md:w-[234px] justify-between md:flex-col md:justify-center bg-[#F4B00D] px-6 py-5 md:px-7 md:py-0">
+      <div className="text-main-950 relative flex not-md:items-center md:w-[234px] justify-between md:flex-col md:justify-center bg-[#F4B00D] px-6 md:px-4 lg:px-7 py-5 md:py-0">
         <Image
           src="/images/summary-bg.svg"
           width={100}

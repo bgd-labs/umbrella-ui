@@ -22,12 +22,14 @@ import {
   Mobile,
   TabletAndDesktop,
 } from "@/components/MediaQueries/MediaQueries";
+import { useRouter } from "next/navigation";
 
 export type ActionsProps = {
   token: StkToken;
 };
 
 export const Actions = ({ token }: ActionsProps) => {
+  const router = useRouter();
   const client = useQueryClient();
   const isSafeWallet = useIsSafeWallet();
   const { chainId } = useCurrentMarket();
@@ -67,6 +69,12 @@ export const Actions = ({ token }: ActionsProps) => {
     }
   };
 
+  const handleWithdrawalClick = async () => {
+    if (status === "withdraw") {
+      router.push(`/withdraw/${address}`);
+    }
+  };
+
   return (
     <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-center md:gap-4">
       {status === "withdraw" && (
@@ -77,6 +85,7 @@ export const Actions = ({ token }: ActionsProps) => {
           elevation={1}
           size="lg"
           className="font-semibold"
+          outerClassName="sm:max-lg:hidden"
         >
           Withdraw
         </Button>
@@ -113,6 +122,15 @@ export const Actions = ({ token }: ActionsProps) => {
             <DropdownItem onClick={handleCooldownClick}>
               Initiate cooldown
             </DropdownItem>
+
+            {status === "withdraw" && (
+              <DropdownItem
+                onClick={handleWithdrawalClick}
+                className="hidden sm:max-lg:block"
+              >
+                Withdraw
+              </DropdownItem>
+            )}
           </DropdownContent>
         </DropdownRoot>
       </TabletAndDesktop>
