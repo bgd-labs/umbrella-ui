@@ -6,18 +6,16 @@ import {
   avalancheFuji,
   base,
   baseSepolia,
-  fantom,
   gnosis,
-  harmonyOne,
   mainnet,
   metis,
-  opBNB,
   optimism,
   polygon,
   scroll,
   sepolia,
   zksync,
 } from "wagmi/chains";
+import { DEFAULT_RPCS } from "@/constants/defaultRPCs";
 
 export const appChains = [
   mainnet,
@@ -25,11 +23,8 @@ export const appChains = [
   arbitrum,
   avalanche,
   polygon,
-  fantom,
   gnosis,
-  harmonyOne,
   metis,
-  opBNB,
   optimism,
   scroll,
   zksync,
@@ -44,74 +39,42 @@ export const config = getDefaultConfig({
   appName: "Umbrella UI",
   projectId: "YOUR_PROJECT_ID",
   chains: [mainnet, ...appChains.slice(1)],
-  // TODO Refactor it
   transports: {
     [mainnet.id]: http(
-      process.env.NEXT_PUBLIC_MAINNET || "https://rpc.ankr.com/eth",
-      // "https://eth.nodeconnect.org",
+      process.env.NEXT_PUBLIC_MAINNET || DEFAULT_RPCS[mainnet.id],
     ),
-    [base.id]: http(
-      process.env.NEXT_PUBLIC_BASE || "https://base.blockpi.network/v1/rpc/public",
-      // "https://base.llamarpc.com" ||
-      // "https://base-mainnet.public.blastapi.io" ||
-      // "https://base.meowrpc.com",
-    ),
+    [base.id]: http(process.env.NEXT_PUBLIC_BASE || DEFAULT_RPCS[base.id]),
     [arbitrum.id]: http(
-      process.env.NEXT_PUBLIC_ARBITRUM || "https://endpoints.omniatech.io/v1/arbitrum/one/public",
-      // "https://arbitrum.llamarpc.com" ||
-      // "https://arb-mainnet-public.unifra.io" ||
-      // "https://endpoints.omniatech.io/v1/arbitrum/one/public",
+      process.env.NEXT_PUBLIC_ARBITRUM || DEFAULT_RPCS[arbitrum.id],
     ),
     [avalanche.id]: http(
-      process.env.NEXT_PUBLIC_AVALANCE || "https://api.avax.network/ext/bc/C/rpc",
-      // "https://avalanche.drpc.org" ||
-      // "https://avax.meowrpc.com" ||
-      // "https://avalanche.blockpi.network/v1/rpc/public",
+      process.env.NEXT_PUBLIC_AVALANCE || DEFAULT_RPCS[avalanche.id],
     ),
     [polygon.id]: http(
-      process.env.NEXT_PUBLIC_POLYGON || "https://endpoints.omniatech.io/v1/matic/mainnet/public",
-      // "https://polygon.llamarpc.com" ||
-      // "https://polygon-bor.publicnode.com",
+      process.env.NEXT_PUBLIC_POLYGON || DEFAULT_RPCS[polygon.id],
     ),
-    [fantom.id]: http(process.env.NEXT_PUBLIC_FANTOM),
     [gnosis.id]: http(
-      process.env.NEXT_PUBLIC_GNOSIS || "https://gnosis.blockpi.network/v1/rpc/public",
-      // "https://gnosis-mainnet.public.blastapi.io",
+      process.env.NEXT_PUBLIC_GNOSIS || DEFAULT_RPCS[gnosis.id],
     ),
-    [harmonyOne.id]: http(process.env.NEXT_PUBLIC_HARMONY_ONE),
-    [metis.id]: http(
-      process.env.NEXT_PUBLIC_METIS || "https://metis-mainnet.public.blastapi.io",
-      // "https://metis.api.onfinality.io/public",
-    ),
-    [opBNB.id]: http(process.env.NEXT_PUBLIC_OP_BNB),
+    [metis.id]: http(process.env.NEXT_PUBLIC_METIS || DEFAULT_RPCS[metis.id]),
     [optimism.id]: http(
-      process.env.NEXT_PUBLIC_OPTIMISM || "https://optimism.blockpi.network/v1/rpc/public",
-      // "https://optimism.llamarpc.com" ||
-      // "https://optimism.publicnode.com",
+      process.env.NEXT_PUBLIC_OPTIMISM || DEFAULT_RPCS[optimism.id],
     ),
     [scroll.id]: http(
-      process.env.NEXT_PUBLIC_SCROLL || "https://scroll.blockpi.network/v1/rpc/public",
-      // "https://scroll-mainnet.public.blastapi.io",
+      process.env.NEXT_PUBLIC_SCROLL || DEFAULT_RPCS[scroll.id],
     ),
     [zksync.id]: http(
-      process.env.NEXT_PUBLIC_ZKSYNC || "https://zksync.meowrpc.com",
-      // "https://mainnet.era.zksync.io",
+      process.env.NEXT_PUBLIC_ZKSYNC || DEFAULT_RPCS[zksync.id],
     ),
 
     [sepolia.id]: http(
-      process.env.NEXT_PUBLIC_SEPOLIA || "https://sepolia.drpc.org",
-      // "https://eth-sepolia.public.blastapi.io" ||
-      // "https://endpoints.omniatech.io/v1/eth/sepolia/public" ||
-      // "https://ethereum-sepolia.blockpi.network/v1/rpc/public" ||
-      // "https://ethereum-sepolia.publicnode.com",
+      process.env.NEXT_PUBLIC_SEPOLIA || DEFAULT_RPCS[sepolia.id],
     ),
-    [baseSepolia.id]: http(process.env.NEXT_PUBLIC_BASE_SEPOLIA),
+    [baseSepolia.id]: http(
+      process.env.NEXT_PUBLIC_BASE_SEPOLIA || DEFAULT_RPCS[baseSepolia.id],
+    ),
     [avalancheFuji.id]: http(
-      process.env.NEXT_PUBLIC_AVALANCHE_FUJI ||
-        "https://avalanche-fuji.blockpi.network/v1/rpc/public",
-      // "https://api.avax-test.network/ext/bc/C/rpc" ||
-      // "https://avalanche-fuji-c-chain.publicnode.com" ||
-      // "https://rpc.ankr.com/avalanche_fuji",
+      process.env.NEXT_PUBLIC_AVALANCHE_FUJI || DEFAULT_RPCS[avalancheFuji.id],
     ),
   },
   ssr: false,

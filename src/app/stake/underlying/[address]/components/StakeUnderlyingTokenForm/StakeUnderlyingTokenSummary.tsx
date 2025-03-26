@@ -7,13 +7,6 @@ import { rayDiv } from "@/utils/math/ray-math";
 import { StkToken } from "@/types/token";
 import { useFormContext, useWatch } from "react-hook-form";
 import { StakeUnderlyingFormValues } from "@/app/stake/underlying/[address]/stakeUnderlyingFormSchema";
-import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
-import { APYBreakdown } from "@/app/components/APYBreakdown/APYBreakdown";
-import {
-  calculateAPYEarnings,
-  calculateSimpleInterest,
-} from "@/utils/calculateCompoundedInterestPerSecond";
-import { formatUSDPrice } from "@/utils/formatUSDPrice";
 import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
 
 const calculateScaledAmount = ({

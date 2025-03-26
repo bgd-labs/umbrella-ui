@@ -2,16 +2,22 @@ import React, { PropsWithChildren } from "react";
 import { CopyIcon } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/Tooltip/Tooltip";
-import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
-import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/Tooltip/Tooltip";
 
 export type CopyToClipboardProps = PropsWithChildren<{
   value?: string;
   className?: string;
 }>;
 
-export const CopyToClipboard = ({ value, className, children }: CopyToClipboardProps) => {
+export const CopyToClipboard = ({
+  value,
+  className,
+  children,
+}: CopyToClipboardProps) => {
   const { status, copyToClipboard } = useCopyToClipboard();
 
   if (children) {
@@ -40,7 +46,9 @@ export const CopyToClipboard = ({ value, className, children }: CopyToClipboardP
         />
       </TooltipTrigger>
       <TooltipContent side="top">
-        <div className="border-main-950 bg-main-50 flex border px-2 py-1">Copied</div>
+        <div className="border-main-950 bg-main-50 flex border px-2 py-1">
+          Copied
+        </div>
       </TooltipContent>
     </Tooltip>
   );
