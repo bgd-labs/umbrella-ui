@@ -11,6 +11,7 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import GhostWithUmbrellaImage from "../../../public/images/ghost-with-umbrella.svg";
 import { PropsWithChildren } from "react";
 import { useMobileMediaQuery } from "@/hooks/useMediaQuery";
+import { ExternalLinkIcon } from "lucide-react";
 
 export type InfoModalProps = PropsWithChildren;
 
@@ -149,19 +150,59 @@ export const InfoModal = ({ children }: InfoModalProps) => {
             <ul className="pl-6">
               <li className="relative mb-4">
                 <span className="absolute -left-5 font-bold">&bull;</span>
-                Aave Governance forum describing Umbrella
+                <a
+                  target="_blank"
+                  href="https://governance.aave.com/t/arfc-aave-umbrella-activation/21521"
+                  className="flex items-center gap-1 underline underline-offset-3"
+                >
+                  Aave Governance forum describing Umbrella
+                  <ExternalLinkIcon
+                    size={14}
+                    className="max-sm:hidden text-main-500 cursor-pointer"
+                  />
+                </a>
+              </li>
+              {/*<li className="relative mb-4">*/}
+              {/*  <span className="absolute -left-5 font-bold">&bull;</span>*/}
+              {/*  <a*/}
+              {/*    target="_blank"*/}
+              {/*    href=""*/}
+              {/*    className="flex items-center gap-1 underline underline-offset-3"*/}
+              {/*  >*/}
+              {/*    Aave Umbrella smart contracts addresses*/}
+              {/*    <ExternalLinkIcon*/}
+              {/*      size={14}*/}
+              {/*      className="text-main-500 cursor-pointer"*/}
+              {/*    />*/}
+              {/*  </a>*/}
+              {/*</li>*/}
+              <li className="relative mb-4">
+                <span className="absolute -left-5 font-bold">&bull;</span>
+                <a
+                  target="_blank"
+                  href="https://github.com/aave-dao/aave-umbrella"
+                  className="flex items-center gap-1 underline underline-offset-3"
+                >
+                  Aave Umbrella smart contracts codebase
+                  <ExternalLinkIcon
+                    size={14}
+                    className="max-sm:hidden text-main-500 cursor-pointer"
+                  />
+                </a>
               </li>
               <li className="relative mb-4">
                 <span className="absolute -left-5 font-bold">&bull;</span>
-                Aave Umbrella smart contracts addresses
-              </li>
-              <li className="relative mb-4">
-                <span className="absolute -left-5 font-bold">&bull;</span>
-                Aave Umbrella smart contracts codebase
-              </li>
-              <li className="relative mb-4">
-                <span className="absolute -left-5 font-bold">&bull;</span>
-                Aave Umbrella UI codebase
+                <a
+                  target="_blank"
+                  href="https://github.com/aave-dao/aave-umbrella-ui"
+                  className="flex items-center gap-1 underline underline-offset-3"
+                >
+                  Aave Umbrella UI codebase
+                  <ExternalLinkIcon
+                    size={14}
+                    className="max-sm:hidden text-main-500 cursor-pointer"
+                  />
+                </a>
               </li>
             </ul>
           </div>
