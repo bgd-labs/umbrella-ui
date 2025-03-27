@@ -8,7 +8,7 @@
     ],
     "types": [
       "vitest/globals",
-      "testing-library/jest-dom"
+      "@types/testing-library__jest-dom"
     ],
     "allowJs": true,
     "skipLibCheck": true,
