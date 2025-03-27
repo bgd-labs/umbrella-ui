@@ -2,7 +2,7 @@ import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
 import { mapTokenTypeToLabel } from "@/components/TokenLabel/TokenLabel";
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
 import React from "react";
-import { withPositiveBalance } from "@/utils/filters";
+import { withPositiveBalance } from "@/utils/filters/filters";
 
 import { StkToken } from "@/types/token";
 import { RewardAssetIcon } from "@/components/RewardAssetIcon/RewardAssetIcon";

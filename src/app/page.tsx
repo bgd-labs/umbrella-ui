@@ -9,7 +9,7 @@ import { useAllStkTokens } from "@/hooks/useAllStkTokens";
 import {
   withAtLeastOneActiveReward,
   withPositiveBalance,
-} from "@/utils/filters";
+} from "@/utils/filters/filters";
 import { useAllAssets } from "@/hooks/useAllAssets";
 import { Mobile } from "@/components/MediaQueries/MediaQueries";
 import { AboutUmbrella } from "@/app/components/AboutUmbrella/AboutUmbrella";

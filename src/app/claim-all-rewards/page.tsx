@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
 import { useAllStkTokens } from "@/hooks/useAllStkTokens";
 import { TransactionCard } from "@/components/Transaction/TransactionCard";
-import { withPositiveBalance } from "@/utils/filters";
+import { withPositiveBalance } from "@/utils/filters/filters";
 import { UmbrellaRewardsBreakdown } from "@/components/UmbrellaRewardsBreakdown/UmbrellaRewardsBreakdown";
 import { useWalletAddress } from "@/providers/WalletProvider/WalletContext";
 import { useClaimSelectedRewards } from "@/hooks/useClaimSelectedRewards/useClaimSelectedRewards";

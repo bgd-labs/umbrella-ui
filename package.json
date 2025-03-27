@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@bgd-labs/aave-address-book": "^4.17.1",
@@ -50,15 +53,25 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@svgr/webpack": "^8.1.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20.17.11",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^3.0.9",
+    "@vitest/ui": "^3.0.9",
     "eslint": "^9.23.0",
     "eslint-config-next": "15.2.4",
+    "jsdom": "^26.0.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.9"
   },
   "overrides": {
     "@safe-global/safe-apps-react-sdk": {
