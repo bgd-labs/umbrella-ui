@@ -1,18 +1,18 @@
 "use client";
 
-import { PageLoader } from "@/components/PageLoader/PageLoader";
-import { UnsupportedMarket } from "@/app/components/UnsupportedMarket";
-import React, { useMemo } from "react";
-import { UmbrellaTable } from "@/app/components/UmbrellaTable/UmbrellaTable";
+import { AboutUmbrella } from "@/app/components/AboutUmbrella/AboutUmbrella";
 import { AssetsTable } from "@/app/components/AssetsTable/AssetsTable";
+import { UmbrellaTable } from "@/app/components/UmbrellaTable/UmbrellaTable";
+import { UnsupportedMarket } from "@/app/components/UnsupportedMarket";
+import { Mobile } from "@/components/MediaQueries/MediaQueries";
+import { PageLoader } from "@/components/PageLoader/PageLoader";
+import { useAllAssets } from "@/hooks/useAllAssets";
 import { useAllStkTokens } from "@/hooks/useAllStkTokens";
 import {
   withAtLeastOneActiveReward,
   withPositiveBalance,
 } from "@/utils/filters/filters";
-import { useAllAssets } from "@/hooks/useAllAssets";
-import { Mobile } from "@/components/MediaQueries/MediaQueries";
-import { AboutUmbrella } from "@/app/components/AboutUmbrella/AboutUmbrella";
+import { useMemo } from "react";
 
 export default function Home() {
   const { data: stkTokens, isLoading: isAllStkTokensLoading } =
@@ -37,7 +37,7 @@ export default function Home() {
   }
 
   return (
-    <main className="mx-auto mb-auto flex w-full max-w-(--mobile-container) md:max-w-(--breakpoint-lg) flex-col gap-12">
+    <main className="mx-auto mb-auto flex w-full max-w-(--mobile-container) flex-col gap-12 md:max-w-(--breakpoint-lg)">
       {filteredUmbrellaTokens && filteredUmbrellaTokens.length > 0 && (
         <UmbrellaTable data={filteredUmbrellaTokens} assets={filteredAssets} />
       )}

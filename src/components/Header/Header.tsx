@@ -7,7 +7,7 @@ import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
 import { Wallet } from "@/components/Wallet/Wallet";
 import { switchChain } from "@wagmi/core";
 import { config } from "@/configs/wagmi";
-import { findMarketById } from "@/utils/markets";
+import { findMarketById } from "@/utils/markets/markets";
 import { useMarketStore } from "@/providers/MarketProvider/MarketContext";
 import { ThemeToggleButton } from "@/components/ThemeToggleButton/ThemeToggleButton";
 import UmbrellaLogoIcon from "../../../public/images/umbrella-logo.svg";

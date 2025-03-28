@@ -1,17 +1,17 @@
-import { useAccount, useReadContract } from "wagmi";
 import { UMBRELLA_DATA_AGGREGATION_HELPER_ABI } from "@/abis/umbrellaDataAggregationHelper";
-import { useMemo } from "react";
-import { formatBigInt } from "@/utils/formatBigInt";
-import { useAllReserves } from "@/hooks/useAllReserves";
-import { useRelatedAssets } from "@/hooks/useRelatedAssets/useRelatedAssets";
 import { ZERO_CONTRACT_ADDRESS } from "@/constants/contracts";
 import { PRICE_FEED_DECIMALS } from "@/constants/oracle";
-import { formatUSDPrice } from "@/utils/formatUSDPrice";
-import { calculateEmissionPerYear } from "@/utils/apy";
-import { calculateApyData } from "@/utils/calculateApyData";
-import { Reward, StkToken } from "@/types/token";
-import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { useAllReserves } from "@/hooks/useAllReserves";
 import { useAllReservesUnderlyings } from "@/hooks/useAllReservesUnderlyings";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { useRelatedAssets } from "@/hooks/useRelatedAssets/useRelatedAssets";
+import { Reward, StkToken } from "@/types/token";
+import { calculateRewardsApy } from "@/utils/apy";
+import { calculateApyData } from "@/utils/calculateApyData";
+import { formatBigInt } from "@/utils/formatBigInt";
+import { formatUSDPrice } from "@/utils/formatUSDPrice";
+import { useMemo } from "react";
+import { useAccount, useReadContract } from "wagmi";
 
 export const useAllStkTokens = () => {
   const { address: owner } = useAccount();
@@ -19,7 +19,9 @@ export const useAllStkTokens = () => {
     useCurrentMarket();
 
   const { data: assetsDict, isLoading: isAssetsDictLoading } = useRelatedAssets();
-  const { data: reserves, isLoading: isReservesLoading } = useAllReserves();
+  const { data: reserves,
+     isLoading: isReservesLoading
+     } = useAllReserves();
   const { data: underlyings, isLoading: isUnderlyingsLoading } = useAllReservesUnderlyings();
 
   const { data, isLoading, ...rest } = useReadContract({
@@ -65,11 +67,14 @@ export const useAllStkTokens = () => {
                   usdPrice: rewardTokenData.price,
                 }),
                 currentEmissionPerSecondScaled,
-                apy: calculateEmissionPerYear({
+                apy: calculateRewardsApy({
                   totalAssets,
                   decimals: stakeTokenData.decimals,
                   usdPrice: stakeTokenData.price,
-                  reward: { usdPrice: rewardTokenData.price, currentEmissionPerSecondScaled },
+                  reward: {
+                    usdPrice: rewardTokenData.price,
+                    currentEmissionPerSecondScaled,
+                  },
                 }),
               };
             },

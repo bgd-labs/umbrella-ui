@@ -2,7 +2,7 @@
 
 import { MarketContext } from "@/providers/MarketProvider/MarketContext";
 import { PropsWithChildren, useMemo, useRef, useState } from "react";
-import { findMarketByChainId } from "@/utils/markets";
+import { findMarketByChainId } from "@/utils/markets/markets";
 import { createMarketStore, MarketStore } from "@/store/market";
 import { getInitialChainId } from "@/utils/getInitialChainId";
 
