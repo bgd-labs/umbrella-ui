@@ -1,12 +1,12 @@
+import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
+import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
+import { RewardAssetIcon } from "@/components/RewardAssetIcon/RewardAssetIcon";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/Tooltip/Tooltip";
-import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
-import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
 import { Reward } from "@/types/token";
-import { RewardAssetIcon } from "@/components/RewardAssetIcon/RewardAssetIcon";
 
 export type APYBreakdownProps = {
   symbol: string;
@@ -23,6 +23,9 @@ export const APYBreakdown = ({
   rewards,
   displayRewards = true,
 }: APYBreakdownProps) => {
+  const filteredRewards = rewards.filter(
+    (reward) => !!reward.currentEmissionPerSecondScaled,
+  );
   return (
     <Tooltip>
       <TooltipTrigger className="group flex items-center justify-center">
@@ -42,7 +45,7 @@ export const APYBreakdown = ({
                   className="-ml-[6px] size-4 first:ml-0"
                 />
               )}
-              {rewards?.map((reward) => (
+              {filteredRewards?.map((reward) => (
                 <RewardAssetIcon
                   key={reward.address}
                   reward={reward}
@@ -62,7 +65,7 @@ export const APYBreakdown = ({
             </div>
             <NumberDisplay value={supplyApy} type="percent" />
           </div>
-          {rewards.map((reward) => (
+          {filteredRewards.map((reward) => (
             <div
               key={reward.address}
               className="flex items-center justify-between gap-3"
