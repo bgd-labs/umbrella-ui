@@ -61,7 +61,7 @@ export const APYBreakdown = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <AssetIcon symbol={symbol} assetTag="a" className="size-[18px]" />
-              {/* <div>Supply APY</div> */}
+              <div>Supply APY</div>
             </div>
             <NumberDisplay value={supplyApy} type="percent" />
           </div>
