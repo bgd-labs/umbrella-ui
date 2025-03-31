@@ -72,11 +72,13 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
   };
 
   const onSubmit = (formValues: StakeNativeTokenFormValues) => {
-    if (!formValues.amount) {
-      return;
-    }
+    console.log("formValues", formValues);
 
     if (isSafeWallet) {
+      if (!formValues.amount) {
+        return;
+      }
+
       safeWrapAndStake({
         umbrellaAddress: stkToken.address,
         assetAddress: nativeToken.stkToken.underlying.address,
@@ -84,11 +86,11 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
       });
     } else {
       stake({
-        amount: formValues.amount,
+        amount: formValues.wrappedAmount,
         umbrellaAddress: stkToken.address,
         assetAddress: nativeToken.stkToken.underlying.address,
         permit: formValues.permit,
-        description: `Stake ${formatUnits(formValues.amount, decimals)} ${symbol}`,
+        description: `Stake ${formatUnits(formValues.wrappedAmount, decimals)} ${symbol}`,
       });
     }
   };
@@ -97,7 +99,7 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
     <FormProvider {...formMethods}>
       <TransactionCard
         title="Stake native token"
-        hash={wrapHash}
+        hash={depositHash}
         safeHash={safeHash}
         loading={isStaking || isSafeStaking}
         error={wrapNativeTokenError || depositError || safeDepositError}
@@ -197,15 +199,15 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
           stkToken={stkToken}
         />
 
-        {approval?.txHash && (
-          <SummarySection title="Approval hash">
-            <TransactionBreakdown hash={approval?.txHash} />
-          </SummarySection>
-        )}
-
         {wrapHash && (
           <SummarySection title="Wrapping native token hash">
             <TransactionBreakdown hash={wrapHash} />
+          </SummarySection>
+        )}
+
+        {approval?.txHash && (
+          <SummarySection title="Approval hash">
+            <TransactionBreakdown hash={approval?.txHash} />
           </SummarySection>
         )}
 

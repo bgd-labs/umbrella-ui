@@ -1,9 +1,9 @@
+import { Countdown } from "@/components/Countdown/Countdown";
 import { useUmbrellaCooldownData } from "@/hooks/useAllUmbrellaCooldowns/useUmbrellaCooldownData";
 import { useUmbrellaCooldownStatus } from "@/hooks/useAllUmbrellaCooldowns/useUmbrellaCooldownStatus";
-import { Countdown } from "@/components/Countdown/Countdown";
 
-import { StkToken } from "@/types/token";
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
+import { StkToken } from "@/types/token";
 import { formatBigInt } from "@/utils/formatBigInt";
 
 export type UmbrellaStatusProps = {
@@ -24,13 +24,7 @@ export const UmbrellaStatus = ({ token, className }: UmbrellaStatusProps) => {
   return (
     <div className="flex flex-col items-center">
       <Countdown
-        date={
-          status === "cooldown"
-            ? data.endOfCooldown
-            : status === "withdraw"
-              ? data.withdrawalEndsAt
-              : 0
-        }
+        date={status === "cooldown" ? data.endOfCooldown : status === "withdraw" ? data.withdrawalEndsAt : 0}
         className={className}
       />
       {status === "cooldown" && (

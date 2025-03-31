@@ -58,7 +58,13 @@ export const useStake = () => {
         address: batchHelper,
         abi: UMBRELLA_BATCH_HELPER_ABI,
         functionName: "deposit",
-        args: [[umbrellaAddress, assetAddress, amount]],
+        args: [
+          {
+            stakeToken: umbrellaAddress,
+            edgeToken: assetAddress,
+            value: amount,
+          },
+        ],
       });
     }
 

@@ -9,7 +9,7 @@ export const useAllUmbrellaCooldowns = () => {
 
   const { address: owner } = useAccount();
   const { data, isLoading: isUmbrellaAddressesLoading } = useAllStkTokens();
-  const addresses = data?.map((token) => token.underlying.address);
+  const addresses = data?.map((token) => token.address);
 
   const { isLoading: isCooldownsLoading, ...rest } = useQuery({
     queryFn: owner && addresses ? () => fetchAllCooldowns({ chainId, owner, addresses }) : skipToken,

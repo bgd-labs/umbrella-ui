@@ -9,11 +9,7 @@ export const REWARDS_CONTROLLER_ABI = [
     name: "AccessControlUnauthorizedAccount",
     type: "error",
   },
-  {
-    inputs: [{ internalType: "address", name: "asset", type: "address" }],
-    name: "AssetNotInitialized",
-    type: "error",
-  },
+  { inputs: [{ internalType: "address", name: "asset", type: "address" }], name: "AssetNotInitialized", type: "error" },
   {
     inputs: [
       { internalType: "address", name: "claimer", type: "address" },
@@ -28,17 +24,9 @@ export const REWARDS_CONTROLLER_ABI = [
     name: "ECDSAInvalidSignatureLength",
     type: "error",
   },
-  {
-    inputs: [{ internalType: "bytes32", name: "s", type: "bytes32" }],
-    name: "ECDSAInvalidSignatureS",
-    type: "error",
-  },
+  { inputs: [{ internalType: "bytes32", name: "s", type: "bytes32" }], name: "ECDSAInvalidSignatureS", type: "error" },
   { inputs: [], name: "EthTransferFailed", type: "error" },
-  {
-    inputs: [{ internalType: "uint256", name: "deadline", type: "uint256" }],
-    name: "ExpiredSignature",
-    type: "error",
-  },
+  { inputs: [{ internalType: "uint256", name: "deadline", type: "uint256" }], name: "ExpiredSignature", type: "error" },
   {
     inputs: [
       { internalType: "address", name: "account", type: "address" },
@@ -58,6 +46,7 @@ export const REWARDS_CONTROLLER_ABI = [
     name: "InvalidSigner",
     type: "error",
   },
+  { inputs: [], name: "InvalidTargetLiquidity", type: "error" },
   { inputs: [], name: "LengthsDontMatch", type: "error" },
   { inputs: [], name: "MaxRewardsLengthReached", type: "error" },
   { inputs: [], name: "NotInitializing", type: "error" },
@@ -80,7 +69,6 @@ export const REWARDS_CONTROLLER_ABI = [
     name: "SafeERC20FailedOperation",
     type: "error",
   },
-  { inputs: [], name: "TargetLiquidityTooLow", type: "error" },
   { inputs: [], name: "ZeroAddress", type: "error" },
   {
     anonymous: false,
@@ -371,31 +359,6 @@ export const REWARDS_CONTROLLER_ABI = [
   },
   {
     inputs: [
-      { internalType: "address[]", name: "assets", type: "address[]" },
-      { internalType: "address", name: "user", type: "address" },
-      { internalType: "address", name: "receiver", type: "address" },
-      { internalType: "uint256", name: "deadline", type: "uint256" },
-      {
-        components: [
-          { internalType: "uint8", name: "v", type: "uint8" },
-          { internalType: "bytes32", name: "r", type: "bytes32" },
-          { internalType: "bytes32", name: "s", type: "bytes32" },
-        ],
-        internalType: "struct IRewardsStructs.SignatureParams",
-        name: "sig",
-        type: "tuple",
-      },
-    ],
-    name: "claimAllRewardsPermit",
-    outputs: [
-      { internalType: "address[][]", name: "", type: "address[][]" },
-      { internalType: "uint256[][]", name: "", type: "uint256[][]" },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
       { internalType: "address", name: "asset", type: "address" },
       { internalType: "address", name: "user", type: "address" },
       { internalType: "address", name: "receiver", type: "address" },
@@ -461,29 +424,6 @@ export const REWARDS_CONTROLLER_ABI = [
       { internalType: "address", name: "receiver", type: "address" },
     ],
     name: "claimSelectedRewardsOnBehalf",
-    outputs: [{ internalType: "uint256[][]", name: "", type: "uint256[][]" }],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      { internalType: "address[]", name: "assets", type: "address[]" },
-      { internalType: "address[][]", name: "rewards", type: "address[][]" },
-      { internalType: "address", name: "user", type: "address" },
-      { internalType: "address", name: "receiver", type: "address" },
-      { internalType: "uint256", name: "deadline", type: "uint256" },
-      {
-        components: [
-          { internalType: "uint8", name: "v", type: "uint8" },
-          { internalType: "bytes32", name: "r", type: "bytes32" },
-          { internalType: "bytes32", name: "s", type: "bytes32" },
-        ],
-        internalType: "struct IRewardsStructs.SignatureParams",
-        name: "sig",
-        type: "tuple",
-      },
-    ],
-    name: "claimSelectedRewardsPermit",
     outputs: [{ internalType: "uint256[][]", name: "", type: "uint256[][]" }],
     stateMutability: "nonpayable",
     type: "function",
