@@ -1,19 +1,18 @@
 "use client";
 
-import React from "react";
-import { parseSignature } from "viem";
-import { Check } from "lucide-react";
-import { addDays, toUnix } from "@/utils/date";
-import { Button } from "@/components/ui/Button";
-import { ensureCorrectChainForTx } from "@/utils/ensureCorrectChainForTx";
-import { useWalletAddress } from "@/providers/WalletProvider/WalletContext";
-import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { SignTransactionProps } from "@/components/SignTransaction/types";
-import { usePermit } from "@/hooks/usePermit";
 import { LoadingBlock } from "@/components/SignTransaction/Loader";
-import { Permit as PermitType } from "@/types/permit";
-import { useSignTypedData } from "wagmi";
+import { SignTransactionProps } from "@/components/SignTransaction/types";
+import { Button } from "@/components/ui/Button";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { usePermit } from "@/hooks/usePermit";
 import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
+import { useWalletAddress } from "@/providers/WalletProvider/WalletContext";
+import { Permit as PermitType } from "@/types/permit";
+import { addDays, toUnix } from "@/utils/date";
+import { ensureCorrectChainForTx } from "@/utils/ensureCorrectChainForTx/ensureCorrectChainForTx";
+import { Check } from "lucide-react";
+import { parseSignature } from "viem";
+import { useSignTypedData } from "wagmi";
 
 export type PermitProps = SignTransactionProps & {
   value?: PermitType;
@@ -21,14 +20,7 @@ export type PermitProps = SignTransactionProps & {
   disabled?: boolean;
 };
 
-export const Permit = ({
-  asset,
-  amount,
-  spender,
-  value,
-  onChange,
-  disabled,
-}: PermitProps) => {
+export const Permit = ({ asset, amount, spender, value, onChange, disabled }: PermitProps) => {
   const owner = useWalletAddress();
   const { chainId } = useCurrentMarket();
   const { setSigningStatus } = useTxFormSignature();
