@@ -13,8 +13,7 @@ export const ensureCorrectChainForTx = async (chainId: ChainId) => {
     try {
       await switchChain(config, { chainId });
     } catch (e) {
-      console.error(e);
-      throw new Error("Error occured when switching chain. Check console log for more details.");
+      throw new Error("Error occured when switching chain.");
     }
   }
 };

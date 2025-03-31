@@ -1,7 +1,7 @@
 import { UMBRELLA_BATCH_HELPER_ABI } from "@/abis/umbrellaBatchHelper";
 import { config } from "@/configs/wagmi";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { useWriteContract } from "@/hooks/useWriteContract";
+import { useWriteContract } from "@/hooks/useWriteContract/useWriteContract";
 import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
 import { Permit } from "@/types/permit";
 import { WithdrawalMethod } from "@/types/withdraw";

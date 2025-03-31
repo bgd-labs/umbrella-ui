@@ -67,9 +67,7 @@ describe("ensureCorrectChainForTx", () => {
     });
     switchChainMock.mockRejectedValue(mockError);
 
-    await expect(ensureCorrectChainForTx(1)).rejects.toThrow(
-      "Error occured when switching chain. Check console log for more details.",
-    );
+    await expect(ensureCorrectChainForTx(1)).rejects.toThrow("Error occured when switching chain.");
   });
 
   it("should not attempt to switch chain when no connector is present", async () => {

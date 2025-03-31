@@ -1,7 +1,7 @@
 import { REWARDS_CONTROLLER_ABI } from "@/abis/rewardsController";
 import { config } from "@/configs/wagmi";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { useWriteContract } from "@/hooks/useWriteContract";
+import { useWriteContract } from "@/hooks/useWriteContract/useWriteContract";
 import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
 import { useQueryClient } from "@tanstack/react-query";
 import { waitForTransactionReceipt } from "@wagmi/core";

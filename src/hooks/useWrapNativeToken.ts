@@ -1,6 +1,6 @@
 import { config } from "@/configs/wagmi";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { useWriteContract } from "@/hooks/useWriteContract";
+import { useWriteContract } from "@/hooks/useWriteContract/useWriteContract";
 import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
 import { waitForTransactionReceipt } from "@wagmi/core";
 import { parseAbi } from "viem";

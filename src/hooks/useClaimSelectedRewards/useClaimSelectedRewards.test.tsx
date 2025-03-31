@@ -1,5 +1,5 @@
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { useWriteContract } from "@/hooks/useWriteContract";
+import { useWriteContract } from "@/hooks/useWriteContract/useWriteContract";
 import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook, waitFor } from "@testing-library/react";
@@ -12,7 +12,7 @@ vi.mock("@/hooks/useCurrentMarket", () => ({
   useCurrentMarket: vi.fn(),
 }));
 
-vi.mock("@/hooks/useWriteContract", () => ({
+vi.mock("@/hooks/useWriteContract/useWriteContract", () => ({
   useWriteContract: vi.fn(),
 }));
 
