@@ -1,12 +1,11 @@
+import { StakeStataFormValues } from "@/app/stake/stata/[address]/stakeStataTokenFormSchema";
+import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
 import { SummarySection } from "@/components/Transaction/SummarySection";
 import { TokenBreakdown } from "@/components/Transaction/TokenBreakdown";
 import { TransactionBreakdown } from "@/components/Transaction/TransactionBreakdown";
 import { TransactionCard } from "@/components/Transaction/TransactionCard";
-import React from "react";
 import { StataToken, StkToken } from "@/types/token";
 import { useFormContext, useWatch } from "react-hook-form";
-import { StakeStataFormValues } from "@/app/stake/stata/[address]/stakeStataTokenFormSchema";
-import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
 
 export type StakeStataTokenSummaryProps = {
   token: StataToken;
@@ -14,11 +13,7 @@ export type StakeStataTokenSummaryProps = {
   hash?: string;
 };
 
-export const StakeStataTokenSummary = ({
-  token,
-  stkToken,
-  hash,
-}: StakeStataTokenSummaryProps) => {
+export const StakeStataTokenSummary = ({ token, stkToken, hash }: StakeStataTokenSummaryProps) => {
   const { control } = useFormContext<StakeStataFormValues>();
   const amount = useWatch({ control, name: "amount" }) ?? 0n;
   const approval = useWatch({ control, name: "approval" });
@@ -50,11 +45,7 @@ export const StakeStataTokenSummary = ({
         />
       </SummarySection>
 
-      <APYAndEarningsForecast
-        amount={amount}
-        initialTokenType="stata"
-        stkToken={stkToken}
-      />
+      <APYAndEarningsForecast amount={amount} initialTokenType="stata" stkToken={stkToken} />
 
       {approval?.txHash && (
         <SummarySection title="Transaction hash">

@@ -1,13 +1,13 @@
-import { Address, encodeFunctionData } from "viem";
-import { Permit } from "@/types/permit";
 import { UMBRELLA_BATCH_HELPER_ABI } from "@/abis/umbrellaBatchHelper";
-import { useWriteContract } from "@/hooks/useWriteContract";
-import { useQueryClient } from "@tanstack/react-query";
-import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
-import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "@/configs/wagmi";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { useWriteContract } from "@/hooks/useWriteContract";
+import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
+import { Permit } from "@/types/permit";
 import { WithdrawalMethod } from "@/types/withdraw";
+import { useQueryClient } from "@tanstack/react-query";
+import { waitForTransactionReceipt } from "@wagmi/core";
+import { Address, encodeFunctionData } from "viem";
 
 export type WithdrawUmbrellaParams = {
   umbrellaAddress: Address;
@@ -79,18 +79,9 @@ export const useWithdraw = () => {
         queryKey: ["readContract", { functionName: "getAllAggregatedData" }],
       });
 
-      // TODO Find a better way to do the same
-      if (withdrawMethod === "withdrawToStata") {
-        client.invalidateQueries({
-          queryKey: ["allStataTokens"],
-        });
-      } else if (withdrawMethod === "withdrawToAave") {
+      if (withdrawMethod === "withdrawToAave") {
         client.invalidateQueries({
           queryKey: ["allReserves"],
-        });
-      } else {
-        client.invalidateQueries({
-          queryKey: ["allUnderlyings"],
         });
       }
     }

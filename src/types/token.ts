@@ -1,5 +1,5 @@
-import { Address } from "viem";
 import { EMode } from "@/types/eMode";
+import { Address } from "viem";
 
 export type TokenType = "underlying" | "a" | "stata" | "stk" | "stkStata";
 
@@ -74,7 +74,7 @@ export type Reward = Token &
 export type UnderlyingToken = Token &
   TokenPrice & {
     type: "underlying";
-    reserve: Reserve;
+    reserve: Reserve | null;
   };
 
 export type StataToken = Token &
@@ -94,6 +94,7 @@ export type StkToken = Token &
     reserve: Reserve | null;
     apyData: ApyData;
     underlying: UnderlyingToken;
+    stata: StataToken | null;
   };
 
 export type ApyDataComponent = {

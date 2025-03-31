@@ -1,10 +1,9 @@
 "use client";
 
-import React from "react";
-import { useNativeToken } from "@/hooks/useNativeToken";
-import { PageLoader } from "@/components/PageLoader/PageLoader";
 import { WrapNativeTokenForm } from "@/app/stake/native/components/WrapNativeTokenForm";
 import { PageContainer } from "@/components/PageContainer/PageContainer";
+import { PageLoader } from "@/components/PageLoader/PageLoader";
+import { useNativeToken } from "@/hooks/useNativeToken";
 import { TxFormProvider } from "@/providers/TxFormProvider/TxFormProvider";
 
 export default function StakeNativeTokenPage() {

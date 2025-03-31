@@ -1,13 +1,13 @@
 "use client";
 
-import React, { use } from "react";
-import { Address } from "viem";
+import { StakeUnderlyingTokenForm } from "@/app/stake/underlying/[address]/components/StakeUnderlyingTokenForm/StakeUnderlyingTokenForm";
 import { PageContainer } from "@/components/PageContainer/PageContainer";
+import { PageLoader } from "@/components/PageLoader/PageLoader";
 import { useStkToken } from "@/hooks/useStkToken";
 import { useTotalSupplied } from "@/hooks/useTotalSupplied";
-import { PageLoader } from "@/components/PageLoader/PageLoader";
-import { StakeUnderlyingTokenForm } from "@/app/stake/underlying/[address]/components/StakeUnderlyingTokenForm/StakeUnderlyingTokenForm";
 import { TxFormProvider } from "@/providers/TxFormProvider/TxFormProvider";
+import { use } from "react";
+import { Address } from "viem";
 
 const tokenType = "underlying";
 

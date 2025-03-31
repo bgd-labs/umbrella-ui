@@ -1,14 +1,14 @@
-import { useUmbrellaAddresses } from "@/hooks/useUmbrellaAddresses";
-import { skipToken, useQuery } from "@tanstack/react-query";
-import { config } from "@/configs/wagmi";
-import { UMBRELLA_ABI } from "@/abis/umbrella";
-import { readContract } from "@wagmi/core";
-import { Address } from "viem";
 import { STATA_ABI } from "@/abis/stata";
+import { UMBRELLA_ABI } from "@/abis/umbrella";
+import { config } from "@/configs/wagmi";
 import { ONE_DAY } from "@/constants/time";
 import { useMarketStore } from "@/providers/MarketProvider/MarketContext";
-import { ChainId } from "@/types/market";
 import { UmbrellaAssetsDictionary } from "@/types/addressesDictionary";
+import { ChainId } from "@/types/market";
+import { skipToken, useQuery } from "@tanstack/react-query";
+import { readContract } from "@wagmi/core";
+import { Address } from "viem";
+import { useAllStkTokens } from "../useAllStkTokens";
 
 const readUmbrellaAsset = (address: Address, chainId: ChainId) =>
   readContract(config, {
@@ -28,9 +28,7 @@ const fetchRelatedUmbrellaAssets = async ({
   const relatedUmbrellaAssets: Record<Address, UmbrellaAssetsDictionary> = {};
 
   try {
-    const stataOrUnderlyingAssets = await Promise.all(
-      umbrellaAddresses.map((adr) => readUmbrellaAsset(adr, chainId)),
-    );
+    const stataOrUnderlyingAssets = await Promise.all(umbrellaAddresses.map((adr) => readUmbrellaAsset(adr, chainId)));
     await Promise.all(
       stataOrUnderlyingAssets.map(async (stataOrUnderlyingAddress, index) => {
         const umbrellaAddress = umbrellaAddresses[index];
@@ -78,13 +76,11 @@ const fetchRelatedUmbrellaAssets = async ({
 
 export const useUmbrellaAssets = () => {
   const { chainId } = useMarketStore((state) => state.market);
-  const { data: umbrellaAddresses } = useUmbrellaAddresses();
+  const { data } = useAllStkTokens();
+  const umbrellaAddresses = data?.map((token) => token.underlying.address);
 
   return useQuery({
-    queryFn: umbrellaAddresses
-      ? () =>
-          fetchRelatedUmbrellaAssets({ chainId, umbrellaAddresses: umbrellaAddresses as Address[] })
-      : skipToken,
+    queryFn: umbrellaAddresses ? () => fetchRelatedUmbrellaAssets({ chainId, umbrellaAddresses }) : skipToken,
     queryKey: ["umbrellaAssets", umbrellaAddresses],
     gcTime: ONE_DAY,
     staleTime: ONE_DAY,

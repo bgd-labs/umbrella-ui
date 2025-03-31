@@ -1,12 +1,12 @@
-import { WithdrawalMethod } from "@/types/withdraw";
-import { WITHDRAWAL_METHODS } from "@/constants/withdraw";
-import React, { ComponentProps, ComponentRef, forwardRef } from "react";
 import { BlockSelect } from "@/components/BlockSelect/BlockSelect";
-import * as Select from "@radix-ui/react-select";
 import { Block } from "@/components/ui/Block";
-import { CheckIcon, ChevronDownIcon } from "lucide-react";
+import { WITHDRAWAL_METHODS } from "@/constants/withdraw";
+import { WithdrawalMethod } from "@/types/withdraw";
 import { cn } from "@/utils/cn";
+import * as Select from "@radix-ui/react-select";
 import * as SelectPrimitive from "@radix-ui/react-select";
+import { CheckIcon, ChevronDownIcon } from "lucide-react";
+import { ComponentProps, ComponentRef, forwardRef } from "react";
 
 function getMethodLabel(method: WithdrawalMethod) {
   switch (method) {
@@ -41,10 +41,7 @@ const items = WITHDRAWAL_METHODS.map((withdrawalMethod) => {
   };
 });
 
-export type SelectWithdrawalMethodProps = Omit<
-  ComponentProps<typeof BlockSelect>,
-  "onValueChange" | "items"
-> & {
+export type SelectWithdrawalMethodProps = Omit<ComponentProps<typeof BlockSelect>, "onValueChange" | "items"> & {
   withdrawalMethods: WithdrawalMethod[];
   onValueChange?: (value: WithdrawalMethod) => void;
   onBlur?: () => void;

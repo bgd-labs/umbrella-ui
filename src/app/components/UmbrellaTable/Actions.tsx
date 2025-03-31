@@ -1,27 +1,19 @@
-import {
-  DropdownContent,
-  DropdownItem,
-  DropdownRoot,
-  DropdownTrigger,
-} from "@/components/Dropdown/Dropdown";
+import { DropdownContent, DropdownItem, DropdownRoot, DropdownTrigger } from "@/components/Dropdown/Dropdown";
 import { Block } from "@/components/ui/Block";
-import React, { useState } from "react";
-import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "@/configs/wagmi";
-import { useQueryClient } from "@tanstack/react-query";
-import { useStartCooldown } from "@/hooks/useStartCooldown";
 import { useUmbrellaCooldownStatus } from "@/hooks/useAllUmbrellaCooldowns/useUmbrellaCooldownStatus";
+import { useStartCooldown } from "@/hooks/useStartCooldown";
+import { useQueryClient } from "@tanstack/react-query";
+import { waitForTransactionReceipt } from "@wagmi/core";
+import { useState } from "react";
 
-import { StkToken } from "@/types/token";
-import { useSafeStartCooldown } from "@/hooks/useSafeStartCooldown";
-import { useIsSafeWallet } from "@/hooks/useSafeWallet";
-import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
-import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { Mobile, TabletAndDesktop } from "@/components/MediaQueries/MediaQueries";
 import { Button } from "@/components/ui/Button";
-import {
-  Mobile,
-  TabletAndDesktop,
-} from "@/components/MediaQueries/MediaQueries";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { useIsSafeWallet } from "@/hooks/useIsSafeWallet/useIsSafeWallet";
+import { useSafeStartCooldown } from "@/hooks/useSafeStartCooldown";
+import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
+import { StkToken } from "@/types/token";
 import { useRouter } from "next/navigation";
 
 export type ActionsProps = {
@@ -40,8 +32,7 @@ export const Actions = ({ token }: ActionsProps) => {
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
 
   const [safeStartCooldown] = useSafeStartCooldown();
-  const [startCooldown, { isPending: isStartCooldownPending }] =
-    useStartCooldown();
+  const [startCooldown, { isPending: isStartCooldownPending }] = useStartCooldown();
   const { status } = useUmbrellaCooldownStatus(address);
 
   const handleCooldownClick = async () => {
@@ -76,7 +67,7 @@ export const Actions = ({ token }: ActionsProps) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-center md:gap-4">
+    <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-center md:gap-4">
       {status === "withdraw" && (
         <Button
           href={`/withdraw/${address}`}
@@ -119,15 +110,10 @@ export const Actions = ({ token }: ActionsProps) => {
           </DropdownTrigger>
 
           <DropdownContent>
-            <DropdownItem onClick={handleCooldownClick}>
-              Initiate cooldown
-            </DropdownItem>
+            <DropdownItem onClick={handleCooldownClick}>Initiate cooldown</DropdownItem>
 
             {status === "withdraw" && (
-              <DropdownItem
-                onClick={handleWithdrawalClick}
-                className="hidden sm:max-lg:block"
-              >
+              <DropdownItem onClick={handleWithdrawalClick} className="hidden sm:max-lg:block">
                 Withdraw
               </DropdownItem>
             )}

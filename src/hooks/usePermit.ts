@@ -1,8 +1,8 @@
-import { useReadContracts } from "wagmi";
-import { Address, erc20Abi, parseAbi } from "viem";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { useWalletAddress } from "@/providers/WalletProvider/WalletContext";
 import { useMemo } from "react";
+import { Address, erc20Abi, parseAbi } from "viem";
+import { useReadContracts } from "wagmi";
 
 export type UsePermitOptions = {
   asset: Address;

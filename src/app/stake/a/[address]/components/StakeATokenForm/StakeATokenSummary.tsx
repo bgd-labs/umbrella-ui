@@ -1,13 +1,12 @@
-import { SummarySection } from "@/components/Transaction/SummarySection";
-import { TokenBreakdown } from "@/components/Transaction/TokenBreakdown";
 import { HealthFactorBreakdown } from "@/app/stake/a/[address]/components/StakeATokenForm/HealthFactorBreakdown";
-import { TransactionBreakdown } from "@/components/Transaction/TransactionBreakdown";
-import { TransactionCard } from "@/components/Transaction/TransactionCard";
-import React from "react";
-import { Reserve, StkToken } from "@/types/token";
-import { useFormContext, useWatch } from "react-hook-form";
 import { StakeATokenFormValues } from "@/app/stake/a/[address]/stakeATokenFormSchema";
 import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
+import { SummarySection } from "@/components/Transaction/SummarySection";
+import { TokenBreakdown } from "@/components/Transaction/TokenBreakdown";
+import { TransactionBreakdown } from "@/components/Transaction/TransactionBreakdown";
+import { TransactionCard } from "@/components/Transaction/TransactionCard";
+import { Reserve, StkToken } from "@/types/token";
+import { useFormContext, useWatch } from "react-hook-form";
 
 export type StakeATokenSummaryProps = {
   reserve: Reserve;
@@ -16,12 +15,7 @@ export type StakeATokenSummaryProps = {
   reserves: Reserve[];
 };
 
-export const StakeATokenSummary = ({
-  reserve,
-  stkToken,
-  hash,
-  reserves,
-}: StakeATokenSummaryProps) => {
+export const StakeATokenSummary = ({ reserve, stkToken, hash, reserves }: StakeATokenSummaryProps) => {
   const { control } = useFormContext<StakeATokenFormValues>();
   const amount = useWatch({ control, name: "amount" }) ?? 0n;
   const approval = useWatch({ control, name: "approval" });
@@ -54,18 +48,10 @@ export const StakeATokenSummary = ({
       </SummarySection>
 
       <SummarySection title="Health factor">
-        <HealthFactorBreakdown
-          reserveId={reserveId}
-          newBalance={newBalance}
-          positions={reserves}
-        />
+        <HealthFactorBreakdown reserveId={reserveId} newBalance={newBalance} positions={reserves} />
       </SummarySection>
 
-      <APYAndEarningsForecast
-        amount={amount}
-        initialTokenType="a"
-        stkToken={stkToken}
-      />
+      <APYAndEarningsForecast amount={amount} initialTokenType="a" stkToken={stkToken} />
 
       {approval?.txHash && (
         <SummarySection title="Transaction hash">

@@ -1,35 +1,25 @@
 import { Address, formatUnits, parseUnits } from "viem";
 
-import { Button } from "@/components/ui/Button";
-import { LayersIcon } from "lucide-react";
-import React, { useMemo } from "react";
-import { useStake } from "@/hooks/useStake";
-import { TransactionCard } from "@/components/Transaction/TransactionCard";
-import { useQueryClient } from "@tanstack/react-query";
-import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { StakeATokenSummary } from "@/app/stake/a/[address]/components/StakeATokenForm/StakeATokenSummary";
-import { Reserve, StkToken } from "@/types/token";
-import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
-import { Controller, FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { createStakeATokenFormSchema, StakeATokenFormValues } from "@/app/stake/a/[address]/stakeATokenFormSchema";
 import { ControlledAmountField } from "@/components/ControlledAmountField/ControlledAmountField";
-import {
-  createStakeATokenFormSchema,
-  StakeATokenFormValues,
-} from "@/app/stake/a/[address]/stakeATokenFormSchema";
-import { useIsSafeWallet } from "@/hooks/useSafeWallet";
+import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
+import { TransactionCard } from "@/components/Transaction/TransactionCard";
+import { Button } from "@/components/ui/Button";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { useIsSafeWallet } from "@/hooks/useIsSafeWallet/useIsSafeWallet";
 import { useSafeApproveAndStake } from "@/hooks/useSafeApproveAndStake";
+import { useStake } from "@/hooks/useStake";
 import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
+import { Reserve, StkToken } from "@/types/token";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
+import { LayersIcon } from "lucide-react";
+import { useMemo } from "react";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 
-const increaseToPercent = (
-  amount: bigint,
-  decimals: number,
-  percent: number,
-) => {
-  return (
-    (amount * parseUnits(String(1 + percent), decimals)) /
-    10n ** BigInt(decimals)
-  );
+const increaseToPercent = (amount: bigint, decimals: number, percent: number) => {
+  return (amount * parseUnits(String(1 + percent), decimals)) / 10n ** BigInt(decimals);
 };
 
 export type StakeATokenFormProps = {
@@ -38,11 +28,7 @@ export type StakeATokenFormProps = {
   reserves: Reserve[];
 };
 
-export const StakeATokenForm = ({
-  asset,
-  stkToken,
-  reserves,
-}: StakeATokenFormProps) => {
+export const StakeATokenForm = ({ asset, stkToken, reserves }: StakeATokenFormProps) => {
   const client = useQueryClient();
   const { batchHelper: spender } = useCurrentMarket();
   const isSafeWallet = useIsSafeWallet();
@@ -67,12 +53,7 @@ export const StakeATokenForm = ({
     mode: "onChange",
   });
 
-  const {
-    stake,
-    data: hash,
-    isPending: isTxPending,
-    error: depositError,
-  } = useStake();
+  const { stake, data: hash, isPending: isTxPending, error: depositError } = useStake();
   const {
     approveAndStake,
     data: safeHash,
@@ -80,19 +61,13 @@ export const StakeATokenForm = ({
     error: approveAndStakeError,
   } = useSafeApproveAndStake();
 
-  const onSubmit = async ({
-    amount,
-    permit,
-    approval,
-  }: StakeATokenFormValues) => {
+  const onSubmit = async ({ amount, permit, approval }: StakeATokenFormValues) => {
     if (!amount) {
       return;
     }
 
     const isMaxAmountStaking = amount === maxAmount;
-    const amountToStake = isMaxAmountStaking
-      ? increaseToPercent(amount, decimals, 0.005)
-      : amount;
+    const amountToStake = isMaxAmountStaking ? increaseToPercent(amount, decimals, 0.005) : amount;
     const umbrellaAddress = stkToken.address;
 
     if (permit || approval) {
@@ -134,9 +109,7 @@ export const StakeATokenForm = ({
           <Controller
             name="amount"
             control={formMethods.control}
-            disabled={
-              signingStatus === "pending" || isTxPending || isSafeTxPending
-            }
+            disabled={signingStatus === "pending" || isTxPending || isSafeTxPending}
             render={({ field }) => (
               <ControlledAmountField
                 {...field}
@@ -150,17 +123,13 @@ export const StakeATokenForm = ({
         </div>
 
         <div className="flex flex-col gap-4 md:self-center">
-          {!isSafeWallet ? (
-            <SignTransaction asset={asset} spender={spender} />
-          ) : null}
+          {!isSafeWallet ? <SignTransaction asset={asset} spender={spender} /> : null}
           <Button
             primary
             elevation={1}
             onClick={formMethods.handleSubmit(onSubmit)}
             loading={isTxPending || isSafeTxPending}
-            disabled={
-              isTxPending || isSafeTxPending || !formMethods.formState.isValid
-            }
+            disabled={isTxPending || isSafeTxPending || !formMethods.formState.isValid}
             outerClassName="w-full md:w-[248px]"
             className="flex items-center gap-2"
           >
@@ -170,12 +139,7 @@ export const StakeATokenForm = ({
         </div>
       </TransactionCard>
 
-      <StakeATokenSummary
-        reserve={reserve}
-        stkToken={stkToken}
-        hash={hash}
-        reserves={reserves}
-      />
+      <StakeATokenSummary reserve={reserve} stkToken={stkToken} hash={hash} reserves={reserves} />
     </FormProvider>
   );
 };

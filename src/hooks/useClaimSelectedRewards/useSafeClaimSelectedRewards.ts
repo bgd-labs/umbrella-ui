@@ -1,11 +1,11 @@
+import { REWARDS_CONTROLLER_ABI } from "@/abis/rewardsController";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { sendSafeTxs, SendSafeTxsContext } from "@/mutations/sendSafeTxs";
+import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
+import { waitForSafeTransactionDetails } from "@/utils/waitForSafeTransactionDetails";
 import { useSafeAppsSDK } from "@safe-global/safe-apps-react-sdk";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Address, encodeFunctionData } from "viem";
-import { sendSafeTxs, SendSafeTxsContext } from "@/mutations/sendSafeTxs";
-import { REWARDS_CONTROLLER_ABI } from "@/abis/rewardsController";
-import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { waitForSafeTransactionDetails } from "@/utils/waitForSafeTransactionDetails";
-import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
 
 export type UseSafeClaimSelectedRewardsParams = {
   rewardsController: Address;
