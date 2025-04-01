@@ -1,9 +1,9 @@
+import { UMBRELLA_BATCH_HELPER_ABI } from "@/abis/umbrellaBatchHelper";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { sendSafeTxs, SendSafeTxsContext } from "@/mutations/sendSafeTxs";
 import { useSafeAppsSDK } from "@safe-global/safe-apps-react-sdk";
 import { useMutation } from "@tanstack/react-query";
 import { Address, encodeFunctionData, erc20Abi } from "viem";
-import { UMBRELLA_BATCH_HELPER_ABI } from "@/abis/umbrellaBatchHelper";
-import { sendSafeTxs, SendSafeTxsContext } from "@/mutations/sendSafeTxs";
-import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 
 export type WithdrawUmbrellaParams = {
   batchHelper: Address;
@@ -31,7 +31,7 @@ export const withdrawViaSafe = async (
     value: "0",
     data: encodeFunctionData({
       abi: UMBRELLA_BATCH_HELPER_ABI,
-      functionName: "deposit",
+      functionName: "redeem",
       args: [
         {
           stakeToken: umbrellaAddress,
