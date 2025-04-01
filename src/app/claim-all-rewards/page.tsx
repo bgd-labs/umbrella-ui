@@ -11,8 +11,8 @@ import { useClaimSelectedRewards } from "@/hooks/useClaimSelectedRewards/useClai
 import { useSafeClaimSelectedRewards } from "@/hooks/useClaimSelectedRewards/useSafeClaimSelectedRewards";
 import { useIsSafeWallet } from "@/hooks/useIsSafeWallet/useIsSafeWallet";
 import { useWalletAddress } from "@/providers/WalletProvider/WalletContext";
+import { sumUpAllRewards } from "@/utils/calculations";
 import { withPositiveBalance } from "@/utils/filters/filters";
-import { sumUpAllRewards } from "@/utils/sumUpAllRewards";
 
 export default function ClaimRewardsPage() {
   const receiver = useWalletAddress();

@@ -4,8 +4,7 @@ import { PRICE_FEED_DECIMALS } from "@/constants/oracle";
 import { useAllReserves } from "@/hooks/useAllReserves";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { Reward, StkToken } from "@/types/token";
-import { calculateRewardsApy } from "@/utils/apy";
-import { calculateApyData } from "@/utils/calculateApyData";
+import { calculateApyData, calculateRewardsApy } from "@/utils/calculations";
 import { formatBigInt } from "@/utils/formatBigInt";
 import { formatUSDPrice } from "@/utils/formatUSDPrice";
 import {

@@ -13,7 +13,7 @@ import { useSafeApproveAndStake } from "@/hooks/useSafeApproveAndStake";
 import { useStake } from "@/hooks/useStake";
 import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
 import { StkToken } from "@/types/token";
-import { calculateMaxSupply } from "@/utils/calaculteMaxAmountForReserve";
+import { calculateMaxSupply } from "@/utils/calculations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LayersIcon } from "lucide-react";
 import { useMemo } from "react";

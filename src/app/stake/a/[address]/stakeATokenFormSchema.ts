@@ -1,8 +1,8 @@
-import { Reserve } from "@/types/token";
-import { z, ZodType } from "zod";
-import { ApprovalSchema, PermitSchema, validatePermitAndApproval } from "@/utils/shemas";
-import { calculateNewHealthFactor, getHealthStatus } from "@/utils/calculateHealthFactor";
 import { SignableTxForm } from "@/types/form";
+import { Reserve } from "@/types/token";
+import { calculateNewHealthFactor, getHealthStatus } from "@/utils/calculations";
+import { ApprovalSchema, PermitSchema, validatePermitAndApproval } from "@/utils/shemas";
+import { z, ZodType } from "zod";
 
 export type StakeATokenFormValues = SignableTxForm;
 
@@ -29,10 +29,7 @@ export const createStakeATokenFormSchema = ({
       }
 
       const newBalance = maxAmount - val.amount;
-      const newHF = calculateNewHealthFactor(
-        { positions: reserves },
-        { reserveId, balance: newBalance },
-      );
+      const newHF = calculateNewHealthFactor({ positions: reserves }, { reserveId, balance: newBalance });
       const newHFStatus = getHealthStatus(newHF);
 
       if (newHFStatus === "risky") {

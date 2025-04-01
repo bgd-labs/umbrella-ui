@@ -1,8 +1,7 @@
+import { APYBreakdown } from "@/app/components/APYBreakdown/APYBreakdown";
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
 import { StkToken, TokenType } from "@/types/token";
-import React from "react";
-import { APYBreakdown } from "@/app/components/APYBreakdown/APYBreakdown";
-import { calculateAPYEarnings } from "@/utils/calculateCompoundedInterestPerSecond";
+import { calculateAPYEarnings } from "@/utils/calculations";
 import { formatUSDPrice } from "@/utils/formatUSDPrice";
 
 export type APYAndEarningsForecastProps = {
@@ -11,15 +10,9 @@ export type APYAndEarningsForecastProps = {
   stkToken: StkToken;
 };
 
-export const APYAndEarningsForecast = ({
-  amount,
-  initialTokenType,
-  stkToken,
-}: APYAndEarningsForecastProps) => {
+export const APYAndEarningsForecast = ({ amount, initialTokenType, stkToken }: APYAndEarningsForecastProps) => {
   const currentAPY =
-    initialTokenType === "underlying" || initialTokenType === "native"
-      ? 0
-      : stkToken.apyData.pool.total;
+    initialTokenType === "underlying" || initialTokenType === "native" ? 0 : stkToken.apyData.pool.total;
   const totalAPY = stkToken.apyData.total;
 
   const amountUsd = formatUSDPrice({
@@ -36,14 +29,10 @@ export const APYAndEarningsForecast = ({
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-3">
           <h2 className="font-bold dark:text-white">Current APY</h2>
-          <NumberDisplay
-            value={currentAPY}
-            type="percent"
-            className="font-semibold"
-          />
+          <NumberDisplay value={currentAPY} type="percent" className="font-semibold" />
         </div>
 
-        <div className="flex flex-col gap-3 items-end">
+        <div className="flex flex-col items-end gap-3">
           <h2 className="font-bold dark:text-white">Staked APY</h2>
           <APYBreakdown
             symbol={stkToken.underlying.symbol}
@@ -60,24 +49,16 @@ export const APYAndEarningsForecast = ({
           <h2 className="font-bold dark:text-white">Current Earning</h2>
           <div>
             <span className="font-semibold">~</span>
-            <NumberDisplay
-              value={currentEarnings}
-              type="currency"
-              className="font-semibold"
-            />
+            <NumberDisplay value={currentEarnings} type="currency" className="font-semibold" />
             /year
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 items-end">
+        <div className="flex flex-col items-end gap-3">
           <h2 className="font-bold dark:text-white">You&apos;ll earn</h2>
           <div>
             <span className="font-semibold">~</span>
-            <NumberDisplay
-              value={stakedEarnings}
-              type="currency"
-              className="font-semibold"
-            />
+            <NumberDisplay value={stakedEarnings} type="currency" className="font-semibold" />
             /year
           </div>
         </div>

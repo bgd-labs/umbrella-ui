@@ -1,6 +1,6 @@
 import { HealthFactor } from "@/components/HealthFactor/HealthFactor";
 import { Reserve } from "@/types/token";
-import { calculateHealthFactor, calculateNewHealthFactor, getHealthStatus } from "@/utils/calculateHealthFactor";
+import { calculateHealthFactor, calculateNewHealthFactor, getHealthStatus } from "@/utils/calculations";
 import { cn } from "@/utils/cn";
 import { ArrowRightIcon } from "lucide-react";
 
