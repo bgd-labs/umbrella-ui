@@ -9,13 +9,26 @@ import { useAllAssets } from "@/hooks/useAllAssets";
 import { useAllStkTokens } from "@/hooks/useAllStkTokens";
 import { withAtLeastOneActiveReward, withPositiveBalance } from "@/utils/filters/filters";
 import { useMemo } from "react";
+import { useAccount } from "wagmi";
 import { UmbrellaTable } from "./components/UmbrellaTable/UmbrellaTable";
 
 export default function Home() {
+  const { address } = useAccount();
+
   const { data: stkTokens, isLoading: isAllStkTokensLoading } = useAllStkTokens();
   const { data: assets, isLoading: isAllAssetsLoading } = useAllAssets();
 
-  const filteredAssets = useMemo(() => assets.filter(withPositiveBalance).filter(withAtLeastOneActiveReward), [assets]);
+  const filteredAssets = useMemo(() => {
+    const assetsWithAtLeastOneActiveReward = assets.filter(withAtLeastOneActiveReward);
+
+    if (address) {
+      return assetsWithAtLeastOneActiveReward.filter(withPositiveBalance);
+    }
+
+    return assetsWithAtLeastOneActiveReward.filter((asset) => {
+      return asset.type === "underlying" || asset.type === "native";
+    });
+  }, [assets, address]);
   const filteredUmbrellaTokens = useMemo(() => stkTokens?.filter(withPositiveBalance), [stkTokens]);
 
   if (isAllStkTokensLoading || isAllAssetsLoading) {

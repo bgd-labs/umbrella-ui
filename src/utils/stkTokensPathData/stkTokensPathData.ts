@@ -45,11 +45,14 @@ export const findTokenInPathData = (
   return data.tokensFromRoute.find((routeData) => routeData.typeOfToken === typeOfToken);
 };
 
-export const extractUnderlyingToken = (pathData: StkTokenPathData, userPathData: UserPathData): UnderlyingToken => {
+export const extractUnderlyingToken = (
+  pathData: StkTokenPathData,
+  userPathData: UserPathData | undefined,
+): UnderlyingToken => {
   const underlyingToken = findTokenInPathData(pathData, "underlying")!.tokenData;
-  const userTokenData = userPathData.balancesOfRouteTokens.find(
+  const userTokenData = userPathData?.balancesOfRouteTokens.find(
     (token) => token.typeOfToken === TOKEN_TYPE_IN_PATH_DATA.underlying,
-  )!;
+  );
 
   return {
     type: "underlying",
@@ -57,12 +60,12 @@ export const extractUnderlyingToken = (pathData: StkTokenPathData, userPathData:
     name: underlyingToken.name,
     decimals: underlyingToken.decimals,
     symbol: underlyingToken.symbol,
-    balance: userTokenData.userBalance,
-    balanceFormatted: formatBigInt(userTokenData.userBalance, underlyingToken.decimals),
+    balance: userTokenData?.userBalance,
+    balanceFormatted: formatBigInt(userTokenData?.userBalance, underlyingToken.decimals),
     latestAnswer: underlyingToken.price,
     latestAnswerFormatted: formatBigInt(underlyingToken.price, underlyingToken.decimals),
     usdAmount: formatUSDPrice({
-      balance: userTokenData.userBalance,
+      balance: userTokenData?.userBalance,
       decimals: underlyingToken.decimals,
       usdPrice: underlyingToken.price,
     }),
@@ -72,14 +75,14 @@ export const extractUnderlyingToken = (pathData: StkTokenPathData, userPathData:
 
 export const extractStataToken = (
   pathData: StkTokenPathData,
-  userPathData: UserPathData,
+  userPathData: UserPathData | undefined,
 ): Omit<StataToken, "reserve" | "underlying"> | null => {
   const stataToken = findTokenInPathData(pathData, "stata")?.tokenData;
-  const userTokenData = userPathData.balancesOfRouteTokens.find(
+  const userTokenData = userPathData?.balancesOfRouteTokens.find(
     (token) => token.typeOfToken === TOKEN_TYPE_IN_PATH_DATA.stata,
   );
 
-  if (!(stataToken && userTokenData)) {
+  if (!stataToken) {
     return null;
   }
 
@@ -89,12 +92,12 @@ export const extractStataToken = (
     name: stataToken.name,
     decimals: stataToken.decimals,
     symbol: stataToken.symbol,
-    balance: userTokenData.userBalance,
-    balanceFormatted: formatBigInt(userTokenData.userBalance, stataToken.decimals),
+    balance: userTokenData?.userBalance,
+    balanceFormatted: formatBigInt(userTokenData?.userBalance, stataToken.decimals),
     latestAnswer: stataToken.price,
     latestAnswerFormatted: formatBigInt(stataToken.price, stataToken.decimals),
     usdAmount: formatUSDPrice({
-      balance: userTokenData.userBalance,
+      balance: userTokenData?.userBalance,
       decimals: stataToken.decimals,
       usdPrice: stataToken.price,
     }),

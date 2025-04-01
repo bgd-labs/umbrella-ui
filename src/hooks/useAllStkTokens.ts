@@ -40,7 +40,7 @@ export const useAllStkTokens = () => {
 
       return aggregatedData
         .map(({ stakeTokenData, rewardsTokenData, totalAssets }, index) => {
-          const { stakeUserBalance, rewardsTokenUserData } = userAggregatedData[index];
+          const { stakeUserBalance, rewardsTokenUserData } = userAggregatedData[index] ?? {};
           const stkTokenPathData = pathData[index] as StkTokenPathData;
           const stkTokenUserPathData = userPathData[index] as UserPathData;
 
