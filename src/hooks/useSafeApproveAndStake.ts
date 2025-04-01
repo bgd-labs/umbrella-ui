@@ -1,9 +1,8 @@
-import { Address, encodeFunctionData } from "viem";
-import { useSafeAppsSDK } from "@safe-global/safe-apps-react-sdk";
-import { erc20Abi } from "viem";
 import { UMBRELLA_BATCH_HELPER_ABI } from "@/abis/umbrellaBatchHelper";
-import { useMutation } from "@tanstack/react-query";
 import { sendSafeTxs, SendSafeTxsContext } from "@/mutations/sendSafeTxs";
+import { useSafeAppsSDK } from "@safe-global/safe-apps-react-sdk";
+import { useMutation } from "@tanstack/react-query";
+import { Address, encodeFunctionData, erc20Abi } from "viem";
 
 export type SafeApproveAndStakeParams = {
   umbrellaAddress: Address;
@@ -17,7 +16,7 @@ export const stakeViaSafe = async (
   { sdk, safe }: SendSafeTxsContext,
 ) => {
   const approveTx = {
-    to: assetAddress,
+    to: umbrellaAddress,
     value: "0",
     data: encodeFunctionData({
       abi: erc20Abi,
