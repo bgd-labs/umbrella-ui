@@ -17,7 +17,7 @@ export const withdrawViaSafe = async (
   { sdk, safe }: SendSafeTxsContext,
 ) => {
   const approveTx = {
-    to: assetAddress,
+    to: umbrellaAddress,
     value: "0",
     data: encodeFunctionData({
       abi: erc20Abi,

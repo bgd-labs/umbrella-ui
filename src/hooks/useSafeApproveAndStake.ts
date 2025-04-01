@@ -16,7 +16,7 @@ export const stakeViaSafe = async (
   { sdk, safe }: SendSafeTxsContext,
 ) => {
   const approveTx = {
-    to: umbrellaAddress,
+    to: assetAddress,
     value: "0",
     data: encodeFunctionData({
       abi: erc20Abi,
