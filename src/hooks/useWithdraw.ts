@@ -66,7 +66,7 @@ export const useWithdraw = () => {
         address: batchHelper,
         abi: UMBRELLA_BATCH_HELPER_ABI,
         functionName: "redeem",
-        args: [[umbrellaAddress, assetAddress, amount]],
+        args: [{ stakeToken: umbrellaAddress, edgeToken: assetAddress, value: amount }],
       });
     }
 

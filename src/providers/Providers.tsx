@@ -1,14 +1,13 @@
 "use client";
 
-import { PropsWithChildren } from "react";
-import type * as React from "react";
-import { WagmiProvider } from "@/providers/WagmiProvider";
-import { RainbowKitProvider } from "@/providers/RainbowKitProvider";
-import { MarketProvider } from "@/providers/MarketProvider/MarketProvider";
-import { ThemeProvider } from "next-themes";
 import { TooltipProvider } from "@/components/Tooltip/Tooltip";
+import { MarketProvider } from "@/providers/MarketProvider/MarketProvider";
+import { RainbowKitProvider } from "@/providers/RainbowKitProvider";
 import { TransactionsTrackerStoreProvider } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
+import { WagmiProvider } from "@/providers/WagmiProvider";
 import SafeProvider from "@safe-global/safe-apps-react-sdk";
+import { ThemeProvider } from "next-themes";
+import { PropsWithChildren } from "react";
 
 export default function Providers({ children }: PropsWithChildren) {
   return (
