@@ -1,10 +1,10 @@
 "use client";
 
 import { MarketContext } from "@/providers/MarketProvider/MarketContext";
-import { PropsWithChildren, useMemo, useRef, useState } from "react";
-import { findMarketByChainId } from "@/utils/markets/markets";
 import { createMarketStore, MarketStore } from "@/store/market";
-import { getInitialChainId } from "@/utils/getInitialChainId";
+import { findMarketByChainId } from "@/utils/markets/markets";
+import { getInitialChainId } from "@/utils/web3";
+import { PropsWithChildren, useMemo, useRef, useState } from "react";
 
 export const MarketProvider = ({ children }: PropsWithChildren) => {
   const [initialChainId] = useState(getInitialChainId);

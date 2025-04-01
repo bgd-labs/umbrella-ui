@@ -9,7 +9,7 @@ import { useMobileMediaQuery } from "@/hooks/useMediaQuery";
 import { useNativeToken } from "@/hooks/useNativeToken";
 import { useTransactionsTrackerStore } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
 import { textCenterEllipsis } from "@/utils/formatting";
-import { getScannerUrl } from "@/utils/getScannerUrl";
+import { getScannerUrl } from "@/utils/web3";
 import { ExternalLinkIcon } from "lucide-react";
 import { ComponentProps, PropsWithChildren, useMemo } from "react";
 import { useAccount, useDisconnect } from "wagmi";

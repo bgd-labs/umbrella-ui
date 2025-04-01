@@ -1,10 +1,10 @@
-import { Address } from "viem";
-import { ChainId } from "@/types/market";
-import { readContract } from "@wagmi/core";
-import { config } from "@/configs/wagmi";
 import { UI_POOL_DATA_PROVIDER_ABI } from "@/abis/uiPoolDataProvider";
-import { getReserveIdByCollateralBitMap } from "@/utils/eMode";
+import { config } from "@/configs/wagmi";
 import { EMode } from "@/types/eMode";
+import { ChainId } from "@/types/market";
+import { getReserveIdByCollateralBitMap } from "@/utils/web3";
+import { readContract } from "@wagmi/core";
+import { Address } from "viem";
 
 export const fetchAllEModes = async ({
   chainId,

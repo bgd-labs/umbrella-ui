@@ -1,5 +1,5 @@
 import { Reserve, StataToken, UnderlyingToken } from "@/types/token";
-import { isReserve } from "@/utils/isReserve";
+import { isReserve } from "@/utils/web3";
 
 export const groupByUnderlying = (positions?: (Reserve | StataToken)[], underlyings?: UnderlyingToken[]) => {
   if (positions && underlyings) {

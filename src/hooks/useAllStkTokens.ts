@@ -12,7 +12,7 @@ import {
   findTokenInPathData,
   StkTokenPathData,
   UserPathData,
-} from "@/utils/stkTokensPathData/stkTokensPathData";
+} from "@/utils/web3";
 import { useMemo } from "react";
 import { useAccount, useReadContract } from "wagmi";
 

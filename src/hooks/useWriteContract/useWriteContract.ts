@@ -1,6 +1,6 @@
 import { ChainId } from "@/types/market";
-import { ensureCorrectChainForTx } from "@/utils/ensureCorrectChainForTx/ensureCorrectChainForTx";
 import { isUserRejectedTransactionError } from "@/utils/errors";
+import { ensureCorrectChainForTx } from "@/utils/web3";
 import { useCallback } from "react";
 import { useWriteContract as useWagmiWriteContract } from "wagmi";
 

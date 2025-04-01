@@ -5,7 +5,7 @@ import { TokenBreakdown } from "@/components/Transaction/TokenBreakdown";
 import { TransactionBreakdown } from "@/components/Transaction/TransactionBreakdown";
 import { TransactionCard } from "@/components/Transaction/TransactionCard";
 import { StkToken } from "@/types/token";
-import { getTokenTypeByWithdrawalMethod } from "@/utils/getTokenTypeByWithdrawalMethod";
+import { getTokenTypeByWithdrawalMethod } from "@/utils/web3";
 import { useFormContext, useWatch } from "react-hook-form";
 
 export type SummaryProps = {

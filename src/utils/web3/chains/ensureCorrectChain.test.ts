@@ -2,7 +2,7 @@ import { config } from "@/configs/wagmi";
 import { getAccount, switchChain, type Connector } from "@wagmi/core";
 import { vi } from "vitest";
 import { mainnet } from "wagmi/chains";
-import { ensureCorrectChainForTx } from "./ensureCorrectChainForTx";
+import { ensureCorrectChainForTx } from "./ensureCorrectChain";
 
 vi.mock("@wagmi/core", () => ({
   getAccount: vi.fn(),

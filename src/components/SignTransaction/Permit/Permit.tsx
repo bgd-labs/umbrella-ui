@@ -9,7 +9,7 @@ import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
 import { useWalletAddress } from "@/providers/WalletProvider/WalletContext";
 import { Permit as PermitType } from "@/types/permit";
 import { addDays, toUnix } from "@/utils/date";
-import { ensureCorrectChainForTx } from "@/utils/ensureCorrectChainForTx/ensureCorrectChainForTx";
+import { ensureCorrectChainForTx } from "@/utils/web3";
 import { Check } from "lucide-react";
 import { parseSignature } from "viem";
 import { useSignTypedData } from "wagmi";

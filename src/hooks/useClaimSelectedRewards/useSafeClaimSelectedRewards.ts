@@ -2,7 +2,7 @@ import { REWARDS_CONTROLLER_ABI } from "@/abis/rewardsController";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { sendSafeTxs, SendSafeTxsContext } from "@/mutations/sendSafeTxs";
 import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
-import { waitForSafeTransactionDetails } from "@/utils/waitForSafeTransactionDetails";
+import { waitForSafeTransactionDetails } from "@/utils/web3";
 import { useSafeAppsSDK } from "@safe-global/safe-apps-react-sdk";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Address, encodeFunctionData } from "viem";
