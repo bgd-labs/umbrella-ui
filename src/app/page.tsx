@@ -7,7 +7,7 @@ import { Mobile } from "@/components/MediaQueries/MediaQueries";
 import { PageLoader } from "@/components/PageLoader/PageLoader";
 import { useAllAssets } from "@/hooks/useAllAssets";
 import { useAllStkTokens } from "@/hooks/useAllStkTokens";
-import { withAtLeastOneActiveReward, withPositiveBalance } from "@/utils/filters/filters";
+import { withAtLeastOneActiveReward, withPositiveBalance } from "@/utils/data";
 import { useMemo } from "react";
 import { useAccount } from "wagmi";
 import { UmbrellaTable } from "./components/UmbrellaTable/UmbrellaTable";

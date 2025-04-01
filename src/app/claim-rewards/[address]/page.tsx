@@ -11,7 +11,7 @@ import { useClaimSelectedRewards } from "@/hooks/useClaimSelectedRewards/useClai
 import { useSafeClaimSelectedRewards } from "@/hooks/useClaimSelectedRewards/useSafeClaimSelectedRewards";
 import { useIsSafeWallet } from "@/hooks/useIsSafeWallet/useIsSafeWallet";
 import { useWalletAddress } from "@/providers/WalletProvider/WalletContext";
-import { withPositiveBalance } from "@/utils/filters/filters";
+import { withPositiveBalance } from "@/utils/data";
 import { use } from "react";
 import { Address } from "viem";
 

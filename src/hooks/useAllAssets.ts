@@ -1,8 +1,8 @@
-import { useAllStkTokens } from "@/hooks/useAllStkTokens";
-import { useNativeToken } from "@/hooks/useNativeToken";
 import { Asset } from "@/types/token";
-import { groupByUnderlying } from "@/utils/groupByUnderlying";
+import { groupByUnderlying } from "@/utils/data";
 import { useMemo } from "react";
+import { useAllStkTokens } from "./useAllStkTokens";
+import { useNativeToken } from "./useNativeToken";
 
 export const useAllAssets = () => {
   const { data: stkTokens, isLoading: isStkTokensLoading } = useAllStkTokens();
