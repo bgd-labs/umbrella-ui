@@ -1,7 +1,7 @@
-import { create } from "zustand";
-import { createSelectors } from "@/utils/createSelectors";
-import { Address } from "viem";
+import { createSelectors } from "@/store/createSelectors";
 import { CooldownStatus } from "@/types/cooldown";
+import { Address } from "viem";
+import { create } from "zustand";
 
 export interface DashboardStore {
   umbrellaCooldownStatusMap: Record<Address, CooldownStatus>;
