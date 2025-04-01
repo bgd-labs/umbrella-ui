@@ -1,67 +1,53 @@
-import { TransactionCard } from "@/components/Transaction/TransactionCard";
-import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
-import { mapTokenTypeToLabel } from "@/components/TokenLabel/TokenLabel";
-import { UmbrellaStatus } from "@/components/UmbrellaStatus/UmbrellaStatus";
 import { SelectWithdrawalMethod } from "@/app/withdraw/[address]/components/SelectWithdrawalMethod";
-import { Button } from "@/components/ui/Button";
-import { LayersIcon } from "lucide-react";
 import { Summary } from "@/app/withdraw/[address]/components/Summary";
-import React, { useMemo } from "react";
-import { StkToken } from "@/types/token";
-import { useWithdraw } from "@/hooks/useWithdraw";
+import { createWithdrawalFormSchema, WithdrawalFormValues } from "@/app/withdraw/[address]/withdrawalFormSchema";
+import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
+import { ControlledAmountField } from "@/components/ControlledAmountField/ControlledAmountField";
+import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
+import { mapTokenTypeToLabel } from "@/components/TokenLabel/TokenLabel";
+import { TransactionCard } from "@/components/Transaction/TransactionCard";
+import { Button } from "@/components/ui/Button";
+import { UmbrellaStatus } from "@/components/UmbrellaStatus/UmbrellaStatus";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { useIsSafeWallet } from "@/hooks/useIsSafeWallet/useIsSafeWallet";
+import { useSafeWithdraw } from "@/hooks/useSafeWithdraw";
+import { useWithdraw } from "@/hooks/useWithdraw";
+import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
+import { CooldownData } from "@/queries/fetchAllCooldowns";
+import { StkToken } from "@/types/token";
 import {
   calculateSupportedWithdrawingMethods,
   getRelatedAssetByWithdrawMethod,
 } from "@/utils/getRelatedAssetByWithdrawMethod";
-import { UmbrellaAssetsDictionary } from "@/types/addressesDictionary";
-import { CooldownData } from "@/queries/fetchAllCooldowns";
-import { Controller, FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LayersIcon } from "lucide-react";
+import { useMemo } from "react";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import { formatUnits } from "viem";
-import { ControlledAmountField } from "@/components/ControlledAmountField/ControlledAmountField";
-import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
-import {
-  createWithdrawalFormSchema,
-  WithdrawalFormValues,
-} from "@/app/withdraw/[address]/withdrawalFormSchema";
-import { useIsSafeWallet } from "@/hooks/useSafeWallet";
-import { useSafeWithdraw } from "@/hooks/useSafeWithdraw";
-import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
 
 export type WithdrawalFormProps = {
   stkToken: StkToken;
-  relatedAssets: UmbrellaAssetsDictionary;
   cooldown: CooldownData;
 };
 
-export const WithdrawalForm = ({
-  stkToken,
-  relatedAssets,
-  cooldown,
-}: WithdrawalFormProps) => {
+export const WithdrawalForm = ({ stkToken, cooldown }: WithdrawalFormProps) => {
   const { batchHelper: spender } = useCurrentMarket();
   const isSafeWallet = useIsSafeWallet();
   const { signingStatus } = useTxFormSignature();
 
-  const {
-    safeWithdraw,
-    data: safeHash,
-    isPending: isSafeWithdrawing,
-    error: safeWithdrawalError,
-  } = useSafeWithdraw();
-  const {
-    withdraw,
-    data: hash,
-    isPending: isWithdrawing,
-    error: withdrawalError,
-  } = useWithdraw();
+  const relatedAssets = useMemo(() => {
+    return {
+      underlying: stkToken.underlying.address,
+      aToken: stkToken.reserve?.address,
+      stataToken: stkToken.stata?.address,
+    };
+  }, [stkToken]);
+
+  const { safeWithdraw, data: safeHash, isPending: isSafeWithdrawing, error: safeWithdrawalError } = useSafeWithdraw();
+  const { withdraw, data: hash, isPending: isWithdrawing, error: withdrawalError } = useWithdraw();
   const maxAmount = cooldown.amount;
 
-  const schema = useMemo(
-    () => createWithdrawalFormSchema({ maxAmount, isSafeWallet }),
-    [maxAmount, isSafeWallet],
-  );
+  const schema = useMemo(() => createWithdrawalFormSchema({ maxAmount, isSafeWallet }), [maxAmount, isSafeWallet]);
   const formMethods = useForm<WithdrawalFormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -72,18 +58,14 @@ export const WithdrawalForm = ({
   const { control } = formMethods;
 
   const { decimals, underlying, latestAnswer } = stkToken;
-  const supportedWithdrawingMethods =
-    calculateSupportedWithdrawingMethods(relatedAssets);
+  const supportedWithdrawingMethods = calculateSupportedWithdrawingMethods(relatedAssets);
 
   const onSubmit = async (formValues: WithdrawalFormValues) => {
     if (!formValues.amount) {
       return;
     }
     const { amount, withdrawalMethod, permit } = formValues;
-    const assetAddress = getRelatedAssetByWithdrawMethod(
-      relatedAssets,
-      withdrawalMethod,
-    );
+    const assetAddress = getRelatedAssetByWithdrawMethod(relatedAssets, withdrawalMethod);
 
     if (!assetAddress) {
       throw new Error("Unknown asset address");
@@ -118,17 +100,11 @@ export const WithdrawalForm = ({
       >
         <div className="border-y-main-950 flex items-center justify-between border-b pb-4">
           <div className="flex items-center gap-2">
-            <AssetIcon
-              symbol={underlying.symbol}
-              type="stk"
-              className="size-9"
-            />
+            <AssetIcon symbol={underlying.symbol} type="stk" className="size-9" />
 
             <div className="flex flex-col">
               <h2 className="font-bold dark:text-white">{underlying.name}</h2>
-              <div className="text-main-500 text-sm capitalize">
-                {mapTokenTypeToLabel("stk")}
-              </div>
+              <div className="text-main-500 text-sm capitalize">{mapTokenTypeToLabel("stk")}</div>
             </div>
           </div>
 
@@ -143,9 +119,7 @@ export const WithdrawalForm = ({
           <Controller
             name="amount"
             control={formMethods.control}
-            disabled={
-              signingStatus === "pending" || isWithdrawing || isSafeWithdrawing
-            }
+            disabled={signingStatus === "pending" || isWithdrawing || isSafeWithdrawing}
             render={({ field }) => (
               <ControlledAmountField
                 {...field}
@@ -177,19 +151,13 @@ export const WithdrawalForm = ({
         </div>
 
         <div className="flex flex-col gap-4 md:self-center">
-          {isSafeWallet ? null : (
-            <SignTransaction asset={stkToken.address} spender={spender} />
-          )}
+          {isSafeWallet ? null : <SignTransaction asset={stkToken.address} spender={spender} />}
 
           <Button
             primary
             elevation={1}
             loading={isWithdrawing || isSafeWithdrawing}
-            disabled={
-              isWithdrawing ||
-              isSafeWithdrawing ||
-              !formMethods.formState.isValid
-            }
+            disabled={isWithdrawing || isSafeWithdrawing || !formMethods.formState.isValid}
             onClick={formMethods.handleSubmit(onSubmit)}
             outerClassName="w-full md:w-[248px]"
             className="flex items-center gap-2"

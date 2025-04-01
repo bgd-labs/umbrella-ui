@@ -1,12 +1,12 @@
-import { Address, encodeFunctionData } from "viem";
-import { Permit } from "@/types/permit";
 import { UMBRELLA_BATCH_HELPER_ABI } from "@/abis/umbrellaBatchHelper";
-import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { useQueryClient } from "@tanstack/react-query";
-import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
-import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "@/configs/wagmi";
-import { useWriteContract } from "@/hooks/useWriteContract";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { useWriteContract } from "@/hooks/useWriteContract/useWriteContract";
+import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
+import { Permit } from "@/types/permit";
+import { useQueryClient } from "@tanstack/react-query";
+import { waitForTransactionReceipt } from "@wagmi/core";
+import { Address, encodeFunctionData } from "viem";
 
 export type StakeAssetParams = {
   umbrellaAddress: Address;
@@ -23,13 +23,7 @@ export const useStake = () => {
   const { chainId, batchHelper } = useCurrentMarket();
   const { writeContractAsync, ...result } = useWriteContract();
 
-  const stake = async ({
-    amount,
-    assetAddress,
-    umbrellaAddress,
-    permit,
-    description,
-  }: StakeAssetParams) => {
+  const stake = async ({ amount, assetAddress, umbrellaAddress, permit, description }: StakeAssetParams) => {
     let transactionRequest: Promise<`0x${string}`>;
 
     if (permit) {
@@ -64,7 +58,13 @@ export const useStake = () => {
         address: batchHelper,
         abi: UMBRELLA_BATCH_HELPER_ABI,
         functionName: "deposit",
-        args: [[umbrellaAddress, assetAddress, amount]],
+        args: [
+          {
+            stakeToken: umbrellaAddress,
+            edgeToken: assetAddress,
+            value: amount,
+          },
+        ],
       });
     }
 

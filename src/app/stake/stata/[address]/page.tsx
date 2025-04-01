@@ -1,13 +1,12 @@
 "use client";
 
-import React, { use } from "react";
-import { Address } from "viem";
-import { PageContainer } from "@/components/PageContainer/PageContainer";
-import { useStkToken } from "@/hooks/useStkToken";
-import { useAllStataTokens } from "@/hooks/useAllStataTokens";
-import { PageLoader } from "@/components/PageLoader/PageLoader";
 import { StakeStataTokenForm } from "@/app/stake/stata/[address]/components/StakeStataTokenForm/StakeStataTokenForm";
+import { PageContainer } from "@/components/PageContainer/PageContainer";
+import { PageLoader } from "@/components/PageLoader/PageLoader";
+import { useStkToken } from "@/hooks/useStkToken";
 import { TxFormProvider } from "@/providers/TxFormProvider/TxFormProvider";
+import { use } from "react";
+import { Address } from "viem";
 
 const tokenType = "stata";
 
@@ -19,14 +18,13 @@ export default function StakeStataPage(props: StakeStataPageProps) {
   const { address: asset } = use(props.params);
 
   const { data: stkToken, isLoading: isStkLoading } = useStkToken({ asset, tokenType });
-  const { data: stataTokens, isLoading: isStataLoading } = useAllStataTokens();
-  const stataToken = stataTokens?.find((token) => token.address === asset);
+  const stataToken = stkToken?.stata;
 
-  if (isStkLoading || isStataLoading) {
+  if (isStkLoading) {
     return <PageLoader />;
   }
 
-  if (!stataToken || !stkToken) {
+  if (!stkToken || !stataToken) {
     return null;
   }
 

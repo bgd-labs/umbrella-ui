@@ -1,21 +1,14 @@
+import { StakeUnderlyingFormValues } from "@/app/stake/underlying/[address]/stakeUnderlyingFormSchema";
+import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
 import { SummarySection } from "@/components/Transaction/SummarySection";
 import { TokenBreakdown } from "@/components/Transaction/TokenBreakdown";
 import { TransactionBreakdown } from "@/components/Transaction/TransactionBreakdown";
 import { TransactionCard } from "@/components/Transaction/TransactionCard";
-import React from "react";
-import { rayDiv } from "@/utils/math/ray-math";
 import { StkToken } from "@/types/token";
+import { rayDiv } from "@/utils/math/ray-math";
 import { useFormContext, useWatch } from "react-hook-form";
-import { StakeUnderlyingFormValues } from "@/app/stake/underlying/[address]/stakeUnderlyingFormSchema";
-import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
 
-const calculateScaledAmount = ({
-  amount,
-  liquidityIndex,
-}: {
-  amount: bigint;
-  liquidityIndex: bigint;
-}) => {
+const calculateScaledAmount = ({ amount, liquidityIndex }: { amount: bigint; liquidityIndex: bigint }) => {
   return rayDiv(amount, liquidityIndex);
 };
 
@@ -24,18 +17,15 @@ export type StakeUnderlyingTokenSummaryProps = {
   hash?: string;
 };
 
-export const StakeUnderlyingTokenSummary = ({
-  stkToken,
-  hash,
-}: StakeUnderlyingTokenSummaryProps) => {
+export const StakeUnderlyingTokenSummary = ({ stkToken, hash }: StakeUnderlyingTokenSummaryProps) => {
   const { control } = useFormContext<StakeUnderlyingFormValues>();
   const amount = useWatch({ control, name: "amount" }) ?? 0n;
   const approval = useWatch({ control, name: "approval" });
 
   const { name, decimals, symbol, reserve, latestAnswer } = stkToken.underlying;
-  const { liquidityIndex } = reserve;
+  const liquidityIndex = reserve?.liquidityIndex;
 
-  const amountScaled = calculateScaledAmount({ amount, liquidityIndex });
+  const amountScaled = liquidityIndex ? calculateScaledAmount({ amount, liquidityIndex }) : amount;
 
   return (
     <TransactionCard title="Details">
@@ -61,11 +51,7 @@ export const StakeUnderlyingTokenSummary = ({
         />
       </SummarySection>
 
-      <APYAndEarningsForecast
-        amount={amountScaled}
-        initialTokenType="underlying"
-        stkToken={stkToken}
-      />
+      <APYAndEarningsForecast amount={amountScaled} initialTokenType="underlying" stkToken={stkToken} />
 
       {approval?.txHash && (
         <SummarySection title="Transaction hash">

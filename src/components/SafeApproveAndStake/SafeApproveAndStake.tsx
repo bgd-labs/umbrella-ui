@@ -1,12 +1,10 @@
-import { useState } from "react";
-import { LayersIcon } from "lucide-react";
-import { Address, encodeFunctionData } from "viem";
+import { UMBRELLA_BATCH_HELPER_ABI } from "@/abis/umbrellaBatchHelper";
 import { Button } from "@/components/ui/Button";
 import { useSafeAppsSDK } from "@safe-global/safe-apps-react-sdk";
-import { erc20Abi } from "viem";
-import { UMBRELLA_BATCH_HELPER_ABI } from "@/abis/umbrellaBatchHelper";
-import { useQueryClient } from "@tanstack/react-query";
 import { sendCalls } from "@wagmi/core/experimental";
+import { LayersIcon } from "lucide-react";
+import { useState } from "react";
+import { Address, encodeFunctionData, erc20Abi } from "viem";
 import { useConfig } from "wagmi";
 
 export const SafeApproveAndStake = ({
@@ -22,7 +20,6 @@ export const SafeApproveAndStake = ({
 }) => {
   const [isPending, setIsPending] = useState(false);
   const { sdk, safe } = useSafeAppsSDK();
-  const client = useQueryClient();
   const config = useConfig();
 
   const handleDepositClick = async () => {
@@ -58,9 +55,6 @@ export const SafeApproveAndStake = ({
 
       if (safe?.safeAddress) {
         const { safeTxHash } = await sdk.txs.send({ txs });
-        client.invalidateQueries({
-          queryKey: ["allUnderlyings"],
-        });
         return safeTxHash;
       } else {
         const result = await sendCalls(config, {
@@ -69,9 +63,6 @@ export const SafeApproveAndStake = ({
             value: BigInt(tx.value),
             data: tx.data,
           })),
-        });
-        client.invalidateQueries({
-          queryKey: ["allUnderlyings"],
         });
         return result;
       }

@@ -1,12 +1,11 @@
-import { getAccount, getClient, switchChain } from "@wagmi/core";
 import { config } from "@/configs/wagmi";
 import { ChainId } from "@/types/market";
+import { getAccount, switchChain } from "@wagmi/core";
 
 export const ensureCorrectChainForTx = async (chainId: ChainId) => {
   const activeWallet = getAccount(config);
-  const walletClient = getClient(config);
 
-  if (!activeWallet.address || !walletClient) {
+  if (!activeWallet.address) {
     throw new Error("Wallet not connected");
   }
 
@@ -14,8 +13,7 @@ export const ensureCorrectChainForTx = async (chainId: ChainId) => {
     try {
       await switchChain(config, { chainId });
     } catch (e) {
-      console.error(e);
-      throw new Error("Error occured when switching chain. Check console log for more details.");
+      throw new Error("Error occured when switching chain.");
     }
   }
 };

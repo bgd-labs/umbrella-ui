@@ -1,5 +1,5 @@
-import SafeAppsSDK from "@safe-global/safe-apps-sdk";
 import { fetchSafeTransactionDetails } from "@/hooks/useWaitForSafeTransaction";
+import SafeAppsSDK from "@safe-global/safe-apps-sdk";
 
 export const waitForSafeTransactionDetails = async (
   { sdk }: { sdk: SafeAppsSDK },

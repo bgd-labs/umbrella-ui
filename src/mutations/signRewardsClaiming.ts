@@ -1,11 +1,11 @@
-import { addDays, toUnix } from "@/utils/date";
-import { readContract, signTypedData } from "@wagmi/core";
-import { config } from "@/configs/wagmi";
 import { REWARDS_CONTROLLER_ABI } from "@/abis/rewardsController";
-import { Address, parseSignature } from "viem";
-import { ClaimRewardsPermit } from "@/types/permit";
+import { config } from "@/configs/wagmi";
 import { ChainId } from "@/types/market";
-import { ensureCorrectChainForTx } from "@/utils/ensureCorrectChainForTx";
+import { ClaimRewardsPermit } from "@/types/permit";
+import { addDays, toUnix } from "@/utils/date";
+import { ensureCorrectChainForTx } from "@/utils/ensureCorrectChainForTx/ensureCorrectChainForTx";
+import { readContract, signTypedData } from "@wagmi/core";
+import { Address, parseSignature } from "viem";
 
 export const signRewardsClaiming = async ({
   owner,

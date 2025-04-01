@@ -1,19 +1,19 @@
 "use client";
 
-import React, { use } from "react";
-import { Address } from "viem";
-import { PageLoader } from "@/components/PageLoader/PageLoader";
-import { useClaimSelectedRewards } from "@/hooks/useClaimSelectedRewards/useClaimSelectedRewards";
-import { useAllStkTokens } from "@/hooks/useAllStkTokens";
-import { TransactionCard } from "@/components/Transaction/TransactionCard";
-import { withPositiveBalance } from "@/utils/filters/filters";
-import { useWalletAddress } from "@/providers/WalletProvider/WalletContext";
-import { UmbrellaRewardsBreakdown } from "@/components/UmbrellaRewardsBreakdown/UmbrellaRewardsBreakdown";
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
-import { Button } from "@/components/ui/Button";
 import { PageContainer } from "@/components/PageContainer/PageContainer";
+import { PageLoader } from "@/components/PageLoader/PageLoader";
+import { TransactionCard } from "@/components/Transaction/TransactionCard";
+import { Button } from "@/components/ui/Button";
+import { UmbrellaRewardsBreakdown } from "@/components/UmbrellaRewardsBreakdown/UmbrellaRewardsBreakdown";
+import { useAllStkTokens } from "@/hooks/useAllStkTokens";
+import { useClaimSelectedRewards } from "@/hooks/useClaimSelectedRewards/useClaimSelectedRewards";
 import { useSafeClaimSelectedRewards } from "@/hooks/useClaimSelectedRewards/useSafeClaimSelectedRewards";
-import { useIsSafeWallet } from "@/hooks/useSafeWallet";
+import { useIsSafeWallet } from "@/hooks/useIsSafeWallet/useIsSafeWallet";
+import { useWalletAddress } from "@/providers/WalletProvider/WalletContext";
+import { withPositiveBalance } from "@/utils/filters/filters";
+import { use } from "react";
+import { Address } from "viem";
 
 export type ClaimRewardsPageProps = {
   params: Promise<{ address: Address }>;
@@ -30,8 +30,7 @@ export default function ClaimRewardsPage(props: ClaimRewardsPageProps) {
 
   const [safeClaim, { data: safeHash, isPending: isSafeClaiming, error: safeClaimError }] =
     useSafeClaimSelectedRewards();
-  const [claim, { data: hash, isPending: isClaiming, error: claimError }] =
-    useClaimSelectedRewards();
+  const [claim, { data: hash, isPending: isClaiming, error: claimError }] = useClaimSelectedRewards();
 
   if (isUmbrellasLoading) {
     return <PageLoader />;
@@ -74,11 +73,7 @@ export default function ClaimRewardsPage(props: ClaimRewardsPageProps) {
 
         <div className="flex items-center justify-end gap-3">
           <div className="text-main-950 text-[20px] font-bold">Total:</div>
-          <NumberDisplay
-            value={stkToken.totalRewardsUSDAmount}
-            type="currency"
-            className="text-[30px] font-semibold"
-          />
+          <NumberDisplay value={stkToken.totalRewardsUSDAmount} type="currency" className="text-[30px] font-semibold" />
         </div>
 
         <div className="flex w-[248px] self-center">

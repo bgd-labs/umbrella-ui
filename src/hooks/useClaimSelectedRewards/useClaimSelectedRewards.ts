@@ -1,19 +1,26 @@
-import { useCallback } from "react";
 import { REWARDS_CONTROLLER_ABI } from "@/abis/rewardsController";
-import { Address } from "viem";
-import { useWriteContract } from "@/hooks/useWriteContract";
-import { useQueryClient } from "@tanstack/react-query";
-import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
-import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "@/configs/wagmi";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { useWriteContract } from "@/hooks/useWriteContract/useWriteContract";
+import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
+import { useQueryClient } from "@tanstack/react-query";
+import { waitForTransactionReceipt } from "@wagmi/core";
+import { useCallback } from "react";
+import { Address } from "viem";
 
-export type ClaimSelectedRewardsArgs = {
-  assets: Address | Address[];
-  rewards: Address[] | Address[][];
-  receiver: Address;
-  description: string;
-};
+export type ClaimSelectedRewardsArgs =
+  | {
+      assets: Address;
+      rewards: Address[];
+      receiver: Address;
+      description: string;
+    }
+  | {
+      assets: Address[];
+      rewards: Address[][];
+      receiver: Address;
+      description: string;
+    };
 
 export const useClaimSelectedRewards = () => {
   const client = useQueryClient();
@@ -29,7 +36,9 @@ export const useClaimSelectedRewards = () => {
         address: rewardsController,
         abi: REWARDS_CONTROLLER_ABI,
         functionName: "claimSelectedRewards",
-        args: [assets, rewards, receiver],
+        args: Array.isArray(assets)
+          ? ([assets as readonly Address[], rewards as readonly (readonly Address[])[], receiver] as const)
+          : ([assets, rewards as readonly Address[], receiver] as const),
       });
       trackTransaction({ chainId, hash, description });
       const { status } = await waitForTransactionReceipt(config, { hash });

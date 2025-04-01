@@ -1,60 +1,41 @@
-import { TransactionCard } from "@/components/Transaction/TransactionCard";
-import { Button } from "@/components/ui/Button";
-import { SummarySection } from "@/components/Transaction/SummarySection";
-import { TokenBreakdown } from "@/components/Transaction/TokenBreakdown";
-import { TransactionBreakdown } from "@/components/Transaction/TransactionBreakdown";
-import React, { useMemo } from "react";
-import { formatUnits } from "viem";
-import { useWrapNativeToken } from "@/hooks/useWrapNativeToken";
-import { NativeToken } from "@/types/token";
-import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
-import { LayersIcon } from "lucide-react";
-import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { Controller, FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ControlledAmountField } from "@/components/ControlledAmountField/ControlledAmountField";
-import { useStake } from "@/hooks/useStake";
-import { useQueryClient } from "@tanstack/react-query";
 import {
   createStakeNativeTokenFormSchema,
   StakeNativeTokenFormValues,
 } from "@/app/stake/native/stakeNativeTokenFormSchema";
-import { useSafeWrapAndStake } from "@/hooks/useWrapAndStake";
-import { useIsSafeWallet } from "@/hooks/useSafeWallet";
-import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
+import { ControlledAmountField } from "@/components/ControlledAmountField/ControlledAmountField";
+import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
 import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
+import { SummarySection } from "@/components/Transaction/SummarySection";
+import { TokenBreakdown } from "@/components/Transaction/TokenBreakdown";
+import { TransactionBreakdown } from "@/components/Transaction/TransactionBreakdown";
+import { TransactionCard } from "@/components/Transaction/TransactionCard";
+import { Button } from "@/components/ui/Button";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { useIsSafeWallet } from "@/hooks/useIsSafeWallet/useIsSafeWallet";
+import { useStake } from "@/hooks/useStake";
+import { useSafeWrapAndStake } from "@/hooks/useWrapAndStake";
+import { useWrapNativeToken } from "@/hooks/useWrapNativeToken";
+import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
+import { NativeToken } from "@/types/token";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LayersIcon } from "lucide-react";
+import { useMemo } from "react";
+import { Controller, FormProvider, useForm } from "react-hook-form";
+import { formatUnits } from "viem";
 
 export type WrapNativeTokenFormProps = {
   nativeToken: NativeToken;
 };
 
-export const WrapNativeTokenForm = ({
-  nativeToken,
-}: WrapNativeTokenFormProps) => {
-  const client = useQueryClient();
+export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) => {
   const { batchHelper: spender } = useCurrentMarket();
   const isSafeWallet = useIsSafeWallet();
 
   const { signingStatus } = useTxFormSignature();
 
-  const {
-    wrap,
-    data: wrapHash,
-    isPending: isWrapping,
-    error: wrapNativeTokenError,
-  } = useWrapNativeToken();
-  const {
-    stake,
-    data: depositHash,
-    isPending: isStaking,
-    error: depositError,
-  } = useStake();
-  const {
-    safeWrapAndStake,
-    data: safeHash,
-    isPending: isSafeStaking,
-    error: safeDepositError,
-  } = useSafeWrapAndStake();
+  const { wrap, data: wrapHash, isPending: isWrapping, error: wrapNativeTokenError } = useWrapNativeToken();
+  const { stake, data: depositHash, isPending: isStaking, error: depositError } = useStake();
+  const { safeWrapAndStake, data: safeHash, isPending: isSafeStaking, error: safeDepositError } = useSafeWrapAndStake();
 
   const { name, decimals, symbol, balance, stkToken } = nativeToken;
   const maxAmount = balance || 0n;
@@ -90,31 +71,27 @@ export const WrapNativeTokenForm = ({
     });
   };
 
-  const onSubmit = async (formValues: StakeNativeTokenFormValues) => {
-    if (!formValues.amount) {
-      return;
-    }
+  const onSubmit = (formValues: StakeNativeTokenFormValues) => {
+    console.log("formValues", formValues);
 
     if (isSafeWallet) {
+      if (!formValues.amount) {
+        return;
+      }
+
       safeWrapAndStake({
         umbrellaAddress: stkToken.address,
         assetAddress: nativeToken.stkToken.underlying.address,
         amount: formValues.amount,
       });
     } else {
-      const { status } = await stake({
-        amount: formValues.amount,
+      stake({
+        amount: formValues.wrappedAmount,
         umbrellaAddress: stkToken.address,
         assetAddress: nativeToken.stkToken.underlying.address,
         permit: formValues.permit,
-        description: `Stake ${formatUnits(formValues.amount, decimals)} ${symbol}`,
+        description: `Stake ${formatUnits(formValues.wrappedAmount, decimals)} ${symbol}`,
       });
-
-      if (status === "success") {
-        client.invalidateQueries({
-          queryKey: ["allUnderlyings"],
-        });
-      }
     }
   };
 
@@ -122,7 +99,7 @@ export const WrapNativeTokenForm = ({
     <FormProvider {...formMethods}>
       <TransactionCard
         title="Stake native token"
-        hash={wrapHash}
+        hash={depositHash}
         safeHash={safeHash}
         loading={isStaking || isSafeStaking}
         error={wrapNativeTokenError || depositError || safeDepositError}
@@ -168,23 +145,14 @@ export const WrapNativeTokenForm = ({
               elevation={1}
               onClick={handleWrapClick}
               loading={isWrapping}
-              disabled={
-                isWrapping ||
-                amountFieldState.invalid ||
-                !amountFieldState.isDirty ||
-                !!wrapHash
-              }
+              disabled={isWrapping || amountFieldState.invalid || !amountFieldState.isDirty || !!wrapHash}
               outerClassName="w-full md:w-[248px]"
               className="flex items-center gap-2"
             >
               Wrap
             </Button>
 
-            <SignTransaction
-              asset={nativeToken.stkToken.underlying.address}
-              spender={spender}
-              disabled={!wrapHash}
-            />
+            <SignTransaction asset={nativeToken.stkToken.underlying.address} spender={spender} disabled={!wrapHash} />
 
             <Button
               primary
@@ -231,15 +199,15 @@ export const WrapNativeTokenForm = ({
           stkToken={stkToken}
         />
 
-        {approval?.txHash && (
-          <SummarySection title="Approval hash">
-            <TransactionBreakdown hash={approval?.txHash} />
-          </SummarySection>
-        )}
-
         {wrapHash && (
           <SummarySection title="Wrapping native token hash">
             <TransactionBreakdown hash={wrapHash} />
+          </SummarySection>
+        )}
+
+        {approval?.txHash && (
+          <SummarySection title="Approval hash">
+            <TransactionBreakdown hash={approval?.txHash} />
           </SummarySection>
         )}
 

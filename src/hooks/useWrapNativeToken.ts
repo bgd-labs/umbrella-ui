@@ -1,10 +1,9 @@
-import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { useWriteContract } from "wagmi";
-import { ensureCorrectChainForTx } from "@/utils/ensureCorrectChainForTx";
-import { parseAbi } from "viem";
-import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "@/configs/wagmi";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { useWriteContract } from "@/hooks/useWriteContract/useWriteContract";
 import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
+import { waitForTransactionReceipt } from "@wagmi/core";
+import { parseAbi } from "viem";
 
 export const useWrapNativeToken = () => {
   const { chainId, wrapNativeTokenAddress } = useCurrentMarket();
@@ -14,7 +13,6 @@ export const useWrapNativeToken = () => {
 
   const wrap = async ({ amount, description }: { amount: bigint; description: string }) => {
     try {
-      await ensureCorrectChainForTx(chainId);
       const hash = await writeContractAsync({
         chainId,
         address: wrapNativeTokenAddress,

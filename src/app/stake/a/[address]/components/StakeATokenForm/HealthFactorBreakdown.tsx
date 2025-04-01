@@ -1,13 +1,8 @@
-import {
-  calculateHealthFactor,
-  calculateNewHealthFactor,
-  getHealthStatus,
-} from "@/utils/calculateHealthFactor";
-import { Reserve } from "@/types/token";
 import { HealthFactor } from "@/components/HealthFactor/HealthFactor";
-import { ArrowRightIcon } from "lucide-react";
-import React from "react";
+import { Reserve } from "@/types/token";
+import { calculateHealthFactor, calculateNewHealthFactor, getHealthStatus } from "@/utils/calculateHealthFactor";
 import { cn } from "@/utils/cn";
+import { ArrowRightIcon } from "lucide-react";
 
 export type HealthFactorBreakdownProps = {
   reserveId: number;
@@ -15,11 +10,7 @@ export type HealthFactorBreakdownProps = {
   positions: Reserve[];
 };
 
-export const HealthFactorBreakdown = ({
-  reserveId,
-  newBalance,
-  positions,
-}: HealthFactorBreakdownProps) => {
+export const HealthFactorBreakdown = ({ reserveId, newBalance, positions }: HealthFactorBreakdownProps) => {
   const currentHF = calculateHealthFactor({ positions });
   const newHF = calculateNewHealthFactor({ positions }, { reserveId, balance: newBalance });
   const newHFStatus = getHealthStatus(newHF);

@@ -1,32 +1,25 @@
-import React from "react";
-import { erc20Abi } from "viem";
-import { Check } from "lucide-react";
-import { useAllowance } from "@/hooks/useAllowance";
-import { useQueryClient } from "@tanstack/react-query";
-import { waitForTransactionReceipt } from "@wagmi/core";
-import { config } from "@/configs/wagmi";
-import { Button } from "../../ui/Button";
-import { SignTransactionProps } from "@/components/SignTransaction/types";
 import { LoadingBlock } from "@/components/SignTransaction/Loader";
+import { SignTransactionProps } from "@/components/SignTransaction/types";
+import { config } from "@/configs/wagmi";
+import { useAllowance } from "@/hooks/useAllowance";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { useWriteContract } from "@/hooks/useWriteContract";
-import { Approval } from "@/types/approval";
-import { useWaitForTransactionReceipt } from "wagmi";
+import { useWriteContract } from "@/hooks/useWriteContract/useWriteContract";
 import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
 import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
+import { Approval } from "@/types/approval";
+import { useQueryClient } from "@tanstack/react-query";
+import { waitForTransactionReceipt } from "@wagmi/core";
+import { Check } from "lucide-react";
+import { erc20Abi } from "viem";
+import { useWaitForTransactionReceipt } from "wagmi";
+import { Button } from "../../ui/Button";
 
 export type ApproveProps = SignTransactionProps & {
   onChange?: (approval: Approval) => void;
   disabled?: boolean;
 };
 
-export const Approve = ({
-  asset,
-  spender,
-  amount,
-  onChange,
-  disabled,
-}: ApproveProps) => {
+export const Approve = ({ asset, spender, amount, onChange, disabled }: ApproveProps) => {
   const client = useQueryClient();
   const { chainId } = useCurrentMarket();
   const trackTransaction = useTrackTransaction();
@@ -41,11 +34,7 @@ export const Approve = ({
     asset,
     spender,
   });
-  const {
-    writeContractAsync,
-    data: hash,
-    isPending: isApprovalPending,
-  } = useWriteContract();
+  const { writeContractAsync, data: hash, isPending: isApprovalPending } = useWriteContract();
   const { isFetching: isReceiptFetching } = useWaitForTransactionReceipt({
     hash,
   });
@@ -91,13 +80,7 @@ export const Approve = ({
     <Button
       elevation={1}
       loading={isApprovalPending || isReceiptFetching || isAllowanceFetching}
-      disabled={
-        isApprovalPending ||
-        isReceiptFetching ||
-        isAllowanceFetching ||
-        amount === 0n ||
-        disabled
-      }
+      disabled={isApprovalPending || isReceiptFetching || isAllowanceFetching || amount === 0n || disabled}
       onClick={handleApproveClick}
       outerClassName="w-full md:w-[248px]"
     >

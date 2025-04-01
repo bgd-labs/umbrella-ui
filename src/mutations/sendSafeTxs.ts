@@ -1,6 +1,6 @@
+import { config } from "@/configs/wagmi";
 import SafeAppsSDK, { BaseTransaction, SafeInfo } from "@safe-global/safe-apps-sdk";
 import { sendCalls } from "@wagmi/core/experimental";
-import { config } from "@/configs/wagmi";
 
 export type SendSafeTxsContext = { sdk: SafeAppsSDK; safe: SafeInfo };
 
