@@ -3,7 +3,7 @@ import { config } from "@/configs/wagmi";
 import { ChainId } from "@/types/market";
 import { ClaimRewardsPermit } from "@/types/permit";
 import { addDays, toUnix } from "@/utils/date";
-import { ensureCorrectChainForTx } from "@/utils/ensureCorrectChainForTx/ensureCorrectChainForTx";
+import { ensureCorrectChainForTx } from "@/utils/web3";
 import { readContract, signTypedData } from "@wagmi/core";
 import { Address, parseSignature } from "viem";
 
