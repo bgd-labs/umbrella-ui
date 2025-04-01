@@ -1,7 +1,6 @@
 import { StataToken, TokenType, UnderlyingToken } from "@/types/token";
+import { formatBigInt, formatUSDPrice } from "@/utils/formatting";
 import { Address } from "viem";
-import { formatBigInt } from "../formatBigInt";
-import { formatUSDPrice } from "../formatUSDPrice";
 
 export const TOKEN_TYPE_IN_PATH_DATA: Record<Extract<TokenType, "underlying" | "a" | "stata">, number> = {
   underlying: 1,

@@ -1,5 +1,5 @@
 import { PRICE_FEED_DECIMALS } from "@/constants/oracle";
-import { formatBigInt } from "@/utils/formatBigInt";
+import { formatBigInt } from "@/utils/formatting";
 
 export const formatUSDPrice = ({
   balance,

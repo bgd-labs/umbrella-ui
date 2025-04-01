@@ -1,19 +1,14 @@
-import React, { ComponentProps } from "react";
-import Link from "next/link";
-import { useAccount } from "wagmi";
-import { textCenterEllipsis } from "@/utils/textCenterEllipsis";
 import { cn } from "@/utils/cn";
+import { textCenterEllipsis } from "@/utils/formatting";
+import Link from "next/link";
+import { ComponentProps } from "react";
+import { useAccount } from "wagmi";
 
 export type HashLinkProps = Omit<ComponentProps<typeof Link>, "href"> & {
   txHashAddress: string;
 };
 
-export const HashLink = ({
-  txHashAddress,
-  target = "_blank",
-  className,
-  ...props
-}: HashLinkProps) => {
+export const HashLink = ({ txHashAddress, target = "_blank", className, ...props }: HashLinkProps) => {
   const { chain } = useAccount();
 
   if (!chain) {

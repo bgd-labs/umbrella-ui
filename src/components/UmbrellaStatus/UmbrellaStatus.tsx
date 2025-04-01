@@ -4,7 +4,7 @@ import { useUmbrellaCooldownStatus } from "@/hooks/useAllUmbrellaCooldowns/useUm
 
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
 import { StkToken } from "@/types/token";
-import { formatBigInt } from "@/utils/formatBigInt";
+import { formatBigInt } from "@/utils/formatting";
 
 export type UmbrellaStatusProps = {
   token: StkToken;

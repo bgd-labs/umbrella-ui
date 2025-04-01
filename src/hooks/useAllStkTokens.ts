@@ -5,8 +5,7 @@ import { useAllReserves } from "@/hooks/useAllReserves";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { Reward, StkToken } from "@/types/token";
 import { calculateApyData, calculateRewardsApy } from "@/utils/calculations";
-import { formatBigInt } from "@/utils/formatBigInt";
-import { formatUSDPrice } from "@/utils/formatUSDPrice";
+import { formatBigInt, formatUSDPrice } from "@/utils/formatting";
 import {
   extractStataToken,
   extractUnderlyingToken,

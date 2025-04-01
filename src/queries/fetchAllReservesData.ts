@@ -1,14 +1,13 @@
-import { ChainId } from "@/types/market";
-import { Address } from "viem";
-import { toUnix } from "@/utils/date";
 import { fetchReservesData } from "@/queries/fetchReservesData";
 import { fetchUserReservesData } from "@/queries/fetchUserReservesData";
+import { ChainId } from "@/types/market";
+import { toUnix } from "@/utils/date";
 import { calculateAPY, getCurrentLiquidityBalance } from "@/utils/math/pool-math";
+import { Address } from "viem";
 
-import { Reserve } from "@/types/token";
 import { fetchAllEModes } from "@/queries/fetchAllEModes";
-import { formatBigInt } from "@/utils/formatBigInt";
-import { formatUSDPrice } from "@/utils/formatUSDPrice";
+import { Reserve } from "@/types/token";
+import { formatBigInt, formatUSDPrice } from "@/utils/formatting";
 
 export type AllReservesDataArgs = {
   chainId: ChainId;
@@ -17,12 +16,7 @@ export type AllReservesDataArgs = {
   uiPoolDataProvider: Address;
 };
 
-export const fetchAllReserves = async ({
-  chainId,
-  owner,
-  poolProvider,
-  uiPoolDataProvider,
-}: AllReservesDataArgs) => {
+export const fetchAllReserves = async ({ chainId, owner, poolProvider, uiPoolDataProvider }: AllReservesDataArgs) => {
   const commonArgs = { chainId, poolProvider, uiPoolDataProvider };
   const [reservesData, eModes, userReservesData] = await Promise.all([
     fetchReservesData(commonArgs),
@@ -33,9 +27,7 @@ export const fetchAllReserves = async ({
   const currentTimestamp = toUnix();
 
   return reservesData.map((reserveData) => {
-    const userReserveData = userReservesData?.find(
-      (item) => item.underlyingAddress === reserveData.underlyingAddress,
-    );
+    const userReserveData = userReservesData?.find((item) => item.underlyingAddress === reserveData.underlyingAddress);
     const balanceScaled = userReserveData?.balanceScaled;
     const balance =
       balanceScaled &&

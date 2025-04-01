@@ -1,12 +1,11 @@
-import { useAccount, useBalance } from "wagmi";
-import { useCurrentMarket } from "@/hooks/useCurrentMarket";
-import { formatBigInt } from "@/utils/formatBigInt";
-import { useMemo } from "react";
 import { appChains } from "@/configs/wagmi";
 import { NATIVE_TOKEN_ADDRESS } from "@/constants/markets";
-import { NativeToken } from "@/types/token";
 import { useAllStkTokens } from "@/hooks/useAllStkTokens";
-import { formatUSDPrice } from "@/utils/formatUSDPrice";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { NativeToken } from "@/types/token";
+import { formatBigInt, formatUSDPrice } from "@/utils/formatting";
+import { useMemo } from "react";
+import { useAccount, useBalance } from "wagmi";
 
 export const useNativeToken = () => {
   const { chainId, wrapNativeTokenAddress } = useCurrentMarket();
@@ -21,9 +20,7 @@ export const useNativeToken = () => {
         return;
       }
 
-      const stkToken = stkTokens.find(
-        (token) => token.underlying.address === wrapNativeTokenAddress,
-      )!;
+      const stkToken = stkTokens.find((token) => token.underlying.address === wrapNativeTokenAddress)!;
       const chain = appChains.find((chain) => chain.id === chainId)!;
 
       return {

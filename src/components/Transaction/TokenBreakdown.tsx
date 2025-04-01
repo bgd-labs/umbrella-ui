@@ -1,11 +1,9 @@
 import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
-import { mapTokenTypeToLabel } from "@/components/TokenLabel/TokenLabel";
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
-import { formatBigInt } from "@/utils/formatBigInt";
-import React from "react";
-import { parseUnits } from "viem";
-import { formatUSDPrice } from "@/utils/formatUSDPrice";
+import { mapTokenTypeToLabel } from "@/components/TokenLabel/TokenLabel";
 import { TokenType } from "@/types/token";
+import { formatBigInt, formatUSDPrice } from "@/utils/formatting";
+import { parseUnits } from "viem";
 
 export type TokenBreakdownProps = {
   name: string;
@@ -16,14 +14,7 @@ export type TokenBreakdownProps = {
   usdPrice: bigint;
 };
 
-export const TokenBreakdown = ({
-  name,
-  type,
-  symbol,
-  decimals,
-  amount,
-  usdPrice,
-}: TokenBreakdownProps) => {
+export const TokenBreakdown = ({ name, type, symbol, decimals, amount, usdPrice }: TokenBreakdownProps) => {
   const formattedAmount = typeof amount === "string" ? parseUnits(amount, decimals) : amount;
   const amountUsdPrice = formatUSDPrice({ balance: formattedAmount, decimals, usdPrice });
 
@@ -41,10 +32,7 @@ export const TokenBreakdown = ({
       </div>
 
       <div className="flex flex-col items-end">
-        <NumberDisplay
-          value={formatBigInt(formattedAmount, decimals)}
-          className="text-base font-semibold"
-        />
+        <NumberDisplay value={formatBigInt(formattedAmount, decimals)} className="text-base font-semibold" />
         <NumberDisplay value={amountUsdPrice} type="currency" className="text-main-500 text-sm" />
       </div>
     </div>

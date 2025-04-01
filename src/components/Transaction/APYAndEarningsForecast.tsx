@@ -2,7 +2,7 @@ import { APYBreakdown } from "@/app/components/APYBreakdown/APYBreakdown";
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
 import { StkToken, TokenType } from "@/types/token";
 import { calculateAPYEarnings } from "@/utils/calculations";
-import { formatUSDPrice } from "@/utils/formatUSDPrice";
+import { formatUSDPrice } from "@/utils/formatting";
 
 export type APYAndEarningsForecastProps = {
   amount: bigint;
