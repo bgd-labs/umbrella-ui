@@ -5,20 +5,24 @@ export type NumberDisplayProps = {
   value: number;
   type?: "currency" | "token" | "percent";
   className?: string;
+  prefix?: string;
+  suffix?: string;
 };
 
 export const NumberDisplay = ({
   value,
   type = "token",
   className,
+  prefix: customPrefix,
+  suffix,
 }: NumberDisplayProps) => {
   let displayValue = value;
-  let prefix: string | undefined = undefined;
+  let prefix: string | undefined = customPrefix;
 
   if (type === "currency") {
     if (value > 0 && value < 0.01) {
       displayValue = 0.01;
-      prefix = "<";
+      prefix = customPrefix ? `${customPrefix}<` : "<";
     }
 
     return (
@@ -34,6 +38,7 @@ export const NumberDisplay = ({
           roundingMode: "floor",
         }}
         prefix={prefix}
+        suffix={suffix}
         className={cn("font-normal", className)}
       />
     );
@@ -42,7 +47,7 @@ export const NumberDisplay = ({
   if (type === "percent") {
     if (value > 0 && value < 0.01) {
       displayValue = 0.01;
-      prefix = "<";
+      prefix = customPrefix ? `${customPrefix}<` : "<";
     }
 
     return (
@@ -55,6 +60,7 @@ export const NumberDisplay = ({
           roundingMode: "floor",
         }}
         prefix={prefix}
+        suffix={suffix}
         className={cn("font-normal", className)}
       />
     );
@@ -70,6 +76,8 @@ export const NumberDisplay = ({
           compactDisplay: "short",
           roundingMode: "floor",
         }}
+        prefix={prefix}
+        suffix={suffix}
         className={cn("font-normal", className)}
       />
     );
@@ -77,7 +85,7 @@ export const NumberDisplay = ({
 
   if (value > 0 && value < 0.00001) {
     displayValue = 0.00001;
-    prefix = "<";
+    prefix = customPrefix ? `${customPrefix}<` : "<";
   }
 
   return (
@@ -89,6 +97,7 @@ export const NumberDisplay = ({
         roundingMode: "floor",
       }}
       prefix={prefix}
+      suffix={suffix}
       className={cn("font-normal", className)}
     />
   );

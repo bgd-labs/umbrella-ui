@@ -7,6 +7,7 @@ import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
 import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
 import { SummarySection } from "@/components/Transaction/SummarySection";
 import { TokenBreakdown } from "@/components/Transaction/TokenBreakdown";
+import { TokenChangeBreakdown } from "@/components/Transaction/TokenChangeBreakdown";
 import { TransactionBreakdown } from "@/components/Transaction/TransactionBreakdown";
 import { TransactionCard } from "@/components/Transaction/TransactionCard";
 import { Button } from "@/components/ui/Button";
@@ -171,27 +172,15 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
       </TransactionCard>
 
       <TransactionCard title="Details">
-        <SummarySection title="You are staking">
-          <TokenBreakdown
-            name={name}
-            type="underlying"
-            decimals={decimals}
-            symbol={symbol}
-            amount={formMethods.getValues("amount") ?? 0n}
-            usdPrice={stkToken.underlying.latestAnswer}
-          />
-        </SummarySection>
-
-        <SummarySection title="You will receive">
-          <TokenBreakdown
-            name={nativeToken.stkToken.underlying.name}
-            type="stk"
-            decimals={nativeToken.stkToken.underlying.decimals}
-            symbol={nativeToken.stkToken.underlying.symbol}
-            amount={formMethods.getValues("amount") ?? 0n}
-            usdPrice={nativeToken.stkToken.latestAnswer}
-          />
-        </SummarySection>
+        <TokenChangeBreakdown
+          fromType="underlying"
+          toType="stkStata"
+          decimals={decimals}
+          fromSymbol={symbol}
+          symbol={nativeToken.stkToken.underlying.symbol}
+          amount={formMethods.getValues("amount") ?? 0n}
+          usdPrice={stkToken.underlying.latestAnswer}
+        />
 
         <APYAndEarningsForecast
           amount={formMethods.getValues("amount") ?? 0n}

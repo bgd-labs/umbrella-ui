@@ -3,6 +3,9 @@ import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
 import { StkToken, TokenType } from "@/types/token";
 import { calculateAPYEarnings } from "@/utils/calculations";
 import { formatUSDPrice } from "@/utils/formatting";
+import { NumberFlowGroup } from "@number-flow/react";
+import { ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
 
 export type APYAndEarningsForecastProps = {
   amount: bigint;
@@ -27,13 +30,11 @@ export const APYAndEarningsForecast = ({ amount, initialTokenType, stkToken }: A
   return (
     <>
       <div className="flex items-center justify-between">
-        <div className="flex flex-col gap-3">
-          <h2 className="font-bold dark:text-white">Current APY</h2>
-          <NumberDisplay value={currentAPY} type="percent" className="font-semibold" />
-        </div>
+        <h2 className="font-bold dark:text-white">APY</h2>
 
-        <div className="flex flex-col items-end gap-3">
-          <h2 className="font-bold dark:text-white">Staked APY</h2>
+        <div className="-mr-2 flex items-center gap-3">
+          <NumberDisplay value={currentAPY} type="percent" className="font-semibold" />
+          <ArrowRight className="size-4 text-gray-400" />
           <APYBreakdown
             symbol={stkToken.underlying.symbol}
             totalApy={stkToken.apyData.total}
@@ -46,21 +47,33 @@ export const APYAndEarningsForecast = ({ amount, initialTokenType, stkToken }: A
 
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-3">
-          <h2 className="font-bold dark:text-white">Current Earning</h2>
-          <div>
-            <span className="font-semibold">~</span>
-            <NumberDisplay value={currentEarnings} type="currency" className="font-semibold" />
-            /year
-          </div>
+          <h2 className="font-bold dark:text-white">Earnings</h2>
         </div>
 
-        <div className="flex flex-col items-end gap-3">
-          <h2 className="font-bold dark:text-white">You&apos;ll earn</h2>
-          <div>
-            <span className="font-semibold">~</span>
-            <NumberDisplay value={stakedEarnings} type="currency" className="font-semibold" />
-            /year
-          </div>
+        <div className="flex items-center gap-3">
+          <NumberFlowGroup>
+            <div>
+              <NumberDisplay
+                value={currentEarnings}
+                type="currency"
+                className="font-semibold"
+                prefix="~"
+                suffix="/year"
+              />
+            </div>
+            <motion.div layout transition={{ duration: 0.35 }}>
+              <ArrowRight className="size-4 text-gray-400" />
+            </motion.div>
+            <div>
+              <NumberDisplay
+                value={stakedEarnings}
+                type="currency"
+                className="font-semibold"
+                prefix="~"
+                suffix="/year"
+              />
+            </div>
+          </NumberFlowGroup>
         </div>
       </div>
     </>
