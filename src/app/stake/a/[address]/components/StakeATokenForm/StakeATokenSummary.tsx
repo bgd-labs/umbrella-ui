@@ -15,7 +15,7 @@ export type StakeATokenSummaryProps = {
   reserves: Reserve[];
 };
 
-export const StakeATokenSummary = ({ reserve, stkToken, hash, reserves }: StakeATokenSummaryProps) => {
+export const StakeATokenSummary = ({ reserve, stkToken, reserves }: StakeATokenSummaryProps) => {
   const { control } = useFormContext<StakeATokenFormValues>();
   const amount = useWatch({ control, name: "amount" }) ?? 0n;
   const approval = useWatch({ control, name: "approval" });
