@@ -1,8 +1,20 @@
 export const UMBRELLA_DATA_AGGREGATION_HELPER_ABI = [
   {
+    inputs: [{ internalType: "address", name: "rewardsController", type: "address" }],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  { inputs: [], name: "ZeroAddress", type: "error" },
+  {
+    inputs: [],
+    name: "REWARDS_CONTROLLER",
+    outputs: [{ internalType: "contract IRewardsController", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       { internalType: "contract IUmbrella", name: "umbrella", type: "address" },
-      { internalType: "contract IRewardsController", name: "rewardsController", type: "address" },
       { internalType: "contract IAaveOracle", name: "aaveOracle", type: "address" },
       { internalType: "address", name: "user", type: "address" },
     ],
@@ -54,11 +66,7 @@ export const UMBRELLA_DATA_AGGREGATION_HELPER_ABI = [
           { internalType: "address", name: "stakeToken", type: "address" },
           {
             components: [
-              {
-                internalType: "enum DataAggregationHelper.TokenType",
-                name: "typeOfToken",
-                type: "uint8",
-              },
+              { internalType: "enum DataAggregationHelper.TokenType", name: "typeOfToken", type: "uint8" },
               {
                 components: [
                   { internalType: "address", name: "token", type: "address" },
@@ -104,11 +112,7 @@ export const UMBRELLA_DATA_AGGREGATION_HELPER_ABI = [
           { internalType: "address", name: "stakeToken", type: "address" },
           {
             components: [
-              {
-                internalType: "enum DataAggregationHelper.TokenType",
-                name: "typeOfToken",
-                type: "uint8",
-              },
+              { internalType: "enum DataAggregationHelper.TokenType", name: "typeOfToken", type: "uint8" },
               { internalType: "address", name: "token", type: "address" },
               { internalType: "uint256", name: "userBalance", type: "uint256" },
             ],
@@ -128,7 +132,6 @@ export const UMBRELLA_DATA_AGGREGATION_HELPER_ABI = [
   {
     inputs: [
       { internalType: "contract IUmbrella", name: "umbrella", type: "address" },
-      { internalType: "contract IRewardsController", name: "rewardsController", type: "address" },
       { internalType: "contract IAaveOracle", name: "aaveOracle", type: "address" },
     ],
     name: "getTokensAggregatedData",
@@ -190,11 +193,7 @@ export const UMBRELLA_DATA_AGGREGATION_HELPER_ABI = [
           { internalType: "address", name: "stakeToken", type: "address" },
           {
             components: [
-              {
-                internalType: "enum DataAggregationHelper.TokenType",
-                name: "typeOfToken",
-                type: "uint8",
-              },
+              { internalType: "enum DataAggregationHelper.TokenType", name: "typeOfToken", type: "uint8" },
               {
                 components: [
                   { internalType: "address", name: "token", type: "address" },
@@ -224,7 +223,6 @@ export const UMBRELLA_DATA_AGGREGATION_HELPER_ABI = [
   {
     inputs: [
       { internalType: "contract IUmbrella", name: "umbrella", type: "address" },
-      { internalType: "contract IRewardsController", name: "rewardsController", type: "address" },
       { internalType: "address", name: "user", type: "address" },
     ],
     name: "getUserAggregatedData",
@@ -263,11 +261,7 @@ export const UMBRELLA_DATA_AGGREGATION_HELPER_ABI = [
           { internalType: "address", name: "stakeToken", type: "address" },
           {
             components: [
-              {
-                internalType: "enum DataAggregationHelper.TokenType",
-                name: "typeOfToken",
-                type: "uint8",
-              },
+              { internalType: "enum DataAggregationHelper.TokenType", name: "typeOfToken", type: "uint8" },
               { internalType: "address", name: "token", type: "address" },
               { internalType: "uint256", name: "userBalance", type: "uint256" },
             ],

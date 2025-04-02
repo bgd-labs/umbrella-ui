@@ -193,7 +193,7 @@ export const MARKETS: Market[] = [
     rewardsController: "0x412f8957f9A42FFe47B634AB73f89Ff4E0a29026",
     umbrellaHelper: "0x5AC6C5C70934939d7Ad4aAB253aFD760Ad5E5313",
     batchHelper: "0xcDfb3f2d924b02A78a51F43BC34610dC62ADCEC3",
-    umbrellaDataAggregationHelper: "0x62858E5b1aAa5d2DdEEeB57e99E73fFAcC8154f6",
+    umbrellaDataAggregationHelper: "0xC4b9D54bA13156aD07A501d8C4D3f8B4d1827bE2",
     wrapNativeTokenAddress: "0x4200000000000000000000000000000000000006",
   },
   {

@@ -18,7 +18,7 @@ import { useAccount, useReadContract } from "wagmi";
 
 export const useAllStkTokens = () => {
   const { address: owner } = useAccount();
-  const { chainId, umbrellaDataAggregationHelper, umbrellaHelper, rewardsController, oracle } = useCurrentMarket();
+  const { chainId, umbrellaDataAggregationHelper, umbrellaHelper, oracle } = useCurrentMarket();
 
   const { data: reserves, isLoading: isReservesLoading } = useAllReserves();
 
@@ -27,7 +27,7 @@ export const useAllStkTokens = () => {
     abi: UMBRELLA_DATA_AGGREGATION_HELPER_ABI,
     address: umbrellaDataAggregationHelper,
     functionName: "getAllAggregatedData",
-    args: [umbrellaHelper, rewardsController, oracle, owner ?? ZERO_CONTRACT_ADDRESS],
+    args: [umbrellaHelper, oracle, owner ?? ZERO_CONTRACT_ADDRESS],
   });
 
   return {

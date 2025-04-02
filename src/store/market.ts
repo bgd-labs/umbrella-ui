@@ -1,9 +1,9 @@
-import { createStore } from "zustand";
-import { Market } from "@/types/market";
 import { MARKETS } from "@/constants/markets";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { Market } from "@/types/market";
+import { createStore } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
-const CURRENT_STORE_VERSION = 7;
+const CURRENT_STORE_VERSION = 8;
 
 export interface MarketState {
   market: Market;
@@ -20,8 +20,7 @@ export const createMarketStore = (initialState: Pick<MarketState, "market">) => 
       (set) => ({
         ...initialState,
 
-        setMarket: (marketId: string) =>
-          set({ market: MARKETS.find(({ id }) => id === marketId)! }),
+        setMarket: (marketId: string) => set({ market: MARKETS.find(({ id }) => id === marketId)! }),
 
         reset: () => set(initialState),
       }),
