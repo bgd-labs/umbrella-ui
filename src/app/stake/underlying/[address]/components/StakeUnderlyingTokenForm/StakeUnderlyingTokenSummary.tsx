@@ -1,7 +1,7 @@
 import { StakeUnderlyingFormValues } from "@/app/stake/underlying/[address]/stakeUnderlyingFormSchema";
 import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
 import { SummarySection } from "@/components/Transaction/SummarySection";
-import { TokenBreakdown } from "@/components/Transaction/TokenBreakdown";
+import { TokenChangeBreakdown } from "@/components/Transaction/TokenChangeBreakdown";
 import { TransactionBreakdown } from "@/components/Transaction/TransactionBreakdown";
 import { TransactionCard } from "@/components/Transaction/TransactionCard";
 import { StkToken } from "@/types/token";
@@ -22,46 +22,27 @@ export const StakeUnderlyingTokenSummary = ({ stkToken, hash }: StakeUnderlyingT
   const amount = useWatch({ control, name: "amount" }) ?? 0n;
   const approval = useWatch({ control, name: "approval" });
 
-  const { name, decimals, symbol, reserve, latestAnswer } = stkToken.underlying;
+  const { decimals, symbol, reserve, latestAnswer } = stkToken.underlying;
   const liquidityIndex = reserve?.liquidityIndex;
 
   const amountScaled = liquidityIndex ? calculateScaledAmount({ amount, liquidityIndex }) : amount;
 
   return (
     <TransactionCard title="Details">
-      <SummarySection title="You are staking">
-        <TokenBreakdown
-          name={name}
-          type="underlying"
-          decimals={decimals}
-          symbol={symbol}
-          amount={amount}
-          usdPrice={latestAnswer}
-        />
-      </SummarySection>
-
-      <SummarySection title="You will receive">
-        <TokenBreakdown
-          name={name}
-          type="stk"
-          decimals={decimals}
-          symbol={symbol}
-          amount={amountScaled}
-          usdPrice={stkToken.latestAnswer}
-        />
-      </SummarySection>
+      <TokenChangeBreakdown
+        fromType="underlying"
+        toType="stkStata"
+        decimals={decimals}
+        symbol={symbol}
+        amount={amount}
+        usdPrice={latestAnswer}
+      />
 
       <APYAndEarningsForecast amount={amountScaled} initialTokenType="underlying" stkToken={stkToken} />
 
       {approval?.txHash && (
         <SummarySection title="Transaction hash">
           <TransactionBreakdown hash={approval?.txHash} />
-        </SummarySection>
-      )}
-
-      {hash && (
-        <SummarySection title="Transaction hash">
-          <TransactionBreakdown hash={hash} />
         </SummarySection>
       )}
     </TransactionCard>

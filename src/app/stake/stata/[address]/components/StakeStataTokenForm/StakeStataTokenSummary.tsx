@@ -1,7 +1,7 @@
 import { StakeStataFormValues } from "@/app/stake/stata/[address]/stakeStataTokenFormSchema";
 import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
 import { SummarySection } from "@/components/Transaction/SummarySection";
-import { TokenBreakdown } from "@/components/Transaction/TokenBreakdown";
+import { TokenChangeBreakdown } from "@/components/Transaction/TokenChangeBreakdown";
 import { TransactionBreakdown } from "@/components/Transaction/TransactionBreakdown";
 import { TransactionCard } from "@/components/Transaction/TransactionCard";
 import { StataToken, StkToken } from "@/types/token";
@@ -23,39 +23,20 @@ export const StakeStataTokenSummary = ({ token, stkToken, hash }: StakeStataToke
 
   return (
     <TransactionCard title="Details">
-      <SummarySection title="You are staking">
-        <TokenBreakdown
-          name={name}
-          type="stata"
-          decimals={decimals}
-          symbol={symbol}
-          amount={amount}
-          usdPrice={latestAnswer}
-        />
-      </SummarySection>
-
-      <SummarySection title="You will receive">
-        <TokenBreakdown
-          name={name}
-          type="stk"
-          decimals={decimals}
-          symbol={symbol}
-          amount={amount}
-          usdPrice={stkToken.latestAnswer}
-        />
-      </SummarySection>
+      <TokenChangeBreakdown
+        fromType="stata"
+        toType="stkStata"
+        decimals={decimals}
+        symbol={symbol}
+        amount={amount}
+        usdPrice={latestAnswer}
+      />
 
       <APYAndEarningsForecast amount={amount} initialTokenType="stata" stkToken={stkToken} />
 
       {approval?.txHash && (
         <SummarySection title="Transaction hash">
           <TransactionBreakdown hash={approval?.txHash} />
-        </SummarySection>
-      )}
-
-      {hash && (
-        <SummarySection title="Transaction hash">
-          <TransactionBreakdown hash={hash} />
         </SummarySection>
       )}
     </TransactionCard>

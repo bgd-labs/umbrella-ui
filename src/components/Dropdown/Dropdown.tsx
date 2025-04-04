@@ -17,34 +17,21 @@ DropdownTrigger.displayName = DropdownPrimitives.Trigger.name;
 export const DropdownContent = forwardRef<
   ComponentRef<typeof DropdownPrimitives.Content>,
   ComponentPropsWithoutRef<typeof DropdownPrimitives.Content>
->(
-  (
-    {
-      children,
-      className,
-      align = "start",
-      alignOffset = -2,
-      side = "right",
-      sideOffset = 8,
-      ...props
-    },
-    ref,
-  ) => (
-    <DropdownPrimitives.Portal>
-      <DropdownPrimitives.Content
-        ref={ref}
-        align={align}
-        alignOffset={alignOffset}
-        side={side}
-        sideOffset={sideOffset}
-        {...props}
-        className={cn("border-main-950 flex flex-col border bg-white p-1", className)}
-      >
-        {children}
-      </DropdownPrimitives.Content>
-    </DropdownPrimitives.Portal>
-  ),
-);
+>(({ children, className, align = "start", alignOffset = 2, side = "bottom", sideOffset = 6, ...props }, ref) => (
+  <DropdownPrimitives.Portal>
+    <DropdownPrimitives.Content
+      ref={ref}
+      align={align}
+      alignOffset={alignOffset}
+      side={side}
+      sideOffset={sideOffset}
+      {...props}
+      className={cn("border-main-950 flex flex-col border bg-white p-1 shadow-lg", className)}
+    >
+      {children}
+    </DropdownPrimitives.Content>
+  </DropdownPrimitives.Portal>
+));
 DropdownContent.displayName = DropdownPrimitives.Content.displayName;
 
 export const DropdownLabel = DropdownPrimitives.Label;
@@ -57,7 +44,7 @@ export const DropdownItem = forwardRef<
     ref={ref}
     {...props}
     className={cn(
-      "text-main-950 z-50 flex cursor-pointer items-center bg-white px-2.5 py-1 text-xs transition outline-none",
+      "text-main-950 z-50 flex cursor-pointer items-center bg-white px-2.5 py-1 font-semibold transition outline-none",
       {
         "hover:bg-main-950 hover:text-white": !disabled,
         "text-main-400": disabled,
