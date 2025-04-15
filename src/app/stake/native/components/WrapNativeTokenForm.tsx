@@ -6,7 +6,6 @@ import { ControlledAmountField } from "@/components/ControlledAmountField/Contro
 import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
 import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
 import { SummarySection } from "@/components/Transaction/SummarySection";
-import { TokenBreakdown } from "@/components/Transaction/TokenBreakdown";
 import { TokenChangeBreakdown } from "@/components/Transaction/TokenChangeBreakdown";
 import { TransactionBreakdown } from "@/components/Transaction/TransactionBreakdown";
 import { TransactionCard } from "@/components/Transaction/TransactionCard";
@@ -38,7 +37,7 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
   const { stake, data: depositHash, isPending: isStaking, error: depositError } = useStake();
   const { safeWrapAndStake, data: safeHash, isPending: isSafeStaking, error: safeDepositError } = useSafeWrapAndStake();
 
-  const { name, decimals, symbol, balance, stkToken } = nativeToken;
+  const { decimals, symbol, balance, stkToken } = nativeToken;
   const maxAmount = balance || 0n;
 
   const schema = useMemo(
