@@ -10,10 +10,11 @@ import { useAllStkTokens } from "@/hooks/useAllStkTokens";
 import { withAtLeastOneActiveReward, withPositiveBalance } from "@/utils/data";
 import { useMemo } from "react";
 import { useAccount } from "wagmi";
+import { NoRewardsOnMarket } from "./components/NoRewardsOnMarket/NoRewardsOnMarket";
 import { UmbrellaTable } from "./components/UmbrellaTable/UmbrellaTable";
 
 export default function Home() {
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
 
   const { data: stkTokens, isLoading: isAllStkTokensLoading } = useAllStkTokens();
   const { data: assets, isLoading: isAllAssetsLoading } = useAllAssets();
@@ -31,6 +32,9 @@ export default function Home() {
   }, [assets, address]);
   const filteredUmbrellaTokens = useMemo(() => stkTokens?.filter(withPositiveBalance), [stkTokens]);
 
+  const noRewardsOnMarket = filteredAssets.length === 0;
+  const noUmbrellaToWithdrawOrClaimRewards = filteredUmbrellaTokens?.length === 0;
+
   if (isAllStkTokensLoading || isAllAssetsLoading) {
     return <PageLoader />;
   }
@@ -39,13 +43,17 @@ export default function Home() {
     return <UnsupportedMarket />;
   }
 
+  if (isConnected ? noUmbrellaToWithdrawOrClaimRewards && noRewardsOnMarket : noRewardsOnMarket) {
+    return <NoRewardsOnMarket />;
+  }
+
   return (
     <main className="mx-auto mb-auto flex w-full max-w-(--mobile-container) flex-col gap-12 md:max-w-(--breakpoint-lg)">
       {filteredUmbrellaTokens && filteredUmbrellaTokens.length > 0 && (
         <UmbrellaTable data={filteredUmbrellaTokens} assets={filteredAssets} />
       )}
 
-      <AssetsTable data={filteredAssets} />
+      {filteredAssets.length > 0 && <AssetsTable data={filteredAssets} />}
 
       <Mobile>
         <AboutUmbrella />
