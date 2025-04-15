@@ -13,13 +13,13 @@ export type StakeStataTokenSummaryProps = {
   hash?: string;
 };
 
-export const StakeStataTokenSummary = ({ token, stkToken, hash }: StakeStataTokenSummaryProps) => {
+export const StakeStataTokenSummary = ({ token, stkToken }: StakeStataTokenSummaryProps) => {
   const { control } = useFormContext<StakeStataFormValues>();
   const amount = useWatch({ control, name: "amount" }) ?? 0n;
   const approval = useWatch({ control, name: "approval" });
 
   const { decimals, latestAnswer, reserve } = token;
-  const { name, symbol } = reserve;
+  const { symbol } = reserve;
 
   return (
     <TransactionCard title="Details">

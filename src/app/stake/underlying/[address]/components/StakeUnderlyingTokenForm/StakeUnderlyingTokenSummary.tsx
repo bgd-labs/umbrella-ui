@@ -17,7 +17,7 @@ export type StakeUnderlyingTokenSummaryProps = {
   hash?: string;
 };
 
-export const StakeUnderlyingTokenSummary = ({ stkToken, hash }: StakeUnderlyingTokenSummaryProps) => {
+export const StakeUnderlyingTokenSummary = ({ stkToken }: StakeUnderlyingTokenSummaryProps) => {
   const { control } = useFormContext<StakeUnderlyingFormValues>();
   const amount = useWatch({ control, name: "amount" }) ?? 0n;
   const approval = useWatch({ control, name: "approval" });
