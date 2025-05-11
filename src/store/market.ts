@@ -3,7 +3,7 @@ import { Market } from "@/types/market";
 import { createStore } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-const CURRENT_STORE_VERSION = 8;
+const CURRENT_STORE_VERSION = 9;
 
 export interface MarketState {
   market: Market;

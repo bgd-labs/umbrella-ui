@@ -1,13 +1,13 @@
 "use client";
 
-import React, { use } from "react";
-import { Address } from "viem";
-import { PageContainer } from "@/components/PageContainer/PageContainer";
-import { useStkToken } from "@/hooks/useStkToken";
-import { useAllReserves } from "@/hooks/useAllReserves";
-import { PageLoader } from "@/components/PageLoader/PageLoader";
 import { StakeATokenForm } from "@/app/stake/a/[address]/components/StakeATokenForm/StakeATokenForm";
+import { PageContainer } from "@/components/PageContainer/PageContainer";
+import { PageLoader } from "@/components/PageLoader/PageLoader";
+import { useAllReserves } from "@/hooks/useAllReserves";
+import { useStkToken } from "@/hooks/useStkToken";
 import { TxFormProvider } from "@/providers/TxFormProvider/TxFormProvider";
+import { use } from "react";
+import { Address } from "viem";
 
 const tokenType = "a";
 
