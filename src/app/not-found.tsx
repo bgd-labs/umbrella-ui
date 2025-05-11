@@ -1,6 +1,5 @@
-import NotFoundImage from "../../public/images/not-found.svg";
 import { Button } from "@/components/ui/Button";
-import React from "react";
+import NotFoundImage from "../../public/images/not-found.svg";
 
 export default function NotFoundPage() {
   return (
