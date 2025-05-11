@@ -13,11 +13,15 @@ export type Token = {
   balanceFormatted?: number;
 };
 
+export type UserReservesData = {
+  eModeId: number;
+  userReserves: UserReserveData[];
+};
+
 export type UserReserveData = {
   underlyingAddress: Address;
   balanceScaled: bigint;
   variableDeptScaled: bigint;
-  eModeId: number;
 };
 
 export type ReserveData = {

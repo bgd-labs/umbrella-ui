@@ -1,8 +1,8 @@
 export type EMode = {
   id: number;
   label: string;
-  ltv: number;
-  liquidationThreshold: number;
+  ltv: bigint;
+  liquidationThreshold: bigint;
   liquidationBonus: number;
-  reserveId: number;
+  collateralBitmap: number;
 };

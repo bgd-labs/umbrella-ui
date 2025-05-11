@@ -2,7 +2,6 @@ import { UI_POOL_DATA_PROVIDER_ABI } from "@/abis/uiPoolDataProvider";
 import { config } from "@/configs/wagmi";
 import { EMode } from "@/types/eMode";
 import { ChainId } from "@/types/market";
-import { getReserveIdByCollateralBitMap } from "@/utils/web3";
 import { readContract } from "@wagmi/core";
 import { Address } from "viem";
 
@@ -25,9 +24,9 @@ export const fetchAllEModes = async ({
   return result.map(({ id, eMode }) => ({
     id,
     label: eMode.label,
-    ltv: eMode.ltv,
-    liquidationThreshold: eMode.liquidationThreshold,
+    ltv: BigInt(eMode.ltv),
+    liquidationThreshold: BigInt(eMode.liquidationThreshold),
     liquidationBonus: eMode.liquidationBonus,
-    reserveId: getReserveIdByCollateralBitMap(eMode.collateralBitmap),
+    collateralBitmap: Number(eMode.collateralBitmap),
   })) satisfies EMode[];
 };
