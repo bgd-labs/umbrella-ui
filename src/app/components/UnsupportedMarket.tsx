@@ -17,9 +17,9 @@ export const UnsupportedMarket = () => {
 
   return (
     <div className="mx-auto mb-auto flex w-full max-w-[890px] flex-col items-center pt-10">
-      <WrongNetworkImage className="mb-[50px] h-[185px]" />
+      <WrongNetworkImage className="mb-[50px] max-h-[185px]" />
 
-      <div className="flex flex-col items-center gap-6">
+      <div className="flex flex-col items-center gap-8">
         <div className="text-3xl font-semibold">Oops! There is No Umbrella on {name} Yet</div>
 
         <div className="text-xl">
