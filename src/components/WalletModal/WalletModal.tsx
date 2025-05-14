@@ -1,4 +1,3 @@
-import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
 import { CopyToClipboard } from "@/components/CopyToClipboard/CopyToClipboard";
 import { ModalBody, ModalClose, ModalRoot, ModalTitle, ModalTrigger } from "@/components/Modal/Modal";
 import { Block, BlocksColumn } from "@/components/ui/Block";
@@ -13,12 +12,13 @@ import { getScannerUrl } from "@/utils/web3";
 import { ExternalLinkIcon } from "lucide-react";
 import { ComponentProps, PropsWithChildren, useMemo } from "react";
 import { useAccount, useDisconnect } from "wagmi";
+import { AssetIcon } from "../AssetIcon/AssetIcon";
 
 export type WalletModalProps = PropsWithChildren<Pick<ComponentProps<typeof ModalRoot>, "open" | "onOpenChange">>;
 
 export const WalletModal = ({ open, onOpenChange, children }: WalletModalProps) => {
   const isMobile = useMobileMediaQuery();
-  const { address, chainId } = useAccount();
+  const { address, chainId, connector } = useAccount();
   const { data } = useNativeToken();
   const { disconnect } = useDisconnect();
 
@@ -61,7 +61,17 @@ export const WalletModal = ({ open, onOpenChange, children }: WalletModalProps) 
           <Block elevation={isMobile ? 1 : 2} className="relative px-[30px] py-6 md:px-10 md:py-10">
             <div className="flex flex-col items-center gap-9">
               <div className="flex flex-col items-center md:gap-6">
-                <AssetIcon chainId={chainId} className="size-[72px] md:size-[90px]" />
+                {!!connector?.icon ? (
+                  <div className="relative">
+                    <img src={connector.icon} alt={connector.name} className="size-[72px] md:size-[90px]" />
+                    <AssetIcon
+                      chainId={chainId}
+                      className="absolute right-0 -bottom-1 size-5 border-2 border-white md:size-6"
+                    />
+                  </div>
+                ) : (
+                  <AssetIcon chainId={chainId} className="size-[72px] md:size-[90px]" />
+                )}
 
                 <div className="flex items-center justify-center gap-1.5">
                   <div className="text-xl font-bold">{textCenterEllipsis(address, 4, 4)}</div>

@@ -14,26 +14,24 @@ import { NoRewardsOnMarket } from "./components/NoRewardsOnMarket/NoRewardsOnMar
 import { UmbrellaTable } from "./components/UmbrellaTable/UmbrellaTable";
 
 export default function Home() {
-  const { address, isConnected } = useAccount();
+  const { isConnected } = useAccount();
 
   const { data: stkTokens, isLoading: isAllStkTokensLoading } = useAllStkTokens();
   const { data: assets, isLoading: isAllAssetsLoading } = useAllAssets();
 
   const filteredAssets = useMemo(() => {
     const assetsWithAtLeastOneActiveReward = assets.filter(withAtLeastOneActiveReward);
-
-    if (address) {
-      return assetsWithAtLeastOneActiveReward.filter(withPositiveBalance);
-    }
-
     return assetsWithAtLeastOneActiveReward.filter((asset) => {
-      return asset.type === "underlying" || asset.type === "native";
+      if (asset.type !== "underlying" && asset.type !== "native") {
+        return withPositiveBalance(asset);
+      }
+      return true;
     });
-  }, [assets, address]);
-  const filteredUmbrellaTokens = useMemo(() => stkTokens?.filter(withPositiveBalance), [stkTokens]);
+  }, [assets]);
+  const umbrellaPositions = useMemo(() => stkTokens?.filter(withPositiveBalance), [stkTokens]);
 
   const noRewardsOnMarket = filteredAssets.length === 0;
-  const noUmbrellaToWithdrawOrClaimRewards = filteredUmbrellaTokens?.length === 0;
+  const noUmbrellaToWithdrawOrClaimRewards = umbrellaPositions?.length === 0;
 
   if (isAllStkTokensLoading || isAllAssetsLoading) {
     return <PageLoader />;
@@ -49,8 +47,8 @@ export default function Home() {
 
   return (
     <main className="mx-auto mb-auto flex w-full max-w-(--mobile-container) flex-col gap-12 md:max-w-(--breakpoint-lg)">
-      {filteredUmbrellaTokens && filteredUmbrellaTokens.length > 0 && (
-        <UmbrellaTable data={filteredUmbrellaTokens} assets={filteredAssets} />
+      {umbrellaPositions && umbrellaPositions.length > 0 && (
+        <UmbrellaTable data={umbrellaPositions} assets={filteredAssets} />
       )}
 
       {filteredAssets.length > 0 && <AssetsTable data={filteredAssets} />}

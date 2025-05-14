@@ -8,6 +8,7 @@ import { Address } from "viem";
 import { fetchAllEModes } from "@/queries/fetchAllEModes";
 import { Reserve } from "@/types/token";
 import { formatBigInt, formatUSDPrice } from "@/utils/formatting";
+import { getEModeForReserve } from "@/utils/web3/emode";
 
 export type AllReservesDataArgs = {
   chainId: ChainId;
@@ -25,9 +26,12 @@ export const fetchAllReserves = async ({ chainId, owner, poolProvider, uiPoolDat
   ]);
 
   const currentTimestamp = toUnix();
+  const userEMode = eModes.find((eMode) => eMode.id === userReservesData?.eModeId) ?? null;
 
   return reservesData.map((reserveData) => {
-    const userReserveData = userReservesData?.find((item) => item.underlyingAddress === reserveData.underlyingAddress);
+    const userReserveData = userReservesData?.userReserves.find(
+      (item) => item.underlyingAddress === reserveData.underlyingAddress,
+    );
     const balanceScaled = userReserveData?.balanceScaled;
     const balance =
       balanceScaled &&
@@ -39,7 +43,7 @@ export const fetchAllReserves = async ({ chainId, owner, poolProvider, uiPoolDat
         currentTimestamp,
       });
     const variableDeptScaled = userReserveData?.variableDeptScaled;
-    const eMode = eModes.find((eMode) => eMode.id === userReserveData?.eModeId) ?? null;
+    const eMode = getEModeForReserve(userEMode, reserveData.reserveId);
     const apy = calculateAPY(reserveData.liquidityRate);
 
     return {

@@ -1,11 +1,7 @@
 import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
 import { RewardAssetIcon } from "@/components/RewardAssetIcon/RewardAssetIcon";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/Tooltip/Tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/Tooltip/Tooltip";
 import { Reward } from "@/types/token";
 
 export type APYBreakdownProps = {
@@ -16,20 +12,12 @@ export type APYBreakdownProps = {
   displayRewards?: boolean;
 };
 
-export const APYBreakdown = ({
-  symbol,
-  totalApy,
-  supplyApy,
-  rewards,
-  displayRewards = true,
-}: APYBreakdownProps) => {
-  const filteredRewards = rewards.filter(
-    (reward) => !!reward.currentEmissionPerSecondScaled,
-  );
+export const APYBreakdown = ({ symbol, totalApy, supplyApy, rewards, displayRewards = true }: APYBreakdownProps) => {
+  const filteredRewards = rewards.filter((reward) => !!reward.currentEmissionPerSecondScaled);
   return (
     <Tooltip>
       <TooltipTrigger className="group flex items-center justify-center">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center gap-0.5">
           <NumberDisplay
             value={totalApy}
             type="percent"
@@ -38,19 +26,10 @@ export const APYBreakdown = ({
           {displayRewards && (
             <div className="flex items-center">
               {!!supplyApy && (
-                <AssetIcon
-                  key="supply-apy"
-                  symbol={symbol}
-                  assetTag="a"
-                  className="-ml-[6px] size-4 first:ml-0"
-                />
+                <AssetIcon key="supply-apy" symbol={symbol} assetTag="a" className="-ml-[6px] size-4 first:ml-0" />
               )}
               {filteredRewards?.map((reward) => (
-                <RewardAssetIcon
-                  key={reward.address}
-                  reward={reward}
-                  className="-ml-[6px] size-4 first:ml-0"
-                />
+                <RewardAssetIcon key={reward.address} reward={reward} className="-ml-[6px] size-4 first:ml-0" />
               ))}
             </div>
           )}
@@ -66,10 +45,7 @@ export const APYBreakdown = ({
             <NumberDisplay value={supplyApy} type="percent" />
           </div>
           {filteredRewards.map((reward) => (
-            <div
-              key={reward.address}
-              className="flex items-center justify-between gap-3"
-            >
+            <div key={reward.address} className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2">
                 <RewardAssetIcon reward={reward} className="size-[18px]" />
                 <div>{reward.name}</div>

@@ -75,7 +75,7 @@ export const AmountField = ({
       >
         <NumericFormat
           className={cn(
-            "focus:bg-main-50 block w-full bg-transparent px-5 py-4 text-2xl font-semibold text-stone-700 transition-colors duration-300 focus:outline-hidden dark:text-white",
+            "focus:bg-main-50 dark:focus:bg-main-900 block w-full bg-transparent px-5 py-4 text-2xl font-semibold text-stone-700 transition-colors duration-300 focus:outline-hidden dark:text-white",
             className,
           )}
           value={value}

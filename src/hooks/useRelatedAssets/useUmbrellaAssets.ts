@@ -1,10 +1,10 @@
-import { STATA_ABI } from "@/abis/stata";
 import { UMBRELLA_ABI } from "@/abis/umbrella";
 import { config } from "@/configs/wagmi";
 import { ONE_DAY } from "@/constants/time";
 import { useMarketStore } from "@/providers/MarketProvider/MarketContext";
 import { UmbrellaAssetsDictionary } from "@/types/addressesDictionary";
 import { ChainId } from "@/types/market";
+import { IStataTokenV2_ABI } from "@bgd-labs/aave-address-book/abis";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { readContract } from "@wagmi/core";
 import { Address } from "viem";
@@ -42,13 +42,13 @@ const fetchRelatedUmbrellaAssets = async ({
             readContract(config, {
               chainId,
               address: stataAsset,
-              abi: STATA_ABI,
+              abi: IStataTokenV2_ABI,
               functionName: "asset",
             }),
             readContract(config, {
               chainId,
               address: stataAsset,
-              abi: STATA_ABI,
+              abi: IStataTokenV2_ABI,
               functionName: "aToken",
             }),
           ]);

@@ -1,9 +1,9 @@
-import { useReadContract } from "wagmi";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { IAToken_ABI } from "@bgd-labs/aave-address-book/abis";
 import { Address } from "viem";
-import { A_ABI } from "@/abis/a";
+import { useReadContract } from "wagmi";
 
 export const useTotalSupplied = ({ address }: { address?: Address }) => {
   const { chainId } = useCurrentMarket();
-  return useReadContract({ chainId, address, abi: A_ABI, functionName: "totalSupply" });
+  return useReadContract({ chainId, address, abi: IAToken_ABI, functionName: "totalSupply" });
 };

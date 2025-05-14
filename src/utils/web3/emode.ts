@@ -1,10 +1,17 @@
-export const getReserveIdByCollateralBitMap = (bitMap: bigint) => {
-  let rightMostSetBit = bitMap & -bitMap;
+import { EMode } from "@/types/eMode";
 
-  let reserveId = 0;
-  while ((rightMostSetBit >>= 1n) !== 0n) {
-    reserveId++;
+export const getEModeForReserve = (userEMode: EMode | null, reserveId: number) => {
+  if (!userEMode) {
+    return null;
   }
 
-  return Number(reserveId);
+  if (isReserveEnabledOnBitmap(userEMode.collateralBitmap, reserveId)) {
+    return userEMode;
+  }
+
+  return null;
+};
+
+export const isReserveEnabledOnBitmap = (bitmap: number, reserveId: number) => {
+  return ((bitmap >> reserveId) & 1) !== 0;
 };

@@ -1,5 +1,5 @@
 import { appChains } from "@/configs/wagmi";
-import { NATIVE_TOKEN_ADDRESS } from "@/constants/markets";
+import { NATIVE_TOKEN_ADDRESS } from "@/constants/contracts";
 import { useAllStkTokens } from "@/hooks/useAllStkTokens";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { NativeToken } from "@/types/token";

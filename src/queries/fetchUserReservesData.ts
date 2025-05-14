@@ -1,10 +1,10 @@
-import { ChainId } from "@/types/market";
-import { Address } from "viem";
-import { readContract } from "@wagmi/core";
 import { config } from "@/configs/wagmi";
+import { ChainId } from "@/types/market";
+import { readContract } from "@wagmi/core";
+import { Address } from "viem";
 
-import { UserReserveData } from "@/types/token";
 import { UI_POOL_DATA_PROVIDER_ABI } from "@/abis/uiPoolDataProvider";
+import { UserReservesData } from "@/types/token";
 
 export type UserReservesDataArgs = {
   chainId: ChainId;
@@ -27,10 +27,12 @@ export const fetchUserReservesData = async ({
     args: [poolProvider, owner],
   });
 
-  return userReservesData.map((userReserveData) => ({
-    underlyingAddress: userReserveData.underlyingAsset,
-    balanceScaled: userReserveData.scaledATokenBalance,
-    variableDeptScaled: userReserveData.scaledVariableDebt,
+  return {
     eModeId,
-  })) satisfies UserReserveData[];
+    userReserves: userReservesData.map((userReserveData) => ({
+      underlyingAddress: userReserveData.underlyingAsset,
+      balanceScaled: userReserveData.scaledATokenBalance,
+      variableDeptScaled: userReserveData.scaledVariableDebt,
+    })),
+  } satisfies UserReservesData;
 };

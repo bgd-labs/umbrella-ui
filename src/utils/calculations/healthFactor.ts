@@ -19,7 +19,6 @@ export const calculateHealthFactor = ({ positions }: CalculateHealthFactorArgs):
 
   for (const position of positions) {
     const {
-      reserveId,
       decimals,
       balance,
       eMode,
@@ -43,34 +42,26 @@ export const calculateHealthFactor = ({ positions }: CalculateHealthFactorArgs):
       currentTimestamp,
     });
 
-    const { marketReferenceCurrencyBalance: collateralInBaseCurrency } =
-      getMarketReferenceCurrencyAndUsdBalance({
-        balance: compoundedATokenBalance,
-        decimals,
-        priceInMarketReferenceCurrency: latestAnswer,
-        marketReferenceCurrencyDecimals: priceFeedDecimals,
-        marketReferencePriceInUsdNormalized: latestAnswer,
-      });
+    const { marketReferenceCurrencyBalance: collateralInBaseCurrency } = getMarketReferenceCurrencyAndUsdBalance({
+      balance: compoundedATokenBalance,
+      decimals,
+      priceInMarketReferenceCurrency: latestAnswer,
+      marketReferenceCurrencyDecimals: priceFeedDecimals,
+      marketReferencePriceInUsdNormalized: latestAnswer,
+    });
 
-    const { marketReferenceCurrencyBalance: debtInBaseCurrency } =
-      getMarketReferenceCurrencyAndUsdBalance({
-        balance: compoundedVariableDebt,
-        decimals,
-        priceInMarketReferenceCurrency: latestAnswer,
-        marketReferenceCurrencyDecimals: priceFeedDecimals,
-        marketReferencePriceInUsdNormalized: latestAnswer,
-      });
+    const { marketReferenceCurrencyBalance: debtInBaseCurrency } = getMarketReferenceCurrencyAndUsdBalance({
+      balance: compoundedVariableDebt,
+      decimals,
+      priceInMarketReferenceCurrency: latestAnswer,
+      marketReferenceCurrencyDecimals: priceFeedDecimals,
+      marketReferencePriceInUsdNormalized: latestAnswer,
+    });
 
     if (usingAsCollateral) {
+      const effectiveLiquidationThreshold = eMode?.liquidationThreshold ?? liquidationThreshold;
+
       totalCollateralInBaseCurrency += collateralInBaseCurrency;
-
-      let effectiveLiquidationThreshold: bigint;
-      if (eMode && reserveId === eMode.reserveId) {
-        effectiveLiquidationThreshold = BigInt(eMode.liquidationThreshold);
-      } else {
-        effectiveLiquidationThreshold = liquidationThreshold;
-      }
-
       weightedLiquidationThreshold += collateralInBaseCurrency * effectiveLiquidationThreshold;
     }
 
@@ -82,9 +73,7 @@ export const calculateHealthFactor = ({ positions }: CalculateHealthFactorArgs):
   }
 
   const avgLiquidationThreshold =
-    totalCollateralInBaseCurrency > 0n
-      ? weightedLiquidationThreshold / totalCollateralInBaseCurrency
-      : 0n;
+    totalCollateralInBaseCurrency > 0n ? weightedLiquidationThreshold / totalCollateralInBaseCurrency : 0n;
 
   const healthFactor = calculateHealthFactorFromBalances({
     collateralBalanceMarketReferenceCurrency: totalCollateralInBaseCurrency,
