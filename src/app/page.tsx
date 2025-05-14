@@ -22,7 +22,10 @@ export default function Home() {
   const filteredAssets = useMemo(() => {
     const assetsWithAtLeastOneActiveReward = assets.filter(withAtLeastOneActiveReward);
     return assetsWithAtLeastOneActiveReward.filter((asset) => {
-      return asset.type === "underlying" || asset.type === "native";
+      if (asset.type !== "underlying" && asset.type !== "native") {
+        return withPositiveBalance(asset);
+      }
+      return true;
     });
   }, [assets]);
   const umbrellaPositions = useMemo(() => stkTokens?.filter(withPositiveBalance), [stkTokens]);

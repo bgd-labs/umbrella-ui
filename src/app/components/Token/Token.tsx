@@ -12,10 +12,10 @@ const getDisplayName = (symbol: string, type: TokenType["type"] | "native") => {
     return `a${symbol}`;
   }
   if (type === "stk") {
-    return `Umbrella ${symbol}`;
+    return `${symbol}`;
   }
   if (type === "stkStata") {
-    return `Umbrella a${symbol}`;
+    return `a${symbol}`;
   }
   return symbol;
 };
