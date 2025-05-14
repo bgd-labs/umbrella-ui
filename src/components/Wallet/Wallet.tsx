@@ -1,8 +1,8 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { Button } from "@/components/ui/Button";
 import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
 import { Block } from "@/components/ui/Block";
+import { Button } from "@/components/ui/Button";
 import { WalletModal } from "@/components/WalletModal/WalletModal";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useState } from "react";
 
 export const Wallet = () => {
@@ -17,10 +17,10 @@ export const Wallet = () => {
           return (
             <Block
               elevation={1}
-              className="flex animate-pulse items-center gap-1 md:gap-2 px-2 py-2 md:py-2.5 leading-5"
+              className="flex animate-pulse items-center gap-1 px-3.5 py-2 leading-5 md:gap-2 md:py-2.5"
             >
-              <div className="bg-main-100 size-3 md:size-4 animate-pulse rounded-full" />
-              <div className="bg-main-100 h-2 w-[66px] md:w-[82px] animate-pulse rounded-lg" />
+              <div className="bg-main-100 size-3 animate-pulse rounded-full md:size-4" />
+              <div className="bg-main-100 h-2 w-[66px] animate-pulse rounded-lg md:w-[82px]" />
             </Block>
           );
         }
@@ -32,7 +32,7 @@ export const Wallet = () => {
                 elevation={1}
                 size="lg"
                 onClick={openConnectModal}
-                className="leading-none text-xs md:text-sm font-semibold"
+                className="text-xs leading-none font-semibold md:h-[38px] md:px-3.5 md:text-sm"
               >
                 Connect Wallet
               </Button>
@@ -45,7 +45,7 @@ export const Wallet = () => {
                 elevation={1}
                 size="lg"
                 onClick={openChainModal}
-                className="leading-none text-xs md:text-sm font-semibold"
+                className="text-xs leading-none font-semibold md:h-[38px] md:px-3.5 md:text-sm"
               >
                 Wrong Network
               </Button>
@@ -57,7 +57,7 @@ export const Wallet = () => {
               <Button
                 elevation={1}
                 size="lg"
-                className="leading-none text-xs md:text-sm font-semibold gap-1 md:gap-2"
+                className="gap-1 text-xs leading-none font-semibold md:h-[38px] md:gap-2 md:px-3.5 md:text-sm"
               >
                 <AssetIcon chainId={chain.id} className="size-3 md:size-4" />
                 <span>{account.displayName}</span>
