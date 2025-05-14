@@ -6,17 +6,9 @@ export type LoaderProps = {
 
 export const Loader = ({ className }: LoaderProps) => {
   return (
-    <svg
-      viewBox="0 0 136 136"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={cn("size-20", className)}
-    >
+    <svg viewBox="0 0 136 136" fill="none" xmlns="http://www.w3.org/2000/svg" className={cn("size-15", className)}>
       {/* Top */}
-      <path
-        d="M68 59.7125L92.82 0H43.35L68 59.7125Z"
-        className="animate-[var(--animate-section-1)]"
-      />
+      <path d="M68 59.7125L92.82 0H43.35L68 59.7125Z" className="animate-[var(--animate-section-1)]" />
       {/* Top Right */}
       <path
         d="M98.685 2.50751L73.9075 62.1775L95.0725 53.4225L133.662 37.485L98.685 2.50751Z"
