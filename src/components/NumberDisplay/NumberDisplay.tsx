@@ -1,5 +1,5 @@
-import NumberFlow from "@number-flow/react";
 import { cn } from "@/utils/cn";
+import NumberFlow from "@number-flow/react";
 
 export type NumberDisplayProps = {
   value: number;
@@ -37,6 +37,7 @@ export const NumberDisplay = ({
           currencyDisplay: "narrowSymbol",
           roundingMode: "floor",
         }}
+        locales="en-US"
         prefix={prefix}
         suffix={suffix}
         className={cn("font-normal", className)}
