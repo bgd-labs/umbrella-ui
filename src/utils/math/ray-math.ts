@@ -88,11 +88,6 @@ export const floatToWad = (value: number | string) => {
   }
 };
 
-export enum Rounding {
-  UP,
-  DOWN,
-}
-
 export const rayDivRoundDown = (a: bigint, b: bigint) => {
   return (a * RAY) / b;
 };
