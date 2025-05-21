@@ -1,8 +1,8 @@
-import { REWARDS_CONTROLLER_ABI } from "@/abis/rewardsController";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { sendSafeTxs, SendSafeTxsContext } from "@/mutations/sendSafeTxs";
 import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
 import { waitForSafeTransactionDetails } from "@/utils/web3";
+import { IUmbrellaRewardsController_ABI } from "@bgd-labs/aave-address-book/abis";
 import { useSafeAppsSDK } from "@safe-global/safe-apps-react-sdk";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Address, encodeFunctionData } from "viem";
@@ -23,7 +23,7 @@ export const claimSelectedRewardsViaSafe = async (
     to: rewardsController,
     value: "0",
     data: encodeFunctionData({
-      abi: REWARDS_CONTROLLER_ABI,
+      abi: IUmbrellaRewardsController_ABI,
       functionName: "claimSelectedRewards",
       // @ts-expect-error function overriding doesn't work in this case
       args: [assets, rewards, receiver],

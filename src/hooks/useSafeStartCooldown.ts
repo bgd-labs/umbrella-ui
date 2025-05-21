@@ -1,8 +1,8 @@
+import { sendSafeTxs, SendSafeTxsContext } from "@/mutations/sendSafeTxs";
+import { IUmbrellaStakeToken_ABI } from "@bgd-labs/aave-address-book/abis";
 import { useSafeAppsSDK } from "@safe-global/safe-apps-react-sdk";
 import { useMutation } from "@tanstack/react-query";
 import { Address, encodeFunctionData } from "viem";
-import { sendSafeTxs, SendSafeTxsContext } from "@/mutations/sendSafeTxs";
-import { UMBRELLA_ABI } from "@/abis/umbrella";
 
 export type StartCooldownParams = {
   assetAddress: Address;
@@ -16,7 +16,7 @@ export const startCooldownViaSafe = async (
     to: assetAddress,
     value: "0",
     data: encodeFunctionData({
-      abi: UMBRELLA_ABI,
+      abi: IUmbrellaStakeToken_ABI,
       functionName: "cooldown",
     }),
   };

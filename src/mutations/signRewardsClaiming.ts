@@ -1,9 +1,9 @@
-import { REWARDS_CONTROLLER_ABI } from "@/abis/rewardsController";
 import { config } from "@/configs/wagmi";
 import { ChainId } from "@/types/market";
 import { ClaimRewardsPermit } from "@/types/permit";
 import { addDays, toUnix } from "@/utils/date";
 import { ensureCorrectChainForTx } from "@/utils/web3";
+import { IUmbrellaRewardsController_ABI } from "@bgd-labs/aave-address-book/abis";
 import { readContract, signTypedData } from "@wagmi/core";
 import { Address, parseSignature } from "viem";
 
@@ -28,13 +28,13 @@ export const signRewardsClaiming = async ({
     readContract(config, {
       chainId,
       address,
-      abi: REWARDS_CONTROLLER_ABI,
+      abi: IUmbrellaRewardsController_ABI,
       functionName: "eip712Domain",
     }),
     readContract(config, {
       chainId,
       address,
-      abi: REWARDS_CONTROLLER_ABI,
+      abi: IUmbrellaRewardsController_ABI,
       functionName: "nonces",
       args: [owner],
     }),
