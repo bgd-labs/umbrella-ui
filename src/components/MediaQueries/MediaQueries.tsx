@@ -1,10 +1,10 @@
-import { PropsWithChildren } from "react";
 import {
   useDesktopMediaQuery,
-  useMobileMediaQuery,
   useMobileAndTabletMediaQuery,
+  useMobileMediaQuery,
   useTabletAndDesktopMediaQuery,
 } from "@/hooks/useMediaQuery";
+import { PropsWithChildren } from "react";
 
 export const Desktop = ({ children }: PropsWithChildren) => {
   const isDesktop = useDesktopMediaQuery();
