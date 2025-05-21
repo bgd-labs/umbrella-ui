@@ -1,6 +1,6 @@
-import { UMBRELLA_ABI } from "@/abis/umbrella";
 import { config } from "@/configs/wagmi";
 import { ChainId } from "@/types/market";
+import { IUmbrellaStakeToken_ABI } from "@bgd-labs/aave-address-book/abis";
 import { readContract } from "@wagmi/core";
 import { Address } from "viem";
 
@@ -26,7 +26,7 @@ export const fetchAllCooldowns = async ({
         readContract(config, {
           chainId,
           address,
-          abi: UMBRELLA_ABI,
+          abi: IUmbrellaStakeToken_ABI,
           functionName: "getStakerCooldown",
           args: [owner],
         }),

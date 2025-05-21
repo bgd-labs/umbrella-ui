@@ -1,8 +1,6 @@
 export const UI_POOL_DATA_PROVIDER_ABI = [
   {
-    inputs: [
-      { internalType: "contract IPoolAddressesProvider", name: "provider", type: "address" },
-    ],
+    inputs: [{ internalType: "contract IPoolAddressesProvider", name: "provider", type: "address" }],
     name: "getReservesData",
     outputs: [
       {
@@ -92,9 +90,7 @@ export const UI_POOL_DATA_PROVIDER_ABI = [
     type: "function",
   },
   {
-    inputs: [
-      { internalType: "contract IPoolAddressesProvider", name: "provider", type: "address" },
-    ],
+    inputs: [{ internalType: "contract IPoolAddressesProvider", name: "provider", type: "address" }],
     name: "getEModes",
     outputs: [
       {

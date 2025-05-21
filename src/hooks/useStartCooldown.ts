@@ -1,8 +1,9 @@
-import { UMBRELLA_ABI } from "@/abis/umbrella";
 import { useWriteContract } from "@/hooks/useWriteContract/useWriteContract";
 import { useMarketStore } from "@/providers/MarketProvider/MarketContext";
 import { useCallback } from "react";
 import { Address } from "viem";
+
+import { IUmbrellaStakeToken_ABI } from "@bgd-labs/aave-address-book/abis";
 
 export type UmbrellaCooldownParams = {
   assetAddress: Address;
@@ -17,7 +18,7 @@ export const useStartCooldown = () => {
       return writeContractAsync({
         chainId,
         address: assetAddress,
-        abi: UMBRELLA_ABI,
+        abi: IUmbrellaStakeToken_ABI,
         functionName: "cooldown",
       });
     },
