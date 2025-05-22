@@ -8,6 +8,7 @@ import { WagmiProvider } from "@/providers/WagmiProvider";
 import SafeProvider from "@safe-global/safe-apps-react-sdk";
 import { ThemeProvider } from "next-themes";
 import { PropsWithChildren } from "react";
+import { ModalsProvider } from "./ModalsProvider/ModalsProvider";
 
 export default function Providers({ children }: PropsWithChildren) {
   return (
@@ -17,7 +18,9 @@ export default function Providers({ children }: PropsWithChildren) {
           <RainbowKitProvider>
             <MarketProvider>
               <TransactionsTrackerStoreProvider>
-                <TooltipProvider delayDuration={300}>{children}</TooltipProvider>
+                <ModalsProvider>
+                  <TooltipProvider delayDuration={300}>{children}</TooltipProvider>
+                </ModalsProvider>
               </TransactionsTrackerStoreProvider>
             </MarketProvider>
           </RainbowKitProvider>
