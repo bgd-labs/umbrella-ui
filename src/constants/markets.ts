@@ -12,7 +12,12 @@ export const MARKETS: Market[] = [
     rewardsController: UmbrellaEthereum.UMBRELLA_REWARDS_CONTROLLER,
     umbrellaHelper: UmbrellaEthereum.UMBRELLA,
     batchHelper: UmbrellaEthereum.UMBRELLA_BATCH_HELPER,
-    umbrellaDataAggregationHelper: UmbrellaEthereum.DATA_AGGREGATION_HELPER,
+    // TODO Once address book is updated, uncomment this and remove hardcoded address
+    // umbrellaDataAggregationHelper: UmbrellaEthereum.DATA_AGGREGATION_HELPER,
+    // Helper address on mainnet
+    // umbrellaDataAggregationHelper: "0xcc8fd820b1b9c5ebaca8615927f2ffc1f74b9db3",
+    // helper address on forked network
+    umbrellaDataAggregationHelper: "0xaC6A246b959eBc135E69Dc160e7BF91024EdD7E8",
     wrapNativeTokenAddress: AaveV3Ethereum.ASSETS.WETH.UNDERLYING,
   },
   {

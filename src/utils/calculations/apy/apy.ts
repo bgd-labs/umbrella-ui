@@ -37,7 +37,7 @@ export const calculateRewardApy = (rewardData: RewardDataToCalculateApy) => {
   const rewardPriceWad = toWad(rewardData.token.price, rewardData.token.priceFeedDecimals);
   const usdPerSecond = (rewardPriceWad * emissionPerSecond) / 10n ** BigInt(rewardData.token.decimals);
 
-  const usdPerYear = usdPerSecond * SECONDS_PER_YEAR;
+  const usdPerYear = (usdPerSecond * SECONDS_PER_YEAR) / ONE_E18;
 
   return calculatePercentage(usdPerYear, totaAssetsUSDWad);
 };
@@ -54,7 +54,7 @@ export const getCurrentEmission = (data: RewardDataToCalculateApy): bigint => {
 
   const emissionScaled = getEmissionPerSecondScaled(maxEmissionScaled, data.targetLiquidity, data.totalAssets);
 
-  const divisor = ONE_E18 * 10n ** decimalsScaling;
+  const divisor = 10n ** decimalsScaling;
   return emissionScaled / divisor;
 };
 
