@@ -220,8 +220,7 @@ export function getMarketReferenceCurrencyAndUsdBalance({
   decimals,
   marketReferencePriceInUsdNormalized,
 }: MarketReferenceCurrencyAndUsdBalanceRequest): MarketReferenceAndUsdBalanceResponse {
-  const marketReferenceCurrencyBalance =
-    (balance * priceInMarketReferenceCurrency) / BigInt(10 ** decimals);
+  const marketReferenceCurrencyBalance = (balance * priceInMarketReferenceCurrency) / BigInt(10 ** decimals);
   const usdBalance =
     (marketReferenceCurrencyBalance * marketReferencePriceInUsdNormalized) /
     BigInt(10 ** marketReferenceCurrencyDecimals);
