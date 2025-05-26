@@ -8,7 +8,10 @@ export const Checkbox = forwardRef<
 >(({ className, children, ...props }, ref) => (
   <CheckboxPrimitive.Root
     ref={ref}
-    className={cn("border-main-950 size-4 cursor-pointer border border-t-[3px] border-r-[3px]", className)}
+    className={cn(
+      "border-main-950 size-4 cursor-pointer border border-t-[3px] border-r-[3px] dark:border-white",
+      className,
+    )}
     {...props}
   >
     {children}
@@ -20,6 +23,10 @@ export const CheckboxIndicator = forwardRef<
   ComponentRef<typeof CheckboxPrimitive.Indicator>,
   ComponentPropsWithoutRef<typeof CheckboxPrimitive.Indicator>
 >(({ className, ...props }, ref) => (
-  <CheckboxPrimitive.Indicator ref={ref} className={cn("bg-main-950 ml-0.5 block size-2", className)} {...props} />
+  <CheckboxPrimitive.Indicator
+    ref={ref}
+    className={cn("bg-main-950 ml-0.5 block size-2 dark:bg-white", className)}
+    {...props}
+  />
 ));
 CheckboxIndicator.displayName = CheckboxPrimitive.Indicator.displayName;
