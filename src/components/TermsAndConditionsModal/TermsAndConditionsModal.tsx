@@ -1,7 +1,6 @@
 "use client";
 
 import { useMobileMediaQuery } from "@/hooks/useMediaQuery";
-import { ModalClose } from "../Modal/Modal";
 import { Block } from "../ui/Block";
 
 import { ModalBody, ModalTitle } from "../Modal/Modal";
@@ -42,7 +41,6 @@ export const TermsAndConditionsModal = ({ children }: PropsWithChildren) => {
         <BlocksColumn>
           <Block elevation={isMobile ? 1 : 2} className="bg-main-50 flex items-center justify-between px-[30px] py-6">
             <ModalTitle className="text-lg font-bold">Terms & Conditions</ModalTitle>
-            <ModalClose />
           </Block>
 
           <Block elevation={isMobile ? 1 : 2} className="relative px-[30px] py-6 md:px-10 md:py-10">

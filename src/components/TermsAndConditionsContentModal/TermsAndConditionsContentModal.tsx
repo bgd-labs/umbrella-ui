@@ -1,6 +1,7 @@
 import { useMobileMediaQuery } from "@/hooks/useMediaQuery";
 import { useModalsContext } from "@/providers/ModalsProvider/ModalsContext";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { ExternalLinkIcon } from "lucide-react";
 import { PropsWithChildren } from "react";
 import { ModalBody, ModalClose, ModalRoot, ModalTitle, ModalTrigger } from "../Modal/Modal";
 import { Block } from "../ui/Block";
@@ -285,12 +286,12 @@ export const TermsAndConditionsContentModal = ({ children }: PropsWithChildren) 
                 (“BSL 1.1”) by the Aave DAO, represented by its governance smart contracts. The full license text and
                 terms are publicly available at:{" "}
                 <a
-                  href="https://github.com/aave-dao/aave-umbrella-ui/blob/main/LICENSE"
                   target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600"
+                  href="https://github.com/aave-dao/aave-umbrella-ui/blob/main/LICENSE"
+                  className="inline-flex items-center gap-1 underline underline-offset-3"
                 >
                   https://github.com/aave-dao/aave-umbrella-ui/blob/main/LICENSE
+                  <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer max-sm:hidden" />
                 </a>
                 .
               </p>
@@ -347,8 +348,13 @@ export const TermsAndConditionsContentModal = ({ children }: PropsWithChildren) 
               <h2 className="font-bold">20. Contact</h2>
               <p>
                 If you have any questions or concerns about this Agreement or any of our Products, please contact us at{" "}
-                <a href="mailto:hi@bgdlabs.com" className="text-gray-600">
+                <a
+                  target="_blank"
+                  href="mailto:hi@bgdlabs.com"
+                  className="inline-flex items-center gap-1 underline underline-offset-3"
+                >
                   hi@bgdlabs.com
+                  <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer max-sm:hidden" />
                 </a>
                 .
               </p>

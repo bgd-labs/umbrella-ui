@@ -25,11 +25,11 @@ const applyMinimumTotalAssets = (totalAssets: bigint, distributionEnd: bigint) =
     return totalAssets;
   }
 
-  if (totalAssets > 10n ** 10n) {
+  if (totalAssets > 10n ** 6n) {
     return totalAssets;
   }
 
-  return 10n ** 10n;
+  return 10n ** 6n;
 };
 
 export const useAllStkTokens = () => {
