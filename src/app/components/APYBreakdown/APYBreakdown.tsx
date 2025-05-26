@@ -13,7 +13,7 @@ export type APYBreakdownProps = {
 };
 
 export const APYBreakdown = ({ symbol, totalApy, supplyApy, rewards, displayRewards = true }: APYBreakdownProps) => {
-  const filteredRewards = rewards.filter((reward) => !!reward.currentEmissionPerSecondScaled);
+  const filteredRewards = rewards.filter((reward) => !!reward.apy);
   return (
     <Tooltip>
       <TooltipTrigger className="group flex items-center justify-center">

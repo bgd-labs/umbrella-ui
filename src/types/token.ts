@@ -71,7 +71,6 @@ export type TokenPrice = {
 export type Reward = Token &
   TokenPrice & {
     type: "underlying";
-    currentEmissionPerSecondScaled: bigint;
     apy: number;
   };
 

@@ -4,7 +4,9 @@ import { PRICE_FEED_DECIMALS } from "@/constants/oracle";
 import { useAllReserves } from "@/hooks/useAllReserves";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { Reward, StkToken } from "@/types/token";
-import { calculateApyData, calculateRewardsApy } from "@/utils/calculations";
+import { calculateApyData } from "@/utils/calculations";
+import { calculateRewardApy } from "@/utils/calculations/apy/apy";
+import { getCurrentUnixTimestamp } from "@/utils/date";
 import { formatBigInt, formatUSDPrice } from "@/utils/formatting";
 import {
   extractStataToken,
@@ -15,6 +17,20 @@ import {
 } from "@/utils/web3";
 import { useMemo } from "react";
 import { useAccount, useReadContract } from "wagmi";
+
+const applyMinimumTotalAssets = (totalAssets: bigint, distributionEnd: bigint) => {
+  const now = BigInt(getCurrentUnixTimestamp());
+
+  if (now > distributionEnd) {
+    return totalAssets;
+  }
+
+  if (totalAssets > 10n ** 10n) {
+    return totalAssets;
+  }
+
+  return 10n ** 10n;
+};
 
 export const useAllStkTokens = () => {
   const { address: owner } = useAccount();
@@ -37,7 +53,7 @@ export const useAllStkTokens = () => {
       const [aggregatedData, pathData, userAggregatedData, userPathData] = data;
 
       return aggregatedData
-        .map(({ stakeTokenData, rewardsTokenData, totalAssets }, index) => {
+        .map(({ stakeTokenData, rewardsTokenData, totalAssets, targetLiquidity }, index) => {
           const { stakeUserBalance, rewardsTokenUserData } = userAggregatedData[index] ?? {};
           const stkTokenPathData = pathData[index] as StkTokenPathData;
           const stkTokenUserPathData = userPathData[index] as UserPathData;
@@ -47,8 +63,23 @@ export const useAllStkTokens = () => {
           const reserve = reserves.find((reserve) => reserve.address === reserveAddress);
           const stataToken = extractStataToken(stkTokenPathData, stkTokenUserPathData);
           const rewards: Reward[] = rewardsTokenData.map(
-            ({ currentEmissionPerSecondScaled, rewardTokenData }, rewardIndex) => {
+            ({ rewardTokenData, distributionEnd, maxEmissionPerSecond }, rewardIndex) => {
               const { currentReward } = rewardsTokenUserData?.[rewardIndex] ?? {};
+
+              const apy = calculateRewardApy({
+                maxEmissionPerSecond,
+                targetLiquidity,
+                totalAssets: applyMinimumTotalAssets(totalAssets, distributionEnd),
+                distributionEnd,
+                decimals: stakeTokenData.decimals,
+                price: stakeTokenData.price,
+                priceFeedDecimals: PRICE_FEED_DECIMALS,
+                token: {
+                  decimals: rewardTokenData.decimals,
+                  price: rewardTokenData.price,
+                  priceFeedDecimals: PRICE_FEED_DECIMALS,
+                },
+              });
 
               return {
                 type: "underlying",
@@ -65,16 +96,7 @@ export const useAllStkTokens = () => {
                   decimals: rewardTokenData.decimals,
                   usdPrice: rewardTokenData.price,
                 }),
-                currentEmissionPerSecondScaled,
-                apy: calculateRewardsApy({
-                  totalAssets,
-                  decimals: stakeTokenData.decimals,
-                  usdPrice: stakeTokenData.price,
-                  reward: {
-                    usdPrice: rewardTokenData.price,
-                    currentEmissionPerSecondScaled,
-                  },
-                }),
+                apy,
               };
             },
           );
