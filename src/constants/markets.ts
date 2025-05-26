@@ -25,7 +25,8 @@ export const MARKETS: Market[] = [
     rewardsController: UmbrellaBaseSepolia.UMBRELLA_REWARDS_CONTROLLER,
     umbrellaHelper: UmbrellaBaseSepolia.UMBRELLA,
     batchHelper: UmbrellaBaseSepolia.UMBRELLA_BATCH_HELPER,
-    umbrellaDataAggregationHelper: UmbrellaBaseSepolia.DATA_AGGREGATION_HELPER,
+    // umbrellaDataAggregationHelper: UmbrellaBaseSepolia.DATA_AGGREGATION_HELPER,
+    umbrellaDataAggregationHelper: "0xa3c885f69adcc80300e2c8d24d5e6573461a5e92",
     wrapNativeTokenAddress: AaveV3BaseSepolia.ASSETS.WETH.UNDERLYING,
   },
 ];
