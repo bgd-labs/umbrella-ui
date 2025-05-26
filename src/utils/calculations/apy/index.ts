@@ -1,1 +1,1 @@
-export { calculateRewardsApy } from "./apy";
+export { calculateRewardApy } from "./apy";
