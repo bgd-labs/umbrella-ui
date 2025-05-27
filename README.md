@@ -61,6 +61,21 @@ npm run dev
 
 The application will be available at [http://localhost:3000](http://localhost:3000).
 
+### Tenderly Virtual Forked Network (Optional)
+
+This project supports connecting to a Tenderly virtual forked network for development and testing purposes. For more information on how to set up and manage your Tenderly Virtual TestNet, please refer to the [Tenderly Virtual TestNets Quickstart guide](https://docs.tenderly.co/virtual-testnets/quickstart).
+
+To enable this feature, you need to configure the following environment variables in your `.env` file:
+
+- `NEXT_PUBLIC_TENDERLY_VNETS_ENABLED`: Set this to `true` to enable the Tenderly virtual network.
+- `NEXT_PUBLIC_TENDERLY_VNET_ID`: (Optional) The chain ID of your Tenderly virtual network. Defaults to `73571`.
+- `NEXT_PUBLIC_TENDERLY_VNET_RPC`: The RPC URL of your Tenderly virtual network.
+- `NEXT_PUBLIC_TENDERLY_VNET_EXPLORER`: The block explorer URL for your Tenderly virtual network.
+
+Once these variables are set, you should be able to select the "Virtual Mainnet" (or your custom network name if you changed the ID and related configurations) from the market selector in the application. This will allow you to interact with the Aave protocol on your private, forked instance of the mainnet.
+
+Make sure your Tenderly fork is running and accessible via the RPC URL you provided.
+
 ### Building for Production
 
 To create a production build:
@@ -76,8 +91,8 @@ npm run start
 ```
 
 ## Deploy your own Vercel instance
-Deploy your own instance of the application effortlessly through Vercel by simply clicking the button below and following the guided setup process:
 
+Deploy your own instance of the application effortlessly through Vercel by simply clicking the button below and following the guided setup process:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Faave-dao%2Faave-umbrella-ui)
 

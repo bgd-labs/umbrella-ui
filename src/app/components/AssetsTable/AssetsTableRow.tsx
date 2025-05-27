@@ -46,7 +46,7 @@ export const AssetsTableRow = ({ data }: AssetsTableRowProps) => {
 
       <TableCell>
         <APYBreakdown
-          symbol={isNative ? data.reserve!.symbol : symbol}
+          symbol={isNative ? (data.reserve?.symbol ?? symbol) : symbol}
           totalApy={totalAPY}
           supplyApy={reserve?.apy ?? 0}
           rewards={rewards}
