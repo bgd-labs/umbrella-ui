@@ -3,6 +3,7 @@ import { Header } from "@/components/Header/Header";
 import { inter, spaceGrotesk } from "@/configs/fonts";
 import Providers from "@/providers/Providers";
 import "@rainbow-me/rainbowkit/styles.css";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { PropsWithChildren } from "react";
 import "./globals.css";
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
             <Footer />
           </div>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
