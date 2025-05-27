@@ -1,3 +1,4 @@
+import { forkedMainnet } from "@/configs/tenderly.config";
 import { Market } from "@/types/market";
 import { AaveV3BaseSepolia, AaveV3Ethereum, UmbrellaBaseSepolia, UmbrellaEthereum } from "@bgd-labs/aave-address-book";
 
@@ -15,9 +16,7 @@ export const MARKETS: Market[] = [
     // TODO Once address book is updated, uncomment this and remove hardcoded address
     // umbrellaDataAggregationHelper: UmbrellaEthereum.DATA_AGGREGATION_HELPER,
     // Helper address on mainnet
-    // umbrellaDataAggregationHelper: "0xcc8fd820b1b9c5ebaca8615927f2ffc1f74b9db3",
-    // helper address on forked network
-    umbrellaDataAggregationHelper: "0xaC6A246b959eBc135E69Dc160e7BF91024EdD7E8",
+    umbrellaDataAggregationHelper: "0xcc8fd820b1b9c5ebaca8615927f2ffc1f74b9db3",
     wrapNativeTokenAddress: AaveV3Ethereum.ASSETS.WETH.UNDERLYING,
   },
   {
@@ -34,4 +33,27 @@ export const MARKETS: Market[] = [
     umbrellaDataAggregationHelper: "0xa3c885f69adcc80300e2c8d24d5e6573461a5e92",
     wrapNativeTokenAddress: AaveV3BaseSepolia.ASSETS.WETH.UNDERLYING,
   },
+
+  ...(process.env.NEXT_PUBLIC_TENDERLY_VNETS_ENABLED === "true"
+    ? [
+        {
+          id: `${forkedMainnet.id}-${AaveV3Ethereum.POOL}`,
+          name: forkedMainnet.name,
+          chainId: forkedMainnet.id,
+          poolProvider: AaveV3Ethereum.POOL_ADDRESSES_PROVIDER,
+          uiPoolDataProvider: AaveV3Ethereum.UI_POOL_DATA_PROVIDER,
+          oracle: AaveV3Ethereum.ORACLE,
+          rewardsController: UmbrellaEthereum.UMBRELLA_REWARDS_CONTROLLER,
+          umbrellaHelper: UmbrellaEthereum.UMBRELLA,
+          batchHelper: UmbrellaEthereum.UMBRELLA_BATCH_HELPER,
+          // TODO Once address book is updated, uncomment this and remove hardcoded address
+          // umbrellaDataAggregationHelper: UmbrellaEthereum.DATA_AGGREGATION_HELPER,
+          // Helper address on mainnet
+          // umbrellaDataAggregationHelper: "0xcc8fd820b1b9c5ebaca8615927f2ffc1f74b9db3",
+          // helper address on forked network
+          umbrellaDataAggregationHelper: "0xaC6A246b959eBc135E69Dc160e7BF91024EdD7E8",
+          wrapNativeTokenAddress: AaveV3Ethereum.ASSETS.WETH.UNDERLYING,
+        } as const,
+      ]
+    : []),
 ];
