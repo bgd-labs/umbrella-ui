@@ -4,6 +4,7 @@ import { createWithdrawalFormSchema, WithdrawalFormValues } from "@/app/withdraw
 import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
 import { ControlledAmountField } from "@/components/ControlledAmountField/ControlledAmountField";
 import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
+import { SignTransactionFormConnector } from "@/components/SignTransaction/SignTransactionFormConnector";
 import { mapTokenTypeToLabel } from "@/components/TokenLabel/TokenLabel";
 import { TransactionCard } from "@/components/Transaction/TransactionCard";
 import { Button } from "@/components/ui/Button";
@@ -14,6 +15,7 @@ import { useSafeWithdraw } from "@/hooks/useSafeWithdraw";
 import { useWithdraw } from "@/hooks/useWithdraw";
 import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
 import { CooldownData } from "@/queries/fetchAllCooldowns";
+import { SignableTxForm } from "@/types/form";
 import { StkToken } from "@/types/token";
 import {
   calculateSupportedWithdrawingMethods,
@@ -22,7 +24,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LayersIcon } from "lucide-react";
 import { useMemo } from "react";
-import { Controller, FormProvider, useForm } from "react-hook-form";
+import { Control, Controller, FormProvider, useForm } from "react-hook-form";
 import { formatUnits } from "viem";
 
 export type WithdrawalFormProps = {
@@ -151,7 +153,20 @@ export const WithdrawalForm = ({ stkToken, cooldown }: WithdrawalFormProps) => {
         </div>
 
         <div className="flex flex-col gap-4 md:self-center">
-          {isSafeWallet ? null : <SignTransaction asset={stkToken.address} spender={spender} />}
+          {isSafeWallet ? null : (
+            <SignTransactionFormConnector>
+              {({ amount }) => {
+                return (
+                  <SignTransaction
+                    control={formMethods.control as unknown as Control<SignableTxForm>}
+                    asset={stkToken.address}
+                    spender={spender}
+                    amount={amount}
+                  />
+                );
+              }}
+            </SignTransactionFormConnector>
+          )}
 
           <Button
             primary

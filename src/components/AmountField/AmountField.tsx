@@ -53,7 +53,7 @@ export const AmountField = ({
   };
 
   const handleMaxClick = () => {
-    onValueChange(String(formatBigInt(maxValue, decimals)));
+    onValueChange(formatUnits(maxValue, decimals));
   };
 
   const isAmountValid = ({ floatValue }: NumberFormatValues) => {

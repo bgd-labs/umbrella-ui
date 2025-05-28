@@ -5,6 +5,7 @@ import {
 } from "@/app/stake/underlying/[address]/stakeUnderlyingFormSchema";
 import { ControlledAmountField } from "@/components/ControlledAmountField/ControlledAmountField";
 import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
+import { SignTransactionFormConnector } from "@/components/SignTransaction/SignTransactionFormConnector";
 import { TransactionCard } from "@/components/Transaction/TransactionCard";
 import { Button } from "@/components/ui/Button";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
@@ -101,7 +102,13 @@ export const StakeUnderlyingTokenForm = ({ asset, stkToken, totalSupplied }: Sta
         </div>
 
         <div className="flex flex-col gap-4 md:self-center">
-          {!isSafeWallet ? <SignTransaction asset={asset} spender={spender} /> : null}
+          {!isSafeWallet ? (
+            <SignTransactionFormConnector>
+              {({ amount }) => {
+                return <SignTransaction control={control} asset={asset} spender={spender} amount={amount} />;
+              }}
+            </SignTransactionFormConnector>
+          ) : null}
           <Button
             primary
             elevation={1}

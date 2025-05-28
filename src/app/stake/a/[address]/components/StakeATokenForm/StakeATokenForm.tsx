@@ -4,6 +4,7 @@ import { StakeATokenSummary } from "@/app/stake/a/[address]/components/StakeATok
 import { createStakeATokenFormSchema, StakeATokenFormValues } from "@/app/stake/a/[address]/stakeATokenFormSchema";
 import { ControlledAmountField } from "@/components/ControlledAmountField/ControlledAmountField";
 import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
+import { SignTransactionFormConnector } from "@/components/SignTransaction/SignTransactionFormConnector";
 import { TransactionCard } from "@/components/Transaction/TransactionCard";
 import { Button } from "@/components/ui/Button";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
@@ -30,8 +31,8 @@ export type StakeATokenFormProps = {
 
 export const StakeATokenForm = ({ asset, stkToken, reserves }: StakeATokenFormProps) => {
   const client = useQueryClient();
-  const { batchHelper: spender } = useCurrentMarket();
   const isSafeWallet = useIsSafeWallet();
+  const { batchHelper: spender } = useCurrentMarket();
   const { signingStatus } = useTxFormSignature();
 
   const reserve = stkToken.reserve!;
@@ -123,7 +124,22 @@ export const StakeATokenForm = ({ asset, stkToken, reserves }: StakeATokenFormPr
         </div>
 
         <div className="flex flex-col gap-4 md:self-center">
-          {!isSafeWallet ? <SignTransaction asset={asset} spender={spender} /> : null}
+          {!isSafeWallet ? (
+            <SignTransactionFormConnector>
+              {({ amount }) => {
+                const isMaxAmountStaking = amount === maxAmount;
+                const amountToStake = isMaxAmountStaking ? increaseToPercent(amount, decimals, 0.005) : amount;
+                return (
+                  <SignTransaction
+                    control={formMethods.control}
+                    asset={asset}
+                    spender={spender}
+                    amount={amountToStake}
+                  />
+                );
+              }}
+            </SignTransactionFormConnector>
+          ) : null}
           <Button
             primary
             elevation={1}
