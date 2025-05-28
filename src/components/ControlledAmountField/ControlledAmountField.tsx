@@ -1,6 +1,6 @@
-import { formatUnits, parseUnits } from "viem";
 import { AmountField, AmountFieldProps } from "@/components/AmountField/AmountField";
-import React, { ComponentProps, forwardRef, useState } from "react";
+import { ComponentProps, forwardRef, useState } from "react";
+import { formatUnits, parseUnits } from "viem";
 
 const getDefaultValue = (value: bigint | undefined, decimals: number) => {
   if (value === undefined) {
@@ -26,13 +26,7 @@ export const ControlledAmountField = forwardRef<
   };
 
   return (
-    <AmountField
-      value={strValue}
-      onValueChange={handlerChange}
-      decimals={decimals}
-      getInputRef={ref}
-      {...props}
-    />
+    <AmountField value={strValue} onValueChange={handlerChange} decimals={decimals} getInputRef={ref} {...props} />
   );
 });
 ControlledAmountField.displayName = "ControlledAmountField";

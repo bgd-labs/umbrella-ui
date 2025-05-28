@@ -1,23 +1,22 @@
-import { usePermit } from "@/hooks/usePermit";
-import { Permit } from "@/components/SignTransaction/Permit/Permit";
 import { Approve } from "@/components/SignTransaction/Approve/Approve";
-import React, { memo } from "react";
 import { LoadingBlock } from "@/components/SignTransaction/Loader";
-import { Controller, useFormContext, useWatch } from "react-hook-form";
+import { Permit } from "@/components/SignTransaction/Permit/Permit";
 import { useAllowance } from "@/hooks/useAllowance";
-import { Address } from "viem";
+import { usePermit } from "@/hooks/usePermit";
 import { SignableTxForm } from "@/types/form";
+import { memo } from "react";
+import { Control, Controller } from "react-hook-form";
+import { Address } from "viem";
 
 export type SignTransactionProps = {
+  control: Control<SignableTxForm>;
   asset: Address;
   spender: Address;
+  amount: bigint;
   disabled?: boolean;
 };
 
-export const SignTransaction = memo(({ asset, spender, disabled }: SignTransactionProps) => {
-  const { control } = useFormContext<SignableTxForm>();
-  const amount = useWatch({ control, name: "amount" }) ?? 0n;
-
+export const SignTransaction = memo(({ control, asset, spender, amount, disabled }: SignTransactionProps) => {
   const { data: permitData, isLoading: isPermitLoading } = usePermit({ asset });
   const { data: allowance, isLoading: isAllowanceLoading } = useAllowance({ asset, spender });
 
@@ -61,13 +60,7 @@ export const SignTransaction = memo(({ asset, spender, disabled }: SignTransacti
       disabled={disabled}
       render={({ field }) => {
         return (
-          <Approve
-            asset={asset}
-            amount={amount}
-            spender={spender}
-            onChange={field.onChange}
-            disabled={disabled}
-          />
+          <Approve asset={asset} amount={amount} spender={spender} onChange={field.onChange} disabled={disabled} />
         );
       }}
     />

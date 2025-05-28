@@ -47,9 +47,7 @@ export default function Home() {
 
   return (
     <main className="mx-auto mb-auto flex w-full max-w-(--mobile-container) flex-col gap-12 md:max-w-(--breakpoint-lg)">
-      {umbrellaPositions && umbrellaPositions.length > 0 && (
-        <UmbrellaTable data={umbrellaPositions} assets={filteredAssets} />
-      )}
+      {!!stkTokens && <UmbrellaTable data={stkTokens} assets={filteredAssets} />}
 
       {filteredAssets.length > 0 && <AssetsTable data={filteredAssets} />}
 
