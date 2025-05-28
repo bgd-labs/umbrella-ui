@@ -31,7 +31,7 @@ export const StakeUnderlyingTokenSummary = ({ stkToken }: StakeUnderlyingTokenSu
     <TransactionCard title="Details">
       <TokenChangeBreakdown
         fromType="underlying"
-        toType="stkStata"
+        toType={stkToken.isUnderlyingStataToken ? "stkStata" : "stk"}
         decimals={decimals}
         symbol={symbol}
         amount={amount}
