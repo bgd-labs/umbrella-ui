@@ -47,6 +47,9 @@ export const useClaimSelectedRewards = () => {
         client.invalidateQueries({
           queryKey: ["readContract", { functionName: "getAllAggregatedData" }],
         });
+        client.invalidateQueries({
+          queryKey: ["allReserves"],
+        });
       }
     },
     [client, trackTransaction, rewardsController, writeContractAsync, chainId],

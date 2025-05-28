@@ -4,6 +4,7 @@ import {
 } from "@/app/stake/native/stakeNativeTokenFormSchema";
 import { ControlledAmountField } from "@/components/ControlledAmountField/ControlledAmountField";
 import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
+import { SignTransactionFormConnector } from "@/components/SignTransaction/SignTransactionFormConnector";
 import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
 import { SummarySection } from "@/components/Transaction/SummarySection";
 import { TokenChangeBreakdown } from "@/components/Transaction/TokenChangeBreakdown";
@@ -16,11 +17,12 @@ import { useStake } from "@/hooks/useStake";
 import { useSafeWrapAndStake } from "@/hooks/useWrapAndStake";
 import { useWrapNativeToken } from "@/hooks/useWrapNativeToken";
 import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
+import { SignableTxForm } from "@/types/form";
 import { NativeToken } from "@/types/token";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LayersIcon } from "lucide-react";
 import { useMemo } from "react";
-import { Controller, FormProvider, useForm } from "react-hook-form";
+import { Control, Controller, FormProvider, useForm } from "react-hook-form";
 import { formatUnits } from "viem";
 
 export type WrapNativeTokenFormProps = {
@@ -152,7 +154,19 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
               Wrap
             </Button>
 
-            <SignTransaction asset={nativeToken.stkToken.underlying.address} spender={spender} disabled={!wrapHash} />
+            <SignTransactionFormConnector>
+              {({ amount }) => {
+                return (
+                  <SignTransaction
+                    amount={amount}
+                    control={formMethods.control as unknown as Control<SignableTxForm>}
+                    asset={nativeToken.stkToken.underlying.address}
+                    spender={spender}
+                    disabled={!wrapHash}
+                  />
+                );
+              }}
+            </SignTransactionFormConnector>
 
             <Button
               primary

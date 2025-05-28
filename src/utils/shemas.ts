@@ -1,7 +1,7 @@
-import { RefinementCtx, z } from "zod";
-import { Address, isAddress, isHash } from "viem";
-import { Permit } from "@/types/permit";
 import { Approval } from "@/types/approval";
+import { Permit } from "@/types/permit";
+import { Address, isAddress, isHash } from "viem";
+import { RefinementCtx, z } from "zod";
 
 export const AddressSchema = z.custom<Address>((val) => {
   return typeof val === "string" ? isAddress(val) : false;
@@ -43,7 +43,7 @@ export const validatePermitAndApproval = (
     return z.NEVER;
   }
 
-  if (val.permit && val.permit.value !== val.amount) {
+  if (val.permit && val.permit.value < val.amount) {
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
       path: ["permit"],
