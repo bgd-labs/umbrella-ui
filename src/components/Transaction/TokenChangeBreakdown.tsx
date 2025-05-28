@@ -1,10 +1,10 @@
 import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
-import { ArrowRight } from "lucide-react";
 import { TokenType } from "@/types/token";
-import { formatBigInt, formatUSDPrice } from "@/utils/formatting";
-import { parseUnits } from "viem";
 import { cn } from "@/utils/cn";
+import { formatBigInt, formatUSDPrice } from "@/utils/formatting";
+import { ArrowRight } from "lucide-react";
+import { parseUnits } from "viem";
 
 export type TokenChangeBreakdownProps = {
   fromType: TokenType;
