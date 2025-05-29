@@ -65,14 +65,15 @@ export const APYAndEarningsForecast = ({ amount, stkToken }: APYAndEarningsForec
 
   const forecastedStkToken = calculateForecastedStkToken(stkToken, amount);
 
-  const usdAmount = formatUSDPrice({
+  const currentUSDAmount = stkToken.usdAmount ?? 0;
+  const stakedUSDAmount = formatUSDPrice({
     balance: amount,
     decimals: stkToken.decimals,
     usdPrice: stkToken.latestAnswer,
   });
 
-  const totalAmountUSD = (stkToken.usdAmount ?? 0) + usdAmount;
-  const currentEarnings = calculateAPYEarnings(totalAmountUSD, currentAPY);
+  const totalAmountUSD = currentUSDAmount + stakedUSDAmount;
+  const currentEarnings = calculateAPYEarnings(currentUSDAmount, currentAPY);
   const stakedEarnings = calculateAPYEarnings(totalAmountUSD, forecastedStkToken.apyData.total);
 
   return (
