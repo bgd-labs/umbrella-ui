@@ -1,31 +1,79 @@
 import { APYBreakdown } from "@/app/components/APYBreakdown/APYBreakdown";
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
-import { StkToken, TokenType } from "@/types/token";
-import { calculateAPYEarnings } from "@/utils/calculations";
+import { PRICE_FEED_DECIMALS } from "@/constants/oracle";
+import { applyMinimumTotalAssets } from "@/hooks/useAllStkTokens";
+import { StkToken } from "@/types/token";
+import { calculateApyData, calculateAPYEarnings } from "@/utils/calculations";
+import { calculateRewardApy } from "@/utils/calculations/apy/apy";
 import { formatUSDPrice } from "@/utils/formatting";
 import { NumberFlowGroup } from "@number-flow/react";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 
+const calculateForecastedStkToken = (stkToken: StkToken, amount: bigint) => {
+  const forecastedStkToken = {
+    ...stkToken,
+    totalAssets: stkToken.totalAssets + amount,
+    rewards: stkToken.rewards.map((reward) => {
+      const currentTotalAssets = applyMinimumTotalAssets(stkToken.totalAssets, reward.distributionEnd);
+      const totalAssets = currentTotalAssets + amount;
+      const apy = calculateRewardApy({
+        maxEmissionPerSecond: reward.maxEmissionPerSecond,
+        targetLiquidity: stkToken.targetLiquidity,
+        totalAssets,
+        distributionEnd: reward.distributionEnd,
+        decimals: stkToken.decimals,
+        price: stkToken.latestAnswer,
+        priceFeedDecimals: PRICE_FEED_DECIMALS,
+        token: {
+          decimals: reward.decimals,
+          price: reward.latestAnswer,
+          priceFeedDecimals: PRICE_FEED_DECIMALS,
+        },
+      });
+
+      return {
+        ...reward,
+        apy,
+      };
+    }),
+  };
+
+  return {
+    ...forecastedStkToken,
+    apyData: calculateApyData(forecastedStkToken),
+  };
+};
+
+const getCurrentApy = (stkToken: StkToken) => {
+  if (stkToken.balance) {
+    return stkToken.apyData.total;
+  }
+  if (stkToken.reserve?.balance) {
+    return stkToken.apyData.pool.total;
+  }
+  return 0;
+};
+
 export type APYAndEarningsForecastProps = {
   amount: bigint;
-  initialTokenType: Exclude<TokenType, "stk" | "stkStata"> | "native";
   stkToken: StkToken;
 };
 
-export const APYAndEarningsForecast = ({ amount, initialTokenType, stkToken }: APYAndEarningsForecastProps) => {
-  const currentAPY =
-    initialTokenType === "underlying" || initialTokenType === "native" ? 0 : stkToken.apyData.pool.total;
-  const totalAPY = stkToken.apyData.total;
+export const APYAndEarningsForecast = ({ amount, stkToken }: APYAndEarningsForecastProps) => {
+  const currentAPY = getCurrentApy(stkToken);
 
-  const amountUsd = formatUSDPrice({
+  const forecastedStkToken = calculateForecastedStkToken(stkToken, amount);
+
+  const usdAmount = formatUSDPrice({
     balance: amount,
     decimals: stkToken.decimals,
     usdPrice: stkToken.latestAnswer,
   });
 
-  const currentEarnings = calculateAPYEarnings(amountUsd, currentAPY);
-  const stakedEarnings = calculateAPYEarnings(amountUsd, totalAPY);
+  const totalAmountUSD = (stkToken.usdAmount ?? 0) + usdAmount;
+  const currentEarnings = calculateAPYEarnings(totalAmountUSD, currentAPY);
+  const stakedEarnings = calculateAPYEarnings(totalAmountUSD, forecastedStkToken.apyData.total);
 
   return (
     <>
@@ -36,10 +84,10 @@ export const APYAndEarningsForecast = ({ amount, initialTokenType, stkToken }: A
           <NumberDisplay value={currentAPY} type="percent" className="font-semibold" />
           <ArrowRight className="size-4 text-gray-400" />
           <APYBreakdown
-            symbol={stkToken.underlying.symbol}
-            totalApy={stkToken.apyData.total}
-            supplyApy={stkToken.apyData.pool.total}
-            rewards={stkToken.rewards}
+            symbol={forecastedStkToken.underlying.symbol}
+            totalApy={forecastedStkToken.apyData.total}
+            supplyApy={forecastedStkToken.apyData.pool.total}
+            rewards={forecastedStkToken.rewards}
             displayRewards={false}
           />
         </div>
