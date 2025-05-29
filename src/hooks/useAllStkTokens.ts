@@ -18,7 +18,7 @@ import {
 import { useMemo } from "react";
 import { useAccount, useReadContract } from "wagmi";
 
-const applyMinimumTotalAssets = (totalAssets: bigint, distributionEnd: bigint) => {
+export const applyMinimumTotalAssets = (totalAssets: bigint, distributionEnd: bigint) => {
   const now = BigInt(getCurrentUnixTimestamp());
 
   if (now > distributionEnd) {
@@ -97,6 +97,8 @@ export const useAllStkTokens = () => {
                   usdPrice: rewardTokenData.price,
                 }),
                 apy,
+                distributionEnd,
+                maxEmissionPerSecond,
               };
             },
           );
@@ -118,6 +120,7 @@ export const useAllStkTokens = () => {
             isUnderlyingStataToken: !!reserveAddress,
             totalAssets,
             totalRewardsUSDAmount: rewards.reduce((acc, { usdAmount }) => acc + (usdAmount ?? 0), 0),
+            targetLiquidity,
             rewards,
             reserve: reserve ?? null,
             stata:

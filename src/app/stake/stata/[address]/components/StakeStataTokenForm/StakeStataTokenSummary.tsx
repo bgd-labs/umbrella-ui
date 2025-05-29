@@ -32,7 +32,7 @@ export const StakeStataTokenSummary = ({ token, stkToken }: StakeStataTokenSumma
         usdPrice={latestAnswer}
       />
 
-      <APYAndEarningsForecast amount={amount} initialTokenType="stata" stkToken={stkToken} />
+      <APYAndEarningsForecast amount={amount} stkToken={stkToken} />
 
       {approval?.txHash && (
         <SummarySection title="Transaction hash">

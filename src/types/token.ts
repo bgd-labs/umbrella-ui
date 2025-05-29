@@ -72,6 +72,8 @@ export type Reward = Token &
   TokenPrice & {
     type: "underlying";
     apy: number;
+    distributionEnd: bigint;
+    maxEmissionPerSecond: bigint;
   };
 
 export type UnderlyingToken = Token &
@@ -92,6 +94,7 @@ export type StkToken = Token &
     type: "stk";
     totalAssets: bigint;
     totalRewardsUSDAmount: number;
+    targetLiquidity: bigint;
     isUnderlyingStataToken: boolean;
     rewards: Reward[];
     reserve: Reserve | null;
