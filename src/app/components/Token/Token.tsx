@@ -1,6 +1,6 @@
 import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
 import { TokenLabel } from "@/components/TokenLabel/TokenLabel";
-import { useMarketStore } from "@/providers/MarketProvider/MarketContext";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { Token as TokenType } from "@/types/token";
 import { cn } from "@/utils/cn";
 import { getScannerUrl } from "@/utils/web3";
@@ -29,7 +29,7 @@ export type TokenProps = {
 };
 
 export const Token = ({ token, className }: TokenProps) => {
-  const { chainId } = useMarketStore((state) => state.market);
+  const { chainId } = useCurrentMarket();
   const { address, type, symbol } = token;
 
   const assetTag = type !== "underlying" && type !== "native" ? type : undefined;
