@@ -13,10 +13,7 @@ export const MARKETS: Market[] = [
     rewardsController: UmbrellaEthereum.UMBRELLA_REWARDS_CONTROLLER,
     umbrellaHelper: UmbrellaEthereum.UMBRELLA,
     batchHelper: UmbrellaEthereum.UMBRELLA_BATCH_HELPER,
-    // TODO Once address book is updated, uncomment this and remove hardcoded address
-    // umbrellaDataAggregationHelper: UmbrellaEthereum.DATA_AGGREGATION_HELPER,
-    // Helper address on mainnet
-    umbrellaDataAggregationHelper: "0xcc8fd820b1b9c5ebaca8615927f2ffc1f74b9db3",
+    umbrellaDataAggregationHelper: UmbrellaEthereum.DATA_AGGREGATION_HELPER,
     wrapNativeTokenAddress: AaveV3Ethereum.ASSETS.WETH.UNDERLYING,
   },
   {
@@ -29,8 +26,7 @@ export const MARKETS: Market[] = [
     rewardsController: UmbrellaBaseSepolia.UMBRELLA_REWARDS_CONTROLLER,
     umbrellaHelper: UmbrellaBaseSepolia.UMBRELLA,
     batchHelper: UmbrellaBaseSepolia.UMBRELLA_BATCH_HELPER,
-    // umbrellaDataAggregationHelper: UmbrellaBaseSepolia.DATA_AGGREGATION_HELPER,
-    umbrellaDataAggregationHelper: "0xa3c885f69adcc80300e2c8d24d5e6573461a5e92",
+    umbrellaDataAggregationHelper: UmbrellaBaseSepolia.DATA_AGGREGATION_HELPER,
     wrapNativeTokenAddress: AaveV3BaseSepolia.ASSETS.WETH.UNDERLYING,
   },
 
@@ -46,12 +42,7 @@ export const MARKETS: Market[] = [
           rewardsController: UmbrellaEthereum.UMBRELLA_REWARDS_CONTROLLER,
           umbrellaHelper: UmbrellaEthereum.UMBRELLA,
           batchHelper: UmbrellaEthereum.UMBRELLA_BATCH_HELPER,
-          // TODO Once address book is updated, uncomment this and remove hardcoded address
-          // umbrellaDataAggregationHelper: UmbrellaEthereum.DATA_AGGREGATION_HELPER,
-          // Helper address on mainnet
-          // umbrellaDataAggregationHelper: "0xcc8fd820b1b9c5ebaca8615927f2ffc1f74b9db3",
-          // helper address on forked network
-          umbrellaDataAggregationHelper: "0xaC6A246b959eBc135E69Dc160e7BF91024EdD7E8",
+          umbrellaDataAggregationHelper: UmbrellaEthereum.DATA_AGGREGATION_HELPER,
           wrapNativeTokenAddress: AaveV3Ethereum.ASSETS.WETH.UNDERLYING,
         } as const,
       ]

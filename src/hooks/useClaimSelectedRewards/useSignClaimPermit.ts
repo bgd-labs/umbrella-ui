@@ -1,7 +1,7 @@
-import { Address } from "viem";
-import { useMarketStore } from "@/providers/MarketProvider/MarketContext";
-import { useMutation } from "@tanstack/react-query";
 import { signRewardsClaiming } from "@/mutations/signRewardsClaiming";
+import { useMutation } from "@tanstack/react-query";
+import { Address } from "viem";
+import { useCurrentMarket } from "../useCurrentMarket";
 
 export type ClaimRewardsParams = {
   owner: Address;
@@ -10,7 +10,7 @@ export type ClaimRewardsParams = {
 };
 
 export const useSignClaimPermit = () => {
-  const { chainId, rewardsController, batchHelper } = useMarketStore((store) => store.market);
+  const { chainId, rewardsController, batchHelper } = useCurrentMarket();
   return useMutation({
     mutationFn: ({ owner, umbrellaAddress, rewardAddresses }: ClaimRewardsParams) => {
       return signRewardsClaiming({

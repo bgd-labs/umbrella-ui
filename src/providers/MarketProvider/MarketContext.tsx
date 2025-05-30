@@ -1,5 +1,5 @@
-import { createContext, useContext } from "react";
 import { MarketState, MarketStore } from "@/store/market";
+import { createContext, useContext } from "react";
 import { useStore } from "zustand/react";
 
 export const MarketContext = createContext<MarketStore | null>(null);

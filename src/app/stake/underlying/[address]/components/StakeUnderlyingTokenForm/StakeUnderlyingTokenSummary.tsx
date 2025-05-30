@@ -38,7 +38,7 @@ export const StakeUnderlyingTokenSummary = ({ stkToken }: StakeUnderlyingTokenSu
         usdPrice={latestAnswer}
       />
 
-      <APYAndEarningsForecast amount={amountScaled} stkToken={stkToken} />
+      <APYAndEarningsForecast amount={amountScaled} sourceTokenType="underlying" stkToken={stkToken} />
 
       {approval?.txHash && (
         <SummarySection title="Transaction hash">

@@ -1,12 +1,10 @@
+import { LOCAL_STORAGE_KEYS } from "@/constants/localStorage";
 import { MARKETS } from "@/constants/markets";
-import { Market } from "@/types/market";
 import { createStore } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-const CURRENT_STORE_VERSION = 10;
-
 export interface MarketState {
-  market: Market;
+  marketId: string;
 
   setMarket: (marketId: string) => void;
   reset: () => void;
@@ -14,30 +12,22 @@ export interface MarketState {
 
 export type MarketStore = ReturnType<typeof createMarketStore>;
 
-export const createMarketStore = (initialState: Pick<MarketState, "market">) => {
+export const initialState: Pick<MarketState, "marketId"> = {
+  marketId: MARKETS[0].id,
+};
+
+export const createMarketStore = () => {
   return createStore<MarketState>()(
     persist(
       (set) => ({
         ...initialState,
 
-        setMarket: (marketId: string) => set({ market: MARKETS.find(({ id }) => id === marketId)! }),
-
-        reset: () => set(initialState),
+        setMarket: (marketId: string) => set({ marketId }),
+        reset: () => set({ ...initialState }),
       }),
       {
-        name: "store:market",
+        name: LOCAL_STORAGE_KEYS.MARKET,
         storage: createJSONStorage(() => localStorage),
-        version: CURRENT_STORE_VERSION,
-        migrate: (persistedState: unknown, version: number) => {
-          if (version === 0 || version !== CURRENT_STORE_VERSION) {
-            return undefined;
-          }
-
-          return persistedState;
-        },
-        partialize: (state) => ({
-          market: state.market,
-        }),
       },
     ),
   );

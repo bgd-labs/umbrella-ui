@@ -2,7 +2,7 @@ import { APYBreakdown } from "@/app/components/APYBreakdown/APYBreakdown";
 import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
 import { PRICE_FEED_DECIMALS } from "@/constants/oracle";
 import { applyMinimumTotalAssets } from "@/hooks/useAllStkTokens";
-import { StkToken } from "@/types/token";
+import { StkToken, TokenType } from "@/types/token";
 import { calculateApyData, calculateAPYEarnings } from "@/utils/calculations";
 import { calculateRewardApy } from "@/utils/calculations/apy/apy";
 import { formatUSDPrice } from "@/utils/formatting";
@@ -45,23 +45,21 @@ const calculateForecastedStkToken = (stkToken: StkToken, amount: bigint) => {
   };
 };
 
-const getCurrentApy = (stkToken: StkToken) => {
-  if (stkToken.balance) {
-    return stkToken.apyData.total;
+const getCurrentApy = (stkToken: StkToken, sourceTokenType: Exclude<TokenType, "stk" | "stkStata"> | "native") => {
+  if (sourceTokenType === "native" || sourceTokenType === "underlying") {
+    return 0;
   }
-  if (stkToken.reserve?.balance) {
-    return stkToken.apyData.pool.total;
-  }
-  return 0;
+  return stkToken.apyData.pool.total;
 };
 
 export type APYAndEarningsForecastProps = {
   amount: bigint;
+  sourceTokenType: Exclude<TokenType, "stk" | "stkStata"> | "native";
   stkToken: StkToken;
 };
 
-export const APYAndEarningsForecast = ({ amount, stkToken }: APYAndEarningsForecastProps) => {
-  const currentAPY = getCurrentApy(stkToken);
+export const APYAndEarningsForecast = ({ amount, sourceTokenType, stkToken }: APYAndEarningsForecastProps) => {
+  const currentAPY = getCurrentApy(stkToken, sourceTokenType);
 
   const forecastedStkToken = calculateForecastedStkToken(stkToken, amount);
 
