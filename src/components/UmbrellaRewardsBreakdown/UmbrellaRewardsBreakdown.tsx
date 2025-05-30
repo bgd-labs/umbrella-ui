@@ -23,7 +23,11 @@ export const UmbrellaRewardsBreakdown = ({ umbrella }: UmbrellaRewardsBreakdownP
             </h2>
           </div>
         </div>
-        <AssetIcon symbol={umbrella.underlying.symbol} assetTag="stk" className="size-7" />
+        <AssetIcon
+          symbol={umbrella.underlying.symbol}
+          assetTag={umbrella.isUnderlyingStataToken ? "stkStata" : "stk"}
+          className="size-7"
+        />
       </div>
       <div className="flex flex-col gap-3 pt-3">
         {filteredRewards.map((reward) => (
