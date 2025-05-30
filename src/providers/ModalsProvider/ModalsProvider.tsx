@@ -2,6 +2,7 @@
 
 import { TermsAndConditionsContentModal } from "@/components/TermsAndConditionsContentModal/TermsAndConditionsContentModal";
 import { TermsAndConditionsModal } from "@/components/TermsAndConditionsModal/TermsAndConditionsModal";
+import { LOCAL_STORAGE_KEYS } from "@/constants/localStorage";
 import { PropsWithChildren, useCallback, useMemo, useState } from "react";
 import { ModalsContext } from "./ModalsContext";
 
@@ -10,7 +11,7 @@ const getIsTermsAgreementAccepted = () => {
     return false;
   }
 
-  const isTermsAgreementAccepted = localStorage.getItem("aave-umbrella-ui:isTermsAgreementAccepted");
+  const isTermsAgreementAccepted = localStorage.getItem(LOCAL_STORAGE_KEYS.USER_AGREEMENT);
 
   if (isTermsAgreementAccepted === null) {
     return false;
@@ -28,7 +29,7 @@ export const ModalsProvider = ({ children }: PropsWithChildren) => {
 
   const handleTermsAndConditionsOpenChange = useCallback((open: boolean) => {
     if (!open) {
-      localStorage.setItem("aave-umbrella-ui:isTermsAgreementAccepted", "true");
+      localStorage.setItem(LOCAL_STORAGE_KEYS.USER_AGREEMENT, "true");
     }
 
     setIsTermsAndConditionsOpen(open);
