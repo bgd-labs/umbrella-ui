@@ -36,7 +36,7 @@ export const StakeATokenSummary = ({ reserve, stkToken, reserves }: StakeATokenS
 
       <HealthFactorBreakdown reserveId={reserveId} newBalance={newBalance} positions={reserves} />
 
-      <APYAndEarningsForecast amount={amount} stkToken={stkToken} />
+      <APYAndEarningsForecast amount={amount} sourceTokenType="a" stkToken={stkToken} />
 
       {approval?.txHash && (
         <SummarySection title="Transaction hash">

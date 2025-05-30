@@ -195,7 +195,11 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
           usdPrice={stkToken.underlying.latestAnswer}
         />
 
-        <APYAndEarningsForecast amount={formMethods.getValues("amount") ?? 0n} stkToken={stkToken} />
+        <APYAndEarningsForecast
+          amount={formMethods.getValues("amount") ?? 0n}
+          sourceTokenType="native"
+          stkToken={stkToken}
+        />
 
         {wrapHash && (
           <SummarySection title="Wrapping native token hash">
