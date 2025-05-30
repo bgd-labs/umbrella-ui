@@ -1,7 +1,8 @@
+import { LOCAL_STORAGE_KEYS } from "@/constants/localStorage";
+import { ChainId } from "@/types/market";
+import { Address } from "viem";
 import { createStore } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { Address } from "viem";
-import { ChainId } from "@/types/market";
 
 const CURRENT_STORE_VERSION = 1;
 
@@ -36,9 +37,7 @@ export const defaultInitState: TransactionsTrackerState = {
   store: {},
 };
 
-export const createTransactionsTrackerStore = (
-  initState: TransactionsTrackerState = defaultInitState,
-) => {
+export const createTransactionsTrackerStore = (initState: TransactionsTrackerState = defaultInitState) => {
   return createStore<TransactionsTrackerStore>()(
     persist(
       (set) => ({
@@ -69,19 +68,9 @@ export const createTransactionsTrackerStore = (
         reset: () => set({ ...initState }),
       }),
       {
-        name: "store:transactionsTracker",
+        name: LOCAL_STORAGE_KEYS.TRANSACTIONS_TRACKER,
         storage: createJSONStorage(() => localStorage),
         version: CURRENT_STORE_VERSION,
-        // migrate: (persistedState: unknown, version: number) => {
-        //   if (version === 0 || version !== CURRENT_STORE_VERSION) {
-        //     return undefined;
-        //   }
-        //
-        //   return persistedState;
-        // },
-        partialize: (state) => ({
-          store: state.store,
-        }),
       },
     ),
   );

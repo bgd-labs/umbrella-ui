@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/Button";
 import { MARKETS } from "@/constants/markets";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { useMarketStore } from "@/providers/MarketProvider/MarketContext";
 import { useSwitchChain } from "wagmi";
 import { baseSepolia } from "wagmi/chains";
 import WrongNetworkImage from "../../../public/images/wrong-network.svg";
 
 export const UnsupportedMarket = () => {
-  const { name } = useMarketStore((state) => state.market);
+  const { name } = useCurrentMarket();
   const setMarket = useMarketStore((state) => state.setMarket);
   const { switchChain } = useSwitchChain();
 

@@ -1,5 +1,5 @@
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { useWriteContract } from "@/hooks/useWriteContract/useWriteContract";
-import { useMarketStore } from "@/providers/MarketProvider/MarketContext";
 import { useCallback } from "react";
 import { Address } from "viem";
 
@@ -10,7 +10,7 @@ export type UmbrellaCooldownParams = {
 };
 
 export const useStartCooldown = () => {
-  const { chainId } = useMarketStore((state) => state.market);
+  const { chainId } = useCurrentMarket();
   const { writeContractAsync, ...result } = useWriteContract();
 
   const cooldown = useCallback(

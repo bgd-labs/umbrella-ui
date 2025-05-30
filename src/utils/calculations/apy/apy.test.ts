@@ -3,8 +3,6 @@ import { describe, expect, it } from "vitest";
 import { calculateRewardApy } from "./apy";
 
 describe("calculateEmissionPerYear", () => {
-  const SCALING_FACTOR = 18;
-  const BASE_10 = 10n ** BigInt(SCALING_FACTOR);
   const PRICE_BASE = 10n ** BigInt(PRICE_FEED_DECIMALS);
 
   it("should return 0 when total assets is 0", () => {

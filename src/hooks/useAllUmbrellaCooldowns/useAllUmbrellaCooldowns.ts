@@ -1,11 +1,11 @@
-import { useMarketStore } from "@/providers/MarketProvider/MarketContext";
+import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { fetchAllCooldowns } from "@/queries/fetchAllCooldowns";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { useAccount } from "wagmi";
 import { useAllStkTokens } from "../useAllStkTokens";
 
 export const useAllUmbrellaCooldowns = () => {
-  const { chainId } = useMarketStore((state) => state.market);
+  const { chainId } = useCurrentMarket();
 
   const { address: owner } = useAccount();
   const { data, isLoading: isUmbrellaAddressesLoading } = useAllStkTokens();

@@ -1,11 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { useMarketStore } from "@/providers/MarketProvider/MarketContext";
-import { useAccount } from "wagmi";
 import { fetchAllReserves } from "@/queries/fetchAllReservesData";
+import { useQuery } from "@tanstack/react-query";
+import { useAccount } from "wagmi";
+import { useCurrentMarket } from "./useCurrentMarket";
 
 export const useAllReserves = () => {
   const { address: owner } = useAccount();
-  const { chainId, poolProvider, uiPoolDataProvider } = useMarketStore((state) => state.market);
+  const { chainId, poolProvider, uiPoolDataProvider } = useCurrentMarket();
 
   return useQuery({
     queryFn: () =>

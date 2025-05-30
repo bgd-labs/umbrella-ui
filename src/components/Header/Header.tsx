@@ -1,18 +1,18 @@
 "use client";
 
-import Link from "next/link";
-import { BlockSelect } from "@/components/BlockSelect/BlockSelect";
-import { MARKETS } from "@/constants/markets";
 import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
-import { Wallet } from "@/components/Wallet/Wallet";
-import { switchChain } from "@wagmi/core";
-import { config } from "@/configs/wagmi";
-import { findMarketById } from "@/utils/markets/markets";
-import { useMarketStore } from "@/providers/MarketProvider/MarketContext";
-import { ThemeToggleButton } from "@/components/ThemeToggleButton/ThemeToggleButton";
-import UmbrellaLogoIcon from "../../../public/images/umbrella-logo.svg";
+import { BlockSelect } from "@/components/BlockSelect/BlockSelect";
 import { InfoModal } from "@/components/InfoModal/InfoModal";
+import { ThemeToggleButton } from "@/components/ThemeToggleButton/ThemeToggleButton";
+import { Wallet } from "@/components/Wallet/Wallet";
+import { config } from "@/configs/wagmi";
+import { MARKETS } from "@/constants/markets";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
+import { useMarketStore } from "@/providers/MarketProvider/MarketContext";
+import { findMarketById } from "@/utils/markets/markets";
+import { switchChain } from "@wagmi/core";
+import Link from "next/link";
+import UmbrellaLogoIcon from "../../../public/images/umbrella-logo.svg";
 
 const items = MARKETS.map((market) => ({
   label: (
@@ -40,24 +40,24 @@ export const Header = () => {
   };
 
   return (
-    <header className="mx-auto mb-5 flex flex-wrap w-full max-w-(--mobile-container) items-center justify-between gap-y-9 py-6 md:max-w-(--breakpoint-lg)">
-      <div className="flex basis-[30%] md:basis-1/3 order-1">
+    <header className="mx-auto mb-5 flex w-full max-w-(--mobile-container) flex-wrap items-center justify-between gap-y-9 py-6 md:max-w-(--breakpoint-lg)">
+      <div className="order-1 flex basis-[30%] md:basis-1/3">
         <Link href="/" className="flex items-center gap-3">
           <UmbrellaLogoIcon className="text-main-950 w-[130px] md:w-[211px] dark:text-white" />
         </Link>
       </div>
 
-      <div className="flex basis-[100%] md:basis-1/3 justify-center order-3 md:order-2">
+      <div className="order-3 flex basis-[100%] justify-center md:order-2 md:basis-1/3">
         <BlockSelect
           placeholder="Select Market"
           items={items}
           value={market.id}
           onValueChange={handleMarketChange}
-          className="not-md:w-full h-[38px]"
+          className="h-[38px] not-md:w-full"
         />
       </div>
 
-      <div className="flex basis-[60%] md:basis-1/3 justify-end order-2 md:order-3">
+      <div className="order-2 flex basis-[60%] justify-end md:order-3 md:basis-1/3">
         <div className="flex items-center gap-3 md:gap-5">
           <Wallet />
 
