@@ -1,14 +1,15 @@
+import { ComingSoon } from "@/components/ComingSoon/ComingSoon";
 import { Footer } from "@/components/Footer/Footer";
 import { Header } from "@/components/Header/Header";
+import { EXECUTION_TIMESTAMP } from "@/configs/constants";
 import { inter, spaceGrotesk } from "@/configs/fonts";
 import Providers from "@/providers/Providers";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { PropsWithChildren } from "react";
 import "./globals.css";
-import { ComingSoon } from "@/components/ComingSoon/ComingSoon";
-import { EXECUTION_TIMESTAMP } from "@/configs/constants";
 
 export const metadata: Metadata = {
   title: "Aave Umbrella",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
           className={`font-sans ${inter.variable} ${spaceGrotesk.variable} border-main-950 dark:border-main-500 text-main-950 dark:bg-main-950 antialiased dark:text-white`}
         >
           <ComingSoon />
+          <SpeedInsights />
           <Analytics />
         </body>
       </html>
@@ -46,6 +48,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
             <Footer />
           </div>
         </Providers>
+        <SpeedInsights />
         <Analytics />
       </body>
     </html>
