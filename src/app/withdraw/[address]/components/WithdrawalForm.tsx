@@ -177,7 +177,6 @@ export const WithdrawalForm = ({ stkToken, cooldown }: WithdrawalFormProps) => {
             outerClassName="w-full md:w-[248px]"
             className="flex items-center gap-2"
           >
-            <ChevronsDownIcon size={14} />
             {isSafeWallet ? "Approve & Withdraw" : "Withdraw"}
           </Button>
         </div>
