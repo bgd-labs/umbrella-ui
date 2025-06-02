@@ -1,7 +1,6 @@
 import { ComingSoon } from "@/components/ComingSoon/ComingSoon";
 import { Footer } from "@/components/Footer/Footer";
 import { Header } from "@/components/Header/Header";
-import { EXECUTION_TIMESTAMP } from "@/configs/constants";
 import { inter, spaceGrotesk } from "@/configs/fonts";
 import Providers from "@/providers/Providers";
 import "@rainbow-me/rainbowkit/styles.css";
@@ -17,7 +16,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
   // TODO: remove after launch
-  if (Date.now() < EXECUTION_TIMESTAMP * 1000) {
+  const launchTimestamp = Number(process.env.NEXT_PUBLIC_EXECUTION_TIMESTAMP);
+  if (!!launchTimestamp && Date.now() < launchTimestamp * 1000) {
     return (
       <html lang="en" suppressHydrationWarning>
         <body

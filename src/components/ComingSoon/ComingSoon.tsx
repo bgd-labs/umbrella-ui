@@ -8,7 +8,6 @@ import ReactCountdown from "react-countdown";
 
 import CountdownGhost from "../../../public/images/countdown.svg";
 import UmbrellaLogoIcon from "../../../public/images/umbrella-logo.svg";
-import { EXECUTION_TIMESTAMP } from "@/configs/constants";
 
 type Props = {
   date: number;
@@ -21,7 +20,7 @@ export const ComingSoon = () => {
       <UmbrellaLogoIcon className="text-main-950 mb-4 w-2/3 max-w-[211px] dark:text-white" />
       <CountdownGhost className="w-full max-w-[726px]" />
       <div className="font-heading -translate-x-2 -translate-y-6 text-xl antialiased sm:-translate-y-10 sm:text-lg">
-        <Countdown date={EXECUTION_TIMESTAMP} />
+        <Countdown date={Number(process.env.NEXT_PUBLIC_EXECUTION_TIMESTAMP)} />
       </div>
       <Footer />
     </div>
