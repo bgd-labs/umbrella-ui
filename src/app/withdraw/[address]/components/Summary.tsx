@@ -1,4 +1,5 @@
 import { WithdrawalFormValues } from "@/app/withdraw/[address]/withdrawalFormSchema";
+import { APYAndEarningsForecastWithdrawal } from "@/components/Transaction/APYAndEarningsForecast";
 import { SummarySection } from "@/components/Transaction/SummarySection";
 import { TokenChangeBreakdown } from "@/components/Transaction/TokenChangeBreakdown";
 import { TransactionBreakdown } from "@/components/Transaction/TransactionBreakdown";
@@ -30,6 +31,8 @@ export const Summary = ({ stkToken }: SummaryProps) => {
         amount={amount}
         usdPrice={stkToken.latestAnswer}
       />
+
+      <APYAndEarningsForecastWithdrawal amount={amount} targetTokenType={resultingTokenType} stkToken={stkToken} />
 
       {approval?.txHash && (
         <SummarySection title="Approval hash">

@@ -126,3 +126,93 @@ export const APYAndEarningsForecast = ({ amount, sourceTokenType, stkToken }: AP
     </>
   );
 };
+
+const getCurrentApyForWithdrawal = (stkToken: StkToken, targetTokenType: TokenType) => {
+  if (targetTokenType === "underlying") {
+    return 0;
+  }
+  if (targetTokenType === "a") {
+    return stkToken.reserve?.apy || 0;
+  }
+  if (targetTokenType === "stata") {
+    return stkToken.reserve?.apy || 0;
+  }
+  return stkToken.apyData.pool.total;
+};
+
+export type APYAndEarningsForecastWithdrawalProps = {
+  amount: bigint;
+  targetTokenType: TokenType;
+  stkToken: StkToken;
+};
+
+export const APYAndEarningsForecastWithdrawal = ({
+  amount,
+  targetTokenType,
+  stkToken,
+}: APYAndEarningsForecastWithdrawalProps) => {
+  const currentAPY = stkToken.apyData.total;
+  const targetAPY = getCurrentApyForWithdrawal(stkToken, targetTokenType);
+
+  const currentUSDAmount = stkToken.usdAmount ?? 0;
+  const withdrawalUSDAmount = formatUSDPrice({
+    balance: amount,
+    decimals: stkToken.decimals,
+    usdPrice: stkToken.latestAnswer,
+  });
+
+  const currentEarnings = calculateAPYEarnings(currentUSDAmount, currentAPY);
+  const targetEarnings = calculateAPYEarnings(withdrawalUSDAmount, targetAPY);
+
+  return (
+    <>
+      <div className="flex items-center justify-between">
+        <h2 className="font-bold dark:text-white">APY</h2>
+
+        <div className="-mr-2 flex items-center gap-3">
+          <APYBreakdown
+            symbol={stkToken.underlying.symbol}
+            totalApy={stkToken.apyData.total}
+            supplyApy={stkToken.apyData.pool.total}
+            rewards={stkToken.rewards}
+            displayRewards={false}
+          />
+          <ArrowRight className="size-4 text-gray-400" />
+          <NumberDisplay value={targetAPY} type="percent" className="font-semibold" />
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3">
+          <h2 className="font-bold dark:text-white">Earnings</h2>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <NumberFlowGroup>
+            <div>
+              <NumberDisplay
+                value={currentEarnings}
+                type="currency"
+                className="font-semibold"
+                prefix="~"
+                suffix="/year"
+              />
+            </div>
+            <motion.div layout transition={{ duration: 0.35 }}>
+              <ArrowRight className="size-4 text-gray-400" />
+            </motion.div>
+            <div>
+              <NumberDisplay
+                value={targetEarnings}
+                type="currency"
+                className="font-semibold"
+                prefix="~"
+                suffix="/year"
+              />
+            </div>
+          </NumberFlowGroup>
+        </div>
+      </div>
+    </>
+  );
+};
