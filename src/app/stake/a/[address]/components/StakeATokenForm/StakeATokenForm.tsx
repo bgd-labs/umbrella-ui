@@ -15,7 +15,6 @@ import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
 import { Reserve, StkToken } from "@/types/token";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { ChevronsUpIcon } from "lucide-react";
 import { useMemo } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 

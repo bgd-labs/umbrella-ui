@@ -16,7 +16,6 @@ import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
 import { StkToken } from "@/types/token";
 import { calculateMaxSupply } from "@/utils/calculations";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChevronsUpIcon } from "lucide-react";
 import { useMemo } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { Address, formatUnits } from "viem";

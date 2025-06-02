@@ -20,7 +20,6 @@ import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
 import { SignableTxForm } from "@/types/form";
 import { NativeToken } from "@/types/token";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChevronsUpIcon } from "lucide-react";
 import { useMemo } from "react";
 import { Control, Controller, FormProvider, useForm } from "react-hook-form";
 import { formatUnits } from "viem";

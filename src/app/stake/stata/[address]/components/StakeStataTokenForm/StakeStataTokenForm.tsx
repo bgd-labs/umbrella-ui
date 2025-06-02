@@ -15,7 +15,6 @@ import { useStake } from "@/hooks/useStake";
 import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
 import { StataToken, StkToken } from "@/types/token";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChevronsUpIcon } from "lucide-react";
 import { useMemo } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { Address, formatUnits } from "viem";
