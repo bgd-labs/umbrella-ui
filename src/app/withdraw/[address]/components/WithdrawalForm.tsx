@@ -22,7 +22,7 @@ import {
   getRelatedAssetByWithdrawMethod,
 } from "@/utils/getRelatedAssetByWithdrawMethod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LayersIcon } from "lucide-react";
+import { ChevronsDownIcon } from "lucide-react";
 import { useMemo } from "react";
 import { Control, Controller, FormProvider, useForm } from "react-hook-form";
 import { formatUnits } from "viem";
@@ -177,7 +177,7 @@ export const WithdrawalForm = ({ stkToken, cooldown }: WithdrawalFormProps) => {
             outerClassName="w-full md:w-[248px]"
             className="flex items-center gap-2"
           >
-            <LayersIcon size={14} />
+            <ChevronsDownIcon size={14} />
             {isSafeWallet ? "Approve & Withdraw" : "Withdraw"}
           </Button>
         </div>

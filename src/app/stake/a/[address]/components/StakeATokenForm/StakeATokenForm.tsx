@@ -15,7 +15,7 @@ import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
 import { Reserve, StkToken } from "@/types/token";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { LayersIcon } from "lucide-react";
+import { ChevronsUpIcon } from "lucide-react";
 import { useMemo } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 
@@ -149,7 +149,7 @@ export const StakeATokenForm = ({ asset, stkToken, reserves }: StakeATokenFormPr
             outerClassName="w-full md:w-[248px]"
             className="flex items-center gap-2"
           >
-            <LayersIcon size={14} />
+            <ChevronsUpIcon size={14} />
             {isSafeWallet ? "Approve & Stake" : "Stake"}
           </Button>
         </div>
