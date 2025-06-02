@@ -22,7 +22,6 @@ import {
   getRelatedAssetByWithdrawMethod,
 } from "@/utils/getRelatedAssetByWithdrawMethod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChevronsDownIcon } from "lucide-react";
 import { useMemo } from "react";
 import { Control, Controller, FormProvider, useForm } from "react-hook-form";
 import { formatUnits } from "viem";
