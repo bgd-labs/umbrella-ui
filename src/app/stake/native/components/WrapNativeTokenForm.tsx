@@ -136,7 +136,6 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
               outerClassName="w-[248px]"
               className="flex items-center gap-2"
             >
-              <ChevronsUpIcon size={14} />
               Approve & Stake
             </Button>
           </div>
@@ -177,7 +176,6 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
               outerClassName="w-full md:w-[248px]"
               className="flex items-center gap-2"
             >
-              <ChevronsUpIcon size={14} />
               Stake
             </Button>
           </div>

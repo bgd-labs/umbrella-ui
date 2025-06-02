@@ -89,7 +89,6 @@ export default function ClaimRewardsPage() {
             disabled={isClaiming}
             className="flex items-center gap-2"
           >
-            <CoinsIcon size={16} />
             Claim All
           </Button>
         </div>

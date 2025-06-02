@@ -120,7 +120,6 @@ export const StakeStataTokenForm = ({ asset, stkToken, stataToken }: StakeStataT
             outerClassName="w-full md:w-[248px]"
             className="flex items-center gap-2"
           >
-            <ChevronsUpIcon size={14} />
             {isSafeWallet ? "Approve & Stake" : "Stake"}
           </Button>
         </div>
