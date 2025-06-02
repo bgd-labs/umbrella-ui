@@ -8,20 +8,17 @@ import type { Metadata } from "next";
 import { PropsWithChildren } from "react";
 import "./globals.css";
 import { ComingSoon } from "@/components/ComingSoon/ComingSoon";
+import { EXECUTION_TIMESTAMP } from "@/configs/constants";
 
 export const metadata: Metadata = {
   title: "Aave Umbrella",
 };
 
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
-  if (true) {
+  // TODO: remove after launch
+  if (Date.now() < EXECUTION_TIMESTAMP * 1000) {
     return (
       <html lang="en" suppressHydrationWarning>
-        <head>
-          {process.env.NODE_ENV === "development" && (
-            <script src="https://unpkg.com/react-scan/dist/auto.global.js" async />
-          )}
-        </head>
         <body
           className={`font-sans ${inter.variable} ${spaceGrotesk.variable} ${silkscreen.variable} border-main-950 dark:border-main-500 text-main-950 dark:bg-main-950 antialiased dark:text-white`}
         >
