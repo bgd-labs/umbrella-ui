@@ -58,7 +58,7 @@ export const UmbrellaTableRow = ({ data }: UmbrellaTableRowProps) => {
         <UmbrellaStatus token={data} />
       </TableCell>
 
-      <TableCell className="justify-end">
+      <TableCell className="justify-end border">
         <Actions token={data} />
       </TableCell>
     </div>
