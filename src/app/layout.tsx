@@ -1,6 +1,6 @@
 import { Footer } from "@/components/Footer/Footer";
 import { Header } from "@/components/Header/Header";
-import { inter, spaceGrotesk, silkscreen } from "@/configs/fonts";
+import { inter, spaceGrotesk } from "@/configs/fonts";
 import Providers from "@/providers/Providers";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Analytics } from "@vercel/analytics/next";
@@ -20,7 +20,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
     return (
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`font-sans ${inter.variable} ${spaceGrotesk.variable} ${silkscreen.variable} border-main-950 dark:border-main-500 text-main-950 dark:bg-main-950 antialiased dark:text-white`}
+          className={`font-sans ${inter.variable} ${spaceGrotesk.variable} border-main-950 dark:border-main-500 text-main-950 dark:bg-main-950 antialiased dark:text-white`}
         >
           <ComingSoon />
           <Analytics />
