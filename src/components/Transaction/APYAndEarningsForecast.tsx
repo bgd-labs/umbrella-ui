@@ -77,7 +77,7 @@ export const APYAndEarningsForecast = ({ amount, sourceTokenType, stkToken }: AP
   return (
     <>
       <div className="flex items-center justify-between">
-        <h2 className="font-bold dark:text-white">APY</h2>
+        <h2 className="font-bold dark:text-white">Yield</h2>
 
         <div className="-mr-2 flex items-center gap-3">
           <NumberDisplay value={currentAPY} type="percent" className="font-semibold" />
@@ -167,7 +167,7 @@ export const APYAndEarningsForecastWithdrawal = ({
   return (
     <>
       <div className="flex items-center justify-between">
-        <h2 className="font-bold dark:text-white">APY</h2>
+        <h2 className="font-bold dark:text-white">Yield</h2>
 
         <div className="-mr-2 flex items-center gap-3">
           <APYBreakdown
