@@ -1,18 +1,37 @@
 import { Footer } from "@/components/Footer/Footer";
 import { Header } from "@/components/Header/Header";
-import { inter, spaceGrotesk } from "@/configs/fonts";
+import { inter, spaceGrotesk, silkscreen } from "@/configs/fonts";
 import Providers from "@/providers/Providers";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { PropsWithChildren } from "react";
 import "./globals.css";
+import { ComingSoon } from "@/components/ComingSoon/ComingSoon";
 
 export const metadata: Metadata = {
-  title: "Umbrella UI",
+  title: "Aave Umbrella",
 };
 
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
+  if (true) {
+    return (
+      <html lang="en" suppressHydrationWarning>
+        <head>
+          {process.env.NODE_ENV === "development" && (
+            <script src="https://unpkg.com/react-scan/dist/auto.global.js" async />
+          )}
+        </head>
+        <body
+          className={`font-sans ${inter.variable} ${spaceGrotesk.variable} ${silkscreen.variable} border-main-950 dark:border-main-500 text-main-950 dark:bg-main-950 antialiased dark:text-white`}
+        >
+          <ComingSoon />
+          <Analytics />
+        </body>
+      </html>
+    );
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
