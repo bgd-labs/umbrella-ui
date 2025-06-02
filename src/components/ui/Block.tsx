@@ -72,45 +72,34 @@ export const BlockBase = ({
 }: BlockProps) => {
   return (
     <span
-      className={cn(
-        "will-change[transform] ease-cubic-bezier[.3,.7,.4,1] grid grow transition-transform",
-        {
-          ["grid-cols-[4px_1fr] grid-rows-[1fr_4px]"]: elevation === 1,
-          ["grid-cols-[8px_1fr] grid-rows-[1fr_8px]"]: elevation === 2,
-          ["grid-cols-[12px_1fr] grid-rows-[1fr_12px]"]: elevation === 3,
-          ["grid-cols-[16px_1fr] grid-rows-[1fr_16px]"]: elevation === 4,
-          // hover effects
-          // css
-          ["duration-150 hover:-translate-x-[2px] hover:translate-y-[2px]"]:
-            hoverAnimation && elevation === 1,
-          ["duration-200 hover:-translate-x-[4px] hover:translate-y-[4px]"]:
-            hoverAnimation && elevation === 2,
-          ["duration-250 hover:-translate-x-[6px] hover:translate-y-[6px]"]:
-            hoverAnimation && elevation === 3,
-          ["duration-300 hover:-translate-x-[8px] hover:translate-y-[8px]"]:
-            hoverAnimation && elevation === 4,
-          // js
-          ["-translate-x-[2px] translate-y-[2px] duration-150"]: isHovered && elevation === 1,
-          ["-translate-x-[4px] translate-y-[4px] duration-200"]: isHovered && elevation === 2,
-          ["-translate-x-[6px] translate-y-[6px] duration-250"]: isHovered && elevation === 3,
-          ["-translate-x-[8px] translate-y-[8px] duration-300"]: isHovered && elevation === 4,
-          // active effects
-          // css
-          ["duration-150 active:-translate-x-[4px] active:translate-y-[4px]"]:
-            activeAnimation && elevation === 1,
-          ["duration-200 active:-translate-x-[8px] active:translate-y-[8px]"]:
-            activeAnimation && elevation === 2,
-          ["duration-250 active:-translate-x-[12px] active:translate-y-[12px]"]:
-            activeAnimation && elevation === 3,
-          ["duration-300 active:-translate-x-[16px] active:translate-y-[16px]"]:
-            activeAnimation && elevation === 4,
-          // js
-          ["-translate-x-[4px] translate-y-[4px] duration-150"]: isClicked && elevation === 1,
-          ["-translate-x-[8px] translate-y-[8px] duration-200"]: isClicked && elevation === 2,
-          ["-translate-x-[12px] translate-y-[12px] duration-250"]: isClicked && elevation === 3,
-          ["-translate-x-[16px] translate-y-[16px] duration-300"]: isClicked && elevation === 4,
-        },
-      )}
+      className={cn("will-change[transform] ease-cubic-bezier[.3,.7,.4,1] grid grow transition-transform", {
+        ["grid-cols-[4px_1fr] grid-rows-[1fr_4px]"]: elevation === 1,
+        ["grid-cols-[8px_1fr] grid-rows-[1fr_8px]"]: elevation === 2,
+        ["grid-cols-[12px_1fr] grid-rows-[1fr_12px]"]: elevation === 3,
+        ["grid-cols-[16px_1fr] grid-rows-[1fr_16px]"]: elevation === 4,
+        // hover effects
+        // css
+        ["duration-150 hover:-translate-x-[2px] hover:translate-y-[2px]"]: hoverAnimation && elevation === 1,
+        ["duration-200 hover:-translate-x-[4px] hover:translate-y-[4px]"]: hoverAnimation && elevation === 2,
+        ["duration-250 hover:-translate-x-[6px] hover:translate-y-[6px]"]: hoverAnimation && elevation === 3,
+        ["duration-300 hover:-translate-x-[8px] hover:translate-y-[8px]"]: hoverAnimation && elevation === 4,
+        // js
+        ["-translate-x-[2px] translate-y-[2px] duration-150"]: isHovered && elevation === 1,
+        ["-translate-x-[4px] translate-y-[4px] duration-200"]: isHovered && elevation === 2,
+        ["-translate-x-[6px] translate-y-[6px] duration-250"]: isHovered && elevation === 3,
+        ["-translate-x-[8px] translate-y-[8px] duration-300"]: isHovered && elevation === 4,
+        // active effects
+        // css
+        ["duration-150 active:-translate-x-[4px] active:translate-y-[4px]"]: activeAnimation && elevation === 1,
+        ["duration-200 active:-translate-x-[8px] active:translate-y-[8px]"]: activeAnimation && elevation === 2,
+        ["duration-250 active:-translate-x-[12px] active:translate-y-[12px]"]: activeAnimation && elevation === 3,
+        ["duration-300 active:-translate-x-[16px] active:translate-y-[16px]"]: activeAnimation && elevation === 4,
+        // js
+        ["-translate-x-[4px] translate-y-[4px] duration-150"]: isClicked && elevation === 1,
+        ["-translate-x-[8px] translate-y-[8px] duration-200"]: isClicked && elevation === 2,
+        ["-translate-x-[12px] translate-y-[12px] duration-250"]: isClicked && elevation === 3,
+        ["-translate-x-[16px] translate-y-[16px] duration-300"]: isClicked && elevation === 4,
+      })}
     >
       <span
         className={cn(
@@ -216,13 +205,7 @@ export const Block = ({
  * @param {React.ReactNode} props.children - The children to be rendered, max 5.
  * @param {string} [props.className] - Optional additional CSS classes.
  */
-export const BlocksRow = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
+export const BlocksRow = ({ children, className }: { children: React.ReactNode; className?: string }) => {
   if (Children.count(children) > 5) throw new Error("Max 5 children allowed");
 
   const zOrderedChildren = Children.map(children, (child, index) => {
@@ -230,11 +213,7 @@ export const BlocksRow = ({
     return cloneElement(child as React.ReactElement, { zIndex: 5 - index });
   });
 
-  return (
-    <div className={cn("relative z-0 flex flex-col justify-end md:flex-row", className)}>
-      {zOrderedChildren}
-    </div>
-  );
+  return <div className={cn("relative z-0 flex flex-col justify-end md:flex-row", className)}>{zOrderedChildren}</div>;
 };
 
 /**
@@ -244,12 +223,6 @@ export const BlocksRow = ({
  * @param {React.ReactNode} props.children - The children to be rendered within the column.
  * @param {string} [props.className] - Optional additional CSS classes to customize the appearance.
  */
-export const BlocksColumn = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
+export const BlocksColumn = ({ children, className }: { children: React.ReactNode; className?: string }) => {
   return <div className={cn("relative z-0 flex flex-col", className)}>{children}</div>;
 };

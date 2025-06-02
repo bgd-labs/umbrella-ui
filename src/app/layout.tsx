@@ -7,12 +7,28 @@ import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { PropsWithChildren } from "react";
 import "./globals.css";
+import { ComingSoon } from "@/components/ComingSoon/ComingSoon";
+import { EXECUTION_TIMESTAMP } from "@/configs/constants";
 
 export const metadata: Metadata = {
-  title: "Umbrella UI",
+  title: "Aave Umbrella",
 };
 
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
+  // TODO: remove after launch
+  if (Date.now() < EXECUTION_TIMESTAMP * 1000) {
+    return (
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`font-sans ${inter.variable} ${spaceGrotesk.variable} border-main-950 dark:border-main-500 text-main-950 dark:bg-main-950 antialiased dark:text-white`}
+        >
+          <ComingSoon />
+          <Analytics />
+        </body>
+      </html>
+    );
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
