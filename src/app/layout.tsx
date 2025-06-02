@@ -9,10 +9,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Umbrella UI",
-  description: "Umbrella is a decentralised staking system to protect Aave suppliers from bad debt.",
+  description: "Stake your Aave positions and earn extra yield",
   openGraph: {
     title: "Umbrella UI",
-    description: "Umbrella is a decentralised staking system to protect Aave suppliers from bad debt.",
+    description: "Stake your Aave positions and earn extra yield",
     url: "https://stake.onaave.com",
     siteName: "Umbrella UI",
     locale: "en_US",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Umbrella UI",
-    description: "Umbrella is a decentralised staking system to protect Aave suppliers from bad debt.",
+    description: "Stake your Aave positions and earn extra yield",
   },
 };
 
