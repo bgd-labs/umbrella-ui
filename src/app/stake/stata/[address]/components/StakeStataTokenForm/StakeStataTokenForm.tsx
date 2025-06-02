@@ -15,7 +15,6 @@ import { useStake } from "@/hooks/useStake";
 import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
 import { StataToken, StkToken } from "@/types/token";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LayersIcon } from "lucide-react";
 import { useMemo } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { Address, formatUnits } from "viem";
@@ -120,7 +119,6 @@ export const StakeStataTokenForm = ({ asset, stkToken, stataToken }: StakeStataT
             outerClassName="w-full md:w-[248px]"
             className="flex items-center gap-2"
           >
-            <LayersIcon size={14} />
             {isSafeWallet ? "Approve & Stake" : "Stake"}
           </Button>
         </div>

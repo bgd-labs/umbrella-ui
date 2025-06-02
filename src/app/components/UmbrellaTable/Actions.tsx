@@ -1,11 +1,9 @@
-import { DropdownContent, DropdownItem, DropdownRoot, DropdownTrigger } from "@/components/Dropdown/Dropdown";
-import { Block } from "@/components/ui/Block";
 import { config } from "@/configs/wagmi";
 import { useUmbrellaCooldownStatus } from "@/hooks/useAllUmbrellaCooldowns/useUmbrellaCooldownStatus";
+import { useUmbrellaCooldownData } from "@/hooks/useAllUmbrellaCooldowns/useUmbrellaCooldownData";
 import { useStartCooldown } from "@/hooks/useStartCooldown";
 import { useQueryClient } from "@tanstack/react-query";
 import { waitForTransactionReceipt } from "@wagmi/core";
-import { useState } from "react";
 
 import { Mobile, TabletAndDesktop } from "@/components/MediaQueries/MediaQueries";
 import { Button } from "@/components/ui/Button";
@@ -14,26 +12,40 @@ import { useIsSafeWallet } from "@/hooks/useIsSafeWallet/useIsSafeWallet";
 import { useSafeStartCooldown } from "@/hooks/useSafeStartCooldown";
 import { useTrackTransaction } from "@/providers/TransactionsTrackerProvider/TransactionsTrackerProvider";
 import { StkToken } from "@/types/token";
-import { useRouter } from "next/navigation";
+import { ChevronsDownIcon, TimerResetIcon } from "lucide-react";
 
 export type ActionsProps = {
   token: StkToken;
 };
 
 export const Actions = ({ token }: ActionsProps) => {
-  const router = useRouter();
   const client = useQueryClient();
   const isSafeWallet = useIsSafeWallet();
   const { chainId } = useCurrentMarket();
 
   const trackTransaction = useTrackTransaction();
 
-  const { address } = token;
-  const [isDropdownOpened, setIsDropdownOpened] = useState(false);
+  const { address, balance: stakedAmount } = token;
 
   const [safeStartCooldown] = useSafeStartCooldown();
   const [startCooldown, { isPending: isStartCooldownPending }] = useStartCooldown();
   const { status } = useUmbrellaCooldownStatus(address);
+  const { data: cooldownData } = useUmbrellaCooldownData(address);
+
+  const shouldShowInitiateCooldown = () => {
+    if (status === "none") {
+      return true;
+    }
+
+    if (status === "cooldown" || status === "withdraw") {
+      if (!stakedAmount || !cooldownData?.amount) {
+        return false;
+      }
+      return stakedAmount > cooldownData.amount;
+    }
+
+    return false;
+  };
 
   const handleCooldownClick = async () => {
     if (isSafeWallet) {
@@ -60,66 +72,47 @@ export const Actions = ({ token }: ActionsProps) => {
     }
   };
 
-  const handleWithdrawalClick = async () => {
-    if (status === "withdraw") {
-      router.push(`/withdraw/${address}`);
-    }
-  };
-
   return (
     <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-center md:gap-4">
       {status === "withdraw" && (
-        <Button
-          href={`/withdraw/${address}`}
-          prefetch
-          primary
-          elevation={1}
-          size="lg"
-          className="font-semibold"
-          outerClassName="sm:max-lg:hidden"
-        >
+        <Button href={`/withdraw/${address}`} prefetch primary elevation={1} size="lg" className="gap-2 font-semibold">
+          <ChevronsDownIcon size={16} />
           Withdraw
         </Button>
       )}
-
-      <Mobile>
-        <Button
-          elevation={1}
-          size="lg"
-          loading={isStartCooldownPending}
-          disabled={isStartCooldownPending}
-          onClick={handleCooldownClick}
-          className="font-semibold"
-        >
-          Initiate cooldown
-        </Button>
-      </Mobile>
-
-      <TabletAndDesktop>
-        <DropdownRoot onOpenChange={setIsDropdownOpened}>
-          <DropdownTrigger className="outline-none">
-            <Block
+      {shouldShowInitiateCooldown() && (
+        <>
+          <Mobile>
+            <Button
               elevation={1}
-              isHovered={isDropdownOpened}
-              className="flex items-center justify-center gap-1.5 px-1.5 py-4"
+              size="lg"
+              loading={isStartCooldownPending}
+              disabled={isStartCooldownPending}
+              onClick={handleCooldownClick}
+              className="gap-2 font-semibold"
+              title="Initiate cooldown"
             >
-              <span className="bg-main-950 size-[3.5px] rounded-full dark:bg-white" />
-              <span className="bg-main-950 size-[3.5px] rounded-full dark:bg-white" />
-              <span className="bg-main-950 size-[3.5px] rounded-full dark:bg-white" />
-            </Block>
-          </DropdownTrigger>
+              <TimerResetIcon size={16} />
+              Cooldown
+            </Button>
+          </Mobile>
 
-          <DropdownContent>
-            <DropdownItem onClick={handleCooldownClick}>Initiate cooldown</DropdownItem>
-
-            {status === "withdraw" && (
-              <DropdownItem onClick={handleWithdrawalClick} className="hidden sm:max-lg:block">
-                Withdraw
-              </DropdownItem>
-            )}
-          </DropdownContent>
-        </DropdownRoot>
-      </TabletAndDesktop>
+          <TabletAndDesktop>
+            <Button
+              elevation={1}
+              size="lg"
+              loading={isStartCooldownPending}
+              disabled={isStartCooldownPending}
+              onClick={handleCooldownClick}
+              className="gap-2 font-semibold"
+              title="Initiate cooldown"
+            >
+              <TimerResetIcon size={16} />
+              {status !== "withdraw" && "Cooldown"}
+            </Button>
+          </TabletAndDesktop>
+        </>
+      )}
     </div>
   );
 };

@@ -20,7 +20,6 @@ import { useTxFormSignature } from "@/providers/TxFormProvider/TxFormContext";
 import { SignableTxForm } from "@/types/form";
 import { NativeToken } from "@/types/token";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LayersIcon } from "lucide-react";
 import { useMemo } from "react";
 import { Control, Controller, FormProvider, useForm } from "react-hook-form";
 import { formatUnits } from "viem";
@@ -136,7 +135,6 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
               outerClassName="w-[248px]"
               className="flex items-center gap-2"
             >
-              <LayersIcon size={14} />
               Approve & Stake
             </Button>
           </div>
@@ -177,7 +175,6 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
               outerClassName="w-full md:w-[248px]"
               className="flex items-center gap-2"
             >
-              <LayersIcon size={14} />
               Stake
             </Button>
           </div>

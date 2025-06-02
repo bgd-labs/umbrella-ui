@@ -13,33 +13,36 @@ export const UmbrellaRewardsBreakdown = ({ umbrella }: UmbrellaRewardsBreakdownP
   const filteredRewards = umbrella.rewards.filter(withPositiveBalance);
 
   return (
-    <div className="flex flex-col">
-      <div className="border-main-950 flex items-center justify-between border-b pb-4">
+    <div className="border-main-100 flex flex-col border-b py-5 last:border-b-0 last:pb-0">
+      <div className="border-main-950 flex">
         <div className="flex items-center gap-3">
           <div className="flex flex-col">
-            <h2 className="truncate font-bold dark:text-white">
-              Umbrella {umbrella.isUnderlyingStataToken && "a"}
-              {umbrella.underlying.symbol} rewards:
+            <h2 className="font-semibold dark:text-white">
+              From staking{" "}
+              <span className="inline-block translate-y-1.5">
+                <AssetIcon
+                  symbol={umbrella.underlying.symbol}
+                  assetTag={umbrella.isUnderlyingStataToken ? "stkStata" : "stk"}
+                  className="size-6"
+                />
+              </span>{" "}
+              {umbrella.isUnderlyingStataToken && "a"}
+              {umbrella.underlying.symbol}:
             </h2>
           </div>
         </div>
-        <AssetIcon
-          symbol={umbrella.underlying.symbol}
-          assetTag={umbrella.isUnderlyingStataToken ? "stkStata" : "stk"}
-          className="size-7"
-        />
       </div>
-      <div className="flex flex-col gap-3 pt-3">
+      <div className="flex flex-col gap-3 pt-4">
         {filteredRewards.map((reward) => (
-          <div key={reward.address} className="flex items-center justify-between">
+          <div key={reward.address} className="mb-2 flex items-center justify-between">
             <div className="flex max-w-[200px] items-center gap-2 md:max-w-[320px]">
-              <RewardAssetIcon reward={reward} className="size-8 shrink-0" />
-              <h2 className="truncate font-bold dark:text-white">{reward.symbol}</h2>
+              <RewardAssetIcon reward={reward} className="size-6 shrink-0" />
+              <h2 className="truncate text-sm font-semibold dark:text-white">{reward.symbol}</h2>
             </div>
 
-            <div className="flex shrink-0 flex-col items-end">
-              <NumberDisplay value={reward.usdAmount ?? 0} type="currency" className="text-base font-semibold" />
+            <div className="flex shrink-0 gap-2">
               <NumberDisplay value={reward.balanceFormatted ?? 0} className="text-main-500 text-sm" />
+              <NumberDisplay value={reward.usdAmount ?? 0} type="currency" className="text-sm font-semibold" />
             </div>
           </div>
         ))}
