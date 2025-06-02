@@ -90,6 +90,7 @@ export const Actions = ({ token }: ActionsProps) => {
               disabled={isStartCooldownPending}
               onClick={handleCooldownClick}
               className="gap-2 font-semibold"
+              title="Initiate cooldown"
             >
               <TimerResetIcon size={16} />
               Cooldown
@@ -104,6 +105,7 @@ export const Actions = ({ token }: ActionsProps) => {
               disabled={isStartCooldownPending}
               onClick={handleCooldownClick}
               className="gap-2 font-semibold"
+              title="Initiate cooldown"
             >
               <TimerResetIcon size={16} />
               {status !== "withdraw" && "Cooldown"}

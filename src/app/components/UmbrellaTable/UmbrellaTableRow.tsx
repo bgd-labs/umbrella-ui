@@ -17,7 +17,7 @@ export const UmbrellaTableRow = ({ data }: UmbrellaTableRowProps) => {
   return (
     <div
       className={
-        "grid gap-4 py-3.5 md:grid-cols-[1fr_80px_100px_160px_60px] md:px-4 lg:grid-cols-[1fr_80px_120px_160px_160px] lg:px-[30px]"
+        "grid gap-4 py-3.5 md:grid-cols-[1fr_80px_100px_160px_150px] md:px-4 lg:grid-cols-[1fr_80px_120px_160px_160px] lg:px-[30px]"
       }
     >
       <TableCell>
@@ -58,7 +58,7 @@ export const UmbrellaTableRow = ({ data }: UmbrellaTableRowProps) => {
         <UmbrellaStatus token={data} />
       </TableCell>
 
-      <TableCell className="justify-end border">
+      <TableCell className="justify-end">
         <Actions token={data} />
       </TableCell>
     </div>
