@@ -41,7 +41,7 @@ export const AssetsTable = ({ data }: AssetsTableProps) => {
         >
           <TableHeaderCell className="grow justify-start gap-1">Asset</TableHeaderCell>
           {isConnected && <TableHeaderCell>Balance</TableHeaderCell>}
-          <TableHeaderCell>Stake APY</TableHeaderCell>
+          <TableHeaderCell>Stake Yield</TableHeaderCell>
           <TableHeaderCell />
         </div>
       </Block>
