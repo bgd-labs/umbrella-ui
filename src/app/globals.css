@@ -99,10 +99,6 @@
     var(--font-heading), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
 
-  --font-countdown:
-    var(--font-countdown), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
-
   --grid-template-rows-layout: var(--height-2) 1fr;
   --grid-template-rows-columns: 1fr var(--height-2);
 
