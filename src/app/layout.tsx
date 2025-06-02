@@ -9,6 +9,20 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Umbrella UI",
+  description: "Stake your Aave positions and earn extra yield",
+  openGraph: {
+    title: "Umbrella UI",
+    description: "Stake your Aave positions and earn extra yield",
+    url: "https://stake.onaave.com",
+    siteName: "Umbrella UI",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Umbrella UI",
+    description: "Stake your Aave positions and earn extra yield",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
