@@ -1,10 +1,6 @@
 "use client";
 import Link from "next/link";
-import {
-  BlockBase,
-  getBlockClassnames,
-  type BlockProps,
-} from "@/components/ui/Block";
+import { BlockBase, getBlockClassnames, type BlockProps } from "@/components/ui/Block";
 import { cn } from "@/utils/cn";
 import { LoaderCircle } from "lucide-react";
 import React, { ComponentProps } from "react";
@@ -21,6 +17,7 @@ export type ButtonProps = BlockProps & {
   disabled?: boolean;
   loading?: boolean;
   onClick?: () => void;
+  title?: string;
 };
 
 /**
@@ -65,12 +62,11 @@ export const Button = ({
   disabled = false,
   loading = false,
   children,
+  title,
   ...props
 }: ButtonProps) => {
-  const finalHoverAnimation =
-    isHovered !== undefined ? isHovered : hoverAnimation;
-  const finalActiveAnimation =
-    isClicked !== undefined ? isClicked : activeAnimation;
+  const finalHoverAnimation = isHovered !== undefined ? isHovered : hoverAnimation;
+  const finalActiveAnimation = isClicked !== undefined ? isClicked : activeAnimation;
 
   const elevation = disabled ? 0 : elevationProp;
 
@@ -86,22 +82,15 @@ export const Button = ({
         {
           ["min-w-[110px] px-2 py-1.5"]: size === "md",
           ["px-1.5 py-1.5 md:px-2 md:py-2"]: size === "lg",
-          ["bg-main-950 dark:bg-main-900 text-white dark:text-white"]:
-            primary && !disabled,
-          ["text-main-950 dark:bg-main-950 bg-white dark:text-white"]:
-            !primary && !disabled,
-          ["bg-main-300 cursor-not-allowed border-b border-transparent text-white"]:
-            disabled,
+          ["bg-main-950 dark:bg-main-900 text-white dark:text-white"]: primary && !disabled,
+          ["text-main-950 dark:bg-main-950 bg-white dark:text-white"]: !primary && !disabled,
+          ["bg-main-300 cursor-not-allowed border-b border-transparent text-white"]: disabled,
         },
         className,
       )}
       {...props}
     >
-      {loading ? (
-        <LoaderCircle className="size-5 animate-spin text-stone-400" />
-      ) : (
-        children
-      )}
+      {loading ? <LoaderCircle className="size-5 animate-spin text-stone-400" /> : children}
     </BlockBase>
   );
 
@@ -113,12 +102,9 @@ export const Button = ({
         replace={replace}
         scroll={scroll}
         prefetch={prefetch}
-        className={cn(
-          getBlockClassnames({ elevation, zIndex }),
-          "inline-flex",
-          outerClassName,
-        )}
+        className={cn(getBlockClassnames({ elevation, zIndex }), "inline-flex", outerClassName)}
         onClick={onClick}
+        title={title}
       >
         {blockBase}
       </Link>
@@ -127,13 +113,10 @@ export const Button = ({
 
   return (
     <button
-      className={cn(
-        getBlockClassnames({ elevation, zIndex }),
-        "inline-flex",
-        outerClassName,
-      )}
+      className={cn(getBlockClassnames({ elevation, zIndex }), "inline-flex", outerClassName)}
       onClick={onClick}
       disabled={disabled}
+      title={title}
     >
       {blockBase}
     </button>

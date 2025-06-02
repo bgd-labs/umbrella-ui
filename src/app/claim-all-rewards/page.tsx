@@ -13,6 +13,7 @@ import { useIsSafeWallet } from "@/hooks/useIsSafeWallet/useIsSafeWallet";
 import { useWalletAddress } from "@/providers/WalletProvider/WalletContext";
 import { sumUpAllRewards } from "@/utils/calculations";
 import { withPositiveBalance } from "@/utils/data";
+import { CoinsIcon } from "lucide-react";
 
 export default function ClaimRewardsPage() {
   const receiver = useWalletAddress();
@@ -60,13 +61,13 @@ export default function ClaimRewardsPage() {
   return (
     <PageContainer>
       <TransactionCard
-        title="Claim All Rewards"
+        title="All accrued rewards"
         hash={hash}
         safeHash={safeHash}
         loading={isClaiming || isSafeClaiming}
         error={claimError || safeClaimError}
       >
-        <div className="flex max-h-[480px] w-full flex-col gap-8 overflow-x-clip overflow-y-auto">
+        <div className="flex w-full flex-col">
           {stkTokenWithRewards
             ?.filter((umbrella) => umbrella.rewards.some((reward) => reward?.usdAmount))
             .map((umbrella) => <UmbrellaRewardsBreakdown key={umbrella.address} umbrella={umbrella} />)}
@@ -88,7 +89,7 @@ export default function ClaimRewardsPage() {
             disabled={isClaiming}
             className="flex items-center gap-2"
           >
-            Claim All Rewards
+            Claim All
           </Button>
         </div>
       </TransactionCard>

@@ -2,7 +2,6 @@ import { UMBRELLA_BATCH_HELPER_ABI } from "@/abis/umbrellaBatchHelper";
 import { Button } from "@/components/ui/Button";
 import { useSafeAppsSDK } from "@safe-global/safe-apps-react-sdk";
 import { sendCalls } from "@wagmi/core/experimental";
-import { LayersIcon } from "lucide-react";
 import { useState } from "react";
 import { Address, encodeFunctionData, erc20Abi } from "viem";
 import { useConfig } from "wagmi";
@@ -84,7 +83,6 @@ export const SafeApproveAndStake = ({
       outerClassName="w-[248px]"
       className="flex items-center gap-2"
     >
-      <LayersIcon size={14} />
       Approve & Stake
     </Button>
   );

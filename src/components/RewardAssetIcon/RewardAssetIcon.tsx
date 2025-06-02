@@ -9,13 +9,7 @@ const CHAIN_ID_TO_SHORT_NAME: Partial<Record<ChainId, string>> = {
   [baseSepolia.id]: "BasSep",
 } as const;
 
-const transformSymbol = ({
-  chainId,
-  symbol,
-}: {
-  chainId: ChainId;
-  symbol: string;
-}) => {
+const transformSymbol = ({ chainId, symbol }: { chainId: ChainId; symbol: string }) => {
   const shortChainName = CHAIN_ID_TO_SHORT_NAME[chainId];
 
   // if there is no defined short chain name that means that we don't have strategy to format symbol

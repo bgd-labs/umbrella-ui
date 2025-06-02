@@ -7,15 +7,11 @@ import { describe, expect, it } from "vitest";
 import { APYBreakdown } from "./APYBreakdown";
 
 vi.mock("@/components/AssetIcon/AssetIcon", () => ({
-  AssetIcon: ({ symbol }: { symbol: string }) => (
-    <div data-testid="asset-icon">{symbol}</div>
-  ),
+  AssetIcon: ({ symbol }: { symbol: string }) => <div data-testid="asset-icon">{symbol}</div>,
 }));
 
 vi.mock("@/components/RewardAssetIcon/RewardAssetIcon", () => ({
-  RewardAssetIcon: ({ reward }: { reward: Reward }) => (
-    <div data-testid="reward-icon">{reward.symbol}</div>
-  ),
+  RewardAssetIcon: ({ reward }: { reward: Reward }) => <div data-testid="reward-icon">{reward.symbol}</div>,
 }));
 
 describe("APYBreakdown", () => {
@@ -25,22 +21,24 @@ describe("APYBreakdown", () => {
       name: "Reward Token 1",
       symbol: "RWD1",
       apy: 5.5,
-      currentEmissionPerSecondScaled: 3664875909329n,
       decimals: 18,
       type: "underlying",
       latestAnswer: 100000000n,
       latestAnswerFormatted: 1,
+      distributionEnd: 1699999999n,
+      maxEmissionPerSecond: 3664875909329n,
     },
     {
       address: "0x456",
       name: "Reward Token 2",
       symbol: "RWD2",
       apy: 3.2,
-      currentEmissionPerSecondScaled: 3664875909329n,
       decimals: 18,
       type: "underlying",
       latestAnswer: 100000000n,
       latestAnswerFormatted: 1,
+      distributionEnd: 1699999999n,
+      maxEmissionPerSecond: 3664875909329n,
     },
   ];
 
@@ -57,27 +55,13 @@ describe("APYBreakdown", () => {
   });
 
   it("should render total APY", () => {
-    renderWithProviders(
-      <APYBreakdown
-        symbol="ETH"
-        totalApy={10.5}
-        supplyApy={1.8}
-        rewards={[]}
-      />,
-    );
+    renderWithProviders(<APYBreakdown symbol="ETH" totalApy={10.5} supplyApy={1.8} rewards={[]} />);
 
     expect(screen.getByRole("button")).toHaveTextContent("10.5");
   });
 
   it("should render reward icons when displayRewards is true", () => {
-    renderWithProviders(
-      <APYBreakdown
-        symbol="ETH"
-        totalApy={10.5}
-        supplyApy={1.8}
-        rewards={mockRewards}
-      />,
-    );
+    renderWithProviders(<APYBreakdown symbol="ETH" totalApy={10.5} supplyApy={1.8} rewards={mockRewards} />);
 
     const rewardIcons = screen.getAllByTestId("reward-icon");
     expect(rewardIcons.length).toBe(mockRewards.length);
@@ -85,13 +69,7 @@ describe("APYBreakdown", () => {
 
   it("should not render reward icons when displayRewards is false", () => {
     renderWithProviders(
-      <APYBreakdown
-        symbol="ETH"
-        totalApy={10.5}
-        supplyApy={1.8}
-        rewards={mockRewards}
-        displayRewards={false}
-      />,
+      <APYBreakdown symbol="ETH" totalApy={10.5} supplyApy={1.8} rewards={mockRewards} displayRewards={false} />,
     );
 
     const rewardIcons = screen.queryAllByTestId("reward-icon");
@@ -99,31 +77,24 @@ describe("APYBreakdown", () => {
   });
 
   it("should show tooltip with breakdown on hover", async () => {
-    renderWithProviders(
-      <APYBreakdown
-        symbol="ETH"
-        totalApy={10.5}
-        supplyApy={1.8}
-        rewards={mockRewards}
-      />,
-    );
+    renderWithProviders(<APYBreakdown symbol="ETH" totalApy={10.5} supplyApy={1.8} rewards={mockRewards} />);
 
     const button = screen.getByRole("button");
 
-    expect(screen.queryByText("Supply APY")).not.toBeInTheDocument();
-    expect(screen.queryByText("Reward Token 1")).not.toBeInTheDocument();
-    expect(screen.queryByText("Reward Token 2")).not.toBeInTheDocument();
+    expect(screen.queryByText("Aave Supply Yield")).not.toBeInTheDocument();
+    expect(screen.queryByText("Umbrella rewards in RWD1")).not.toBeInTheDocument();
+    expect(screen.queryByText("Umbrella rewards in RWD2")).not.toBeInTheDocument();
 
     await userEvent.hover(button);
 
     await waitFor(() => {
-      const supplyApyElements = screen.getAllByText("Supply APY");
+      const supplyApyElements = screen.getAllByText("Aave Supply Yield");
       expect(supplyApyElements[0]).toBeVisible();
 
-      const reward1Elements = screen.getAllByText("Reward Token 1");
+      const reward1Elements = screen.getAllByText("Umbrella rewards in RWD1");
       expect(reward1Elements[0]).toBeVisible();
 
-      const reward2Elements = screen.getAllByText("Reward Token 2");
+      const reward2Elements = screen.getAllByText("Umbrella rewards in RWD2");
       expect(reward2Elements[0]).toBeVisible();
     });
   });
@@ -136,58 +107,38 @@ describe("APYBreakdown", () => {
         name: "Zero Reward",
         symbol: "ZERO",
         apy: 0,
-        currentEmissionPerSecondScaled: 0n,
         decimals: 18,
         type: "underlying",
         latestAnswer: 100000000n, // 1 USD with 8 decimals
         latestAnswerFormatted: 1,
+        distributionEnd: 1699999999n,
+        maxEmissionPerSecond: 0n,
       },
     ];
 
-    renderWithProviders(
-      <APYBreakdown
-        symbol="ETH"
-        totalApy={10.5}
-        supplyApy={1.8}
-        rewards={rewardsWithZero}
-      />,
-    );
+    renderWithProviders(<APYBreakdown symbol="ETH" totalApy={10.5} supplyApy={1.8} rewards={rewardsWithZero} />);
 
     const button = screen.getByRole("button");
 
-    expect(screen.queryByText("Zero Reward")).not.toBeInTheDocument();
+    expect(screen.queryByText("Umbrella rewards in ZERO")).not.toBeInTheDocument();
 
     await userEvent.hover(button);
 
     await waitFor(() => {
-      expect(screen.getAllByText("Reward Token 1")[0]).toBeVisible();
-      expect(screen.getAllByText("Reward Token 2")[1]).toBeVisible();
-      expect(screen.queryByText("Zero Reward")).not.toBeInTheDocument();
+      expect(screen.getAllByText("Umbrella rewards in RWD1")[0]).toBeVisible();
+      expect(screen.getAllByText("Umbrella rewards in RWD2")[0]).toBeVisible();
+      expect(screen.queryByText("Umbrella rewards in ZERO")).not.toBeInTheDocument();
     });
   });
 
   it("should render supply APY icon only when supplyApy is non-zero", async () => {
-    renderWithProviders(
-      <APYBreakdown
-        symbol="ETH"
-        totalApy={10.5}
-        supplyApy={0}
-        rewards={mockRewards}
-      />,
-    );
+    renderWithProviders(<APYBreakdown symbol="ETH" totalApy={10.5} supplyApy={0} rewards={mockRewards} />);
 
     expect(screen.queryByText("ETH")).not.toBeInTheDocument();
   });
 
   it("should format APY values with correct decimals", async () => {
-    renderWithProviders(
-      <APYBreakdown
-        symbol="ETH"
-        totalApy={10.56789}
-        supplyApy={1.23456}
-        rewards={[]}
-      />,
-    );
+    renderWithProviders(<APYBreakdown symbol="ETH" totalApy={10.56789} supplyApy={1.23456} rewards={[]} />);
 
     const button = screen.getByRole("button");
 

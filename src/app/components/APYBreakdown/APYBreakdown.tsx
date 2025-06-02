@@ -40,7 +40,7 @@ export const APYBreakdown = ({ symbol, totalApy, supplyApy, rewards, displayRewa
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <AssetIcon symbol={symbol} assetTag="a" className="size-[18px]" />
-              <div>Supply APY</div>
+              <div>Aave Supply Yield</div>
             </div>
             <NumberDisplay value={supplyApy} type="percent" />
           </div>
@@ -48,7 +48,7 @@ export const APYBreakdown = ({ symbol, totalApy, supplyApy, rewards, displayRewa
             <div key={reward.address} className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2">
                 <RewardAssetIcon reward={reward} className="size-[18px]" />
-                <div>{reward.name}</div>
+                <div>Umbrella rewards in {reward.symbol}</div>
               </div>
               <NumberDisplay value={reward.apy} type="percent" />
             </div>

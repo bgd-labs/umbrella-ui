@@ -3,6 +3,7 @@ import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
 import { Button } from "@/components/ui/Button";
 import { Asset, StkToken } from "@/types/token";
 import { calculateAvailableToStakeUsd, calculateMetrics, calculateSimpleInterest } from "@/utils/calculations";
+import { CoinsIcon } from "lucide-react";
 import Image from "next/image";
 import { useAccount } from "wagmi";
 
@@ -102,7 +103,8 @@ export const Summary = ({ umbrellaTokens, assets }: SummaryProps) => {
         </div>
         <div className="not-md:flex not-md:items-center">
           {totalClaimableYield > 0 && (
-            <Button elevation={1} href="/claim-all-rewards" primary className="font-semibold">
+            <Button elevation={1} href="/claim-all-rewards" primary className="gap-2 font-semibold">
+              <CoinsIcon size={16} />
               Claim all
             </Button>
           )}
