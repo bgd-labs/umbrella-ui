@@ -48,27 +48,27 @@ const CountdownRenderer = ({
           <>
             <span className="flex items-baseline tabular-nums">
               <NumberFlow trend={-1} value={days} format={{ minimumIntegerDigits: 1 }} />
-              <span className="text-sm sm:text-lg">D</span>
+              <span className="ml-[2px] text-sm sm:text-lg">D</span>
             </span>
             <span className="flex items-baseline tabular-nums">
               <NumberFlow trend={-1} value={hours} format={{ minimumIntegerDigits: 2 }} />
-              <span className="text-sm sm:text-lg">H</span>
+              <span className="ml-[2px] text-sm sm:text-lg">H</span>
             </span>
           </>
         )}
         {days === 0 && (
           <span className="flex items-baseline tabular-nums">
             <NumberFlow trend={-1} value={hours} format={{ minimumIntegerDigits: 2 }} />
-            <span className="sm:text-lg">H</span>
+            <span className="ml-[2px] sm:text-lg">H</span>
           </span>
         )}
         <span className="flex items-baseline tabular-nums">
           <NumberFlow trend={-1} value={minutes} digits={{ 1: { max: 5 } }} format={{ minimumIntegerDigits: 2 }} />
-          <span className="text-sm sm:text-lg">M</span>
+          <span className="ml-[2px] text-sm sm:text-lg">M</span>
         </span>
         <span className="flex items-baseline tabular-nums">
           <NumberFlow trend={-1} value={seconds} digits={{ 1: { max: 5 } }} format={{ minimumIntegerDigits: 2 }} />
-          <span className="text-sm sm:text-lg">S</span>
+          <span className="ml-[2px] text-sm sm:text-lg">S</span>
         </span>
       </div>
     </Block>
