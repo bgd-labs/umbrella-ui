@@ -5,6 +5,8 @@ import { StkToken } from "@/types/token";
 import { memo } from "react";
 import { formatUnits } from "viem";
 
+const MAX_TOKENS_TO_SHOW = 4;
+
 export type StakedSummaryProps = {
   stkTokens: StkToken[];
 };
@@ -30,7 +32,7 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
         <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
           {stkTokens
             // TODO Add dropdown to show more tokens
-            .slice(0, 4)
+            .slice(0, MAX_TOKENS_TO_SHOW)
             .map(({ address, totalAssets, decimals, latestAnswerFormatted, targetLiquidity, underlying }) => {
               const stakedUSD = Number(formatUnits(totalAssets, decimals)) * latestAnswerFormatted;
               const targetLiquidityUSD = Number(formatUnits(targetLiquidity, decimals)) * latestAnswerFormatted;
