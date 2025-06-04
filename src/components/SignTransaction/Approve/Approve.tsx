@@ -1,6 +1,7 @@
 import { LoadingBlock } from "@/components/SignTransaction/Loader";
 import { SignTransactionProps } from "@/components/SignTransaction/types";
 import { config } from "@/configs/wagmi";
+import { USDT } from "@/constants/assets";
 import { useAllowance } from "@/hooks/useAllowance";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
 import { useWriteContract } from "@/hooks/useWriteContract/useWriteContract";
@@ -44,6 +45,21 @@ export const Approve = ({ asset, spender, amount, onChange, disabled }: ApproveP
   const handleApproveClick = async () => {
     try {
       setSigningStatus("pending");
+
+      // For USDT on mainnet we have to reset allowance to 0 if it is non 0 now
+      // https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
+      if (asset === USDT && allowance !== 0n) {
+        const hash = await writeContractAsync({
+          chainId,
+          address: asset,
+          abi: erc20Abi,
+          functionName: "approve",
+          args: [spender, 0n],
+        });
+        await waitForTransactionReceipt(config, { hash });
+        trackTransaction({ chainId, hash, description: "Reset allowance to 0" });
+      }
+
       const hash = await writeContractAsync({
         chainId,
         address: asset,
