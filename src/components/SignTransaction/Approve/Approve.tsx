@@ -73,6 +73,7 @@ export const Approve = ({ asset, spender, amount, onChange, disabled }: ApproveP
         functionName: "approve",
         args: [spender, amount],
       });
+
       await waitForTransactionReceipt(config, { hash });
       await client.invalidateQueries({ queryKey: allowanceQueryKey });
       setSigningStatus("signed");
@@ -99,7 +100,7 @@ export const Approve = ({ asset, spender, amount, onChange, disabled }: ApproveP
   }
 
   return (
-    <Tooltip open={twoTransactionsRequired && isTooltipOpen} onOpenChange={setIsTooltipOpen}>
+    <Tooltip open={twoTransactionsRequired && amount !== 0n && isTooltipOpen} onOpenChange={setIsTooltipOpen}>
       <TooltipTrigger>
         <Button
           elevation={1}
@@ -109,7 +110,7 @@ export const Approve = ({ asset, spender, amount, onChange, disabled }: ApproveP
           className="gap-2"
           outerClassName="w-full md:w-[248px]"
         >
-          {twoTransactionsRequired && <InfoIcon className="size-5" />}
+          {twoTransactionsRequired && amount !== 0n && <InfoIcon className="size-5" />}
           Approve
         </Button>
       </TooltipTrigger>

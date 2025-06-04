@@ -11,6 +11,7 @@ import { withAtLeastOneActiveReward, withPositiveBalance } from "@/utils/data";
 import { useMemo } from "react";
 import { useAccount } from "wagmi";
 import { NoRewardsOnMarket } from "./components/NoRewardsOnMarket/NoRewardsOnMarket";
+import { StakedSummary } from "./components/StakedSummary/StakedSummary";
 import { UmbrellaTable } from "./components/UmbrellaTable/UmbrellaTable";
 
 export default function Home() {
@@ -47,6 +48,8 @@ export default function Home() {
 
   return (
     <main className="mx-auto mb-auto flex w-full max-w-(--mobile-container) flex-col gap-12 md:max-w-(--breakpoint-lg)">
+      {!!stkTokens && <StakedSummary stkTokens={stkTokens} />}
+
       {!!stkTokens && <UmbrellaTable data={stkTokens} assets={filteredAssets} />}
 
       {filteredAssets.length > 0 && <AssetsTable data={filteredAssets} />}
