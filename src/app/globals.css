@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @plugin 'tailwindcss-animate';
 
@@ -33,9 +33,15 @@
 }
 
 @keyframes section-highlight {
-  0% { fill: var(--color-secondary-500); }
-  12.5% { fill: var(--color-main-100); }
-  100% { fill: var(--color-main-100); }
+  0% {
+    fill: var(--color-secondary-500);
+  }
+  12.5% {
+    fill: var(--color-main-100);
+  }
+  100% {
+    fill: var(--color-main-100);
+  }
 }
 
 @theme {
@@ -53,7 +59,6 @@
   --color-main-800: #40414c;
   --color-main-900: #383842;
   --color-main-950: #1c1c21;
-
 
   --color-secondary-50: #ffffe7;
   --color-secondary-100: #feffc1;
@@ -79,15 +84,16 @@
   /*--color-secondary-900: #0a5753;*/
   /*--color-secondary-950: #003435;*/
 
-  
-  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-sans:
+    var(--font-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --font-heading:
+    var(--font-heading), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
 
   --grid-template-rows-layout: var(--height-2) 1fr;
   --grid-template-rows-columns: 1fr var(--height-2);
-  
+
   --animate-section-1: section-highlight 0.8s infinite steps(1);
   --animate-section-2: section-highlight 0.8s infinite steps(1) -0.1s;
   --animate-section-3: section-highlight 0.8s infinite steps(1) -0.2s;
@@ -98,6 +104,15 @@
   --animate-section-8: section-highlight 0.8s infinite steps(1) -0.7s;
 
   --mobile-container: 336px;
+}
+
+/* Safari NumberFlow alignment fix for < 16px font sizes with symbols */
+number-flow-react::part(left),
+number-flow-react::part(right),
+number-flow-react::part(left)::after,
+number-flow-react::part(right)::after,
+number-flow-react::part(symbol) {
+  padding: calc(var(--number-flow-mask-height, 0.25em) / 2) 0;
 }
 
 /* https://base-ui.com/react/overview/quick-start */
