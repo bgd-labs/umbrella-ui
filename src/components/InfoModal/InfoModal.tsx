@@ -120,56 +120,78 @@ export const InfoModal = ({ children }: InfoModalProps) => {
 
               <h2 className="text-2xl font-semibold md:text-3xl dark:text-white">More information and links</h2>
 
-              <ul className="pl-6">
-                <li className="relative mb-4">
-                  <span className="absolute -left-5 font-bold">&bull;</span>
-                  <a
-                    target="_blank"
-                    href="https://governance.aave.com/t/arfc-aave-umbrella-activation/21521"
-                    className="flex items-center gap-1 underline underline-offset-3"
-                  >
-                    Aave Governance forum describing Umbrella
-                    <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer max-sm:hidden" />
-                  </a>
-                </li>
-                {/*<li className="relative mb-4">*/}
-                {/*  <span className="absolute -left-5 font-bold">&bull;</span>*/}
-                {/*  <a*/}
-                {/*    target="_blank"*/}
-                {/*    href=""*/}
-                {/*    className="flex items-center gap-1 underline underline-offset-3"*/}
-                {/*  >*/}
-                {/*    Aave Umbrella smart contracts addresses*/}
-                {/*    <ExternalLinkIcon*/}
-                {/*      size={14}*/}
-                {/*      className="text-main-500 cursor-pointer"*/}
-                {/*    />*/}
-                {/*  </a>*/}
-                {/*</li>*/}
-                <li className="relative mb-4">
-                  <span className="absolute -left-5 font-bold">&bull;</span>
-                  <a
-                    target="_blank"
-                    href="https://github.com/aave-dao/aave-umbrella"
-                    className="flex items-center gap-1 underline underline-offset-3"
-                  >
-                    Aave Umbrella smart contracts codebase
-                    <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer max-sm:hidden" />
-                  </a>
-                </li>
-                <li className="relative mb-4">
-                  <span className="absolute -left-5 font-bold">&bull;</span>
-                  <a
-                    target="_blank"
-                    href="https://github.com/aave-dao/aave-umbrella-ui"
-                    className="flex items-center gap-1 underline underline-offset-3"
-                  >
-                    Aave Umbrella UI codebase
-                    <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer max-sm:hidden" />
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <ul className="pl-6">
+              <li className="relative mb-4">
+                <span className="absolute -left-5 font-bold">&bull;</span>
+                <a
+                  target="_blank"
+                  href="https://governance.aave.com/t/arfc-aave-umbrella-activation/21521"
+                  className="flex items-center gap-1 underline underline-offset-3"
+                >
+                  Aave Governance forum describing Umbrella
+                  <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer max-sm:hidden" />
+                </a>
+              </li>
+              {/*<li className="relative mb-4">*/}
+              {/*  <span className="absolute -left-5 font-bold">&bull;</span>*/}
+              {/*  <a*/}
+              {/*    target="_blank"*/}
+              {/*    href=""*/}
+              {/*    className="flex items-center gap-1 underline underline-offset-3"*/}
+              {/*  >*/}
+              {/*    Aave Umbrella smart contracts addresses*/}
+              {/*    <ExternalLinkIcon*/}
+              {/*      size={14}*/}
+              {/*      className="text-main-500 cursor-pointer"*/}
+              {/*    />*/}
+              {/*  </a>*/}
+              {/*</li>*/}
+              <li className="relative mb-4">
+                <span className="absolute -left-5 font-bold">&bull;</span>
+                <a
+                  target="_blank"
+                  href="https://github.com/aave-dao/aave-umbrella"
+                  className="flex items-center gap-1 underline underline-offset-3"
+                >
+                  Aave Umbrella smart contracts codebase
+                  <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer max-sm:hidden" />
+                </a>
+              </li>
+              <li className="relative mb-4">
+                <span className="absolute -left-5 font-bold">&bull;</span>
+                <a
+                  target="_blank"
+                  href="https://github.com/aave-dao/aave-umbrella-ui"
+                  className="flex items-center gap-1 underline underline-offset-3"
+                >
+                  Aave Umbrella UI codebase
+                  <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer max-sm:hidden" />
+                </a>
+              </li>
+
+              <li className="relative mb-4">
+                <span className="absolute -left-5 font-bold">&bull;</span>
+                <a
+                  target="_blank"
+                  href="https://github.com/bgd-labs/umbrella-docs/blob/main/umbrella-raw-data-fetching.md"
+                  className="flex items-center gap-1 underline underline-offset-3"
+                >
+                  Block explorer data fetching guide
+                  <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer max-sm:hidden" />
+                </a>
+              </li>
+              <li className="relative mb-4">
+                <span className="absolute -left-5 font-bold">&bull;</span>
+                <a
+                  target="_blank"
+                  href="https://github.com/bgd-labs/umbrella-docs/blob/main/umbrella-faq.md"
+                  className="flex items-center gap-1 underline underline-offset-3"
+                >
+                  FAQ
+                  <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer max-sm:hidden" />
+                </a>
+              </li>
+            </ul>
           </div>
         </Block>
       </ModalBody>

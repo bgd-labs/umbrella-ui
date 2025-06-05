@@ -13,16 +13,16 @@ export const metadata: Metadata = {
   title: "Aave Umbrella",
   description: "Stake your Aave positions and earn extra yield",
   openGraph: {
-    title: "Umbrella UI",
+    title: "Aave Umbrella",
     description: "Stake your Aave positions and earn extra yield",
     url: "https://stake.onaave.com",
-    siteName: "Umbrella UI",
+    siteName: "Aave Umbrella",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Umbrella UI",
+    title: "Aave Umbrella",
     description: "Stake your Aave positions and earn extra yield",
   },
 };

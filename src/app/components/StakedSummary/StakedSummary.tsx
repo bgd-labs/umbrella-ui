@@ -141,7 +141,7 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
                       </div>
                     </TooltipTrigger>
                     <TooltipContent side="bottom">
-                      <div className="border-main-950 flex min-w-[250px] flex-col gap-1 border bg-white px-4 py-3">
+                      <div className="border-main-950 dark:bg-main-950 dark:border-main-600 flex min-w-[250px] flex-col gap-1 border bg-white px-4 py-3">
                         <Token
                           token={{
                             address,
@@ -149,29 +149,29 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
                             type: isUnderlyingStataToken ? "stkStata" : "stk",
                           }}
                         />
-                        <div className="bg-main-100 my-2 h-px w-full" />
+                        <div className="bg-main-100 dark:bg-main-600 my-2 h-px w-full" />
                         <div className="flex items-center justify-between gap-2">
-                          <div>Total Staked</div>
-                          <div className="text-main-900">
+                          <div className="dark:text-main-500">Total Staked</div>
+                          <div className="text-main-900 dark:text-white">
                             <NumberDisplay value={stakedUSD} type="currency" className="font-bold" />
                           </div>
                         </div>
                         <div className="flex items-center justify-between gap-2">
-                          <div>Target Liquidity</div>
-                          <div className="text-main-900">
+                          <div className="dark:text-main-500">Target Liquidity</div>
+                          <div className="text-main-900 dark:text-white">
                             <NumberDisplay value={targetLiquidityUSD} type="currency" className="font-bold" />
                           </div>
                         </div>
-                        <div className="bg-main-100 my-2 h-px w-full" />
+                        <div className="bg-main-100 dark:bg-main-600 my-2 h-px w-full" />
                         <div className="flex items-center justify-between gap-2">
-                          <div>Current Yield</div>
-                          <div className="text-main-900">
+                          <div className="dark:text-main-500">Current Yield</div>
+                          <div className="text-main-900 dark:text-white">
                             <NumberDisplay value={apyData.total} type="percent" className="font-bold" />
                           </div>
                         </div>
                         <div className="flex items-center justify-between gap-2">
-                          <div>Yield at Target</div>
-                          <div className="text-main-900">
+                          <div className="dark:text-main-500">Yield at Target</div>
+                          <div className="text-main-900 dark:text-white">
                             <NumberDisplay value={apyData.targetTotal} type="percent" className="font-bold" />
                           </div>
                         </div>
