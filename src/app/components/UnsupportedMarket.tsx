@@ -23,9 +23,7 @@ export const UnsupportedMarket = () => {
       <div className="flex flex-col items-center gap-8">
         <div className="text-3xl font-semibold">Oops! There is No Umbrella on {name} Yet</div>
 
-        <div className="text-xl">
-          We&apos;re working on adding more chains, but for now you can explore it on a Base Sepolia
-        </div>
+        <div className="text-xl">We&apos;re working on adding more chains</div>
 
         <div className="flex items-center justify-center">
           <Button primary elevation={1} size="lg" outerClassName="w-[250px] grow-0" onClick={handleSwitchToTestnet}>
