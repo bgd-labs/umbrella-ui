@@ -4,9 +4,12 @@ import GithubIcon from "../../../public/images/github.svg";
 import TwitterIcon from "../../../public/images/twitter.svg";
 import WebIcon from "../../../public/images/web.svg";
 
+import { BugIcon } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+
 export const Footer = () => {
   return (
-    <footer className="mt-5 flex items-center justify-center pt-5 pb-10 md:mt-10">
+    <footer className="mt-5 flex flex-col items-center justify-center gap-10 pt-10 pb-10 md:mt-3">
       <div className="dark:border-main-400 flex items-center gap-3 rounded-xl border-2 px-3 py-1">
         <BGDLogoIcon className="h-[33px] w-[34px] dark:hidden" />
         <BGDLogoDarkIcon className="hidden h-[33px] w-[34px] dark:block dark:text-white" />
@@ -25,6 +28,17 @@ export const Footer = () => {
             </a>
           </div>
         </div>
+      </div>
+      <div className="-translate-x-0.5">
+        <Button
+          elevation={1}
+          className="gap-2 px-2 py-1 text-xs font-semibold"
+          href="https://discord.com/channels/602826299974877205/1377252053721677934"
+          target="_blank"
+        >
+          <BugIcon className="size-4" />
+          Report a bug
+        </Button>
       </div>
     </footer>
   );
