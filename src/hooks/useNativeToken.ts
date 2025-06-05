@@ -16,7 +16,7 @@ export const useNativeToken = () => {
 
   return {
     data: useMemo(() => {
-      if (!stkTokens) {
+      if (!stkTokens || stkTokens.length === 0) {
         return;
       }
 

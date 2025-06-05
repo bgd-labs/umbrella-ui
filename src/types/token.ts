@@ -110,6 +110,7 @@ export type ApyDataComponent = {
 
 export type ApyData = {
   total: number;
+  targetTotal: number;
   pool: {
     total: number;
   };
