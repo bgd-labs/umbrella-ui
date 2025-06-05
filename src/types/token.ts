@@ -117,7 +117,7 @@ export type ApyData = {
     total: number;
     components: ApyDataComponent[];
   };
-  maxRewards: {
+  targetRewards: {
     total: number;
     components: ApyDataComponent[];
   };

@@ -7,7 +7,7 @@ export const calculateApyData = (
 ): ApyData => {
   const poolApy = stkToken.reserve?.apy || 0;
   let totalRewardsApy = 0;
-  let totalMaxRewardsApy = 0;
+  let totalTargetRewardsApy = 0;
 
   const apyComponents = stkToken.rewards.map((reward) => {
     totalRewardsApy += reward.apy;
@@ -17,11 +17,11 @@ export const calculateApyData = (
     };
   });
 
-  const maxApyComponents = stkToken.rewards.map((reward) => {
-    const maxApy = calculateRewardApy({
+  const targetApyComponents = stkToken.rewards.map((reward) => {
+    const targetApy = calculateRewardApy({
       maxEmissionPerSecond: reward.maxEmissionPerSecond,
       targetLiquidity: stkToken.targetLiquidity,
-      totalAssets: stkToken.targetLiquidity, // Use targetLiquidity instead of totalAssets
+      totalAssets: stkToken.targetLiquidity,
       distributionEnd: reward.distributionEnd,
       decimals: stkToken.decimals,
       price: stkToken.latestAnswer,
@@ -33,9 +33,9 @@ export const calculateApyData = (
       },
     });
 
-    totalMaxRewardsApy += maxApy;
+    totalTargetRewardsApy += targetApy;
     return {
-      apy: maxApy,
+      apy: targetApy,
       reward,
     };
   });
@@ -49,9 +49,9 @@ export const calculateApyData = (
       total: totalRewardsApy,
       components: apyComponents,
     },
-    maxRewards: {
-      total: totalMaxRewardsApy,
-      components: maxApyComponents,
+    targetRewards: {
+      total: totalTargetRewardsApy,
+      components: targetApyComponents,
     },
   };
 };
