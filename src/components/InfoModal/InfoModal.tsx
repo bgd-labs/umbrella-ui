@@ -167,6 +167,29 @@ export const InfoModal = ({ children }: InfoModalProps) => {
                   <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer max-sm:hidden" />
                 </a>
               </li>
+
+              <li className="relative mb-4">
+                <span className="absolute -left-5 font-bold">&bull;</span>
+                <a
+                  target="_blank"
+                  href="https://github.com/bgd-labs/umbrella-docs/blob/main/umbrella-raw-data-fetching.md"
+                  className="flex items-center gap-1 underline underline-offset-3"
+                >
+                  Block explorer data fetching guide
+                  <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer max-sm:hidden" />
+                </a>
+              </li>
+              <li className="relative mb-4">
+                <span className="absolute -left-5 font-bold">&bull;</span>
+                <a
+                  target="_blank"
+                  href="https://github.com/bgd-labs/umbrella-docs/blob/main/umbrella-faq.md"
+                  className="flex items-center gap-1 underline underline-offset-3"
+                >
+                  FAQ
+                  <ExternalLinkIcon size={14} className="text-main-500 cursor-pointer max-sm:hidden" />
+                </a>
+              </li>
             </ul>
           </div>
         </Block>
