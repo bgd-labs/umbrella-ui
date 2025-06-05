@@ -175,6 +175,12 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
                             <NumberDisplay value={apyData.targetTotal} type="percent" className="font-bold" />
                           </div>
                         </div>
+                        <div className="flex items-center justify-between gap-2">
+                          <div>Max Yield</div>
+                          <div className="text-main-900">
+                            <NumberDisplay value={apyData.maxTotal} type="percent" className="font-bold" />
+                          </div>
+                        </div>
                       </div>
                     </TooltipContent>
                   </Tooltip>
