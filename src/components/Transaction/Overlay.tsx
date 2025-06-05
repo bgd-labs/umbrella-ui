@@ -1,13 +1,12 @@
-import { useWaitForTransactionReceipt } from "wagmi";
-import PendingGhost from "../../../public/images/pending-ghost.svg";
-import React from "react";
 import { Loader } from "@/components/Loader/Loader";
-import { WriteContractErrorType } from "@wagmi/core";
 import { TransactionFormOverlay } from "@/components/SuccessOverlay/TransactionFormOverlay";
-import { isUserRejectedTransactionError } from "@/utils/errors";
 import { ExplorerLink } from "@/components/Transaction/ExplorerLink";
 import { Button } from "@/components/ui/Button";
 import { useWaitForSafeTransaction } from "@/hooks/useWaitForSafeTransaction";
+import { isUserRejectedTransactionError } from "@/utils/errors";
+import { WriteContractErrorType } from "@wagmi/core";
+import { useWaitForTransactionReceipt } from "wagmi";
+import PendingGhost from "../../../public/images/pending-ghost.svg";
 
 const query = { refetchOnWindowFocus: false, refetchOnReconnect: false };
 
@@ -19,11 +18,7 @@ export type NewOverlayProps = {
 };
 
 export const Overlay = ({ hash, safeHash, loading, error }: NewOverlayProps) => {
-  const {
-    data: txReceipt,
-    isFetching: isTxFetching,
-    error: txError,
-  } = useWaitForTransactionReceipt({ hash, query });
+  const { data: txReceipt, isFetching: isTxFetching, error: txError } = useWaitForTransactionReceipt({ hash, query });
   const {
     data: safeTxDetails,
     isFetching: isSafeTxFetching,
@@ -37,13 +32,7 @@ export const Overlay = ({ hash, safeHash, loading, error }: NewOverlayProps) => 
     return null;
   }
 
-  if (
-    loading ||
-    isTxFetching ||
-    isSafeTxFetching ||
-    safeTxDetails?.status === "pending" ||
-    safeHash === null
-  ) {
+  if (loading || isTxFetching || isSafeTxFetching || safeTxDetails?.status === "pending" || safeHash === null) {
     return (
       <div className="dark:bg-main-950 flex flex-col justify-center gap-14 bg-white">
         <div className="flex flex-col items-center justify-center gap-8">
@@ -72,13 +61,7 @@ export const Overlay = ({ hash, safeHash, loading, error }: NewOverlayProps) => 
     );
   }
 
-  if (
-    txReceipt?.status === "reverted" ||
-    safeTxDetails?.status === "reverted" ||
-    error ||
-    txError ||
-    safeTxError
-  ) {
+  if (txReceipt?.status === "reverted" || safeTxDetails?.status === "reverted" || error || txError || safeTxError) {
     return <TransactionFormOverlay type="failure" hash={hash} />;
   }
 

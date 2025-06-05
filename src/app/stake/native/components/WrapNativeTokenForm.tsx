@@ -5,6 +5,7 @@ import {
 import { ControlledAmountField } from "@/components/ControlledAmountField/ControlledAmountField";
 import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
 import { SignTransactionFormConnector } from "@/components/SignTransaction/SignTransactionFormConnector";
+import { StakingWarningMessage } from "@/components/StakingWarningMessage/StakingWarningMessage";
 import { APYAndEarningsForecast } from "@/components/Transaction/APYAndEarningsForecast";
 import { SummarySection } from "@/components/Transaction/SummarySection";
 import { TokenChangeBreakdown } from "@/components/Transaction/TokenChangeBreakdown";
@@ -73,8 +74,6 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
   };
 
   const onSubmit = (formValues: StakeNativeTokenFormValues) => {
-    console.log("formValues", formValues);
-
     if (isSafeWallet) {
       if (!formValues.amount) {
         return;
@@ -105,8 +104,9 @@ export const WrapNativeTokenForm = ({ nativeToken }: WrapNativeTokenFormProps) =
         loading={isStaking || isSafeStaking}
         error={wrapNativeTokenError || depositError || safeDepositError}
       >
+        <StakingWarningMessage />
         <div className="flex flex-col justify-start gap-5 self-stretch">
-          <h2 className="font-bold">Select amount</h2>
+          <h2 className="font-bold dark:text-white">Select amount</h2>
 
           <Controller
             name="amount"

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/Button";
-import { ChevronsUpIcon } from "lucide-react";
 import { Asset } from "@/types/token";
+import { ChevronsUpIcon } from "lucide-react";
 
 export type ActionsProps = {
   data: Asset;
@@ -11,7 +11,7 @@ export const Actions = ({ data }: ActionsProps) => {
 
   return type === "native" && !!balance ? (
     <div className="not-md:flex">
-      <Button href={`/stake/native`} prefetch={true} primary elevation={1} size="lg" className="gap-2 font-semibold">
+      <Button href={`/stake/native`} prefetch={true} primary elevation={1} size="lg" className="gap-1 font-semibold">
         <ChevronsUpIcon size={16} />
         Stake
       </Button>
@@ -25,7 +25,7 @@ export const Actions = ({ data }: ActionsProps) => {
           primary
           elevation={1}
           size="lg"
-          className="gap-2 font-semibold"
+          className="gap-1 font-semibold"
         >
           <ChevronsUpIcon size={16} />
           Stake

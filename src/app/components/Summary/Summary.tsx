@@ -40,7 +40,7 @@ export const Summary = ({ umbrellaTokens, assets }: SummaryProps) => {
               />
               <span className="mb-1 text-base font-bold text-[#E2E7F2] md:mb-2">/</span>
               <NumberDisplay
-                value={availableToStakeUsd}
+                value={availableToStakeUsd + totalStakedUsd}
                 type="currency"
                 className="mb-1 text-xs font-semibold text-[#E2E7F2] md:mb-2 md:text-base"
               />

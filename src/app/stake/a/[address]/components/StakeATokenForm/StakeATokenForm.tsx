@@ -5,6 +5,7 @@ import { createStakeATokenFormSchema, StakeATokenFormValues } from "@/app/stake/
 import { ControlledAmountField } from "@/components/ControlledAmountField/ControlledAmountField";
 import { SignTransaction } from "@/components/SignTransaction/SignTransaction";
 import { SignTransactionFormConnector } from "@/components/SignTransaction/SignTransactionFormConnector";
+import { StakingWarningMessage } from "@/components/StakingWarningMessage/StakingWarningMessage";
 import { TransactionCard } from "@/components/Transaction/TransactionCard";
 import { Button } from "@/components/ui/Button";
 import { useCurrentMarket } from "@/hooks/useCurrentMarket";
@@ -106,6 +107,7 @@ export const StakeATokenForm = ({ asset, stkToken, reserves }: StakeATokenFormPr
         loading={isTxPending || isSafeTxPending}
         error={depositError || approveAndStakeError}
       >
+        <StakingWarningMessage />
         <div className="flex flex-col justify-start gap-5 self-stretch">
           <h2 className="font-bold dark:text-white">Select amount</h2>
 
