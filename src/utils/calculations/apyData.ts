@@ -42,6 +42,7 @@ export const calculateApyData = (
 
   return {
     total: poolApy + totalRewardsApy,
+    targetTotal: poolApy + totalTargetRewardsApy,
     pool: {
       total: poolApy,
     },

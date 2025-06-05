@@ -87,7 +87,7 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
             className="flex w-full items-center justify-between"
           >
             <div className="flex items-center gap-2">
-              <div className="text-main-400">TVL:</div>
+              <div>TVL:</div>
               <NumberDisplay value={totalStakedUSD} type="currency" className="font-bold" />
             </div>
             <ChevronDown
@@ -104,7 +104,7 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
       <TabletAndDesktop>
         <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center sm:pb-0">
           <div className="border-main-400 flex w-full shrink-0 items-center gap-1 border-b sm:w-auto sm:border-b-0">
-            <div className="text-main-400">TVL:</div>
+            <div>TVL:</div>
             <NumberDisplay value={totalStakedUSD} type="currency" className="font-bold" />
           </div>
 
@@ -166,13 +166,13 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
                         <div className="flex items-center justify-between gap-2">
                           <div>Current Yield</div>
                           <div className="text-main-900">
-                            <NumberDisplay value={apyData.rewards.total} type="percent" className="font-bold" />
+                            <NumberDisplay value={apyData.total} type="percent" className="font-bold" />
                           </div>
                         </div>
                         <div className="flex items-center justify-between gap-2">
                           <div>Yield at Target</div>
                           <div className="text-main-900">
-                            <NumberDisplay value={apyData.targetRewards.total} type="percent" className="font-bold" />
+                            <NumberDisplay value={apyData.targetTotal} type="percent" className="font-bold" />
                           </div>
                         </div>
                       </div>
