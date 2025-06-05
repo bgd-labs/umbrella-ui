@@ -1,4 +1,3 @@
-import { ComingSoon } from "@/components/ComingSoon/ComingSoon";
 import { Footer } from "@/components/Footer/Footer";
 import { Header } from "@/components/Header/Header";
 import { inter, spaceGrotesk } from "@/configs/fonts";
@@ -29,22 +28,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
-  // TODO: remove after launch
-  const launchTimestamp = Number(process.env.NEXT_PUBLIC_EXECUTION_TIMESTAMP);
-  if (!!launchTimestamp && Date.now() < launchTimestamp * 1000) {
-    return (
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`font-sans ${inter.variable} ${spaceGrotesk.variable} border-main-950 dark:border-main-500 text-main-950 dark:bg-main-950 antialiased dark:text-white`}
-        >
-          <ComingSoon />
-          <SpeedInsights />
-          <Analytics />
-        </body>
-      </html>
-    );
-  }
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
