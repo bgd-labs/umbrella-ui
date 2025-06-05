@@ -99,7 +99,7 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
                         <div className="flex items-center justify-between gap-2">
                           <div>Maximum yield</div>
                           <div className="text-main-900">
-                            <NumberDisplay value={apyData.rewards.total} type="percent" className="font-bold" />
+                            <NumberDisplay value={apyData.maxRewards.total} type="percent" className="font-bold" />
                           </div>
                         </div>
                       </div>

@@ -117,6 +117,10 @@ export type ApyData = {
     total: number;
     components: ApyDataComponent[];
   };
+  maxRewards: {
+    total: number;
+    components: ApyDataComponent[];
+  };
 };
 
 export type NativeToken = TokenPrice & {
