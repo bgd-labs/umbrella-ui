@@ -40,16 +40,9 @@ export const calculateApyData = (
     };
   });
 
-  const totalMaxRewardsApy = totalTargetRewardsApy * 2;
-  const maxApyComponents = targetApyComponents.map((component) => ({
-    apy: component.apy * 2,
-    reward: component.reward,
-  }));
-
   return {
     total: poolApy + totalRewardsApy,
     targetTotal: poolApy + totalTargetRewardsApy,
-    maxTotal: poolApy + totalMaxRewardsApy,
     pool: {
       total: poolApy,
     },
@@ -60,10 +53,6 @@ export const calculateApyData = (
     targetRewards: {
       total: totalTargetRewardsApy,
       components: targetApyComponents,
-    },
-    maxRewards: {
-      total: totalMaxRewardsApy,
-      components: maxApyComponents,
     },
   };
 };

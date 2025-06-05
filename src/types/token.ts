@@ -111,7 +111,6 @@ export type ApyDataComponent = {
 export type ApyData = {
   total: number;
   targetTotal: number;
-  maxTotal: number;
   pool: {
     total: number;
   };
@@ -120,10 +119,6 @@ export type ApyData = {
     components: ApyDataComponent[];
   };
   targetRewards: {
-    total: number;
-    components: ApyDataComponent[];
-  };
-  maxRewards: {
     total: number;
     components: ApyDataComponent[];
   };

@@ -1,13 +1,13 @@
-import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
-import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
-import { Block } from "@/components/ui/Block";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/Tooltip/Tooltip";
-import { Mobile, TabletAndDesktop } from "@/components/MediaQueries/MediaQueries";
-import { StkToken } from "@/types/token";
-import { memo, useState } from "react";
-import { InfoIcon, ChevronDown } from "lucide-react";
-import { formatUnits } from "viem";
 import { Token } from "@/app/components/Token/Token";
+import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
+import { Mobile, TabletAndDesktop } from "@/components/MediaQueries/MediaQueries";
+import { NumberDisplay } from "@/components/NumberDisplay/NumberDisplay";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/Tooltip/Tooltip";
+import { Block } from "@/components/ui/Block";
+import { StkToken } from "@/types/token";
+import { ChevronDown, InfoIcon } from "lucide-react";
+import { memo, useState } from "react";
+import { formatUnits } from "viem";
 
 const MAX_TOKENS_TO_SHOW = 4;
 
@@ -173,12 +173,6 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
                           <div>Yield at Target</div>
                           <div className="text-main-900">
                             <NumberDisplay value={apyData.targetTotal} type="percent" className="font-bold" />
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-between gap-2">
-                          <div>Max Yield</div>
-                          <div className="text-main-900">
-                            <NumberDisplay value={apyData.maxTotal} type="percent" className="font-bold" />
                           </div>
                         </div>
                       </div>
