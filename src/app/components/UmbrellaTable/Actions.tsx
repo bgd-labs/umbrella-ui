@@ -1,6 +1,6 @@
 import { config } from "@/configs/wagmi";
-import { useUmbrellaCooldownStatus } from "@/hooks/useAllUmbrellaCooldowns/useUmbrellaCooldownStatus";
 import { useUmbrellaCooldownData } from "@/hooks/useAllUmbrellaCooldowns/useUmbrellaCooldownData";
+import { useUmbrellaCooldownStatus } from "@/hooks/useAllUmbrellaCooldowns/useUmbrellaCooldownStatus";
 import { useStartCooldown } from "@/hooks/useStartCooldown";
 import { useQueryClient } from "@tanstack/react-query";
 import { waitForTransactionReceipt } from "@wagmi/core";
@@ -75,7 +75,7 @@ export const Actions = ({ token }: ActionsProps) => {
   return (
     <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-center md:gap-4">
       {status === "withdraw" && (
-        <Button href={`/withdraw/${address}`} prefetch primary elevation={1} size="lg" className="gap-2 font-semibold">
+        <Button href={`/withdraw/${address}`} prefetch primary elevation={1} size="lg" className="gap-1 font-semibold">
           <ChevronsDownIcon size={16} />
           Withdraw
         </Button>
@@ -89,7 +89,7 @@ export const Actions = ({ token }: ActionsProps) => {
               loading={isStartCooldownPending}
               disabled={isStartCooldownPending}
               onClick={handleCooldownClick}
-              className="gap-2 font-semibold"
+              className="gap-1 font-semibold"
               title="Initiate cooldown"
             >
               <TimerResetIcon size={16} />
