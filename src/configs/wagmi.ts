@@ -13,8 +13,8 @@ export const appChains = [
 ];
 
 export const config = getDefaultConfig({
-  appName: "Umbrella UI",
-  projectId: "YOUR_PROJECT_ID",
+  appName: "AAVE Umbrella",
+  projectId: "2cb581955df9284a18d9ae163a520290",
   chains: [mainnet, ...appChains.slice(1)],
   transports: {
     [mainnet.id]: http(process.env.NEXT_PUBLIC_MAINNET || DEFAULT_RPCS[mainnet.id]),
