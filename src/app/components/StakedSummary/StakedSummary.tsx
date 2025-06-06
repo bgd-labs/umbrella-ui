@@ -67,11 +67,11 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
           </div>
           <div className="flex flex-col gap-1">
             <div className="text-main-500">Current Yield</div>
-            <NumberDisplay value={apyData.rewards.total} type="percent" className="font-bold" />
+            <NumberDisplay value={apyData.total} type="percent" className="font-bold" />
           </div>
           <div className="flex flex-col gap-1">
             <div className="text-main-500">Yield at Target</div>
-            <NumberDisplay value={apyData.targetRewards.total} type="percent" className="font-bold" />
+            <NumberDisplay value={apyData.targetTotal} type="percent" className="font-bold" />
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
                 return (
                   <Tooltip key={address}>
                     <TooltipTrigger asChild>
-                      <div className="group border-main-100 dark:border-main-600 flex shrink-0 cursor-pointer items-center gap-2 border-l px-4 first:border-l-0 last:pr-0">
+                      <div className="border-main-100 dark:border-main-600 flex shrink-0 cursor-pointer items-center gap-2 border-l px-4 first:border-l-0 last:pr-0">
                         <AssetIcon
                           type="underlying"
                           symbol={underlying.symbol}
@@ -136,7 +136,7 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
 
                         <div className="flex items-center gap-1">
                           <NumberDisplay value={stakedUSD} type="currency" className="text-base font-bold" />
-                          <InfoIcon className="text-main-300 group-hover:text-main-900 ml-0.5 size-4" />
+                          <InfoIcon className="text-main-300 ml-0.5 size-4" />
                         </div>
                       </div>
                     </TooltipTrigger>

@@ -48,18 +48,26 @@ export const WithdrawalForm = ({ stkToken, cooldown }: WithdrawalFormProps) => {
   const { withdraw, data: hash, isPending: isWithdrawing, error: withdrawalError } = useWithdraw();
   const maxAmount = cooldown.amount;
 
+  const supportedWithdrawingMethods = calculateSupportedWithdrawingMethods(relatedAssets);
+
+  const defaultWithdrawalMethod = useMemo(() => {
+    if (supportedWithdrawingMethods.includes("withdrawToAave")) {
+      return "withdrawToAave";
+    }
+    return "withdrawToUnderlying";
+  }, [supportedWithdrawingMethods]);
+
   const schema = useMemo(() => createWithdrawalFormSchema({ maxAmount, isSafeWallet }), [maxAmount, isSafeWallet]);
   const formMethods = useForm<WithdrawalFormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      withdrawalMethod: "withdrawToUnderlying",
+      withdrawalMethod: defaultWithdrawalMethod,
     },
     mode: "onChange",
   });
   const { control } = formMethods;
 
   const { decimals, underlying, latestAnswer } = stkToken;
-  const supportedWithdrawingMethods = calculateSupportedWithdrawingMethods(relatedAssets);
 
   const onSubmit = async (formValues: WithdrawalFormValues) => {
     if (!formValues.amount) {
