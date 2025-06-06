@@ -19,13 +19,9 @@ export type APYBreakdownProps = {
 export const APYBreakdown = ({ symbol, totalApy, supplyApy, rewards, displayRewards = true }: APYBreakdownProps) => {
   const filteredRewards = rewards.filter((reward) => !!reward.apy);
   const [isOpen, setIsOpen] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    const hasTouchCapability = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    setIsTouchDevice(hasTouchCapability);
-  }, []);
+  const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
   useEffect(() => {
     if (!isTouchDevice || !isOpen) return;
