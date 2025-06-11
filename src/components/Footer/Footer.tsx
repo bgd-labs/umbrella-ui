@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/Button";
 
 export const Footer = () => {
   return (
-    <footer className="mt-5 flex flex-col items-center justify-center gap-10 pt-10 pb-10 md:mt-3">
-      <div className="dark:border-main-400 flex items-center gap-3 rounded-xl border-2 px-3 py-1">
+    <footer className="mt-5 flex flex-col items-center justify-center gap-10 py-10 md:mt-3">
+      <div className="dark:border-main-400 flex items-center gap-3 rounded-xl border-2 px-3 py-3.5">
         <BGDLogoIcon className="h-[33px] w-[34px] dark:hidden" />
         <BGDLogoDarkIcon className="hidden h-[33px] w-[34px] dark:block dark:text-white" />
 
