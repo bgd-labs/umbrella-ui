@@ -13,7 +13,8 @@ export const MARKETS: Market[] = [
     rewardsController: UmbrellaEthereum.UMBRELLA_REWARDS_CONTROLLER,
     umbrellaHelper: UmbrellaEthereum.UMBRELLA,
     batchHelper: UmbrellaEthereum.UMBRELLA_BATCH_HELPER,
-    umbrellaDataAggregationHelper: UmbrellaEthereum.DATA_AGGREGATION_HELPER,
+    // umbrellaDataAggregationHelper: UmbrellaEthereum.DATA_AGGREGATION_HELPER,
+    umbrellaDataAggregationHelper: "0x5061c5aaea55442a886fbc77dfd40e8489d1c07c",
     wrapNativeTokenAddress: AaveV3Ethereum.ASSETS.WETH.UNDERLYING,
   },
 
@@ -29,7 +30,8 @@ export const MARKETS: Market[] = [
           rewardsController: UmbrellaBaseSepolia.UMBRELLA_REWARDS_CONTROLLER,
           umbrellaHelper: UmbrellaBaseSepolia.UMBRELLA,
           batchHelper: UmbrellaBaseSepolia.UMBRELLA_BATCH_HELPER,
-          umbrellaDataAggregationHelper: UmbrellaBaseSepolia.DATA_AGGREGATION_HELPER,
+          // umbrellaDataAggregationHelper: UmbrellaBaseSepolia.DATA_AGGREGATION_HELPER,
+          umbrellaDataAggregationHelper: "0x139faf11d09605d840cbd1b1fbe4adf5feac70a2",
           wrapNativeTokenAddress: AaveV3BaseSepolia.ASSETS.WETH.UNDERLYING,
         } as const,
       ]
