@@ -76,7 +76,7 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
           </div>
           <div className="flex flex-col gap-1">
             <div className="text-main-500">Yield at Target</div>
-            <NumberDisplay value={apyData.targetTotal} type="percent" className="font-bold" />
+            <NumberDisplay value={apyData.targetRewards.total} type="percent" className="font-bold" />
           </div>
         </div>
 
@@ -139,12 +139,16 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2">
-                    <div className="text-main-500 text-sm font-medium">Current Yield</div>
-                    <NumberDisplay value={apyData.total} type="percent" className="text-lg font-bold" />
+                    <div className="text-main-500 text-sm font-medium">Aave Yield</div>
+                    {apyData.pool.total > 0 ? (
+                      <NumberDisplay value={apyData.pool.total} type="percent" className="text-lg font-bold" />
+                    ) : (
+                      <span className="text-lg font-bold">—</span>
+                    )}
                   </div>
                   <div className="flex flex-col gap-2">
-                    <div className="text-main-500 text-sm font-medium">Yield at Target</div>
-                    <NumberDisplay value={apyData.targetTotal} type="percent" className="text-lg font-bold" />
+                    <div className="text-main-500 text-sm font-medium">Umbrella Yield</div>
+                    <NumberDisplay value={apyData.rewards.total} type="percent" className="text-lg font-bold" />
                   </div>
                 </div>
 
@@ -227,34 +231,6 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
                         </div>
                       </div>
                     </div>
-
-                    {currentUmbrellaData.rewardsControllerConfigs.rewardConfigs.length > 0 && (
-                      <div className="border-main-200 border-t pt-4">
-                        <h3 className="text-main-500 mb-2 text-sm font-medium">Active Rewards</h3>
-                        <div className="space-y-3">
-                          {currentUmbrellaData.rewardsControllerConfigs.rewardConfigs.map((rewardConfig, index) => (
-                            <div
-                              key={index}
-                              className="bg-main-50 dark:bg-main-800 border-main-200 flex items-center justify-between border px-4 py-2"
-                            >
-                              <div className="flex items-center gap-2">
-                                <AssetIcon symbol={rewardConfig.reward.symbol} className="size-6" />
-                                <span className="font-medium">{rewardConfig.reward.symbol}</span>
-                              </div>
-                              <div className="text-right">
-                                <div className="text-main-500 text-sm">Max Emission/sec</div>
-                                <NumberDisplay
-                                  value={Number(
-                                    formatUnits(rewardConfig.maxEmissionPerSecond, rewardConfig.reward.decimals),
-                                  )}
-                                  className="text-sm font-bold"
-                                />
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
                   </>
                 )}
               </div>
@@ -360,7 +336,7 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
                           <div className="flex items-center justify-between gap-2">
                             <div className="dark:text-main-500">Yield at Target</div>
                             <div className="text-main-900 dark:text-white">
-                              <NumberDisplay value={apyData.targetTotal} type="percent" className="font-bold" />
+                              <NumberDisplay value={apyData.targetRewards.total} type="percent" className="font-bold" />
                             </div>
                           </div>
                           <div className="mt-3 flex w-full">
