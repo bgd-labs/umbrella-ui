@@ -103,6 +103,8 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
       apyData,
     } = selectedToken;
 
+    const rewardColors = ["bg-green-300", "bg-orange-300", "bg-red-300", "bg-pink-300", "bg-yellow-300"];
+
     const stakedUSD = Number(formatUnits(totalAssets, decimals)) * latestAnswerFormatted;
     const targetLiquidityUSD = Number(formatUnits(targetLiquidity, decimals)) * latestAnswerFormatted;
 
@@ -125,115 +127,174 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
                 />
               </div>
 
-              <div className="grid gap-6">
-                <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-10">
+                <div className="border-main-200 flex flex-col gap-6">
                   <div className="flex flex-col gap-2">
                     <div className="text-main-500 text-sm font-medium">Total Staked</div>
                     <NumberDisplay value={stakedUSD} type="currency" className="text-lg font-bold" />
                   </div>
+
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
+                      <div className="text-main-500 text-sm font-medium">Yield</div>
+                      <NumberDisplay value={apyData.total} type="percent" className="text-lg font-bold" />
+                    </div>
+
+                    <TabletAndDesktop>
+                      <div className="flex flex-col gap-3">
+                        <div className="bg-main-100 dark:bg-main-700 flex h-2 w-full overflow-hidden">
+                          {apyData.pool.total > 0 && (
+                            <div
+                              className="bg-[#959aff]"
+                              style={{ width: `${(apyData.pool.total / apyData.total) * 100}%` }}
+                            />
+                          )}
+
+                          {apyData.rewards.components.map((component, index) => (
+                            <div
+                              key={`${component.reward.address}-${index}`}
+                              className={rewardColors[index % rewardColors.length]}
+                              style={{ width: `${(component.apy / apyData.total) * 100}%` }}
+                            />
+                          ))}
+                        </div>
+
+                        <div className="flex flex-col gap-2 text-sm">
+                          {apyData.pool.total > 0 && (
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <div className="size-2 bg-[#959aff]"></div>
+                                <span className="text-main-500 text-sm">Aave Supply Yield</span>
+                              </div>
+                              <NumberDisplay
+                                value={apyData.pool.total}
+                                type="percent"
+                                className="text-main-500 text-sm"
+                              />
+                            </div>
+                          )}
+
+                          {apyData.rewards.components.map((component, index) => (
+                            <div
+                              key={`${component.reward.address}-${index}`}
+                              className="flex items-center justify-between"
+                            >
+                              <div className="flex items-center gap-2">
+                                <div className={`size-2 ${rewardColors[index % rewardColors.length]}`}></div>
+                                <span className="text-main-500 text-sm">
+                                  Umbrella rewards in {component.reward.symbol}
+                                </span>
+                              </div>
+                              <NumberDisplay value={component.apy} type="percent" className="text-main-500 text-sm" />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </TabletAndDesktop>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-6">
                   <div className="flex flex-col gap-2">
                     <div className="text-main-500 text-sm font-medium">Target Liquidity</div>
                     <NumberDisplay value={targetLiquidityUSD} type="currency" className="text-lg font-bold" />
                   </div>
-                </div>
 
-                <div className="grid grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2">
-                    <div className="text-main-500 text-sm font-medium">Aave Yield</div>
-                    {apyData.pool.total > 0 ? (
-                      <NumberDisplay value={apyData.pool.total} type="percent" className="text-lg font-bold" />
-                    ) : (
-                      <span className="text-lg font-bold">—</span>
-                    )}
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <div className="text-main-500 text-sm font-medium">Umbrella Yield</div>
-                    <NumberDisplay value={apyData.rewards.total} type="percent" className="text-lg font-bold" />
+                    <div className="text-main-500 text-sm font-medium">Yield at Target</div>
+                    <NumberDisplay value={apyData.targetRewards.total} type="percent" className="text-lg font-bold" />
                   </div>
                 </div>
+              </div>
 
-                {currentUmbrellaData && (
-                  <>
-                    <div className="border-main-200 border-t pt-4">
-                      <div className="grid grid-cols-2 gap-6">
-                        <div className="flex flex-col">
-                          <div className="text-main-500 mb-2 text-sm font-medium">Cooldown Period</div>
-                          <div className="text-lg font-bold">
-                            {Math.floor(currentUmbrellaData.stakeTokenConfig.cooldown / (24 * 60 * 60))} days
-                          </div>
-                        </div>
-                        <div className="flex flex-col">
-                          <div className="text-main-500 mb-2 text-sm font-medium">Unstake Window</div>
-                          <div className="text-lg font-bold">
-                            {Math.floor(Number(currentUmbrellaData.stakeTokenConfig.unstakeWindow) / (24 * 60 * 60))}{" "}
-                            days
-                          </div>
-                        </div>
-                        <div className="flex flex-col">
-                          <div className="text-main-500 mb-2 text-sm font-medium">Deficit Offset</div>
-                          <NumberDisplay
-                            value={
-                              Number(formatUnits(currentUmbrellaData.umbrellaConfig.deficitOffset, decimals)) *
-                              latestAnswerFormatted
-                            }
-                            type="currency"
-                            className="text-lg font-bold"
+              {currentUmbrellaData && (
+                <div className="border-main-200 border-t pt-6">
+                  <div className="grid grid-cols-2 gap-x-10 gap-y-6">
+                    <div className="flex flex-col">
+                      <div className="text-main-500 mb-2 text-sm font-medium">Cooldown Period</div>
+                      <div className="text-lg font-bold">
+                        {Math.floor(currentUmbrellaData.stakeTokenConfig.cooldown / (24 * 60 * 60))} days
+                      </div>
+                    </div>
+                    <div className="flex flex-col">
+                      <div className="text-main-500 mb-2 text-sm font-medium">Unstake Window</div>
+                      <div className="text-lg font-bold">
+                        {Math.floor(Number(currentUmbrellaData.stakeTokenConfig.unstakeWindow) / (24 * 60 * 60))} days
+                      </div>
+                    </div>
+                    <div className="flex flex-col">
+                      <div className="text-main-500 mb-2 text-sm font-medium">Deficit Offset</div>
+                      <NumberDisplay
+                        value={
+                          Number(formatUnits(currentUmbrellaData.umbrellaConfig.deficitOffset, decimals)) *
+                          latestAnswerFormatted
+                        }
+                        type="currency"
+                        className="text-lg font-bold"
+                      />
+                      <div className="text-main-500 flex items-center gap-1 text-sm">
+                        <NumberDisplay
+                          value={Number(formatUnits(currentUmbrellaData.umbrellaConfig.deficitOffset, decimals))}
+                        />
+                        <AssetIcon
+                          type="underlying"
+                          symbol={underlying.symbol}
+                          assetTag={isUnderlyingStataToken ? "stata" : undefined}
+                          className="size-5"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-col">
+                      <div className="text-main-500 mb-2 text-sm font-medium">Pending Deficit</div>
+                      <NumberDisplay
+                        value={
+                          Number(formatUnits(currentUmbrellaData.umbrellaConfig.pendingDeficit, decimals)) *
+                          latestAnswerFormatted
+                        }
+                        type="currency"
+                        className="text-lg font-bold"
+                      />
+                      <div className="text-main-500 flex items-center gap-1 text-sm">
+                        <NumberDisplay
+                          value={Number(formatUnits(currentUmbrellaData.umbrellaConfig.pendingDeficit, decimals))}
+                        />
+                        <AssetIcon
+                          type="underlying"
+                          symbol={underlying.symbol}
+                          assetTag={isUnderlyingStataToken ? "stata" : undefined}
+                          className="size-5"
+                        />
+                      </div>
+                    </div>
+                    <div className="col-span-2 flex flex-col">
+                      <div className="text-main-500 mb-2 text-sm font-medium">Exchange Rate</div>
+                      <div className="flex items-center gap-2">
+                        <NumberDisplay
+                          value={
+                            Number(formatUnits(currentUmbrellaData.stakeTokenConfig.totalAssets, decimals)) /
+                            Number(formatUnits(currentUmbrellaData.stakeTokenConfig.totalSupply, decimals))
+                          }
+                          className="text-lg font-bold"
+                        />
+                        <div className="text-main-500 flex items-center gap-1 text-sm">
+                          <AssetIcon
+                            type="underlying"
+                            symbol={underlying.symbol}
+                            assetTag={isUnderlyingStataToken ? "stata" : undefined}
+                            className="size-5"
                           />
-                          <NumberDisplay
-                            value={Number(formatUnits(currentUmbrellaData.umbrellaConfig.deficitOffset, decimals))}
-                            className="text-main-500 text-sm"
-                          />
-                        </div>
-                        <div className="flex flex-col">
-                          <div className="text-main-500 mb-2 text-sm font-medium">Pending Deficit</div>
-                          <NumberDisplay
-                            value={
-                              Number(formatUnits(currentUmbrellaData.umbrellaConfig.pendingDeficit, decimals)) *
-                              latestAnswerFormatted
-                            }
-                            type="currency"
-                            className="text-lg font-bold"
-                          />
-                          <NumberDisplay
-                            value={Number(formatUnits(currentUmbrellaData.umbrellaConfig.pendingDeficit, decimals))}
-                            className="text-main-500 text-sm"
-                          />
-                        </div>
-                        <div className="flex flex-col">
-                          <div className="text-main-500 mb-2 text-sm font-medium">Total Assets</div>
-                          <NumberDisplay
-                            value={
-                              Number(formatUnits(currentUmbrellaData.stakeTokenConfig.totalAssets, decimals)) *
-                              latestAnswerFormatted
-                            }
-                            type="currency"
-                            className="text-lg font-bold"
-                          />
-                          <NumberDisplay
-                            value={Number(formatUnits(currentUmbrellaData.stakeTokenConfig.totalAssets, decimals))}
-                            className="text-main-500 text-sm"
-                          />
-                        </div>
-                        <div className="flex flex-col">
-                          <div className="text-main-500 mb-2 text-sm font-medium">Total Supply</div>
-                          <NumberDisplay
-                            value={
-                              Number(formatUnits(currentUmbrellaData.stakeTokenConfig.totalSupply, decimals)) *
-                              latestAnswerFormatted
-                            }
-                            type="currency"
-                            className="text-lg font-bold"
-                          />
-                          <NumberDisplay
-                            value={Number(formatUnits(currentUmbrellaData.stakeTokenConfig.totalSupply, decimals))}
-                            className="text-main-500 text-sm"
+                          <span>per</span>
+                          <AssetIcon
+                            type="underlying"
+                            symbol={underlying.symbol}
+                            assetTag={isUnderlyingStataToken ? "stkStata" : "stk"}
+                            className="size-5"
                           />
                         </div>
                       </div>
                     </div>
-                  </>
-                )}
-              </div>
+                  </div>
+                </div>
+              )}
             </div>
           </Block>
         </ModalBody>
