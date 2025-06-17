@@ -21,6 +21,7 @@ export type StakedSummaryProps = {
 export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
   const [isMobileExpanded, setIsMobileExpanded] = useState(false);
   const [selectedToken, setSelectedToken] = useState<StkToken | null>(null);
+  const [openTooltip, setOpenTooltip] = useState<string | null>(null);
   const { data: umbrellaData } = useUmbrellaData();
 
   if (stkTokens.length === 0) {
@@ -349,9 +350,16 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
                   const targetLiquidityUSD = Number(formatUnits(targetLiquidity, decimals)) * latestAnswerFormatted;
 
                   return (
-                    <Tooltip key={address}>
+                    <Tooltip
+                      key={address}
+                      open={openTooltip === address}
+                      onOpenChange={(open) => setOpenTooltip(open ? address : null)}
+                    >
                       <TooltipTrigger asChild>
-                        <div className="border-main-100 dark:border-main-600 flex shrink-0 cursor-pointer items-center gap-2 border-l px-4 first:border-l-0 last:pr-0">
+                        <div
+                          className="border-main-100 dark:border-main-600 flex shrink-0 cursor-pointer items-center gap-2 border-l px-4 first:border-l-0 last:pr-0"
+                          onClick={() => setOpenTooltip(openTooltip === address ? null : address)}
+                        >
                           <AssetIcon
                             type="underlying"
                             symbol={underlying.symbol}
@@ -404,9 +412,10 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
                             <Button
                               className="w-full px-2 py-1 text-sm"
                               elevation={1}
-                              onClick={() =>
-                                setSelectedToken(stkTokens.find((token) => token.address === address) || null)
-                              }
+                              onClick={() => {
+                                setSelectedToken(stkTokens.find((token) => token.address === address) || null);
+                                setOpenTooltip(null);
+                              }}
                             >
                               More details
                             </Button>
