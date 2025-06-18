@@ -76,7 +76,7 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
           </div>
           <div className="flex flex-col gap-1">
             <div className="text-main-500">Yield at Target</div>
-            <NumberDisplay value={apyData.targetRewards.total} type="percent" className="font-bold" />
+            <NumberDisplay value={apyData.targetTotal} type="percent" className="font-bold" />
           </div>
         </div>
 
@@ -201,7 +201,7 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
 
                   <div className="flex flex-col gap-2">
                     <div className="text-main-500 text-sm font-medium">Yield at Target</div>
-                    <NumberDisplay value={apyData.targetRewards.total} type="percent" className="text-lg font-bold" />
+                    <NumberDisplay value={apyData.targetTotal} type="percent" className="text-lg font-bold" />
                   </div>
                 </div>
               </div>
@@ -397,7 +397,7 @@ export const StakedSummary = memo(({ stkTokens }: StakedSummaryProps) => {
                           <div className="flex items-center justify-between gap-2">
                             <div className="dark:text-main-500">Yield at Target</div>
                             <div className="text-main-900 dark:text-white">
-                              <NumberDisplay value={apyData.targetRewards.total} type="percent" className="font-bold" />
+                              <NumberDisplay value={apyData.targetTotal} type="percent" className="font-bold" />
                             </div>
                           </div>
                           <div className="mt-3 flex w-full">
