@@ -3,54 +3,41 @@ sidebar_position: 1
 slug: /
 ---
 
-# Umbrella Documentation
+# What is Umbrella?
 
-Welcome to the **Umbrella Protocol** documentation.
+Umbrella is an Aave system allowing stake Aave aTokens to earn rewards, but accepting risk of slashing to cover any deficit accrued on the Aave pools.
 
-Umbrella Protocol is a liquid staking solution built on top of Aave, allowing users to stake their assets while maintaining liquidity through tokenized representations of their staked positions.
+## How does Umbrella work?
 
-## What is Umbrella Protocol?
+As commented, users can stake assets such as aUSDC into Umbrella, and receive rewards for taking on slashing risk.
 
-Umbrella Protocol provides:
+The process involves the following:
 
-- **Liquid Staking**: Stake your assets and receive liquid tokens that can be used in DeFi
-- **Aave Integration**: Built on top of Aave's battle-tested lending protocol
-- **Flexible Withdrawal**: Multiple withdrawal methods to suit your needs
-- **Reward Optimization**: Automatic compounding and reward distribution
+1. **Staking:** Users deposit their aTokens (e.g., aUSDC) into Umbrella, and receive Umbrella stake aUSDC.
 
-## Key Features
+2. **Rewards Accumulation:** While the user has its aUSDC staked on Umbrella, they still earn yield from supplying on Aave, but also additional rewards in one or multiple tokens, which may include AAVE, GHO, or other assets, depending on the pool.
 
-### Staking Options
+3. **Claiming rewards:** At any point in time, users can claim all rewards accrued.
 
-- **Native Token Staking**: Stake native tokens (like ETH) directly
-- **Underlying Asset Staking**: Stake any supported underlying asset
-- **AToken Staking**: Stake existing Aave aTokens
-- **StataToken Staking**: Stake static aTokens for fixed-rate strategies
+4. **Withdrawal process (cooldown and withdrawal window):** To withdraw staked assets, users must first initiate a cooldown period that can last for example 20 days, depending on Umbrella's configuration. Once the cooldown period ends, the user has a withdrawal window to complete the withdrawal, also depending on Umbrella's configuration, but for example of 2 days.
 
-### Rewards
+This structured process ensures that withdrawals are orderly and prevents sudden spikes in unstaking, which could potentially destabilize the system.
 
-- Automatic reward claiming and distribution
-- Multiple reward tokens support
-- Optimized gas usage through batch operations
+## User Risks
 
-### Withdrawal Methods
+- This interface is non-custodial: it allows users to connect their wallet applications, building transactions to be submitted to the Umbrella smart contracts.
 
-- **Instant Withdrawal**: Immediate access to your funds (when liquidity is available)
-- **Standard Withdrawal**: Traditional unstaking process
-- **Emergency Withdrawal**: Quick exit in emergency situations
+- All configurations of Umbrella are based on smart contracts controlled by the Aave decentralized governance. This means that over time, aspects like rewards, cooldown period, withdrawal window, or even assets available to stake depend solely and exclusively on the Umbrella smart contracts, not anyhow on this interface.
 
-## Getting Started
+- The Umbrella system of smart contracts this interface connects is based on a principle of risk and reward: **if you are a user staking in Umbrella and a deficit is accrued on the connected asset on the Aave pool, you can potentially be slashed.** By interacting with the Umbrella contract, you explicitly accept this risk and any consequences arising from it, including earning rewards as compensation for assuming the risk.
 
-Ready to start using Umbrella Protocol? Choose your path:
+## More information and links
 
-1. **[Staking Guide](/tutorial-basics/create-a-document)** - Learn how to stake your first assets
-2. **[Rewards Guide](/tutorial-basics/create-a-page)** - Understand how rewards work
-3. **[Withdrawal Guide](/tutorial-basics/congratulations)** - Learn about withdrawal options
-
-## Technical Resources
-
-- **GitHub**: [umbrella-ui](https://github.com/bgd-labs/umbrella-ui)
-- **Main Application**: [stake.onaave.com](https://stake.onaave.com)
+- [Aave Governance forum describing Umbrella](https://governance.aave.com/t/arfc-aave-umbrella-activation/21521)
+- [Aave Umbrella smart contracts codebase](https://github.com/aave-dao/aave-umbrella)
+- [Aave Umbrella UI codebase](https://github.com/aave-dao/aave-umbrella-ui)
+- [Block explorer data fetching guide](https://github.com/bgd-labs/umbrella-docs/blob/main/umbrella-raw-data-fetching.md)
+- [FAQ](https://github.com/bgd-labs/umbrella-docs/blob/main/umbrella-faq.md)
 
 ---
 
