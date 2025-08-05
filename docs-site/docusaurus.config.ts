@@ -1,6 +1,9 @@
 import type * as Preset from "@docusaurus/preset-classic";
 import type { Config } from "@docusaurus/types";
+import { config as dotenvConfig } from "dotenv";
 import { themes as prismThemes } from "prism-react-renderer";
+
+dotenvConfig();
 
 const config: Config = {
   title: "Umbrella Docs",
@@ -53,10 +56,11 @@ const config: Config = {
       },
       items: [
         {
-          type: "docSidebar",
-          sidebarId: "tutorialSidebar",
-          position: "left",
-          label: "User Guide",
+          href:
+            process.env.DOCUSAURUS_STAKE_APP_URL ||
+            (process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://stake.onaave.com"),
+          label: "Stake App",
+          position: "right",
         },
         {
           href: "https://github.com/aave-dao/aave-umbrella-ui",
@@ -87,10 +91,6 @@ const config: Config = {
             {
               label: "Umbrella Contracts GitHub",
               href: "https://github.com/aave-dao/aave-umbrella",
-            },
-            {
-              label: "Stake On Aave",
-              href: "/",
             },
           ],
         },
