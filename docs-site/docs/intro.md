@@ -3,7 +3,7 @@ sidebar_position: 1
 slug: /
 ---
 
-# Umbrella Protocol Documentation
+# Umbrella Documentation
 
 Welcome to the **Umbrella Protocol** documentation.
 
