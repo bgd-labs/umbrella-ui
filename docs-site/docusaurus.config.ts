@@ -49,10 +49,9 @@ const config: Config = {
   themeConfig: {
     image: "img/docusaurus-social-card.jpg",
     navbar: {
-      title: "Umbrella",
       logo: {
         alt: "Umbrella Logo",
-        src: "img/logo.svg",
+        src: "img/umbrella-logo.svg",
       },
       items: [
         {
