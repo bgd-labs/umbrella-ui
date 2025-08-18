@@ -2,7 +2,7 @@
 id: umbrella-faq
 title: Umbrella FAQ
 sidebar_label: FAQ
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 # Umbrella FAQ
