@@ -1,44 +1,38 @@
 ---
+id: umbrella-intro
+title: Umbrella Overview
+sidebar_label: Overview
 sidebar_position: 1
-slug: /
 ---
 
-# What is Umbrella?
-
-Umbrella is an Aave system allowing stake Aave aTokens to earn rewards, but accepting risk of slashing to cover any deficit accrued on the Aave pools.
+# Umbrella Overview
 
 ## How does Umbrella work?
 
-As commented, users can stake assets such as aUSDC into Umbrella, and receive rewards for taking on slashing risk.
+Users can stake assets such as aUSDC into Umbrella and receive a staked version of the same asset (e.g., staked aUSDC) in return, eligible for rewards. On the other side, this deposit can be slashed to cover the deficit of the same asset. The process involves the following:
 
-The process involves the following:
+## The Staking Process
 
-1. **Staking:** Users deposit their aTokens (e.g., aUSDC) into Umbrella, and receive Umbrella stake aUSDC.
+1. **Staking:** Users deposit their aTokens (e.g., aUSDC) into Umbrella and receive a corresponding staked token.
 
-2. **Rewards Accumulation:** While the user has its aUSDC staked on Umbrella, they still earn yield from supplying on Aave, but also additional rewards in one or multiple tokens, which may include AAVE, GHO, or other assets, depending on the pool.
+2. **Rewards Accumulation:** While the user has their aToken staked in Umbrella, they continue to earn yield from supplying liquidity to Aave and also receive additional rewards. The reward is paid out in the same token you staked. For example, if you stake aUSDC, your reward will be in aUSDC. Umbrella supports multiple staking options, so you can choose which token to stake based on your preference (USDC, WETH, USDT etc.).
 
-3. **Claiming rewards:** At any point in time, users can claim all rewards accrued.
+3. **Claiming Rewards:** At any time, users can claim all accumulated rewards.
 
-4. **Withdrawal process (cooldown and withdrawal window):** To withdraw staked assets, users must first initiate a cooldown period that can last for example 20 days, depending on Umbrella's configuration. Once the cooldown period ends, the user has a withdrawal window to complete the withdrawal, also depending on Umbrella's configuration, but for example of 2 days.
+4. **Withdrawal Process:**
+   - To withdraw staked assets, users must first initiate a withdrawal which has a cooldown period. The duration of this period is defined by Umbrella's smart contract configuration (currently set to 20 days).
+   - After the cooldown ends, there is a limited withdrawal window (currently set to 2 days) during which users can complete their withdrawal.
 
-This structured process ensures that withdrawals are orderly and prevents sudden spikes in unstaking, which could potentially destabilize the system.
+This structured process **ensures orderly withdrawals** and helps prevent sudden spikes in unstaking that could destabilize the system.
 
 ## User Risks
 
-- This interface is non-custodial: it allows users to connect their wallet applications, building transactions to be submitted to the Umbrella smart contracts.
+:::warning Important Risks
+Please carefully review these risks before using Umbrella:
+:::
 
-- All configurations of Umbrella are based on smart contracts controlled by the Aave decentralized governance. This means that over time, aspects like rewards, cooldown period, withdrawal window, or even assets available to stake depend solely and exclusively on the Umbrella smart contracts, not anyhow on this interface.
+- **Non-custodial interface:** Users connect their wallets and submit transactions directly to Umbrella smart contracts. This means users maintain full control of their funds, but are also responsible for transaction security and wallet safety.
 
-- The Umbrella system of smart contracts this interface connects is based on a principle of risk and reward: **if you are a user staking in Umbrella and a deficit is accrued on the connected asset on the Aave pool, you can potentially be slashed.** By interacting with the Umbrella contract, you explicitly accept this risk and any consequences arising from it, including earning rewards as compensation for assuming the risk.
+- **On-chain parameters:** All rewards, cooldowns, withdrawal windows, and staking configurations are defined by smart contracts, not this interface. The smart contracts have undergone security audits, but users should understand that smart contract interactions carry inherent risks.
 
-## More information and links
-
-- [Aave Governance forum describing Umbrella](https://governance.aave.com/t/arfc-aave-umbrella-activation/21521)
-- [Aave Umbrella smart contracts codebase](https://github.com/aave-dao/aave-umbrella)
-- [Aave Umbrella UI codebase](https://github.com/aave-dao/aave-umbrella-ui)
-- [Block explorer data fetching guide](https://github.com/bgd-labs/umbrella-docs/blob/main/umbrella-raw-data-fetching.md)
-- [FAQ](https://github.com/bgd-labs/umbrella-docs/blob/main/umbrella-faq.md)
-
----
-
-_This documentation is continuously updated. If you have questions or suggestions, please reach out through our official channels._
+- **Slashing risk:** If deficit occurs in an Aave pool for a specific asset, users who staked that asset may be partially slashed. By using Umbrella, users accept this risk in exchange for earning rewards.
