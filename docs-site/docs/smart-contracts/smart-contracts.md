@@ -37,6 +37,4 @@ The **RewardsController** contract manages the distribution of multiple reward t
 
 These contracts don't operate in isolation. They communicate through interconnected calls and data sharing, creating a system where each component supports the others. When a reserve deficit occurs, the central contract assesses the situation, determines the required response, and triggers the appropriate StakeToken contracts to provide coverage, while simultaneously updating reward calculations through the RewardsController.
 
-:::note Automated Coordination
 This automated coordination eliminates the delays and potential errors of manual intervention, creating a safety net that responds in real-time to protect the broader ecosystem.
-:::
