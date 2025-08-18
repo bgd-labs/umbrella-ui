@@ -2,8 +2,7 @@
 id: helpers
 title: Helpers
 sidebar_label: Helpers
-sidebar_position: 1
-parent: smart-contracts
+sidebar_position: 2
 ---
 
 # Helpers
