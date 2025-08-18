@@ -3,6 +3,7 @@ id: umbrella-intro
 title: Umbrella Overview
 sidebar_label: Overview
 sidebar_position: 1
+slug: /
 ---
 
 # Umbrella Overview
