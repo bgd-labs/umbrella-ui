@@ -10,7 +10,7 @@ slug: /
 
 ## How does Umbrella work?
 
-Users can stake assets such as aUSDC into Umbrella and receive a staked version of the same asset (e.g., staked aUSDC) in return, eligible for rewards. On the other side, this deposit can be slashed to cover the deficit of the same asset. The process involves the following:
+Users can stake assets such as aUSDC into Umbrella and receive a staked version of the same asset (e.g., staked aUSDC) in return, eligible for rewards. On the other side, this deposit can be slashed to cover the deficit of the same asset.
 
 ## The Staking Process
 
