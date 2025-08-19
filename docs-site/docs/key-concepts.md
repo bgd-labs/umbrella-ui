@@ -29,7 +29,7 @@ You can participate in Umbrella by bringing either:
 
 - **underlying tokens**
 
-  In this case, you deposit underlying tokens (e.g., USDC), which are automatically deposited into the Aave as aTokens (e.g., aUSDC) and then are staked in Umbrella.
+  In this case, you deposit underlying tokens (e.g., USDC), which are automatically deposited into Aave as aTokens (e.g., aUSDC) and then are staked in Umbrella.
 
 :::tip Double Yield Benefit
 **In both cases, you get double yield benefit:** Aave supply yield + Umbrella staking rewards.
