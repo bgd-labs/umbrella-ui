@@ -46,6 +46,12 @@ Bad debt that has accumulated in an Aave pool when borrowers' collateral value f
 
 **Umbrella's role:** The system automatically detects a deficit above configured thresholds and triggers proportional slashing of staked aTokens to cover it.
 
+## Deficit Offset
+
+**Deficit Offset** is a buffer threshold below which no slashing occurs ([see current deficit offsets per token](https://dash.onaave.com/umbrella/?umbrellaFields=stakeTokenSymbol%2CtotalAssets%2CtotalSupply%2CtargetLiquidity%2Ccooldown%2CunstakeWindow%2CdeficitOffset%2CpendingDeficit%2CactiveRewards)).
+
+**Purpose:** This mechanism allows the DAO to absorb small amounts of deficit without triggering slashing events, providing additional protection for stakers against minor bad debt occurrences while ensuring that larger deficits are still covered through the slashing mechanism. However, once this buffer is fully used, any future deficit will trigger slashing unless the governance establishes a new offset.
+
 ## Slashing
 
 **Slashing is** the automated reduction of staked token balances to cover the accumulated deficit in the associated Aave pool.
@@ -63,12 +69,6 @@ Bad debt that has accumulated in an Aave pool when borrowers' collateral value f
 **Safety Module:** The previous system where users are staking AAVE, GHO, and stkABPT tokens to earn rewards while covering potential bad debt. Still operational, it requires governance votes for slashing decisions and involves selling slashed assets to cover deficits in different tokens.
 
 **Umbrella advantages:** Users stake aTokens (or underlying tokens that get converted to aTokens) to directly cover a deficit in the same asset. This provides automated slashing based on actual deficit detection, eliminates the need for asset sales since aTokens can be burned directly, and offers more capital-efficient coverage with potentially higher yields from the double-earning mechanism.
-
-## Deficit Offset
-
-**Deficit Offset** is a buffer threshold below which no slashing occurs ([see current deficit offsets per token](https://dash.onaave.com/umbrella/?umbrellaFields=stakeTokenSymbol%2CtotalAssets%2CtotalSupply%2CtargetLiquidity%2Ccooldown%2CunstakeWindow%2CdeficitOffset%2CpendingDeficit%2CactiveRewards)).
-
-**Purpose:** This mechanism allows the DAO to absorb small amounts of deficit without triggering slashing events, providing additional protection for stakers against minor bad debt occurrences while ensuring that larger deficits are still covered through the slashing mechanism. However, once this buffer is fully used, any future deficit will trigger slashing unless the governance establishes a new offset.
 
 ## Asset-Specific Coverage
 
