@@ -21,6 +21,3 @@ Not quite. Umbrella yield consists of two components:
 
 Once you start staking, you will continuously accrue Umbrella rewards. You can claim these rewards at any time by executing a blockchain transaction, for example, via [stake.onaave.com](https://stake.onaave.com/). The process is fully on-chain.
 
-## Can I earn multiple types of reward tokens simultaneously?
-
-Yes, each staked asset can simultaneously earn up to eight different reward token types. The Aave DAO governance controls target liquidity levels, maximum emission rates, reward token selection, and distribution periods for these multiple reward streams.
