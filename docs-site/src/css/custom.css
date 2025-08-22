@@ -42,24 +42,49 @@
 
 /* Header links - always dark for yellow navbar background */
 .navbar__item .navbar__link {
-  color: #201D1D !important;
+  color: #000000 !important; /* Pure black instead of brand gray */
 }
 
 .navbar__item .navbar__link:hover {
-  color: #000000 !important;
+  color: #201D1D !important; /* Brand gray on hover */
 }
 
 /* Header navbar - override any theme-based color changes */
 .navbar .navbar__item .navbar__link {
-  color: #201D1D !important;
+  color: #000000 !important; /* Pure black */
 }
 
 [data-theme="dark"] .navbar .navbar__item .navbar__link {
-  color: #201D1D !important; /* Force dark color even in dark theme */
+  color: #000000 !important; /* Force pure black even in dark theme */
 }
 
 [data-theme="dark"] .navbar .navbar__item .navbar__link:hover {
+  color: #201D1D !important; /* Brand gray on hover */
+}
+
+/* CRITICAL: Cover external links that inherit --ifm-color-primary */
+.navbar__item a,
+.navbar a[href],
+.navbar a[href^="http"],
+.navbar a[href^="https://"],
+.navbar__link[href^="http"],
+.navbar__link[href^="https://"],
+.navbar__item .navbar__link[href^="http"],
+.navbar__item .navbar__link[href^="https://"] {
   color: #000000 !important;
+  filter: none !important; /* Block any CSS filters */
+}
+
+[data-theme="dark"] .navbar__item a,
+[data-theme="dark"] .navbar a[href],
+[data-theme="dark"] .navbar a[href^="http"],
+[data-theme="dark"] .navbar a[href^="https://"],
+[data-theme="dark"] .navbar__link[href^="http"],
+[data-theme="dark"] .navbar__link[href^="https://"],
+[data-theme="dark"] .navbar__item .navbar__link[href^="http"],
+[data-theme="dark"] .navbar__item .navbar__link[href^="https://"] {
+  color: #000000 !important;
+  filter: none !important; /* Block inversion filters */
 }
 
 /* Content links - using gray for better harmony with black text */
