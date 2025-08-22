@@ -62,20 +62,6 @@
   color: #000000 !important;
 }
 
-/* External links in navbar */
-.navbar__item .navbar__link[href^="http"],
-.navbar__item .navbar__link[href^="https://"],
-[data-theme="dark"] .navbar__item .navbar__link[href^="http"],
-[data-theme="dark"] .navbar__item .navbar__link[href^="https://"] {
-  color: #201D1D !important;
-}
-
-/* All possible navbar link variations */
-[data-theme="dark"] .navbar a,
-[data-theme="dark"] .navbar__items a {
-  color: #201D1D !important;
-}
-
 /* Content links - using gray for better harmony with black text */
 .markdown a {
   color: #837E7 !important; /* Medium gray - more contrast with text */
@@ -94,4 +80,48 @@
 
 [data-theme="dark"] .markdown a:hover {
   color: #fff7ae !important; /* Lighter yellow on hover */
+}
+
+/* Footer styling */
+.footer {
+  background-color: #201D1D !important; /* Dark gray background */
+  color: #E6E6E6 !important; /* Light gray text */
+}
+
+.footer__title {
+  color: #FFD631 !important; /* Yellow titles */
+}
+
+.footer__item .footer__link-item {
+  color: #E6E6E6 !important; /* Light gray links */
+}
+
+.footer__item .footer__link-item:hover {
+  color: #FFD631 !important; /* Yellow on hover */
+}
+
+.footer__copyright {
+  color: #837E7 !important; /* Medium gray for copyright */
+}
+
+/* Footer styling for dark theme */
+[data-theme="dark"] .footer {
+  background-color: #837E7 !important; /* Medium gray background in dark theme */
+  color: #E6E6E6 !important;
+}
+
+[data-theme="dark"] .footer__title {
+  color: #FFD631 !important; /* Keep yellow titles */
+}
+
+[data-theme="dark"] .footer__item .footer__link-item {
+  color: #E6E6E6 !important;
+}
+
+[data-theme="dark"] .footer__item .footer__link-item:hover {
+  color: #FFD631 !important;
+}
+
+[data-theme="dark"] .footer__copyright {
+  color: #201D1D !important; /* Dark gray copyright in dark theme */
 }
