@@ -88,7 +88,7 @@ Each staked token protects only its associated borrowed asset.
 
 **How it works:** Instead of fixed reward rates, Umbrella uses Target Liquidity to automatically adjust incentives. When total staked assets are below target, rewards are proportionally higher to attract more stakers. At target liquidity, the system distributes maximum configured reward rate. If the pool reaches this limit, no further deposits will be accepted that helps to maintain the intended yield.
 
-:::tip Example
+:::note Example
 - Target Liquidity set at 10M USDC for staked waUSDC
 - At low staking amounts: ~16% APY (higher to attract capital)
 - At exactly 10M staked: ~8.3% APY rewards. Once target liquidity is reached, additional deposits are blocked, so the APY stays at 8.3% or increases if users unstake
