@@ -27,6 +27,33 @@
   --docusaurus-admonition-important-background-color: #FFD631;
 }
 
+/* Header links - always dark for yellow navbar background */
+.navbar__item .navbar__link {
+  color: #201D1D !important;
+}
+
+.navbar__item .navbar__link:hover {
+  color: #000000 !important;
+}
+
+/* Content links - more distinctive colors */
+.markdown a {
+  color: #FFB800 !important; /* Bright orange-yellow for light theme */
+}
+
+.markdown a:hover {
+  color: #e6a600 !important; /* Darker on hover */
+}
+
+/* Content links in dark theme */
+[data-theme="dark"] .markdown a {
+  color: #FFD631 !important; /* Keep yellow in dark theme */
+}
+
+[data-theme="dark"] .markdown a:hover {
+  color: #fff7ae !important; /* Lighter yellow on hover */
+}
+
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme="dark"] {
   /* Dark theme - using yellow for good contrast */
