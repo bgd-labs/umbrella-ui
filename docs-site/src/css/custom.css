@@ -125,3 +125,41 @@
 [data-theme="dark"] .footer__copyright {
   color: #201D1D !important; /* Dark gray copyright in dark theme */
 }
+
+/* Enhanced header links - all types including external */
+.navbar__item .navbar__link,
+.navbar__item .navbar__link--active,
+.navbar__item a,
+.navbar__items .navbar__item .navbar__link,
+.navbar__items .navbar__item a {
+  color: #201D1D !important;
+}
+
+.navbar__item .navbar__link:hover,
+.navbar__item .navbar__link--active:hover,
+.navbar__item a:hover,
+.navbar__items .navbar__item .navbar__link:hover,
+.navbar__items .navbar__item a:hover {
+  color: #000000 !important;
+}
+
+/* Force dark header links in dark theme - all types */
+[data-theme="dark"] .navbar__item .navbar__link,
+[data-theme="dark"] .navbar__item .navbar__link--active,
+[data-theme="dark"] .navbar__item a,
+[data-theme="dark"] .navbar__items .navbar__item .navbar__link,
+[data-theme="dark"] .navbar__items .navbar__item a,
+html[data-theme="dark"] .navbar__item .navbar__link,
+html[data-theme="dark"] .navbar__item a,
+body[data-theme="dark"] .navbar__item .navbar__link,
+body[data-theme="dark"] .navbar__item a {
+  color: #201D1D !important;
+  filter: none !important;
+}
+
+[data-theme="dark"] .navbar__item .navbar__link:hover,
+[data-theme="dark"] .navbar__item a:hover,
+html[data-theme="dark"] .navbar__item .navbar__link:hover,
+html[data-theme="dark"] .navbar__item a:hover {
+  color: #000000 !important;
+}
