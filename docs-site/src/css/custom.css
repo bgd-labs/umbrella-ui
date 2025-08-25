@@ -87,6 +87,48 @@
   filter: none !important; /* Block inversion filters */
 }
 
+/* Theme toggle button - force dark color */
+.navbar__item .navbar__toggle,
+.clean-btn.navbar__toggle,
+.navbar .navbar__toggle,
+.navbar__items .navbar__toggle,
+button[title*="theme"],
+button[title*="Theme"],
+[class*="toggle"] {
+  color: #000000 !important;
+  filter: none !important;
+}
+
+[data-theme="dark"] .navbar__item .navbar__toggle,
+[data-theme="dark"] .clean-btn.navbar__toggle,
+[data-theme="dark"] .navbar .navbar__toggle,
+[data-theme="dark"] .navbar__items .navbar__toggle,
+[data-theme="dark"] button[title*="theme"],
+[data-theme="dark"] button[title*="Theme"],
+[data-theme="dark"] [class*="toggle"] {
+  color: #000000 !important;
+  filter: none !important;
+}
+
+/* Theme toggle icon specifically */
+.navbar__toggle svg,
+.clean-btn.navbar__toggle svg,
+[data-theme="dark"] .navbar__toggle svg,
+[data-theme="dark"] .clean-btn.navbar__toggle svg {
+  fill: #000000 !important;
+  color: #000000 !important;
+  filter: none !important;
+}
+
+/* Limit size of specific images */
+img[alt="Enter Amount"],
+img[alt="Confirm Transaction"], 
+img[alt="Stake"] {
+  width: 50%;
+  max-width: 400px;
+  height: auto;
+}
+
 /* Content links - using gray for better harmony with black text */
 .markdown a {
   color: #837E7 !important; /* Medium gray - more contrast with text */
@@ -171,12 +213,4 @@
 
 [data-theme="dark"] .navbar .navbar__item .navbar__link:hover {
   color: #000000 !important;
-}
-
-img[alt="Enter Amount"],
-img[alt="Confirm Transaction"], 
-img[alt="Stake"] {
-  width: 50%;
-  max-width: 400px;
-  height: auto;
 }
