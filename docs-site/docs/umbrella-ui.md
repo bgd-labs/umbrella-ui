@@ -34,10 +34,16 @@ Interactive web interface for staking, rewards management, and yield tracking.
    ![Enter Amount](/img/ui-enter-amount.png)
 
 5. Confirm transaction
+
+     **Confirmation can be done in two ways (depends on asset):**
+   - **Permit signature**: Off-chain signature, no additional gas cost
+   - **Approve transaction**: On-chain approval, requires separate gas payment
+   
+   *The method is determined by the token's smart contract capabilities. Older tokens like USDT only support the approve method*
    
    ![Confirm Transaction](/img/ui-confirm-transaction.png)
 
-6. Stake
+7. Stake
    
    ![Stake](/img/ui-stake.png)
 
