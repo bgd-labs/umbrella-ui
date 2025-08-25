@@ -36,6 +36,6 @@ Staked token visual frames are designed based on the zenith view of an umbrella,
 
 ![Umbrella Asset Frames](/img/umbrella-frames.jpg)
 
-## Visual Examples
+## Examples of Illustrations
 
 ![Umbrella Illustrations](/img/umbrella-illustrations.jpg)
