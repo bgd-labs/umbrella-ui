@@ -129,6 +129,66 @@ img[alt="Stake"] {
   height: auto;
 }
 
+/* Customize heading anchor links */
+.hash-link {
+  color: #837E7 !important; /* Medium gray from brand palette */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease;
+  text-decoration: none;
+  font-weight: normal;
+  margin-left: -24px; /* Position to the left of heading */
+  margin-right: 8px; /* Space between link and heading text */
+  position: absolute; /* Absolute positioning to not affect heading flow */
+  left: 0;
+  font-family: monospace; /* Better for symbols */
+}
+
+/* Make headings relative positioned for anchor positioning */
+h1, h2, h3, h4, h5, h6 {
+  position: relative;
+  padding-left: 24px; /* Make space for the anchor link */
+}
+
+/* Replace # with chain link icon */
+.hash-link::before {
+  content: "⛓"; /* Chain symbol */
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+
+.hash-link::after {
+  content: none; /* Remove the # symbol */
+}
+
+/* Show anchor on heading hover */
+h1:hover .hash-link,
+h2:hover .hash-link,
+h3:hover .hash-link,
+h4:hover .hash-link,
+h5:hover .hash-link,
+h6:hover .hash-link {
+  opacity: 1; /* Show on hover */
+}
+
+/* Anchor link hover state */
+.hash-link:hover {
+  color: #201D1D !important; /* Darker on hover */
+  text-decoration: none;
+}
+
+.hash-link:hover::before {
+  opacity: 1; /* Full opacity on hover */
+}
+
+/* Dark theme anchor links */
+[data-theme="dark"] .hash-link {
+  color: #FFD631 !important; /* Yellow in dark theme */
+}
+
+[data-theme="dark"] .hash-link:hover {
+  color: #fff7ae !important; /* Lighter yellow on hover */
+}
+
 /* Content links - using gray for better harmony with black text */
 .markdown a {
   color: #837E7 !important; /* Medium gray - more contrast with text */
