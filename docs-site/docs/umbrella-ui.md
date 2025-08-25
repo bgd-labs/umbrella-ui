@@ -31,15 +31,15 @@ Interactive web interface for staking, rewards management, and yield tracking.
 
 4. Enter amount
    
-   <img src="/img/ui-enter-amount.png" alt="Enter Amount" width="400" />
+   ![Enter Amount](/img/ui-enter-amount.png)
 
 5. Confirm transaction
    
-   <img src="/img/ui-confirm-transaction.png" alt="Confirm Transaction" width="400" />
+   ![Confirm Transaction](/img/ui-confirm-transaction.png)
 
 6. Stake
    
-   <img src="/img/ui-stake.png" alt="Stake" width="400" />
+   ![Stake](/img/ui-stake.png)
 
 ### Claim Rewards
 
