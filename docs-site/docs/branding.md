@@ -7,7 +7,7 @@ sidebar_position: 6
 
 # Branding
 
-![Umbrella Full_Logo](/img/umbrella-full-logo.jpg)
+![Umbrella Full_Logo](/img/umbrella-full-logo.jpeg)
 
 Official visual identity guidelines for Aave Umbrella, including logos, colors, and design elements for consistent brand representation across all platforms and communications.
 
@@ -27,7 +27,7 @@ Umbrella uses yellow as its primary brand color, maintaining consistency with ot
 
 Staked token visual frames are designed based on the zenith view of an umbrella, creating a distinctive visual identity for Umbrella assets.
 
-![Umbrella Frame Concept](/img/umbrella-frame-concept.jpg)
+![Umbrella Frame Concept](/img/umbrella-frame-concept.jpeg)
 
 ### Frame Color Guidelines
 
