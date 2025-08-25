@@ -33,7 +33,7 @@ You can participate in Umbrella by bringing either:
 
 **In both cases, you get double yield benefit:** Aave supply yield + Umbrella staking rewards.
 
-![Double Yield Benefit](/img/double-yield.png)
+![Staking](/img/umb_diagram_1.jpg)
 
 <!-- Note: Image reference removed - you'll need to add the image to your Docusaurus static/img folder -->
 <!-- ![Staking Process](./img/staking-process.png) -->
@@ -75,6 +75,8 @@ Bad debt that has accumulated in an Aave pool when borrowers' collateral value f
 Each staked token protects only its associated borrowed asset.
 
 **How it works:** If you stake aUSDC, you are only accepting slashing risk for any bad debt that occurs with USDC on AAVE pools, nothing else.
+
+![Asset-Specific Coverage](/img/umb_diagram_2.jpg)
 
 **Benefits:**
 
