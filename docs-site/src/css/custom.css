@@ -172,3 +172,11 @@
 [data-theme="dark"] .navbar .navbar__item .navbar__link:hover {
   color: #000000 !important;
 }
+
+img[alt="Enter Amount"],
+img[alt="Confirm Transaction"], 
+img[alt="Stake"] {
+  width: 50%;
+  max-width: 400px;
+  height: auto;
+}
