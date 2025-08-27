@@ -16,50 +16,170 @@ The complete implementation details, code examples, and integration guides:
 # Smart contracts addresses
 
 import CodeBlock from '@theme/CodeBlock';
+import '../../css/compact-tables.css';
 
-<style>
-/* Make links in tables underlined and keep text color */
-table a {
-  text-decoration: underline;
-  color: inherit; /* do not change color */
-}
-
-/* Remove extra vertical spacing for table cells */
-table th,
-table td {
-  padding: 2px; /* compact top/bottom and left/right */
-  text-align: left;
-}
-
-/* Remove default CodeBlock margins/padding inside tables for compact rows */
-table pre {
-  margin: 0;
-  padding: 2px 4px; /* small padding for readability */
-  font-size: 0.9em; /* optional: smaller font if desired */
-}
-</style>
-
-| Smart contract | Address |
-|----------------|---------|
-| DATA_AGGREGATION_HELPER | <a href="https://etherscan.io/address/0x5061c5aAEA55442a886fBC77dfD40e8489D1c07c" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x5061c5aAEA55442a886fBC77dfD40e8489D1c07c</CodeBlock></a> |
-| DEFICIT_OFFSET_CLINIC_STEWARD | <a href="https://etherscan.io/address/0x6c1DC85f2aE71C3DAcd6E44Bb57DEeF61b540a5A" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x6c1DC85f2aE71C3DAcd6E44Bb57DEeF61b540a5A</CodeBlock></a> |
-| PERMISSION_PAYLOADS_CONTROLLER | <a href="https://etherscan.io/address/0xF86F77F7531B3374274E3f725E0A81D60bC4bB67" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0xF86F77F7531B3374274E3f725E0A81D60bC4bB67</CodeBlock></a> |
-| PERMISSION_PAYLOADS_CONTROLLER_EXECUTOR | <a href="https://etherscan.io/address/0x2759de67aD133C747C9f41d56F1b8A343cE679a1" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x2759de67aD133C747C9f41d56F1b8A343cE679a1</CodeBlock></a> |
-| UMBRELLA | <a href="https://etherscan.io/address/0xD400fc38ED4732893174325693a63C30ee3881a8" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0xD400fc38ED4732893174325693a63C30ee3881a8</CodeBlock></a> |
-| UMBRELLA_BATCH_HELPER | <a href="https://etherscan.io/address/0xCe6Ced23118EDEb23054E06118a702797b13fc2F" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0xCe6Ced23118EDEb23054E06118a702797b13fc2F</CodeBlock></a> |
-| UMBRELLA_CONFIG_ENGINE | <a href="https://etherscan.io/address/0x3f3EfAeba02bbA78BA7E89Dc6Ec503C8fe5fd5a4" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x3f3EfAeba02bbA78BA7E89Dc6Ec503C8fe5fd5a4</CodeBlock></a> |
-| UMBRELLA_IMPL | <a href="https://etherscan.io/address/0x929e21D24D3f2A529621AdC248D227012B72646d" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x929e21D24D3f2A529621AdC248D227012B72646d</CodeBlock></a> |
-| UMBRELLA_REWARDS_CONTROLLER | <a href="https://etherscan.io/address/0x4655Ce3D625a63d30bA704087E52B4C31E38188B" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x4655Ce3D625a63d30bA704087E52B4C31E38188B</CodeBlock></a> |
-| UMBRELLA_REWARDS_CONTROLLER_IMPL | <a href="https://etherscan.io/address/0x85C3371044e49782DbE3dC23de1D77a078aFb5d0" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x85C3371044e49782DbE3dC23de1D77a078aFb5d0</CodeBlock></a> |
-| UMBRELLA_STAKE_ASSETS STK_GHO_V1 STAKE_TOKEN | <a href="https://etherscan.io/address/0x4f827A63755855cDf3e8f3bcD20265C833f15033" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x4f827A63755855cDf3e8f3bcD20265C833f15033</CodeBlock></a> |
-| UMBRELLA_STAKE_ASSETS STK_GHO_V1 UNDERLYING | <a href="https://etherscan.io/address/0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f</CodeBlock></a> |
-| UMBRELLA_STAKE_ASSETS STK_WA_USDC_V1 STAKE_TOKEN | <a href="https://etherscan.io/address/0x6bf183243FdD1e306ad2C4450BC7dcf6f0bf8Aa6" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x6bf183243FdD1e306ad2C4450BC7dcf6f0bf8Aa6</CodeBlock></a> |
-| UMBRELLA_STAKE_ASSETS STK_WA_USDC_V1 UNDERLYING | <a href="https://etherscan.io/address/0xD4fa2D31b7968E448877f69A96DE69f5de8cD23E" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0xD4fa2D31b7968E448877f69A96DE69f5de8cD23E</CodeBlock></a> |
-| UMBRELLA_STAKE_ASSETS STK_WA_USDT_V1 STAKE_TOKEN | <a href="https://etherscan.io/address/0xA484Ab92fe32B143AEE7019fC1502b1dAA522D31" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0xA484Ab92fe32B143AEE7019fC1502b1dAA522D31</CodeBlock></a> |
-| UMBRELLA_STAKE_ASSETS STK_WA_USDT_V1 UNDERLYING | <a href="https://etherscan.io/address/0x7Bc3485026Ac48b6cf9BaF0A377477Fff5703Af8" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x7Bc3485026Ac48b6cf9BaF0A377477Fff5703Af8</CodeBlock></a> |
-| UMBRELLA_STAKE_ASSETS STK_WA_WETH_V1 STAKE_TOKEN | <a href="https://etherscan.io/address/0xaAFD07D53A7365D3e9fb6F3a3B09EC19676B73Ce" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0xaAFD07D53A7365D3e9fb6F3a3B09EC19676B73Ce</CodeBlock></a> |
-| UMBRELLA_STAKE_ASSETS STK_WA_WETH_V1 UNDERLYING | <a href="https://etherscan.io/address/0x0bfc9d54Fc184518A81162F8fB99c2eACa081202" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x0bfc9d54Fc184518A81162F8fB99c2eACa081202</CodeBlock></a> |
-| UMBRELLA_STAKE_TOKEN_IMPL | <a href="https://etherscan.io/address/0x75e8aC0c063B6966E2A9954adEdf39BdE9370197" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x75e8aC0c063B6966E2A9954adEdf39BdE9370197</CodeBlock></a> |
+<table className="compact-table">
+  <thead>
+    <tr>
+      <th>Smart contract</th>
+      <th>Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DATA_AGGREGATION_HELPER</td>
+      <td>
+        <a href="https://etherscan.io/address/0x5061c5aAEA55442a886fBC77dfD40e8489D1c07c" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0x5061c5aAEA55442a886fBC77dfD40e8489D1c07c</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>DEFICIT_OFFSET_CLINIC_STEWARD</td>
+      <td>
+        <a href="https://etherscan.io/address/0x6c1DC85f2aE71C3DAcd6E44Bb57DEeF61b540a5A" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0x6c1DC85f2aE71C3DAcd6E44Bb57DEeF61b540a5A</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>PERMISSION_PAYLOADS_CONTROLLER</td>
+      <td>
+        <a href="https://etherscan.io/address/0xF86F77F7531B3374274E3f725E0A81D60bC4bB67" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0xF86F77F7531B3374274E3f725E0A81D60bC4bB67</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>PERMISSION_PAYLOADS_CONTROLLER_EXECUTOR</td>
+      <td>
+        <a href="https://etherscan.io/address/0x2759de67aD133C747C9f41d56F1b8A343cE679a1" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0x2759de67aD133C747C9f41d56F1b8A343cE679a1</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA</td>
+      <td>
+        <a href="https://etherscan.io/address/0xD400fc38ED4732893174325693a63C30ee3881a8" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0xD400fc38ED4732893174325693a63C30ee3881a8</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_BATCH_HELPER</td>
+      <td>
+        <a href="https://etherscan.io/address/0xCe6Ced23118EDEb23054E06118a702797b13fc2F" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0xCe6Ced23118EDEb23054E06118a702797b13fc2F</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_CONFIG_ENGINE</td>
+      <td>
+        <a href="https://etherscan.io/address/0x3f3EfAeba02bbA78BA7E89Dc6Ec503C8fe5fd5a4" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0x3f3EfAeba02bbA78BA7E89Dc6Ec503C8fe5fd5a4</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_IMPL</td>
+      <td>
+        <a href="https://etherscan.io/address/0x929e21D24D3f2A529621AdC248D227012B72646d" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0x929e21D24D3f2A529621AdC248D227012B72646d</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_REWARDS_CONTROLLER</td>
+      <td>
+        <a href="https://etherscan.io/address/0x4655Ce3D625a63d30bA704087E52B4C31E38188B" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0x4655Ce3D625a63d30bA704087E52B4C31E38188B</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_REWARDS_CONTROLLER_IMPL</td>
+      <td>
+        <a href="https://etherscan.io/address/0x85C3371044e49782DbE3dC23de1D77a078aFb5d0" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0x85C3371044e49782DbE3dC23de1D77a078aFb5d0</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_STAKE_ASSETS STK_GHO_V1 STAKE_TOKEN</td>
+      <td>
+        <a href="https://etherscan.io/address/0x4f827A63755855cDf3e8f3bcD20265C833f15033" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0x4f827A63755855cDf3e8f3bcD20265C833f15033</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_STAKE_ASSETS STK_GHO_V1 UNDERLYING</td>
+      <td>
+        <a href="https://etherscan.io/address/0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_STAKE_ASSETS STK_WA_USDC_V1 STAKE_TOKEN</td>
+      <td>
+        <a href="https://etherscan.io/address/0x6bf183243FdD1e306ad2C4450BC7dcf6f0bf8Aa6" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0x6bf183243FdD1e306ad2C4450BC7dcf6f0bf8Aa6</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_STAKE_ASSETS STK_WA_USDC_V1 UNDERLYING</td>
+      <td>
+        <a href="https://etherscan.io/address/0xD4fa2D31b7968E448877f69A96DE69f5de8cD23E" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0xD4fa2D31b7968E448877f69A96DE69f5de8cD23E</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_STAKE_ASSETS STK_WA_USDT_V1 STAKE_TOKEN</td>
+      <td>
+        <a href="https://etherscan.io/address/0xA484Ab92fe32B143AEE7019fC1502b1dAA522D31" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0xA484Ab92fe32B143AEE7019fC1502b1dAA522D31</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_STAKE_ASSETS STK_WA_USDT_V1 UNDERLYING</td>
+      <td>
+        <a href="https://etherscan.io/address/0x7Bc3485026Ac48b6cf9BaF0A377477Fff5703Af8" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0x7Bc3485026Ac48b6cf9BaF0A377477Fff5703Af8</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_STAKE_ASSETS STK_WA_WETH_V1 STAKE_TOKEN</td>
+      <td>
+        <a href="https://etherscan.io/address/0xaAFD07D53A7365D3e9fb6F3a3B09EC19676B73Ce" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0xaAFD07D53A7365D3e9fb6F3a3B09EC19676B73Ce</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_STAKE_ASSETS STK_WA_WETH_V1 UNDERLYING</td>
+      <td>
+        <a href="https://etherscan.io/address/0x0bfc9d54Fc184518A81162F8fB99c2eACa081202" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0x0bfc9d54Fc184518A81162F8fB99c2eACa081202</CodeBlock>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>UMBRELLA_STAKE_TOKEN_IMPL</td>
+      <td>
+        <a href="https://etherscan.io/address/0x75e8aC0c063B6966E2A9954adEdf39BdE9370197" target="_blank" rel="noopener noreferrer">
+          <CodeBlock className="language-none">0x75e8aC0c063B6966E2A9954adEdf39BdE9370197</CodeBlock>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 
 
