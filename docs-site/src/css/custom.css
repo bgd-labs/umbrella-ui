@@ -233,11 +233,5 @@ h1, h2, h3, h4, h5, h6 {
 [data-theme="dark"] .navbar .navbar__item .navbar__link:hover {
   color: #000000 !important;
 }
-table pre {
-  margin-top: 2px;
-  margin-bottom: 2px;
-  padding: 2px 4px; /* уменьшаем внутренние отступы */
-  font-size: 0.9em;  /* при желании уменьшить размер шрифта */
-}
 
 
