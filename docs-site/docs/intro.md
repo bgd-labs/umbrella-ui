@@ -14,6 +14,8 @@ Users can stake assets such as aUSDC into Umbrella and receive a staked version 
 
 ## The Staking Process
 
+![Umbrella Diagram](/img/Umbrella_Post_Diagram_1.jpg)
+
 1. **Staking:** Users deposit their aTokens (e.g., aUSDC) into Umbrella and receive a corresponding staked token.
 
 2. **Rewards Accumulation:** While the user has their aToken staked in Umbrella, they continue to earn yield from supplying liquidity to Aave and also receive additional rewards. The reward is paid out in the same token you staked. For example, if you stake aUSDC, your reward will be in aUSDC. Umbrella supports multiple staking options, so you can choose which token to stake based on your preference (USDC, WETH, USDT etc.).
