@@ -8,7 +8,7 @@ slug: /
 
 # Umbrella Overview
 
-Aave Umbrella is a system of permissionless staking smart contracts designed to protect the Aave liquidity protocol. Through this system, users can stake their Aave aTokens to earn rewards in exchange for accepting slashing risk—meaning their staked tokens may be reduced to cover potential losses within the Aave liquidity protocol
+Aave Umbrella is a system of permissionless staking smart contracts designed to protect the Aave liquidity protocol. Through this system, users can stake their Aave aTokens to earn rewards in exchange for accepting slashing risk, meaning their staked tokens may be reduced to cover potential losses within the Aave liquidity protocol.
 
 ## How does Umbrella work?
 
