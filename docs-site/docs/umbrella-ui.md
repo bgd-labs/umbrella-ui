@@ -35,7 +35,9 @@ Interactive web interface for staking, rewards management, and yield tracking.
 
 5. Confirm transaction
 
-     Confirmation can be done in two ways (depends on asset):
+   ![Confirm Transaction](/img/ui-confirm-transaction.png)
+
+   Confirmation can be done in two ways (depends on asset):
 * **Permit signature**: Off-chain signature, no additional gas cost
 * **Approve transaction**: On-chain approval, requires separate gas payment
    
@@ -43,9 +45,7 @@ The method is determined by the token's smart contract capabilities. Older token
 
 **ETH wrapping**: ETH requires wrapping to WETH first (since ETH is not an ERC-20 token).
 
-   ![Confirm Transaction](/img/ui-confirm-transaction.png)
-
-7. Stake
+6. Stake
    
    ![Stake](/img/ui-stake.png)
 
