@@ -17,8 +17,30 @@ The complete implementation details, code examples, and integration guides:
 
 import CodeBlock from '@theme/CodeBlock';
 
+<style>
+/* Make links in tables underlined and keep text color */
+table a {
+  text-decoration: underline;
+  color: inherit; /* do not change color */
+}
+
+/* Remove extra vertical spacing for table cells */
+table th,
+table td {
+  padding: 2px; /* compact top/bottom and left/right */
+  text-align: left;
+}
+
+/* Remove default CodeBlock margins/padding inside tables for compact rows */
+table pre {
+  margin: 0;
+  padding: 2px 4px; /* small padding for readability */
+  font-size: 0.9em; /* optional: smaller font if desired */
+}
+</style>
+
 | Smart contract | Address |
-|:---------------|:--------|
+|----------------|---------|
 | DATA_AGGREGATION_HELPER | <a href="https://etherscan.io/address/0x5061c5aAEA55442a886fBC77dfD40e8489D1c07c" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x5061c5aAEA55442a886fBC77dfD40e8489D1c07c</CodeBlock></a> |
 | DEFICIT_OFFSET_CLINIC_STEWARD | <a href="https://etherscan.io/address/0x6c1DC85f2aE71C3DAcd6E44Bb57DEeF61b540a5A" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x6c1DC85f2aE71C3DAcd6E44Bb57DEeF61b540a5A</CodeBlock></a> |
 | PERMISSION_PAYLOADS_CONTROLLER | <a href="https://etherscan.io/address/0xF86F77F7531B3374274E3f725E0A81D60bC4bB67" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0xF86F77F7531B3374274E3f725E0A81D60bC4bB67</CodeBlock></a> |
@@ -38,6 +60,7 @@ import CodeBlock from '@theme/CodeBlock';
 | UMBRELLA_STAKE_ASSETS STK_WA_WETH_V1 STAKE_TOKEN | <a href="https://etherscan.io/address/0xaAFD07D53A7365D3e9fb6F3a3B09EC19676B73Ce" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0xaAFD07D53A7365D3e9fb6F3a3B09EC19676B73Ce</CodeBlock></a> |
 | UMBRELLA_STAKE_ASSETS STK_WA_WETH_V1 UNDERLYING | <a href="https://etherscan.io/address/0x0bfc9d54Fc184518A81162F8fB99c2eACa081202" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x0bfc9d54Fc184518A81162F8fB99c2eACa081202</CodeBlock></a> |
 | UMBRELLA_STAKE_TOKEN_IMPL | <a href="https://etherscan.io/address/0x75e8aC0c063B6966E2A9954adEdf39BdE9370197" target="_blank" rel="noopener noreferrer"><CodeBlock className="language-none">0x75e8aC0c063B6966E2A9954adEdf39BdE9370197</CodeBlock></a> |
+
 
 
 
