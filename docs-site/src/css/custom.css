@@ -233,3 +233,16 @@ h1, h2, h3, h4, h5, h6 {
 [data-theme="dark"] .navbar .navbar__item .navbar__link:hover {
   color: #000000 !important;
 }
+table {
+  border-collapse: collapse; /* Убирает двойные границы */
+  margin: 0; /* Убирает внешние отступы */
+}
+
+table th,
+table td {
+  padding: 2px;
+  text-align: left;
+  border-collapse: collapse; 
+}
+
+
