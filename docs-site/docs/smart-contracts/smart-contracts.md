@@ -8,7 +8,7 @@ sidebar_position: 1
 # Smart Contracts
 
 The complete implementation details, code examples, and integration guides:
-- [Address Book](https://search.onaave.com/?q=umbrella) - contract addresses across all networks
+- [Contracts addresses](https://search.onaave.com/?q=umbrella)
 - [Full code base](https://github.com/aave-dao/aave-umbrella)
 - [Umbrella](https://github.com/aave-dao/aave-umbrella/blob/main/src/contracts/umbrella/README.md)
 - [StakeToken](https://github.com/aave-dao/aave-umbrella/tree/main/src/contracts/stakeToken)
