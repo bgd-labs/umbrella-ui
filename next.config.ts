@@ -62,8 +62,8 @@ const nextConfig: NextConfig = {
           destination: "/docs/index.html",
         },
         {
-          source: "/docs/:path",
-          destination: "/docs/:path.html",
+          source: "/docs/:path*",
+          destination: "/docs/:path*.html",
         },
       ],
     };
