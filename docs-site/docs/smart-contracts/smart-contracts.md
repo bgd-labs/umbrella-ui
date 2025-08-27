@@ -16,7 +16,7 @@ The complete implementation details, code examples, and integration guides:
 # Smart contracts addresses
 
 | Smart contract | Address |
-|---|---|
+|:---------------|:--------|
 | DATA_AGGREGATION_HELPER | [0x5061c5aAEA55442a886fBC77dfD40e8489D1c07c](https://etherscan.io/address/0x5061c5aAEA55442a886fBC77dfD40e8489D1c07c) |
 | DEFICIT_OFFSET_CLINIC_STEWARD | [0x6c1DC85f2aE71C3DAcd6E44Bb57DEeF61b540a5A](https://etherscan.io/address/0x6c1DC85f2aE71C3DAcd6E44Bb57DEeF61b540a5A) |
 | PERMISSION_PAYLOADS_CONTROLLER | [0xF86F77F7531B3374274E3f725E0A81D60bC4bB67](https://etherscan.io/address/0xF86F77F7531B3374274E3f725E0A81D60bC4bB67) |
@@ -36,3 +36,5 @@ The complete implementation details, code examples, and integration guides:
 | UMBRELLA_STAKE_ASSETS STK_WA_WETH_V1 STAKE_TOKEN | [0xaAFD07D53A7365D3e9fb6F3a3B09EC19676B73Ce](https://etherscan.io/address/0xaAFD07D53A7365D3e9fb6F3a3B09EC19676B73Ce) |
 | UMBRELLA_STAKE_ASSETS STK_WA_WETH_V1 UNDERLYING | [0x0bfc9d54Fc184518A81162F8fB99c2eACa081202](https://etherscan.io/address/0x0bfc9d54Fc184518A81162F8fB99c2eACa081202) |
 | UMBRELLA_STAKE_TOKEN_IMPL | [0x75e8aC0c063B6966E2A9954adEdf39BdE9370197](https://etherscan.io/address/0x75e8aC0c063B6966E2A9954adEdf39BdE9370197) |
+
+
