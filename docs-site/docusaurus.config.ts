@@ -55,16 +55,17 @@ const config: Config = {
       },
       items: [
         {
-          href:
-            process.env.DOCUSAURUS_STAKE_APP_URL ||
-            (process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://stake.onaave.com"),
-          label: "Stake App",
-          position: "right",
-        },
-        {
-          href: "https://github.com/aave-dao/aave-umbrella-ui",
-          label: "GitHub",
-          position: "right",
+          type: 'html',
+          position: 'right',
+          value: `
+            <div class="custom-navbar-buttons">
+              <a href="${
+                process.env.DOCUSAURUS_STAKE_APP_URL ||
+                (process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://stake.onaave.com")
+              }" target="_blank" rel="noopener noreferrer" class="custom-navbar-button custom-navbar-button--primary">Stake App</a>
+              <a href="https://github.com/aave-dao/aave-umbrella-ui" target="_blank" rel="noopener noreferrer" class="custom-navbar-button custom-navbar-button--secondary">GitHub</a>
+            </div>
+          `,
         },
       ],
     },
