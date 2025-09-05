@@ -7,18 +7,17 @@ sidebar_position: 2
 
 # What's New
 
-Keep track of the latest updates, releases, and announcements for Umbrella. This page highlights recent changes, new features, and important developments in the Umbrella ecosystem.
+## Dynamic staking limit (Supply Cap) added to Umbrella
 
-## Recent Updates
+Governance can now set a maximum amount of capital that can be staked per pool. This helps to:
 
-Coming soon...
+- Manage staking demand and prevent excessive inflows
+- Protect the target APY for stakers
 
-## Upcoming Features
+For example, since the potential APY is calculated based on a recommended maximum staked amount, if the cap is set to a certain level and the pool reaches this limit, no further deposits will be accepted — helping to maintain the intended yield.
 
-Coming soon...
+**Note:** Existing positions are not affected by the staking cap. If you deposited before the cap was implemented, your position remains active and unchanged.
 
-## Release Notes
+## Zero cooldown option (technical update)
 
-Coming soon...
-
-## Change log
+Umbrella now supports instant withdrawals, if zero cooldown is enabled. Currently, no pools have zero cooldown set; this is a technical capability that may be activated in the future.
