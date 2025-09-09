@@ -2,7 +2,6 @@
 
 import { AssetIcon } from "@/components/AssetIcon/AssetIcon";
 import { BlockSelect } from "@/components/BlockSelect/BlockSelect";
-import { InfoModal } from "@/components/InfoModal/InfoModal";
 import { ThemeToggleButton } from "@/components/ThemeToggleButton/ThemeToggleButton";
 import { Wallet } from "@/components/Wallet/Wallet";
 import { config } from "@/configs/wagmi";
@@ -13,6 +12,7 @@ import { findMarketById } from "@/utils/markets/markets";
 import { switchChain } from "@wagmi/core";
 import Link from "next/link";
 import UmbrellaLogoIcon from "../../../public/images/umbrella-logo.svg";
+import { Button } from "../ui/Button";
 
 const items = MARKETS.map((market) => ({
   label: (
@@ -62,7 +62,12 @@ export const Header = () => {
           <Wallet />
 
           <div className="flex not-md:hidden">
-            <InfoModal />
+            <Button href="/docs" elevation={1} size="lg">
+              <span className="flex size-5 flex-col items-center justify-center">
+                <span className="bg-main-950 mb-0.5 size-[3.5px] rounded-full dark:bg-white" />
+                <span className="bg-main-950 h-3 w-[3.5px] dark:bg-white" />
+              </span>
+            </Button>
           </div>
 
           <ThemeToggleButton />

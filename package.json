@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "docs:dev": "cd docs-site && npm run start",
+    "docs:build": "cd docs-site && npm run build",
+    "prebuild": "rimraf ./public/docs && npm run docs:build && mkdir -p ./public/docs && cp -R docs-site/build/* ./public/docs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -11,7 +14,8 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "prepare": "husky",
-    "test:ci": "vitest related --run --passWithNoTests"
+    "test:ci": "vitest related --run --passWithNoTests",
+    "postinstall": "cd docs-site && npm install"
   },
   "lint-staged": {
     "**/*.{ts,tsx,js,jsx}": [
@@ -86,6 +90,7 @@
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.3",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.1.4"

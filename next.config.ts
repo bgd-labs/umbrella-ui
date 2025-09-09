@@ -50,6 +50,25 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  async rewrites() {
+    return {
+      fallback: [
+        {
+          source: "/docs",
+          destination: "/docs/index.html",
+        },
+        {
+          source: "/docs/",
+          destination: "/docs/index.html",
+        },
+        {
+          source: "/docs/:path*",
+          destination: "/docs/:path*.html",
+        },
+      ],
+    };
+  },
+
   turbopack: {
     rules: {
       "*.svg": {

@@ -1,0 +1,8 @@
+{
+  "label": "Previous Releases",
+  "position": 8,
+  "link": {
+    "type": "generated-index",
+    "description": "Information about previous releases, governance votings, and forum updates."
+  }
+}
